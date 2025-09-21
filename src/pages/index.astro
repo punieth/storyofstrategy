@@ -1,95 +1,82 @@
 ---
 import Layout from "@layouts/Default.astro";
 import RecentBlogPosts from "@components/generic/RecentBlogPosts.astro";
-import MobileSocials from "@components/home/MobileSocials.astro";
-import { Pill } from "@eliancodes/brutal-ui";
-import { Button } from "@eliancodes/brutal-ui";
-import { Card } from "@eliancodes/brutal-ui";
+import { Button, Card } from "@eliancodes/brutal-ui";
 
-const builtWith = [
-  { name: "Astro", url: "https://astro.build/" },
-  { name: "UnoCSS", url: "https://uno.antfu.me/" },
-  {
-    name: "Content Collections",
-    url: "https://docs.astro.build/en/guides/content-collections/",
-  },
-  { name: "RSS", url: "https://docs.astro.build/en/guides/rss/" },
-  {
-    name: "Sitemap",
-    url: "https://docs.astro.build/en/guides/integrations-guide/sitemap/",
-  },
-  { name: "Vercel", url: "https://vercel.com" },
-  { name: "TypeScript", url: "https://www.typescriptlang.org/" },
-];
+const featured = {
+  title: "Refund Transparency @ Meesho",
+  href: "/blog/blogpost-1/",
+};
 ---
 
 <Layout
-  title="Home"
-  pageTitle="Story Of Strategy | Home"
-  description="Brutal is a minimalistic, neobrutalism theme for Astro."
+  title="Story Of Strategy | Home"
+  description="Portfolio of an engineer-turned-product-builder focused on clarity, first principles, and India’s next wave."
 >
   <main class="bg-green p-6 flex-grow border-b-15 border-black">
-    <!-- <MobileSocials /> -->
+    {/* Accessibility+SEO: put a real H1 once per page */}
+    <h1 class="sr-only">
+      Story Of Strategy — Product thinking by an engineer moving into PM
+    </h1>
+
     <section id="about" class="grid md:grid-cols-8 gap-8 mt-4">
+      {/* Card 1 — Hero */}
       <div class="col-span-5">
         <Card>
           <div class="flex flex-col justify-between items-start gap-4">
-            <p class="mt-4 outfit text-2xl md:text-5xl lg:text-6xl">
-              "Making a <a class="text-white" target="_blank">simple</a> thing is
-              never<a class="text-white" target="_blank"> simple"</a>
-            </p>
+            <blockquote
+              class="mt-4 outfit text-2xl md:text-5xl lg:text-6xl leading-tight"
+            >
+              “Making a <span class="bg-black text-white px-2">simple</span> thing
+              is never simple.”
+            </blockquote>
             <p class="mt-2 outfit text-xl md:text-3xl lg:text-5xl">
               I care about turning complexity into clarity.
             </p>
-            <Button target={"_self"} href="/blog/">
-              Check out the posts &rarr;
-            </Button>
+            <a
+              href="/blog/blogpost-1/"
+              class="inline-block font-bold border-4 border-black px-4 py-2
+         shadow-[8px_8px_0_#000] bg-white
+         hover:bg-lime-300 hover:text-black transition-colors"
+            >
+              Read the case study →
+            </a>
           </div>
         </Card>
       </div>
+
+      {/* Card 2 — About (transition) */}
       <div class="col-span-3">
         <Card>
-          <h2 class="text-2xl md:text-4xl lg:text-6xl mb-8 dm-serif">
+          <h2 class="text-2xl md:text-4xl lg:text-6xl mb-6 dm-serif">
             I bridge engineering and product.
           </h2>
           <p class="poppins">
             Grounded in first principles, I look for clarity where others see
             noise. I began in software engineering, but my drive was never just
-            writing code—it was understanding why we build, not only how. Moving
-            into product management became the natural step.
+            writing code— it was understanding <em>why</em> we build, not only <em
+              >how</em
+            >. Moving into product management became the natural step.
           </p>
-          <!-- <ul class='flex gap-4 flex-wrap'>
-            {
-              builtWith.map((item) => (
-                <li>
-                  <Pill>
-                    <a
-                      class='sanchez'
-                      href={item.url}
-                      target='_blank'
-                      title={`Go to ${item.name}`}
-                    >
-                      {item.name}
-                    </a>
-                  </Pill>
-                </li>
-              ))
-            }
-          </ul> -->
         </Card>
       </div>
+
+      {/* Card 3 — Philosophy */}
       <div class="col-span-3">
         <Card>
           <h2 class="text-2xl md:text-4xl lg:text-6xl mb-4 dm-serif">
             Clarity over complexity.
           </h2>
           <p class="poppins">
-            I think in systems and mental models. I believe simplicity, clarity,
-            and first principles are the foundation of strong products. For me,
-            building is about bridging engineering depth with product vision.
+            I think in systems and mental models. Simplicity and first
+            principles guide my decisions. My work is about connecting
+            engineering depth with product vision to build what people truly
+            need.
           </p>
         </Card>
       </div>
+
+      {/* Card 4 — Vision */}
       <div class="col-span-5">
         <Card>
           <h2 class="text-2xl md:text-4xl lg:text-6xl mb-4 dm-serif">
@@ -103,6 +90,92 @@ const builtWith = [
         </Card>
       </div>
     </section>
-    <RecentBlogPosts />
+
+    {/* Featured Case Study — adds substance above the fold */}
+    <section id="featured" class="mt-8">
+      <Card>
+        <div class="grid md:grid-cols-8 gap-6 items-start">
+          <div class="md:col-span-5">
+            <h2 class="dm-serif text-2xl md:text-4xl mb-1">
+              Featured case study
+            </h2>
+            <h3 class="outfit text-xl md:text-2xl font-bold mb-4 leading-tight">
+              Refund Transparency — Meesho
+            </h3>
+
+            <div class="grid md:grid-cols-3 gap-4">
+              <div
+                class="border-4 border-black bg-[var(--accent-soft)] p-4 shadow-[8px_8px_0_var(--ink)]"
+              >
+                <div class="font-bold uppercase text-lg mb-2">Problem</div>
+                <p class="poppins text-base">
+                  Refund timelines were unclear, creating anxiety and eroding
+                  trust.
+                </p>
+              </div>
+              <div
+                class="border-4 border-black bg-[var(--accent-soft)] p-4 shadow-[8px_8px_0_var(--ink)]"
+              >
+                <div class="font-bold uppercase text-lg mb-2">Approach</div>
+                <p class="poppins text-base">
+                  Simple status tracker with ETA windows, grounded in
+                  first-principles system mapping.
+                </p>
+              </div>
+              <div
+                class="border-4 border-black bg-[var(--accent-soft)] p-4 shadow-[8px_8px_0_var(--ink)]"
+              >
+                <div class="font-bold uppercase text-lg mb-2">
+                  Potential impact
+                </div>
+                <p class="poppins text-base">
+                  ~25% fewer refund-related tickets, ~18% higher task
+                  completion.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="md:col-span-3 flex md:justify-end mt-4 md:mt-0">
+            <div class="flex flex-col gap-3 w-full md:w-auto">
+              <a href="/blog/blogpost-1/" class="btn">Read the case study →</a>
+              <a href="/blog/" class="btn btn--ghost">Browse all posts →</a>
+            </div>
+          </div>
+        </div>
+      </Card>
+    </section>
+
+    <section id="about-me" class="mt-12">
+      <Card>
+        <h2 class="dm-serif text-2xl md:text-4xl mb-6">About Me</h2>
+        <div class="grid md:grid-cols-3 gap-4">
+          <div class="block-outline">
+            <div class="kicker">Engineer</div>
+            <p class="poppins text-sm">
+              7 years as a full-stack builder. Shipped trading apps in 3 months
+              (3× faster). Built UI libraries now powering 300+ developers.
+            </p>
+          </div>
+
+          <div class="block-outline">
+            <div class="kicker">Builder</div>
+            <p class="poppins text-sm">
+              I question defaults, strip waste, and prove small focused teams
+              can deliver outsized impact.
+            </p>
+          </div>
+
+          <div class="block-outline">
+            <div class="kicker">Next Wave</div>
+            <p class="poppins text-sm">
+              Moving into product management. Systems thinking and
+              first-principles clarity to build what people actually want to
+              use.
+            </p>
+          </div>
+        </div>
+      </Card>
+    </section>
   </main>
 </Layout>

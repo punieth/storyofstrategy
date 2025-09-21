@@ -6,8 +6,8 @@
     <div class="rounded-[2rem] overflow-hidden w-full h-full bg-white dark:bg-gray-800 relative">
         <!-- Screen 1: Orders List -->
         <div id="screen-orders-list" class="prototype-screen absolute inset-0 flex flex-col h-full">
-            <header class="p-6 border-b-2 border-gray-100 text-center flex-shrink-0">
-            <h1 class="font-bold text-md">My Orders</h1>
+            <header class="p-6 border-b-2 border-gray-100 flex items-center flex-shrink-0">
+            <h1 class="font-bold text-md w-full text-center">My Orders</h1>
             </header>
             <main class="p-4 space-y-3 flex-grow overflow-y-auto">
             <div id="order-1234-card" class="bg-white p-3 rounded-lg border border-gray-200 cursor-pointer hover:shadow-lg transition-shadow">
@@ -36,11 +36,11 @@
         
         <!-- Screen 2: Order Detail -->
         <div id="screen-order-detail" class="prototype-screen absolute inset-0 hidden flex-col h-full">
-            <header class="p-6 border-b-2 border-gray-100 flex items-center flex-shrink-0">
-            <button id="back-to-orders-btn" class="p-2 -ml-2 text-gray-600 hover:text-gray-900 font-bold">
+            <header class="p-6 border-b-2 border-gray-100 flex items-center flex-shrink-0 relative">
+            <button id="back-to-orders-btn" class="absolute left-4 top-1/2 -translate-y-1/2 p-2 text-gray-600 hover:text-gray-900 font-bold">
                 &lt;
             </button>
-            <h1 class="font-bold text-md text-center flex-grow">
+            <h1 class="font-bold text-md text-center w-full">
                 Refund Status
             </h1>
             </header>

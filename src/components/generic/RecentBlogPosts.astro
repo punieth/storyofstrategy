@@ -4,15 +4,7 @@ import BlogList from '../blog/BlogList.astro';
 import { Card } from '@eliancodes/brutal-ui';
 import { Button } from '@eliancodes/brutal-ui';
 
-interface Props {
-  count?: number;
-}
-
-const { count } = Astro.props;
-
-const posts = await getCollection('blog').then((posts) =>
-  posts.reverse().slice(0, count ?? 3)
-);
+const posts = await getCollection('blog', (post) => post.id === 'blogpost-1');
 ---
 
 <section class='mt-8'>
