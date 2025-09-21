@@ -1,0 +1,219 @@
+<div class="w-full max-w-sm mx-auto bg-white rounded-2xl border-2 border-black shadow-box flex flex-col">
+  <!-- Screen 1: Orders List -->
+  <div id="screen-orders-list" class="prototype-screen">
+    <header class="p-4 border-b-2 border-black text-center">
+      <h1 class="font-bold text-lg">My Orders</h1>
+    </header>
+    <main class="p-4 space-y-3">
+      <div id="order-1234-card" class="bg-white p-4 rounded-lg border-2 border-black cursor-pointer hover:shadow-box-hover">
+        <div class="flex justify-between items-center">
+          <p class="font-bold text-base">Kurti Set</p>
+          <span class="font-bold">&gt;</span>
+        </div>
+        <p class="text-sm text-gray-500">Order #1234</p>
+        <div class="mt-3 pt-3 border-t border-gray-200">
+          <p class="text-sm font-semibold text-pink-600">
+            Refund in progress
+          </p>
+        </div>
+      </div>
+      <div class="bg-white p-4 rounded-lg border-2 border-black">
+        <p class="font-bold text-base">Bedsheet Set</p>
+        <p class="text-sm text-gray-500">Order #1235</p>
+        <div class="mt-3 pt-3 border-t border-gray-200">
+          <p class="text-sm font-semibold text-green-600">
+            Refund Completed
+          </p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Screen 2: Order Detail -->
+  <div id="screen-order-detail" class="prototype-screen hidden">
+    <header class="p-4 border-b-2 border-black flex items-center">
+      <button id="back-to-orders-btn" class="p-2 -ml-2 text-gray-600 hover:text-gray-900 font-bold">
+        &lt;
+      </button>
+      <h1 class="font-bold text-lg text-center flex-grow">
+        Refund Status
+      </h1>
+    </header>
+    <main class="p-5 flex flex-col">
+      <div class="p-4 rounded-lg bg-white border-2 border-black mb-4 flex-shrink-0">
+        <p class="font-bold text-base">Kurti Set</p>
+        <p class="text-sm text-gray-500">Order #1234</p>
+      </div>
+      <div class="flex-grow flex flex-col">
+        <!-- Timeline Item 1 -->
+        <div class="flex flex-grow">
+          <div class="flex flex-col items-center w-10 mr-4">
+            <div class="w-7 h-7 bg-green-500 text-white rounded-full flex items-center justify-center z-10 flex-shrink-0 ring-4 ring-white">
+              <span>✓</span>
+            </div>
+            <div class="w-0.5 h-full bg-green-500"></div>
+          </div>
+          <div class="pt-1">
+            <p class="font-semibold text-sm">Pickup Scheduled</p>
+            <p class="text-xs text-gray-500">Sep 4–5</p>
+          </div>
+        </div>
+        <!-- Timeline Item 2 -->
+        <div class="flex flex-grow">
+          <div class="flex flex-col items-center w-10 mr-4">
+            <div class="w-7 h-7 bg-green-500 text-white rounded-full flex items-center justify-center z-10 flex-shrink-0 ring-4 ring-white">
+              <span>✓</span>
+            </div>
+            <div class="w-0.5 h-full bg-pink-500"></div>
+          </div>
+          <div class="pt-1">
+            <p class="font-semibold text-sm">Pickup Done</p>
+            <p class="text-xs text-gray-500">Sep 6</p>
+          </div>
+        </div>
+        <!-- Timeline Item 3 -->
+        <div class="flex flex-grow">
+          <div class="flex flex-col items-center w-10 mr-4">
+            <div class="w-7 h-7 bg-pink-500 ring-4 ring-pink-100 rounded-full flex items-center justify-center z-10 flex-shrink-0">
+              <div class="w-2.5 h-2.5 bg-white rounded-full"></div>
+            </div>
+            <div class="w-0.5 h-full bg-gray-200"></div>
+          </div>
+          <div class="pt-1">
+            <p class="font-bold text-sm text-pink-600">QC in Progress</p>
+            <p class="text-xs text-gray-500">Sep 7–9</p>
+          </div>
+        </div>
+        <!-- Timeline Item 4 -->
+        <div class="flex flex-grow">
+          <div class="flex flex-col items-center w-10 mr-4">
+            <div class="w-7 h-7 border-2 border-gray-300 rounded-full z-10 bg-white flex-shrink-0 ring-4 ring-white"></div>
+            <div class="w-0.5 h-full bg-gray-200"></div>
+          </div>
+          <div class="pt-1">
+            <p class="font-medium text-sm text-gray-500">Refund Initiated</p>
+            <p class="text-xs text-gray-400">Sep 10–11</p>
+          </div>
+        </div>
+        <!-- Timeline Item 5 -->
+        <div class="flex">
+          <div class="flex flex-col items-center w-10 mr-4">
+            <div class="w-7 h-7 border-2 border-gray-300 rounded-full z-10 bg-white flex-shrink-0 ring-4 ring-white"></div>
+          </div>
+          <div class="pt-1">
+            <p class="font-medium text-sm text-gray-500">Refund Posted</p>
+            <p class="text-xs text-gray-400">Sep 12–13</p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="p-4 border-t-2 border-black">
+      <button id="escalate-btn" class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:opacity-90 transition-opacity text-base shadow-box-hover">Need help?</button>
+    </footer>
+  </div>
+
+  <!-- Screen 3: Escalation -->
+  <div id="screen-escalation" class="prototype-screen hidden justify-center items-center text-center p-6">
+    <div class="bg-white p-8 rounded-xl shadow-box border-2 border-black">
+      <div class="text-5xl mb-4">🤔</div>
+      <h2 class="font-bold text-xl mb-2">Are you sure?</h2>
+      <p class="mb-6 text-base text-gray-600">
+        Your return is at <b class="font-semibold">QC in Progress</b>. Most checks finish in 1-2 days. Please escalate only if there's no update for more than 4 days.
+      </p>
+      <div class="w-full space-y-3">
+        <button id="confirm-escalation-btn" class="w-full bg-red-600 text-white font-semibold py-3 rounded-lg hover:bg-red-700 text-base shadow-box-hover">Yes, Escalate Now</button>
+        <button id="cancel-escalation-btn" class="w-full bg-gray-200 text-gray-800 font-semibold py-3 rounded-lg hover:bg-gray-300 text-base shadow-box-hover">No, I'll Wait</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Screen 4: Complete -->
+  <div id="screen-complete" class="prototype-screen hidden flex-col justify-center items-center text-center p-6">
+    <div class="text-6xl mb-4">🎉</div>
+    <h2 class="font-bold text-2xl mb-2">Refund Sent!</h2>
+    <p class="text-lg">
+      A refund of <b class="font-semibold">₹899</b> is on its way to your Bank Account.
+    </p>
+    <p class="text-sm text-gray-500 mt-1">Posted on Sep 12, 2025</p>
+    <div class="w-full mt-8 space-y-3">
+      <button class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:opacity-90 text-base shadow-box-hover">Continue Shopping</button>
+      <button id="shop-again-btn" class="w-full bg-transparent text-gray-800 font-semibold py-2 rounded-md hover:bg-gray-100 text-base">Back to Orders</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const screenOrdersList = document.getElementById('screen-orders-list');
+  const screenOrderDetail = document.getElementById('screen-order-detail');
+  const screenEscalation = document.getElementById('screen-escalation');
+  const screenComplete = document.getElementById('screen-complete');
+
+  const orderCard = document.getElementById('order-1234-card');
+  const backBtn = document.getElementById('back-to-orders-btn');
+  const escalateBtn = document.getElementById('escalate-btn');
+  const cancelEscalationBtn = document.getElementById('cancel-escalation-btn');
+  const confirmEscalationBtn = document.getElementById('confirm-escalation-btn');
+  const shopAgainBtn = document.getElementById('shop-again-btn');
+
+  function showScreen(screen: HTMLElement | null) {
+    if (screenOrdersList) screenOrdersList.classList.add('hidden');
+    if (screenOrderDetail) screenOrderDetail.classList.add('hidden');
+    if (screenEscalation) screenEscalation.classList.add('hidden');
+    if (screenComplete) screenComplete.classList.add('hidden');
+    if (screen) screen.classList.remove('hidden');
+  }
+
+  if (orderCard) orderCard.addEventListener('click', () => showScreen(screenOrderDetail));
+  if (backBtn) backBtn.addEventListener('click', () => showScreen(screenOrdersList));
+  if (escalateBtn) escalateBtn.addEventListener('click', () => showScreen(screenEscalation));
+  if (cancelEscalationBtn) cancelEscalationBtn.addEventListener('click', () => showScreen(screenOrderDetail));
+  if (confirmEscalationBtn) {
+    confirmEscalationBtn.addEventListener('click', () => {
+      // In a real app, this would trigger an API call
+      alert("Your issue has been escalated. We will get back to you shortly.");
+      showScreen(screenOrderDetail);
+    });
+  }
+  if (shopAgainBtn) shopAgainBtn.addEventListener('click', () => showScreen(screenOrdersList));
+
+  // A little extra for fun: simulate refund completion
+  if (screenOrderDetail) {
+    const timelineItems = screenOrderDetail.querySelectorAll('.flex-grow');
+    let currentStep = 2; // Start at QC in Progress
+
+    const interval = setInterval(() => {
+      if (currentStep >= timelineItems.length - 1) {
+        clearInterval(interval);
+        setTimeout(() => showScreen(screenComplete), 1500);
+        return;
+      }
+
+      currentStep++;
+      const currentTimelineItem = timelineItems[currentStep];
+      const prevTimelineItem = timelineItems[currentStep - 1];
+
+      if (prevTimelineItem) {
+        const prevDot = prevTimelineItem.querySelector('.w-7');
+        const prevLine = prevTimelineItem.querySelector('.w-0\.5');
+        if (prevDot) {
+          prevDot.classList.remove('bg-pink-500', 'ring-pink-100');
+          prevDot.classList.add('bg-green-500');
+          prevDot.innerHTML = '<span>✓</span>';
+        }
+        if (prevLine) {
+          prevLine.classList.remove('bg-pink-500');
+          prevLine.classList.add('bg-green-500');
+        }
+      }
+
+      if (currentTimelineItem) {
+        const currentDot = currentTimelineItem.querySelector('.w-7');
+        if (currentDot) {
+          currentDot.classList.remove('border-gray-300');
+          currentDot.classList.add('bg-pink-500', 'ring-4', 'ring-pink-100');
+          currentDot.innerHTML = '<div class="w-2.5 h-2.5 bg-white rounded-full"></div>';
+        }
+      }
+    }, 2000);
+  }
+</script>

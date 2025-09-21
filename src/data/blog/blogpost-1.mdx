@@ -1,0 +1,193 @@
+---
+title: "The ₹500 Question"
+description: "How answering a simple user question—'Where is my refund?'—can solve a multi-million dollar trust issue for Meesho and fuel its next wave of growth."
+pubDate: "Jul 22 2022"
+author: "Punith Rathnakar"
+tags: ["product management", "case study", "meesho"]
+imgUrl: "../../assets/astro.jpeg"
+draft: false
+---
+import InteractivePrototype from '@components/blog/InteractivePrototype.astro';
+
+<div class="text-center">
+  <span class="text-sm font-bold uppercase tracking-wider text-blue-600">A Product Teardown</span>
+  <h2 class="text-4xl md:text-6xl font-extrabold mt-4 leading-tight">
+    The ₹500 Question
+  </h2>
+  <p class="mt-6 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+    How answering a simple user question—"Where is my refund?"—can solve a multi-million dollar trust issue for Meesho and fuel its next wave of growth.
+  </p>
+</div>
+
+### The Real Cost of Confusion
+<p>
+  Meesho's mission is to democratize e-commerce. But for millions of first-time users, a confusing refund process isn't just a hassle—it's a breach of trust that costs a fortune in support overhead and lost customers. This is where user experience directly impacts the bottom line.
+</p>
+<div class="border-2 border-black rounded-lg p-8 my-8 shadow-box bg-blue-100">
+  <h4 class="text-2xl font-bold text-center">
+    Business Impact Snapshot
+  </h4>
+  <p class="text-center text-gray-600 mt-2">
+    Based on public data and industry benchmarks, the scale of this problem is immense.
+  </p>
+  <div class="mt-8 grid sm:grid-cols-3 gap-6 text-center">
+    <div>
+      <p class="text-3xl font-bold text-blue-600">~24M</p>
+      <p class="text-sm text-gray-600">
+        "Where's My Refund?" Tickets Annually
+      </p>
+    </div>
+    <div>
+      <p class="text-3xl font-bold text-blue-600">~₹150</p>
+      <p class="text-sm text-gray-600">Cost Per Support Ticket</p>
+    </div>
+    <div>
+      <p class="text-3xl font-bold text-blue-600">~₹360 Cr.</p>
+      <p class="text-sm text-gray-600">
+        Annual Cost of Refund Anxiety
+      </p>
+    </div>
+  </div>
+  <div class="mt-8 text-center text-lg text-blue-800 font-semibold italic p-4 bg-blue-200/50 rounded-lg">
+    A 20% reduction in these tickets could save over
+    <b class="text-black">₹72 Crore (~$8.6M USD)</b> annually, not
+    including the value of retaining churned customers.
+  </div>
+</div>
+
+### Listening to the Internet's Screams
+<p>
+  This isn't a theoretical problem. This is what millions of users are shouting into the void every day:
+</p>
+<div class="grid md:grid-cols-2 gap-6 my-8">
+  <div class="border-2 border-black rounded-lg p-6 shadow-box bg-gray-100">
+    <p class="text-gray-700 italic">
+      "Return request 11 days back… still no… staff has no clue."
+    </p>
+    <span class="inline-block mt-4 text-xs font-semibold bg-gray-200 text-gray-800 py-1 px-3 rounded-full">Trustpilot</span>
+  </div>
+  <div class="border-2 border-black rounded-lg p-6 shadow-box bg-gray-100">
+    <p class="text-gray-700 italic">
+      "Pickup postponed/cancelled multiple times… still struggling to get my money back."
+    </p>
+    <span class="inline-block mt-4 text-xs font-semibold bg-gray-200 text-gray-800 py-1 px-3 rounded-full">Sitejabber</span>
+  </div>
+</div>
+
+### Meet Priya. For Her, Every Rupee Counts.
+<div class="my-8 bg-white border-2 border-black rounded-lg shadow-box p-8 bg-purple-100">
+  <div class="flex flex-col md:flex-row items-center gap-8">
+    <div class="flex-shrink-0 text-center">
+      <img src="https://placehold.co/120x120/8A2BE2/white?text=Priya" alt="User Persona" class="rounded-full mx-auto border-2 border-black"/>
+      <h4 class="text-xl font-bold mt-4">Priya, 28</h4>
+      <p class="text-gray-600">Homemaker from Lucknow</p>
+    </div>
+    <div class="md:border-l-2 border-black md:pl-8">
+      <h5 class="font-bold text-lg">Her Worldview</h5>
+      <ul class="mt-4 space-y-4 text-gray-700">
+        <li>
+          <b class="text-black">Money isn't funny:</b> A missing
+          ₹500 refund isn't an "inconvenience." It's the difference
+          between buying groceries on Thursday or waiting until
+          Monday.
+        </li>
+        <li>
+          <b class="text-black">Trust is local:</b> Her social
+          circle is her Consumer Reports. A single bad story spreads
+          through the family WhatsApp group like wildfire.
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="mt-8 pt-6 border-t-2 border-black">
+    <h5 class="font-bold text-lg">
+      What Priya is *Really* Asking
+    </h5>
+    <p class="mt-2 text-gray-700">
+      When her refund is in limbo, she's not thinking about supply
+      chains. She’s thinking:
+      <b class="text-black">"Did I just get scammed?"</b>
+    </p>
+  </div>
+</div>
+
+### The Solution: A Radically Simple Tracker
+<p>
+  We don't need to reinvent the wheel. We just need to show the user
+  that the wheels are turning. This is a communication feature,
+  designed to replace anxiety with confidence.
+</p>
+
+<div class="mt-12 flex justify-center">
+  <InteractivePrototype />
+</div>
+
+### How We'll Measure Success
+<div class="border-2 border-black rounded-lg p-8 my-8 border-l-4 border-blue-600 shadow-box bg-blue-100">
+  <ul class="space-y-6">
+    <li>
+      <p class="font-semibold text-lg text-blue-800">
+        Primary Goal: Reduce User Anxiety & Support Costs
+      </p>
+      <p class="text-gray-700">
+        Our main KPI is a
+        <b class="text-black">&gt;20% reduction in "Where is my Refund?" tickets.</b>
+        This directly measures user frustration and our operational
+        load.
+      </p>
+    </li>
+    <li class="pt-6 border-t-2 border-black">
+      <p class="font-semibold text-lg text-blue-800">
+        Secondary Goal: Build Long-Term Trust
+      </p>
+      <p class="text-gray-700">
+        We'll track
+        <b class="text-black">First-Time Returner Retention.</b>
+        After a user's first return, do they buy again? This shows if
+        we are building long-term loyalty or just a leaky bucket.
+      </p>
+    </li>
+  </ul>
+</div>
+
+### The Game Plan: A Disciplined MVP
+<div class="grid lg:grid-cols-2 gap-8 my-8">
+  <div class="border-2 border-black rounded-lg p-6 shadow-box bg-green-200">
+    <h4 class="font-bold text-lg">
+      What We're Building (The MVP)
+    </h4>
+    <ul class="mt-4 space-y-2 text-gray-700 list-disc list-inside">
+      <li>A read-only tracker screen.</li>
+      <li>One new API endpoint to expose existing backend data.</li>
+      <li>
+        An event-logging pipeline to feed our new metrics dashboard.
+      </li>
+      <li class="font-semibold text-black">
+        This is a quick win. Maybe 2 sprints, tops.
+      </li>
+    </ul>
+  </div>
+  <div class="border-2 border-black rounded-lg p-6 shadow-box bg-red-200">
+    <h4 class="font-bold text-lg">
+      What We're *Not* Building (The Non-Goals)
+    </h4>
+    <ul class="mt-4 space-y-2 text-gray-700 list-disc list-inside">
+      <li>NO real-time GPS courier tracking.</li>
+      <li>NO in-app chat with support agents.</li>
+      <li>NO ability to change refund destination.</li>
+      <li class="font-semibold text-black">
+        This discipline keeps us focused on the core problem.
+      </li>
+    </ul>
+  </div>
+</div>
+
+### From Leaky Bucket to Growth Flywheel
+<p>
+  This isn't just about plugging a hole in the bucket. It's about
+  turning a moment of maximum friction into a surprising moment of
+  trust. A happy refund experience becomes a story Priya tells her
+  sister. That story builds a brand that no amount of marketing spend
+  can buy, lowering acquisition costs and building a real, defensible
+  moat in India's most important consumer market.
+</p>
