@@ -2,198 +2,128 @@
 title: "The ₹500 Question"
 description: "How answering a simple user question—'Where is my refund?'—can solve a multi-million dollar trust issue for Meesho and fuel its next wave of growth."
 pubDate: "Jul 22 2022"
-author: "Punith Rathnakar"
+author: "XXXXX"
 tags: ["product management", "case study", "meesho"]
 imgUrl: "../../assets/astro.jpeg"
 draft: false
 ---
-import InteractivePrototype from '@components/blog/InteractivePrototype.astro';
+import HeroBlock from "@components/blog/HeroBlock.astro";
+import PAOStrip from "@components/blog/PAOStrip.astro";
+import UserPersonaCard from "@components/blog/UserPersonaCard.astro";
+import ContextBlock from "@components/blog/ContextBlock.astro";
+import EvidenceList from "@components/blog/EvidenceList.astro";
+import SolutionBlock from "@components/blog/SolutionBlock.astro";
+import ScopeTwoUp from "@components/blog/ScopeTwoUp.astro";
+import FlowSteps from "@components/blog/FlowSteps.astro";
+import RisksBlock from "@components/blog/RisksBlock.astro";
+import MetricsBlock from "@components/blog/MetricsBlock.astro";
+import NextStepsBlock from "@components/blog/NextStepsBlock.astro";
+import AssumptionsBlock from "@components/blog/AssumptionsBlock.astro";
 
-<div class="border-2 border-black rounded-lg p-8 my-8 shadow-[8px_8px_0_0_#000] bg-white">
-<div class="text-center font-heading">
-  <span class="text-sm font-bold uppercase tracking-wider text-blue-600">A Product Teardown</span>
-  <h2 class="text-4xl md:text-6xl font-extrabold mt-4 leading-tight">
-    The ₹500 Question
-  </h2>
-  <p class="mt-6 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto font-body">
-    How answering a simple user question—"Where is my refund?"—can solve a multi-million dollar trust issue for Meesho and fuel its next wave of growth.
-  </p>
-</div>
+<div class="post-wrap stack-lg">
 
-<div class="my-12 border-t-2 border-black"></div>
+  {/* HERO — plain background */}
+  <HeroBlock
+    kicker="A PRODUCT USE CASE"
+    title="Refund ETA Tracker — Reduce Anxiety, Reduce Tickets"
+    tagline="Show buyers where their refund is and when it arrives. Confidence beats guesswork."
+    as="h1"
+    tone="lime"
+  />
 
-<h3 class="font-heading text-2xl font-bold">The Real Cost of Confusion</h3>
-<p class="font-body mt-4">
-  Meesho's mission is to democratize e-commerce. But for millions of first-time users, a confusing refund process isn't just a hassle—it's a breach of trust that costs a fortune in support overhead and lost customers. This is where user experience directly impacts the bottom line.
-</p>
-<div class="border-2 border-black rounded-lg p-8 my-8 shadow-[8px_8px_0_0_#000] bg-blue-100">
-  <h4 class="text-2xl font-bold text-center font-heading">
-    Business Impact Snapshot
-  </h4>
-  <p class="text-center text-gray-600 mt-2 font-body">
-    Based on public data and industry benchmarks, the scale of this problem is immense.
-  </p>
-  <div class="mt-8 grid sm:grid-cols-3 gap-6 text-center">
-    <div>
-      <p class="text-4xl font-bold text-blue-600">~24M</p>
-      <p class="text-sm text-gray-600 font-body">
-        "Where's My Refund?" Tickets Annually
-      </p>
-    </div>
-    <div>
-      <p class="text-4xl font-bold text-blue-600">~₹150</p>
-      <p class="text-sm text-gray-600 font-body">Cost Per Support Ticket</p>
-    </div>
-    <div>
-      <p class="text-4xl font-bold text-blue-600">~₹360 Cr.</p>
-      <p class="text-sm text-gray-600 font-body">
-        Annual Cost of Refund Anxiety
-      </p>
-    </div>
+  {/* PAO in a soft peach lane */}
+  <div class="lane lane--lime">
+    <PAOStrip
+      tone="peach"
+      problem="Buyers can’t see refund progress → support tickets and distrust."
+      approach="One screen with current state + ETA window, fed by existing events."
+      outcome="Target −20% refund tickets, +15% task completion on 'check refund'."
+    />
   </div>
-  <div class="mt-8 text-center text-lg text-blue-800 font-semibold italic p-4 bg-blue-200/50 rounded-lg font-body">
-    A 20% reduction in these tickets could save over
-    <b class="text-black">₹72 Crore (~$8.6M USD)</b> annually, not
-    including the value of retaining churned customers.
+
+  {/* PERSONA in violet lane (full-width persona + it’s ‘own moment’) */}
+  <div class="lane lane--violet">
+    <UserPersonaCard
+      name="Priya"
+      age="28"
+      subtitle="Homemaker, Lucknow"
+      truths={[
+        "Money is immediate — ₹500 is this week’s groceries.",
+        "Trust is local — WhatsApp stories shape her decision to buy again."
+      ]}
+      thought="Did I just get scammed?"
+      tone="violet"
+    />
   </div>
-</div>
 
-<h3 class="font-heading text-2xl font-bold">Listening to the Internet's Screams</h3>
-<p class="font-body mt-4">
-  This isn't a theoretical problem. This is what millions of users are shouting into the void every day:
-</p>
-<div class="grid md:grid-cols-2 gap-6 my-8">
-  <div class="border-2 border-black rounded-lg p-6 shadow-[8px_8px_0_0_#000] bg-gray-100">
-    <p class="text-gray-700 italic font-body text-lg">
-      "Return request 11 days back… still no… staff has no clue."
-    </p>
-    <span class="inline-block mt-4 text-xs font-semibold bg-gray-200 text-gray-800 py-1 px-3 rounded-full font-body">Trustpilot</span>
+  {/* CONTEXT + EVIDENCE on neutral background */}
+  <div class="stack-md">
+    <ContextBlock tone="neutral" text="Support load is spiking around refunds. Finance has events, ops has milestones, but buyers see a black box. A small communication fix beats scaling headcount and prevents churn." />
+    <EvidenceList tone="blue" items={[
+      { label: "Ticket/search clusters around 'refund when / status'" },
+      { label: "Reviews cite delay + silence (not delay alone)" },
+      { label: "Returns pipeline already emits usable timestamps" },
+    ]} />
   </div>
-  <div class="border-2 border-black rounded-lg p-6 shadow-[8px_8px_0_0_#000] bg-gray-100">
-    <p class="text-gray-700 italic font-body text-lg">
-      "Pickup postponed/cancelled multiple times… still struggling to get my money back."
-    </p>
-    <span class="inline-block mt-4 text-xs font-semibold bg-gray-200 text-gray-800 py-1 px-3 rounded-full font-body">Sitejabber</span>
+
+  {/* SOLUTION gets a lime lane for emphasis */}
+  <div class="lane lane--lime">
+    <SolutionBlock tone="lime" text="One Refund view shows stage, a conservative ETA window, and last change. Read-only; no new orchestration. A clear window into systems we already run." />
   </div>
-</div>
 
-<h3 class="font-heading text-2xl font-bold">Meet Priya. For Her, Every Rupee Counts.</h3>
-<div class="my-8 bg-white border-2 border-black rounded-lg shadow-[8px_8px_0_0_#000] p-8 bg-purple-100">
-  <div class="flex flex-col md:flex-row items-center gap-8">
-    <div class="flex-shrink-0 text-center">
-      <img src="https://placehold.co/120x120/8A2BE2/white?text=Priya" alt="User Persona" class="rounded-full mx-auto border-4 border-black"/>
-      <h4 class="text-2xl font-bold mt-4 font-heading">Priya, 28</h4>
-      <p class="text-gray-600 font-body">Homemaker from Lucknow</p>
-    </div>
-    <div class="md:border-l-2 border-black md:pl-8">
-      <h5 class="font-bold text-xl font-heading">Her Worldview</h5>
-      <ul class="mt-4 space-y-4 text-gray-700 font-body text-lg">
-        <li>
-          <b class="text-black">Money isn't funny:</b> A missing
-          ₹500 refund isn't an "inconvenience." It's the difference
-          between buying groceries on Thursday or waiting until
-          Monday.
-        </li>
-        <li>
-          <b class="text-black">Trust is local:</b> Her social
-          circle is her Consumer Reports. A single bad story spreads
-          through the family WhatsApp group like wildfire.
-        </li>
-      </ul>
-    </div>
+  {/* SCOPE two-up on neutral */}
+  <ScopeTwoUp
+    mvp={[
+      "Read-only Refund screen per order",
+      "API exposing state + ETA window",
+      "Event logging for funnel/latency"
+    ]}
+    nonGoals={[
+      "Change refund destination",
+      "Live agent chat",
+      "Courier/bank deep integrations v1"
+    ]}
+  />
+
+  {/* FLOW steps (neutral) */}
+  <FlowSteps steps={[
+    { text:"Open Orders → select refunded order" },
+    { text:"See 'Processing with bank' + ETA 'Tue–Thu'" },
+    { text:"Timeline shows last event (e.g., Bank accepted Mon 10:42)" },
+    { text:"Info line explains stage in plain words" },
+    { text:"Late state triggers with one-tap help" },
+    { text:"Completed state shows destination (UPI/Bank)" },
+  ]}/>
+
+  {/* RISKS (neutral) */}
+  <RisksBlock items={[
+    { title:"ETA anger", note:"Use windows, bias conservative" },
+    { title:"Edge cases", note:"Show 'We’re checking' + SLA note" },
+    { title:"Data gaps", note:"Fallback copy: 'Usually 2–5 days'" },
+  ]}/>
+
+  {/* METRICS in a blue lane */}
+  <div class="lane lane--blue">
+    <MetricsBlock
+      primaryLabel="Primary impact"
+      primaryTarget="≥ 20% drop in 'Where is my refund?' tickets"
+      guardrail="Post-return NPS must not drop"
+      leading={[
+        "% of refund views with time-on-page < 10s (clarity)",
+        "Late-flag rate trending down"
+      ]}
+    />
   </div>
-  <div class="mt-8 pt-6 border-t-2 border-black">
-    <h5 class="font-bold text-xl font-heading">
-      What Priya is *Really* Asking
-    </h5>
-    <p class="mt-2 text-gray-700 font-body text-lg">
-      When her refund is in limbo, she's not thinking about supply
-      chains. She’s thinking:
-      <b class="text-black">"Did I just get scammed?"</b>
-    </p>
-  </div>
-</div>
 
-<h3 class="font-heading text-2xl font-bold">The Solution: A Radically Simple Tracker</h3>
-<p class="font-body mt-4">
-  We don't need to reinvent the wheel. We just need to show the user
-  that the wheels are turning. This is a communication feature,
-  designed to replace anxiety with confidence.
-</p>
-
-<div class="my-12 flex justify-center">
-  <InteractivePrototype />
-</div>
-
-<h3 class="font-heading text-2xl font-bold">The Game Plan: A Disciplined MVP</h3>
-<div class="grid lg:grid-cols-2 gap-8 my-8">
-  <div class="border-2 border-black rounded-lg p-6 shadow-[8px_8px_0_0_#000] bg-green-200">
-    <h4 class="font-bold text-xl font-heading">
-      What We're Building (The MVP)
-    </h4>
-    <ul class="mt-4 space-y-2 text-gray-700 list-disc list-inside font-body">
-      <li>A read-only tracker screen.</li>
-      <li>One new API endpoint to expose existing backend data.</li>
-      <li>
-        An event-logging pipeline to feed our new metrics dashboard.
-      </li>
-      <li class="font-semibold text-black">
-        This is a quick win. Maybe 2 sprints, tops.
-      </li>
-    </ul>
-  </div>
-  <div class="border-2 border-black rounded-lg p-6 shadow-[8px_8px_0_0_#000] bg-red-200">
-    <h4 class="font-bold text-xl font-heading">
-      What We're *Not* Building (The Non-Goals)
-    </h4>
-    <ul class="mt-4 space-y-2 text-gray-700 list-disc list-inside">
-      <li>NO real-time GPS courier tracking.</li>
-      <li>NO in-app chat with support agents.</li>
-      <li>NO ability to change refund destination.</li>
-      <li class="font-semibold text-black">
-        This discipline keeps us focused on the core problem.
-      </li>
-    </ul>
-  </div>
-</div>
-
-<h3 class="font-heading text-2xl font-bold">How We'll Measure Success</h3>
-<div class="border-2 border-black rounded-lg p-8 my-8 border-l-4 border-blue-600 shadow-[8px_8px_0_0_#000] bg-blue-100">
-  <ul class="space-y-6">
-    <li>
-      <p class="font-semibold text-xl text-blue-800 font-heading">
-        Primary Goal: Reduce User Anxiety & Support Costs
-      </p>
-      <p class="text-gray-700 font-body text-lg">
-        Our main KPI is a
-        <b class="text-black">&gt;20% reduction in "Where is my Refund?" tickets.</b>
-        This directly measures user frustration and our operational
-        load.
-      </p>
-    </li>
-    <li class="pt-6 border-t-2 border-black">
-      <p class="font-semibold text-xl text-blue-800 font-heading">
-        Secondary Goal: Build Long-Term Trust
-      </p>
-      <p class="text-gray-700 font-body text-lg">
-        We'll track
-        <b class="text-black">First-Time Returner Retention.</b>
-        After a user's first return, do they buy again? This shows if
-        we are building long-term loyalty or just a leaky bucket.
-      </p>
-    </li>
-  </ul>
-</div>
-
-<div class="my-12 border-t-2 border-black"></div>
-
-<h3 class="font-heading text-2xl font-bold">From Leaky Bucket to Growth Flywheel</h3>
-<p class="font-body mt-4 text-lg">
-  This isn't just about plugging a hole in the bucket. It's about
-  turning a moment of maximum friction into a surprising moment of
-  trust. A happy refund experience becomes a story Priya tells her
-  sister. That story builds a brand that no amount of marketing spend
-  can buy, lowering acquisition costs and building a real, defensible
-  moat in India's most important consumer market.
-</p>
+  {/* NEXT + ASSUMPTIONS (neutral) */}
+  <NextStepsBlock steps={[
+    { label:"Map events → state machine", note:"Finance + Ops, 2 sessions" },
+    { label:"Define ETA rules per rail",   note:"UPI, bank" },
+    { label:"API stub + wire screen",      note:"Ship to 5% cohort" },
+  ]}/>
+  <AssumptionsBlock items={[
+    "Event timestamps reliable to ±2h",
+    "85% of refunds land in 2–5 business days",
+    "Support macros link to new screen"
+  ]}/>
 </div>

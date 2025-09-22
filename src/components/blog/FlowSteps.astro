@@ -1,0 +1,20 @@
+---
+interface Step { text: string }
+interface Props { steps: Step[] }
+const { steps } = Astro.props as Props;
+---
+<ol class="flow">
+  {steps.map((s,i)=>(
+    <li class="row">
+      <div class="num">{i+1}</div>
+      <div class="txt">{s.text}</div>
+    </li>
+  ))}
+</ol>
+
+<style>
+.flow{ display:flex; flex-direction:column; gap:10px; counter-reset:step; }
+.row{ display:grid; grid-template-columns: 44px 1fr; align-items:center; gap:10px; background:#fff; border:4px solid #000; border-radius:12px; padding:.6rem; box-shadow:5px 5px 0 #000; }
+.num{ display:grid; place-items:center; font-weight:800; border:3px solid #000; width:40px; height:40px; border-radius:10px; background:#f5ffcf; }
+.txt{ line-height:1.6; }
+</style>

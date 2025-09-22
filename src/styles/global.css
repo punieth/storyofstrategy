@@ -2,6 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ===== Section rhythm (lanes) ===== */
+.lane {
+  padding: 1rem;
+  border-radius: 14px;
+  margin: 1.5rem 0;            /* vertical breathing */
+}
+.lane--lime   { background: #f5ffcf; } /* business/problem */
+.lane--violet { background: #f3e8ff; } /* persona/emotion  */
+.lane--blue   { background: #e7f2ff; } /* metrics/outcomes */
+.lane--none   { background: transparent; }
+
+/* Tighten the card spacing inside lanes */
+.lane > * + * { margin-top: 12px; }
+
+/* Page width + vertical rhythm */
+.post-wrap { max-width: 860px; margin: 0 auto; }
+.stack-lg  > * + * { margin-top: 22px; }
+.stack-md  > * + * { margin-top: 14px; }
+
+/* Make shadows consistent, not overpowering */
+.nb-box, .persona, .cell, .card, .row, .primary, .node { box-shadow: 6px 6px 0 #000 !important; }
+
 .card-shadow {
   filter: drop-shadow(7px 7px 0 rgb(0 0 0 / 1));
   transition: filter .2s ease, transform .2s ease;

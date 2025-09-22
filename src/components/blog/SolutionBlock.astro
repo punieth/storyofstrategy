@@ -1,0 +1,15 @@
+---
+interface Props { title?: string; text: string; tone?: "lime"|"neutral" }
+const { title="Solution", text, tone="neutral" } = Astro.props as Props;
+const tint = tone==="lime" ? "#f5ffcf" : "#fff";
+---
+<section class="nb" style={`--tint:${tint}`}>
+  <span class="kicker">{title}</span>
+  <p class="copy">{text}</p>
+</section>
+
+<style>
+.nb{ background:var(--tint); border:4px solid #000; border-radius:12px; padding:1rem; box-shadow:6px 6px 0 #000; }
+.kicker{ display:inline-block;background:#000;color:#fff;border:2px solid #000;padding:2px 8px;font-size:.7rem;text-transform:uppercase;letter-spacing:.06em; }
+.copy{ margin:.5rem 0 0; line-height:1.65; }
+</style>

@@ -1,0 +1,26 @@
+---
+interface Risk { title: string; note: string }
+interface Props { items: Risk[] }
+const { items } = Astro.props as Props;
+---
+<section class="wrap">
+  <span class="kicker">Risks & Trade-offs</span>
+  <div class="grid">
+    {items.map((r)=>(
+      <div class="card">
+        <div class="ttl">{r.title}</div>
+        <div class="nt">{r.note}</div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+.wrap{ margin-top:.5rem }
+.kicker{ display:inline-block;background:#000;color:#fff;border:2px solid #000;padding:2px 8px;font-size:.7rem;text-transform:uppercase;letter-spacing:.06em; }
+.grid{ display:grid; gap:12px; grid-template-columns: 1fr; }
+@media (min-width:768px){ .grid{ grid-template-columns: repeat(3,1fr); } }
+.card{ background:#fff; border:4px solid #000; border-radius:12px; padding:.75rem; box-shadow:5px 5px 0 #000; }
+.ttl{ font-weight:800; margin-bottom:.25rem; }
+.nt{ line-height:1.55; }
+</style>
