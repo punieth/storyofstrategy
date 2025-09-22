@@ -1,7 +1,5 @@
 ---
 import Layout from "@layouts/Default.astro";
-import RecentBlogPosts from "@components/generic/RecentBlogPosts.astro";
-import { Button } from "@eliancodes/brutal-ui";
 import BrutalCard from "@components/layout/Brutalcard.astro";
 
 const featured = {
@@ -98,27 +96,21 @@ const featured = {
             </h3>
 
             <div class="grid md:grid-cols-3 gap-4">
-              <div
-                class="border-4 border-black bg-[var(--accent-soft)] p-4 shadow-[8px_8px_0_var(--ink)]"
-              >
+              <BrutalCard tone="yellow" class="p-4">
                 <div class="font-bold uppercase text-lg mb-2">Problem</div>
                 <p class="poppins text-base">
                   Refund timelines were unclear, creating anxiety and eroding
                   trust.
                 </p>
-              </div>
-              <div
-                class="border-4 border-black bg-[var(--accent-soft)] p-4 shadow-[8px_8px_0_var(--ink)]"
-              >
+              </BrutalCard>
+              <BrutalCard tone="blue" class="p-4">
                 <div class="font-bold uppercase text-lg mb-2">Approach</div>
                 <p class="poppins text-base">
                   Simple status tracker with ETA windows, grounded in
                   first-principles system mapping.
                 </p>
-              </div>
-              <div
-                class="border-4 border-black bg-[var(--accent-soft)] p-4 shadow-[8px_8px_0_var(--ink)]"
-              >
+              </BrutalCard>
+              <BrutalCard tone="orange" class="p-4">
                 <div class="font-bold uppercase text-lg mb-2">
                   Potential impact
                 </div>
@@ -126,7 +118,7 @@ const featured = {
                   ~25% fewer refund-related tickets, ~18% higher task
                   completion.
                 </p>
-              </div>
+              </BrutalCard>
             </div>
           </div>
 
@@ -144,30 +136,30 @@ const featured = {
       <BrutalCard tone="yellow">
         <h2 class="dm-serif text-2xl md:text-4xl mb-6">About Me</h2>
         <div class="grid md:grid-cols-3 gap-4">
-          <div class="block-outline">
-            <div class="kicker">Engineer</div>
+          <BrutalCard tone="black">
+            <div class="kicker kicker-invert">Engineer</div>
             <p class="poppins text-sm">
               7 years as a full-stack builder. Shipped trading apps in 3 months
               (3× faster). Built UI libraries now powering 300+ developers.
             </p>
-          </div>
+          </BrutalCard>
 
-          <div class="block-outline">
-            <div class="kicker">Builder</div>
+          <BrutalCard tone="black">
+            <div class="kicker kicker-invert">Builder</div>
             <p class="poppins text-sm">
               I question defaults, strip waste, and prove small focused teams
               can deliver outsized impact.
             </p>
-          </div>
+          </BrutalCard>
 
-          <div class="block-outline">
-            <div class="kicker">Next Wave</div>
+          <BrutalCard tone="black">
+            <div class="kicker kicker-invert">Next Wave</div>
             <p class="poppins text-sm">
               Moving into product management. Systems thinking and
               first-principles clarity to build what people actually want to
               use.
             </p>
-          </div>
+          </BrutalCard>
         </div>
       </BrutalCard>
     </section>

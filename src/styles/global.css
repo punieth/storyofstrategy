@@ -108,6 +108,12 @@
   letter-spacing: .06em;
 }
 
+.kicker-invert {
+  background: var(--primary);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+}
+
 html {
   scroll-behavior: smooth;
 }

@@ -1,50 +1,65 @@
 ---
 interface Props {
-  tone?: "red" | "orange" | "yellow" | "blue";
-  color?: string;
-  class?: string;
-  [key: string]: any; // allow passthrough props (id, aria, etc.)
+    tone?: "red" | "orange" | "yellow" | "blue" | "black";
+    color?: string;
+    class?: string;
+    [key: string]: any;
 }
 
-const palette: Record<"red" | "orange" | "yellow" | "blue", string> = {
-  red: "#f87171",
-  orange: "#fb923c",
-  yellow: "#facc15",
-  blue: "#60a5fa",
+const palette: Record<NonNullable<Props["tone"]>, string> = {
+    red: "#f87171",
+    orange: "#fb923c",
+    yellow: "#facc15",
+    blue: "#60a5fa",
+    black: "#000000",
 };
 
 const {
-  tone = "red",
-  color,
-  class: className = "",
-  ...rest
+    tone = "red",
+    color,
+    class: className = "",
+    ...rest
 } = Astro.props as Props;
 
-const bg = color ?? palette[tone];
+const bg = (color ?? palette[tone]).toLowerCase();
+const isBlack = tone === "black" || bg === "#000" || bg === "#000000";
+
+/* Auto-contrast vars */
+const borderColor = isBlack ? "#000000" : "#000000"; // white border on black bg
+const shadowColor = isBlack ? "#60a5fa" : "#000000"; // pale-lime shadow on black
+const textColor = isBlack ? "#ffffff" : "#000000";
 ---
 
-<style define:vars={{ bg }}>
-  /* Rounded brutal card with drop-shadow kept */
-  .brutal-card {
-    background-color: var(--bg);
-    border-radius: 0.5rem;       /* always rounded (as before) */
-    border: 3px solid #000;      /* matches original */
-    filter: drop-shadow(7px 7px 0 #000);
-    transition: filter .2s ease;
-    padding: 1rem;
-  }
-  .brutal-card:hover { filter: drop-shadow(5px 5px 0 #000); }
-
-  /* iOS stability for filter during scroll/hover */
-  @supports (-webkit-touch-callout: none) {
+<style define:vars={{ bg, borderColor, shadowColor, textColor }}>
     .brutal-card {
-      -webkit-transform: translateZ(0);
-      backface-visibility: hidden;
-      will-change: filter;
+        position: relative;
+        background-color: var(--bg);
+        color: var(--textColor);
+        border-radius: 0.5rem;
+        border: 3px solid var(--borderColor);
+        filter: drop-shadow(7px 7px 0 var(--shadowColor));
+        transition: filter 0.2s ease;
+        padding: 1rem;
     }
-  }
+    .brutal-card:hover {
+        filter: drop-shadow(5px 5px 0 var(--shadowColor));
+    }
+
+    /* Make links inherit contrast inside dark cards */
+    .brutal-card a {
+        color: inherit;
+    }
+
+    /* iOS stability */
+    @supports (-webkit-touch-callout: none) {
+        .brutal-card {
+            -webkit-transform: translateZ(0);
+            backface-visibility: hidden;
+            will-change: filter;
+        }
+    }
 </style>
 
 <div class={`brutal-card ${className}`} {...rest}>
-  <slot />
+    <slot />
 </div>
