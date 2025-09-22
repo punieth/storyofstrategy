@@ -1,0 +1,50 @@
+---
+interface Props {
+  tone?: "red" | "orange" | "yellow" | "blue";
+  color?: string;
+  class?: string;
+  [key: string]: any; // allow passthrough props (id, aria, etc.)
+}
+
+const palette: Record<"red" | "orange" | "yellow" | "blue", string> = {
+  red: "#f87171",
+  orange: "#fb923c",
+  yellow: "#facc15",
+  blue: "#60a5fa",
+};
+
+const {
+  tone = "red",
+  color,
+  class: className = "",
+  ...rest
+} = Astro.props as Props;
+
+const bg = color ?? palette[tone];
+---
+
+<style define:vars={{ bg }}>
+  /* Rounded brutal card with drop-shadow kept */
+  .brutal-card {
+    background-color: var(--bg);
+    border-radius: 0.5rem;       /* always rounded (as before) */
+    border: 3px solid #000;      /* matches original */
+    filter: drop-shadow(7px 7px 0 #000);
+    transition: filter .2s ease;
+    padding: 1rem;
+  }
+  .brutal-card:hover { filter: drop-shadow(5px 5px 0 #000); }
+
+  /* iOS stability for filter during scroll/hover */
+  @supports (-webkit-touch-callout: none) {
+    .brutal-card {
+      -webkit-transform: translateZ(0);
+      backface-visibility: hidden;
+      will-change: filter;
+    }
+  }
+</style>
+
+<div class={`brutal-card ${className}`} {...rest}>
+  <slot />
+</div>

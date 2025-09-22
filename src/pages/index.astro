@@ -1,7 +1,8 @@
 ---
 import Layout from "@layouts/Default.astro";
 import RecentBlogPosts from "@components/generic/RecentBlogPosts.astro";
-import { Button, Card } from "@eliancodes/brutal-ui";
+import { Button } from "@eliancodes/brutal-ui";
+import BrutalCard from "@components/layout/Brutalcard.astro";
 
 const featured = {
   title: "Refund Transparency @ Meesho",
@@ -22,7 +23,7 @@ const featured = {
     <section id="about" class="grid md:grid-cols-8 gap-8 mt-4">
       {/* Card 1 — Hero */}
       <div class="col-span-5">
-        <Card>
+        <BrutalCard tone="red">
           <div class="flex flex-col justify-between items-start gap-4">
             <blockquote
               class="mt-4 outfit text-2xl md:text-5xl lg:text-6xl leading-tight"
@@ -33,21 +34,14 @@ const featured = {
             <p class="mt-2 outfit text-xl md:text-3xl lg:text-5xl">
               I care about turning complexity into clarity.
             </p>
-            <a
-              href="/blog/blogpost-1/"
-              class="inline-block font-bold border-4 border-black px-4 py-2
-         shadow-[8px_8px_0_#000] bg-white
-         hover:bg-lime-300 hover:text-black transition-colors"
-            >
-              Read the case study →
-            </a>
+            <a href="/blog/blogpost-1/" class="btn"> Read the case study →</a>
           </div>
-        </Card>
+        </BrutalCard>
       </div>
 
       {/* Card 2 — About (transition) */}
       <div class="col-span-3">
-        <Card>
+        <BrutalCard tone="orange">
           <h2 class="text-2xl md:text-4xl lg:text-6xl mb-6 dm-serif">
             I bridge engineering and product.
           </h2>
@@ -58,12 +52,12 @@ const featured = {
               >how</em
             >. Moving into product management became the natural step.
           </p>
-        </Card>
+        </BrutalCard>
       </div>
 
       {/* Card 3 — Philosophy */}
       <div class="col-span-3">
-        <Card>
+        <BrutalCard tone="yellow">
           <h2 class="text-2xl md:text-4xl lg:text-6xl mb-4 dm-serif">
             Clarity over complexity.
           </h2>
@@ -73,12 +67,12 @@ const featured = {
             engineering depth with product vision to build what people truly
             need.
           </p>
-        </Card>
+        </BrutalCard>
       </div>
 
       {/* Card 4 — Vision */}
       <div class="col-span-5">
-        <Card>
+        <BrutalCard>
           <h2 class="text-2xl md:text-4xl lg:text-6xl mb-4 dm-serif">
             Shaping India’s next wave.
           </h2>
@@ -87,13 +81,13 @@ const featured = {
             millions live and work. That’s where I want to apply my mix of
             engineering depth and product clarity.
           </p>
-        </Card>
+        </BrutalCard>
       </div>
     </section>
 
     {/* Featured Case Study — adds substance above the fold */}
     <section id="featured" class="mt-8">
-      <Card>
+      <BrutalCard tone="blue">
         <div class="grid md:grid-cols-8 gap-6 items-start">
           <div class="md:col-span-5">
             <h2 class="dm-serif text-2xl md:text-4xl mb-1">
@@ -143,11 +137,11 @@ const featured = {
             </div>
           </div>
         </div>
-      </Card>
+      </BrutalCard>
     </section>
 
     <section id="about-me" class="mt-12">
-      <Card>
+      <BrutalCard tone="yellow">
         <h2 class="dm-serif text-2xl md:text-4xl mb-6">About Me</h2>
         <div class="grid md:grid-cols-3 gap-4">
           <div class="block-outline">
@@ -175,7 +169,7 @@ const featured = {
             </p>
           </div>
         </div>
-      </Card>
+      </BrutalCard>
     </section>
   </main>
 </Layout>

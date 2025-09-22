@@ -26,7 +26,7 @@
   --accent-soft: #f5ffcf;
   /* pale lime */
   --ink: var(--secondary);
-  --shadow: 8px 8px 0 var(--ink);
+  --shadow: 5px 5px 0 var(--ink);
 }
 
 /* Buttons */
@@ -45,7 +45,7 @@
 .btn:hover {
   background: var(--accent);
   color: var(--ink);
-  box-shadow: 6px 6px 0 var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
   transform: translateY(-1px);
 }
 
