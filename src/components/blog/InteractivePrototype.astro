@@ -1,196 +1,404 @@
-<div class="relative mx-auto border-gray-200 dark:border-gray-200 bg-gray-200 border-[10px] rounded-[2.5rem] h-[600px] w-[300px] shadow-xl max-w-full aspect-w-9 aspect-h-16">
-    <div class="w-[148px] h-[18px] bg-gray-200 top-0 rounded-b-[1rem] left-1/2 -translate-x-1/2 absolute"></div>
-    <div class="h-[32px] w-[3px] bg-gray-200 absolute -left-[13px] top-[124px] rounded-l-lg"></div>
-    <div class="h-[32px] w-[3px] bg-gray-200 absolute -left-[13px] top-[178px] rounded-l-lg"></div>
-    <div class="h-[48px] w-[3px] bg-gray-200 absolute -right-[13px] top-[142px] rounded-r-lg"></div>
-    <div class="rounded-[2rem] overflow-hidden w-full h-full bg-white dark:bg-gray-800 relative">
+<div
+    class="relative mx-auto border-[#ffe0f1] bg-white border-[9px] rounded-[2.65rem] h-[600px] w-[300px] shadow-[0_16px_40px_rgba(248,180,210,0.25)] max-w-full aspect-[9/16]"
+>
+    <div
+        class="w-[136px] h-[16px] bg-white top-0 rounded-b-[0.9rem] left-1/2 -translate-x-1/2 absolute shadow-[0_4px_10px_rgba(236,192,220,0.16)]"
+    >
+    </div>
+    <div
+        class="h-[28px] w-[3px] bg-white absolute -left-[11px] top-[124px] rounded-l-lg shadow-[2px_0_6px_rgba(236,192,220,0.12)]"
+    >
+    </div>
+    <div
+        class="h-[28px] w-[3px] bg-white absolute -left-[11px] top-[176px] rounded-l-lg shadow-[2px_0_6px_rgba(236,192,220,0.12)]"
+    >
+    </div>
+    <div
+        class="h-[44px] w-[3px] bg-white absolute -right-[11px] top-[142px] rounded-r-lg shadow-[-2px_0_6px_rgba(236,192,220,0.12)]"
+    >
+    </div>
+    <div class="rounded-[2rem] overflow-hidden w-full h-full bg-white relative">
         <!-- Screen 1: Orders List -->
-        <div id="screen-orders-list" class="prototype-screen absolute inset-0 flex flex-col h-full">
-            <header class="p-6 border-b-2 border-gray-100 flex items-center flex-shrink-0">
-            <h1 class="font-bold text-md w-full text-center">My Orders</h1>
+        <div
+            id="screen-orders-list"
+            class="prototype-screen absolute inset-0 flex flex-col h-full"
+        >
+            <header
+                class="px-5 py-3 bg-gradient-to-r from-white via-[#f8f6ff] to-[#f1efff] border-b border-[#e9e2ff] flex flex-col items-center gap-1 flex-shrink-0 shadow-[0_5px_12px_rgba(189,173,224,0.14)] text-[#44376b]"
+            >
+                <span
+                    class="inline-flex h-7 w-7 items-center justify-center rounded-2xl bg-[#efe9ff] text-[11px] font-semibold"
+                    >M</span
+                >
+                <div class="leading-tight text-center">
+                    <p
+                        class="text-[9px] uppercase tracking-[0.3em] text-[#7d60d1] font-semibold"
+                    >
+                        Orders
+                    </p>
+                    <h1 class="text-[13px] font-bold">Refund tracker</h1>
+                </div>
             </header>
-            <main class="p-4 space-y-3 flex-grow overflow-y-auto">
-            <div id="order-1234-card" class="bg-white p-3 rounded-lg border border-gray-200 cursor-pointer hover:shadow-lg transition-shadow">
-                <div class="flex justify-between items-center">
-                <p class="font-semibold text-sm">Kurti Set</p>
-                <span class="font-bold text-gray-400 text-xs">&gt;</span>
+            <main
+                class="p-4 space-y-2.5 flex-grow overflow-y-auto bg-gradient-to-b from-white via-[#fbf9ff] to-[#f7f2ff]"
+            >
+                <div
+                    id="order-1234-card"
+                    class="bg-white/95 p-4 rounded-xl border border-[#e9d7f6] cursor-pointer shadow-[0_8px_18px_rgba(193,158,219,0.18)] hover:shadow-[0_12px_22px_rgba(193,158,219,0.26)] transition-shadow"
+                >
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="font-semibold text-sm text-[#6b4b83]">
+                                Kurti Set
+                            </p>
+                            <p class="text-[11px] text-[#8b6fa6]">
+                                Order   #M-598-P9
+                            </p>
+                        </div>
+                        <span class="font-bold text-[#a855b7] text-lg">›</span>
+                    </div>
+                    <div
+                        class="mt-3 pt-3 border-t border-[#efe3fb] flex items-center justify-between"
+                    >
+                        <span
+                            class="inline-flex items-center gap-2 text-xs font-semibold text-[#a855b7]"
+                        >
+                            <span class="h-2 w-2 rounded-full bg-[#a855b7]"
+                            ></span>
+                            Refund in progress
+                        </span>
+                        <span class="text-[11px] text-[#8b6fa6] font-medium"
+                            >ETA • 3 days</span
+                        >
+                    </div>
                 </div>
-                <p class="text-xs text-gray-500">Order #1234</p>
-                <div class="mt-2 pt-2 border-t border-gray-100">
-                    <p class="text-xs font-semibold text-pink-600">
-                      Refund in progress
-                    </p>
+                <div
+                    class="bg-white/90 p-4 rounded-xl border border-[#e9d7f6] shadow-[0_6px_16px_rgba(180,154,220,0.14)]"
+                >
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="font-semibold text-sm text-[#6b4b83]">
+                                Bedsheet Set
+                            </p>
+                            <p class="text-[11px] text-[#8b6fa6]">
+                                Order  #M-023-88
+                            </p>
+                        </div>
+                        <span
+                            class="inline-flex items-center gap-2 text-xs font-semibold text-[#16a34a]"
+                        >
+                            <span class="h-2 w-2 rounded-full bg-[#16a34a]"
+                            ></span>
+                            Paid
+                        </span>
+                    </div>
+                    <div class="mt-3 pt-3 border-t border-[#efe3fb]">
+                        <p class="text-xs font-semibold text-[#16a34a]">
+                            Refund completed
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="bg-white p-3 rounded-lg border border-gray-200">
-                <p class="font-semibold text-sm">Bedsheet Set</p>
-                <p class="text-xs text-gray-500">Order #1235</p>
-                <div class="mt-2 pt-2 border-t border-gray-100">
-                    <p class="text-xs font-semibold text-green-600">
-                      Refund Completed
-                    </p>
-                </div>
-            </div>
             </main>
         </div>
-        
+
         <!-- Screen 2: Order Detail -->
-        <div id="screen-order-detail" class="prototype-screen absolute inset-0 hidden flex-col h-full">
-            <header class="p-6 border-b-2 border-gray-100 flex items-center flex-shrink-0 relative">
-            <button id="back-to-orders-btn" class="absolute left-4 top-1/2 -translate-y-1/2 p-2 text-gray-600 hover:text-gray-900 font-bold">
-                &lt;
-            </button>
-            <h1 class="font-bold text-md text-center w-full">
-                Refund Status
-            </h1>
+        <div
+            id="screen-order-detail"
+            class="prototype-screen absolute inset-0 hidden flex-col h-full"
+        >
+            <header
+                class="relative px-5 py-3 bg-gradient-to-r from-white via-[#f8f6ff] to-[#f1efff] border-b border-[#e9e2ff] flex flex-col items-center gap-1 flex-shrink-0 shadow-[0_5px_12px_rgba(189,173,224,0.14)] text-[#44376b]"
+            >
+                <button
+                    id="back-to-orders-btn"
+                    class="absolute left-5 top-1/2 -translate-y-1/2 inline-flex h-7 w-7 items-center justify-center rounded-full border border-[#dcd3ff] bg-white text-[#44376b] text-sm font-bold shadow-[0_5px_12px_rgba(180,154,220,0.14)]"
+                >
+                    ‹
+                </button>
+                <span
+                    class="inline-flex h-7 w-7 items-center justify-center rounded-2xl bg-[#efe9ff] text-[11px] font-semibold"
+                    >M</span
+                >
+                <div class="leading-tight text-center">
+                    <p
+                        class="text-[9px] uppercase tracking-[0.3em] text-[#7d60d1] font-semibold"
+                    >
+                        Refund status
+                    </p>
+                    <h1 class="text-[13px] font-bold">Order   #M-598-P9</h1>
+                </div>
             </header>
-            <main class="p-4 flex flex-col flex-grow overflow-y-auto">
-            <div class="p-3 rounded-lg bg-white border border-gray-200 mb-3 flex-shrink-0">
-                <p class="font-semibold text-sm">Kurti Set</p>
-                <p class="text-xs text-gray-500">Order #1234</p>
-            </div>
-            <div class="flex-grow flex flex-col">
-                <!-- Timeline Item 1 -->
-                <div class="flex flex-grow">
-                <div class="flex flex-col items-center w-10 mr-4">
-                    <div class="w-7 h-7 bg-green-500 text-white rounded-full flex items-center justify-center z-10 flex-shrink-0 ring-4 ring-white">
-                    <span>✓</span>
+            <main
+                class="p-4 flex flex-col flex-grow overflow-y-hidden bg-gradient-to-b from-white via-[#fff8fc] to-[#f3ecff] space-y-1"
+            >
+                <div
+                    class="p-3 rounded-xl bg-white/95 border border-[#e9d7f6] shadow-[0_8px_18px_rgba(193,158,219,0.18)] flex-shrink-0"
+                >
+                    <p class="font-semibold text-sm text-[#6b4b83]">
+                        Kurti Set
+                    </p>
+                    <p class="text-xs text-[#8b6fa6]">
+                        Order   #M-598-P9 · Cashfree payout
+                    </p>
+                </div>
+                <div class="flex-grow flex flex-col">
+                    <!-- Timeline Item 1 -->
+                    <div class="flex flex-grow">
+                        <div class="flex flex-col items-center w-10 mr-4">
+                            <div
+                                class="w-7 h-7 bg-purple-600 text-white rounded-full flex items-center justify-center z-10 flex-shrink-0 ring-4 ring-white"
+                                style="margin-top: 7px;"
+                            >
+                                <span>✓</span>
+                            </div>
+                            <div class="w-0.5 h-full bg-green-500"></div>
+                        </div>
+                        <div class="pt-1">
+                            <p class="font-semibold text-sm">
+                                Pickup Scheduled
+                            </p>
+                            <p class="text-xs text-gray-500">
+                                Sep 4–5 • Slot confirmed
+                            </p>
+                        </div>
                     </div>
-                    <div class="w-0.5 h-full bg-green-500"></div>
-                </div>
-                <div class="pt-1">
-                    <p class="font-semibold text-sm">Pickup Scheduled</p>
-                    <p class="text-xs text-gray-500">Sep 4–5</p>
-                </div>
-                </div>
-                <!-- Timeline Item 2 -->
-                <div class="flex flex-grow">
-                <div class="flex flex-col items-center w-10 mr-4">
-                    <div class="w-7 h-7 bg-green-500 text-white rounded-full flex items-center justify-center z-10 flex-shrink-0 ring-4 ring-white">
-                    <span>✓</span>
+                    <!-- Timeline Item 2 -->
+                    <div class="flex flex-grow">
+                        <div class="flex flex-col items-center w-10 mr-4">
+                            <div
+                                class="w-7 h-7 bg-purple-600 text-white rounded-full flex items-center justify-center z-10 flex-shrink-0 ring-4 ring-white"
+                                style="margin-top: 5px;"
+                            >
+                                <span>✓</span>
+                            </div>
+                            <div class="w-0.5 h-full bg-pink-500"></div>
+                        </div>
+                        <div class="pt-1">
+                            <p class="font-semibold text-sm">Pickup Done</p>
+                            <p class="text-xs text-gray-500">
+                                Sep 6 • In transit
+                            </p>
+                        </div>
                     </div>
-                    <div class="w-0.5 h-full bg-pink-500"></div>
-                </div>
-                <div class="pt-1">
-                    <p class="font-semibold text-sm">Pickup Done</p>
-                    <p class="text-xs text-gray-500">Sep 6</p>
-                </div>
-                </div>
-                <!-- Timeline Item 3 -->
-                <div class="flex flex-grow">
-                <div class="flex flex-col items-center w-10 mr-4">
-                    <div class="w-7 h-7 bg-pink-500 ring-4 ring-pink-100 rounded-full flex items-center justify-center z-10 flex-shrink-0">
-                    <div class="w-2.5 h-2.5 bg-white rounded-full"></div>
+                    <!-- Timeline Item 3 -->
+                    <div class="flex flex-grow">
+                        <div class="flex flex-col items-center w-10 mr-4">
+                            <div
+                                class="w-7 h-7 bg-pink-500 ring-4 ring-pink-100 rounded-full flex items-center justify-center z-10 flex-shrink-0"
+                                style="margin-top: 7px;"
+                            >
+                                <div class="w-2.5 h-2.5 bg-white rounded-full">
+                                </div>
+                            </div>
+                            <div class="w-0.5 h-full bg-gray-300"></div>
+                        </div>
+                        <div class="pt-1">
+                            <p class="font-bold text-sm text-pink-600">
+                                Quality Check
+                            </p>
+                            <p class="text-xs text-gray-500">
+                                Sep 7–9 • Checking quality
+                            </p>
+                        </div>
                     </div>
-                    <div class="w-0.5 h-full bg-gray-200"></div>
+                    <!-- Timeline Item 4 -->
+                    <div class="flex flex-grow">
+                        <div class="flex flex-col items-center w-10 mr-4">
+                            <div
+                                class="w-7 h-7 border-2 border-gray-300 rounded-full z-10 bg-white flex-shrink-0 ring-4 ring-white"
+                                style="margin-top: 7px;"
+                            >
+                            </div>
+                            <div class="w-0.5 h-full bg-gray-300"></div>
+                        </div>
+                        <div class="pt-1">
+                            <p class="font-medium text-sm text-gray-500">
+                                Refund Initiated
+                            </p>
+                            <p class="text-xs text-gray-400">
+                                Sep 10–11 • Bank processing
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Timeline Item 5 -->
+                    <div class="flex">
+                        <div class="flex flex-col items-center w-10 mr-4">
+                            <div
+                                class="w-7 h-7 border-2 border-gray-300 rounded-full z-10 bg-white flex-shrink-0 ring-4 ring-white"
+                                style="margin-top: 5px;"
+                            >
+                            </div>
+                        </div>
+                        <div class="pt-1">
+                            <p class="font-medium text-sm text-gray-500">
+                                Refund Posted
+                            </p>
+                            <p class="text-xs text-gray-400">
+                                Sep 12–13 • Arriving soon
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="pt-1">
-                    <p class="font-bold text-sm text-pink-600">QC in Progress</p>
-                    <p class="text-xs text-gray-500">Sep 7–9</p>
-                </div>
-                </div>
-                <!-- Timeline Item 4 -->
-                <div class="flex flex-grow">
-                <div class="flex flex-col items-center w-10 mr-4">
-                    <div class="w-7 h-7 border-2 border-gray-300 rounded-full z-10 bg-white flex-shrink-0 ring-4 ring-white"></div>
-                    <div class="w-0.5 h-full bg-gray-200"></div>
-                </div>
-                <div class="pt-1">
-                    <p class="font-medium text-sm text-gray-500">Refund Initiated</p>
-                    <p class="text-xs text-gray-400">Sep 10–11</p>
-                </div>
-                </div>
-                <!-- Timeline Item 5 -->
-                <div class="flex">
-                <div class="flex flex-col items-center w-10 mr-4">
-                    <div class="w-7 h-7 border-2 border-gray-300 rounded-full z-10 bg-white flex-shrink-0 ring-4 ring-white"></div>
-                </div>
-                <div class="pt-1">
-                    <p class="font-medium text-sm text-gray-500">Refund Posted</p>
-                    <p class="text-xs text-gray-400">Sep 12–13</p>
-                </div>
-                </div>
-            </div>
             </main>
-            <footer class="p-4 border-t-2 border-gray-100 flex-shrink-0">
-            <button id="escalate-btn" class="w-full bg-blue-600 text-white font-bold py-2 rounded-lg hover:opacity-90 transition-opacity text-sm shadow-lg">Need help?</button>
+            <footer
+                class="px-5 pb-5 pt-3 border-t border-[#e5daf7] bg-white/95 flex-shrink-0"
+            >
+                <button
+                    id="escalate-btn"
+                    class="w-full bg-gradient-to-r from-[#7f66e9] via-[#8b5cf6] to-[#7f66e9] text-white font-semibold py-3 rounded-xl hover:opacity-95 transition-opacity text-sm shadow-[0_10px_20px_rgba(127,102,233,0.28)]"
+                    >Need help?</button
+                >
             </footer>
         </div>
-        
+
         <!-- Screen 3: Escalation -->
-        <div id="screen-escalation" class="prototype-screen absolute inset-0 hidden flex-col h-full">
-            <div class="bg-white p-6 rounded-xl h-full flex flex-col justify-center items-center text-center">
-                <div class="text-4xl mb-3">🤔</div>
-                <h2 class="font-bold text-lg mb-2">Are you sure?</h2>
-                <p class="mb-4 text-sm text-gray-600">
-                    Your return is at <b class="font-semibold">QC in Progress</b>. Most checks finish in 1-2 days. Please escalate only if there's no update for more than 4 days.
-                </p>
-                <div class="w-full space-y-2">
-                    <button id="confirm-escalation-btn" class="w-full bg-red-600 text-white font-semibold py-2 rounded-lg hover:bg-red-700 text-sm shadow-lg">Yes, Escalate Now</button>
-                    <button id="cancel-escalation-btn" class="w-full bg-gray-200 text-gray-800 font-semibold py-2 rounded-lg hover:bg-gray-300 text-sm shadow-lg">No, I'll Wait</button>
+        <div
+            id="screen-escalation"
+            class="prototype-screen absolute inset-0 hidden flex-col h-full"
+        >
+            <div
+                class="p-6 h-full flex flex-col justify-center items-center text-center bg-gradient-to-b from-white via-[#fff3fb] to-[#ffe5f5]"
+            >
+                <div
+                    class="bg-white/95 border-2 border-[#ffd4ec] rounded-2xl shadow-[0_16px_32px_rgba(255,150,199,0.22)] p-6 space-y-4 w-full max-w-[240px] text-left"
+                >
+                    <h2 class="font-bold text-base text-[#6b4b83]">
+                        Escalate to support?
+                    </h2>
+                    <p class="text-xs text-[#6b4b83] leading-relaxed">
+                        QC updates usually land within 24–48 hours. Escalate
+                        only if it’s been 4+ days since the last movement.
+                    </p>
+                    <ul class="space-y-1 text-xs text-[#8b6fa6]">
+                        <li class="flex items-start gap-2">
+                            <span
+                                class="mt-1 inline-block h-2 w-2 rounded-full bg-[#8b5cf6]"
+                            ></span>Check the app for timeline updates first.
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span
+                                class="mt-1 inline-block h-2 w-2 rounded-full bg-[#8b5cf6]"
+                            ></span>Escalations alert a specialist and reset the
+                            ETA clock.
+                        </li>
+                    </ul>
+                    <div class="w-full space-y-2">
+                        <button
+                            id="confirm-escalation-btn"
+                            class="w-full bg-red-500 text-white font-semibold py-3 rounded-xl hover:opacity-95 text-sm shadow-[0_12px_24px_rgba(168,128,255,0.28)]"
+                            >Yes, escalate now</button
+                        >
+                        <button
+                            id="cancel-escalation-btn"
+                            class="w-full bg-white text-[#6b4b83] font-semibold py-3 rounded-xl border border-[#e0d1ff] hover:bg-[#f7f2ff] text-sm shadow-[0_8px_18px_rgba(180,154,220,0.18)]"
+                            >No, I'll wait</button
+                        >
+                    </div>
                 </div>
-                </div>
+            </div>
         </div>
-        
+
         <!-- Screen 4: Complete -->
-        <div id="screen-complete" class="prototype-screen absolute inset-0 hidden flex-col h-full">
-            <div class="bg-white p-6 rounded-xl h-full flex flex-col justify-center items-center text-center">
-                <div class="text-5xl mb-3">🎉</div>
-                <h2 class="font-bold text-xl mb-2">Refund Sent!</h2>
-                <p class="text-md">
-                    A refund of <b class="font-semibold">₹899</b> is on its way to your Bank Account.
-                </p>
-                <p class="text-xs text-gray-500 mt-1">Posted on Sep 12, 2025</p>
-                <div class="w-full mt-6 space-y-2">
-                    <button class="w-full bg-blue-600 text-white font-bold py-2 rounded-lg hover:opacity-90 text-sm shadow-lg">Continue Shopping</button>
-                    <button id="shop-again-btn" class="w-full bg-transparent text-gray-800 font-semibold py-2 rounded-md hover:bg-gray-100 text-sm">Back to Orders</button>
+        <div
+            id="screen-complete"
+            class="prototype-screen absolute inset-0 hidden flex-col h-full"
+        >
+            <div
+                class="p-6 h-full flex flex-col justify-center items-center text-center bg-gradient-to-b from-[#fff8fc] via-white to-[#ffe9f7]"
+            >
+                <div
+                    class="bg-white/95 border-2 border-[#dcd3ff] rounded-2xl shadow-[0_16px_32px_rgba(142,126,255,0.18)] p-6 space-y-4 w-full max-w-[240px]"
+                >
+                    <div class="text-5xl">🎉</div>
+                    <h2 class="font-bold text-xl text-[#6b4b83]">
+                        Refund sent!
+                    </h2>
+                    <p class="text-sm text-[#5a3b74] leading-relaxed">
+                        ₹899 is on its way to your bank account. We’ll nudge you
+                        once it lands.
+                    </p>
+                    <p class="text-[11px] text-[#8b6fa6]">
+                        Posted on Sep 12, 2025
+                    </p>
+                    <div class="w-full space-y-2">
+                        <button
+                            class="w-full bg-gradient-to-r from-[#8b5cf6] via-[#6366f1] to-[#8b5cf6] text-white font-semibold py-3 rounded-xl hover:opacity-95 text-sm shadow-[0_12px_24px_rgba(99,102,241,0.3)]"
+                            >Continue shopping</button
+                        >
+                        <button
+                            id="shop-again-btn"
+                            class="w-full bg-white text-[#6b4b83] font-semibold py-3 rounded-xl border border-[#dcd3ff] hover:bg-[#f2ecff] text-sm shadow-[0_8px_18px_rgba(99,102,241,0.18)]"
+                            >Back to orders</button
+                        >
+                    </div>
                 </div>
-                </div>
+            </div>
         </div>
     </div>
 </div>
 
-
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const screenOrdersList = document.getElementById('screen-orders-list');
-        const screenOrderDetail = document.getElementById('screen-order-detail');
-        const screenEscalation = document.getElementById('screen-escalation');
-        const screenComplete = document.getElementById('screen-complete');
+    document.addEventListener("DOMContentLoaded", () => {
+        const screenOrdersList = document.getElementById("screen-orders-list");
+        const screenOrderDetail = document.getElementById(
+            "screen-order-detail",
+        );
+        const screenEscalation = document.getElementById("screen-escalation");
+        const screenComplete = document.getElementById("screen-complete");
 
-        const orderCard = document.getElementById('order-1234-card');
-        const backBtn = document.getElementById('back-to-orders-btn');
-        const escalateBtn = document.getElementById('escalate-btn');
-        const cancelEscalationBtn = document.getElementById('cancel-escalation-btn');
-        const confirmEscalationBtn = document.getElementById('confirm-escalation-btn');
-        const shopAgainBtn = document.getElementById('shop-again-btn');
+        const orderCard = document.getElementById("order-1234-card");
+        const backBtn = document.getElementById("back-to-orders-btn");
+        const escalateBtn = document.getElementById("escalate-btn");
+        const cancelEscalationBtn = document.getElementById(
+            "cancel-escalation-btn",
+        );
+        const confirmEscalationBtn = document.getElementById(
+            "confirm-escalation-btn",
+        );
+        const shopAgainBtn = document.getElementById("shop-again-btn");
 
         function showScreen(screen: HTMLElement | null) {
             if (!screen) return;
 
-            const screens = document.querySelectorAll('.prototype-screen');
+            const screens = document.querySelectorAll(".prototype-screen");
             screens.forEach((s) => {
                 const el = s as HTMLElement;
-                el.style.display = 'none';
-                el.classList.add('hidden');
+                el.style.display = "none";
+                el.classList.add("hidden");
             });
 
-            screen.style.display = 'flex';
-            screen.classList.remove('hidden');
+            screen.style.display = "flex";
+            screen.classList.remove("hidden");
         }
 
-        if (orderCard) orderCard.addEventListener('click', () => showScreen(screenOrderDetail));
-        if (backBtn) backBtn.addEventListener('click', () => showScreen(screenOrdersList));
-        if (escalateBtn) escalateBtn.addEventListener('click', () => showScreen(screenEscalation));
-        if (cancelEscalationBtn) cancelEscalationBtn.addEventListener('click', () => showScreen(screenOrderDetail));
+        if (orderCard)
+            orderCard.addEventListener("click", () =>
+                showScreen(screenOrderDetail),
+            );
+        if (backBtn)
+            backBtn.addEventListener("click", () =>
+                showScreen(screenOrdersList),
+            );
+        if (escalateBtn)
+            escalateBtn.addEventListener("click", () =>
+                showScreen(screenEscalation),
+            );
+        if (cancelEscalationBtn)
+            cancelEscalationBtn.addEventListener("click", () =>
+                showScreen(screenOrderDetail),
+            );
         if (confirmEscalationBtn) {
-            confirmEscalationBtn.addEventListener('click', () => {
+            confirmEscalationBtn.addEventListener("click", () => {
                 // In a real app, this would trigger an API call
-                alert('Your issue has been escalated. We will get back to you shortly.');
+                alert(
+                    "Your issue has been escalated. We will get back to you shortly.",
+                );
                 showScreen(screenOrderDetail);
             });
         }
-        if (shopAgainBtn) shopAgainBtn.addEventListener('click', () => showScreen(screenOrdersList));
+        if (shopAgainBtn)
+            shopAgainBtn.addEventListener("click", () =>
+                showScreen(screenOrdersList),
+            );
     });
-
-  </script>
+</script>
