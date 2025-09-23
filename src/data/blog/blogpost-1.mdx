@@ -22,26 +22,25 @@ import AssumptionsBlock from "@components/blog/AssumptionsBlock.astro";
 
 <div class="post-wrap stack-lg">
 
-  {/* HERO — plain background */}
   <HeroBlock
     kicker="A PRODUCT USE CASE"
     title="Refund ETA Tracker — Reduce Anxiety, Reduce Tickets"
     tagline="Show buyers where their refund is and when it arrives. Confidence beats guesswork."
     as="h1"
     tone="lime"
+    elev="md"
   />
 
-  {/* PAO in a soft peach lane */}
   <div class="lane lane--lime">
     <PAOStrip
       tone="peach"
+      elev="none"
       problem="Buyers can’t see refund progress → support tickets and distrust."
       approach="One screen with current state + ETA window, fed by existing events."
       outcome="Target −20% refund tickets, +15% task completion on 'check refund'."
     />
   </div>
 
-  {/* PERSONA in violet lane (full-width persona + it’s ‘own moment’) */}
   <div class="lane lane--violet">
     <UserPersonaCard
       name="Priya"
@@ -53,40 +52,29 @@ import AssumptionsBlock from "@components/blog/AssumptionsBlock.astro";
       ]}
       thought="Did I just get scammed?"
       tone="violet"
+      elev="md"
     />
   </div>
 
-  {/* CONTEXT + EVIDENCE on neutral background */}
   <div class="stack-md">
-    <ContextBlock tone="neutral" text="Support load is spiking around refunds. Finance has events, ops has milestones, but buyers see a black box. A small communication fix beats scaling headcount and prevents churn." />
-    <EvidenceList tone="blue" items={[
+    <ContextBlock elev="none" tone="neutral" text="Support load is spiking around refunds. Finance has events, ops has milestones, but buyers see a black box. A small communication fix beats scaling headcount and prevents churn." />
+    <EvidenceList elev="none" tone="blue" items={[
       { label: "Ticket/search clusters around 'refund when / status'" },
       { label: "Reviews cite delay + silence (not delay alone)" },
       { label: "Returns pipeline already emits usable timestamps" },
     ]} />
   </div>
 
-  {/* SOLUTION gets a lime lane for emphasis */}
   <div class="lane lane--lime">
-    <SolutionBlock tone="lime" text="One Refund view shows stage, a conservative ETA window, and last change. Read-only; no new orchestration. A clear window into systems we already run." />
+    <SolutionBlock elev="none" tone="lime" text="One Refund view shows stage, a conservative ETA window, and last change. Read-only; no new orchestration. A clear window into systems we already run." />
   </div>
 
-  {/* SCOPE two-up on neutral */}
-  <ScopeTwoUp
-    mvp={[
-      "Read-only Refund screen per order",
-      "API exposing state + ETA window",
-      "Event logging for funnel/latency"
-    ]}
-    nonGoals={[
-      "Change refund destination",
-      "Live agent chat",
-      "Courier/bank deep integrations v1"
-    ]}
+  <ScopeTwoUp elev="none"
+    mvp={["Read-only Refund screen per order","API exposing state + ETA window","Event logging for funnel/latency"]}
+    nonGoals={["Change refund destination","Live agent chat","Courier/bank deep integrations v1"]}
   />
 
-  {/* FLOW steps (neutral) */}
-  <FlowSteps steps={[
+  <FlowSteps elev="none" steps={[
     { text:"Open Orders → select refunded order" },
     { text:"See 'Processing with bank' + ETA 'Tue–Thu'" },
     { text:"Timeline shows last event (e.g., Bank accepted Mon 10:42)" },
@@ -95,33 +83,27 @@ import AssumptionsBlock from "@components/blog/AssumptionsBlock.astro";
     { text:"Completed state shows destination (UPI/Bank)" },
   ]}/>
 
-  {/* RISKS (neutral) */}
-  <RisksBlock items={[
+  <RisksBlock elev="none" items={[
     { title:"ETA anger", note:"Use windows, bias conservative" },
     { title:"Edge cases", note:"Show 'We’re checking' + SLA note" },
     { title:"Data gaps", note:"Fallback copy: 'Usually 2–5 days'" },
   ]}/>
 
-  {/* METRICS in a blue lane */}
   <div class="lane lane--blue">
-    <MetricsBlock
+    <MetricsBlock elev="sm"
       primaryLabel="Primary impact"
       primaryTarget="≥ 20% drop in 'Where is my refund?' tickets"
       guardrail="Post-return NPS must not drop"
-      leading={[
-        "% of refund views with time-on-page < 10s (clarity)",
-        "Late-flag rate trending down"
-      ]}
+      leading={["% of refund views with time-on-page < 10s (clarity)","Late-flag rate trending down"]}
     />
   </div>
 
-  {/* NEXT + ASSUMPTIONS (neutral) */}
-  <NextStepsBlock steps={[
+  <NextStepsBlock elev="none" steps={[
     { label:"Map events → state machine", note:"Finance + Ops, 2 sessions" },
     { label:"Define ETA rules per rail",   note:"UPI, bank" },
     { label:"API stub + wire screen",      note:"Ship to 5% cohort" },
   ]}/>
-  <AssumptionsBlock items={[
+  <AssumptionsBlock elev="none" items={[
     "Event timestamps reliable to ±2h",
     "85% of refunds land in 2–5 business days",
     "Support macros link to new screen"
