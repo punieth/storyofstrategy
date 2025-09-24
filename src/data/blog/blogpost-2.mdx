@@ -1,0 +1,459 @@
+---
+title: "The ₹500 Question"
+description: "Answering one anxious user question—'Where is my refund?'—can cut support volume, compound trust, and lift repeat rate at Meesho."
+pubDate: "Sep 23 2025"
+author: "xxxx"
+tags: ["product management", "case study", "meesho"]
+imgUrl: "../../assets/astro.jpeg"
+draft: false
+---
+
+import InteractivePrototype from "@components/blog/InteractivePrototype.astro";
+
+{/* Sticky Nav */}
+
+<div class="hidden lg:block sticky top-6 z-50 my-8">
+  <div class="mx-auto max-w-max border-2 border-black rounded-full bg-white/70 backdrop-blur-sm shadow-lg">
+    <div class="flex items-center gap-x-1 px-3 py-2 text-sm font-semibold">
+      <span class="mr-2 font-bold">On this page:</span>
+      <a href="#tldr" class="px-3 py-1 rounded-full hover:bg-gray-200">
+        TL;DR
+      </a>
+      <a href="#context" class="px-3 py-1 rounded-full hover:bg-gray-200">
+        Context
+      </a>
+      <a href="#voc" class="px-3 py-1 rounded-full hover:bg-gray-200">
+        VOC
+      </a>
+      <a href="#persona" class="px-3 py-1 rounded-full hover:bg-gray-200">
+        Persona
+      </a>
+      <a href="#solution" class="px-3 py-1 rounded-full hover:bg-gray-200">
+        Solution
+      </a>
+      <a href="#measurement" class="px-3 py-1 rounded-full hover:bg-gray-200">
+        Measurement
+      </a>
+      <a href="#roi" class="px-3 py-1 rounded-full hover:bg-gray-200">
+        ROI
+      </a>
+      <a href="#risks" class="px-3 py-1 rounded-full hover:bg-gray-200">
+        Risks
+      </a>
+      <a href="#sources" class="px-3 py-1 rounded-full hover:bg-gray-200">
+        Sources
+      </a>
+    </div>
+  </div>
+</div>
+
+{/* Page Header */}
+
+<div class="text-center my-12">
+  <h1 class="text-5xl md:text-6xl font-extrabold leading-tight">
+    The ₹500 Question
+  </h1>
+  <p class="mt-6 text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+    First-time shoppers don’t fear returns—they fear refunds in limbo. This is a
+    trust problem masquerading as a support problem.
+  </p>
+</div>
+
+{/* --- Section: TL;DR --- */}
+
+<div
+  id="tldr"
+  class="bg-yellow-50 border-2 border-black rounded-2xl p-6 md:p-8 shadow-[8px_8px_0_0_#000] my-16 scroll-mt-24"
+>
+  <h2 class="text-3xl md:text-4xl font-extrabold mb-8 text-center">TL;DR</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-5 text-center">
+      <div class="inline-flex items-center gap-2 bg-black text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mb-3">
+        <span>⚠</span>
+        <span>Problem</span>
+      </div>
+      <p class="text-lg leading-relaxed">
+        “Where’s my refund?” drives avoidable contacts and erodes trust.
+      </p>
+    </div>
+    <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-5 text-center">
+      <div class="inline-flex items-center gap-2 bg-indigo-700 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mb-3">
+        <span>💡</span>
+        <span>The Bet</span>
+      </div>
+      <p class="text-lg leading-relaxed">
+        A plain-English refund tracker with stage SLAs + proactive nudges.
+      </p>
+    </div>
+    <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-5 text-center">
+      <div class="inline-flex items-center gap-2 bg-rose-700 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mb-3">
+        <span>🎯</span>
+        <span>Primary KPI</span>
+      </div>
+      <p class="text-4xl font-bold">≥20%</p>
+      <p class="text-sm text-gray-600">Reduction in refund-status contacts.</p>
+      <p class="text-xs text-gray-500 italic mt-1">
+        *Target; to be validated via A/B.*
+      </p>
+    </div>
+    <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-5 text-center">
+      <div class="inline-flex items-center gap-2 bg-amber-700 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mb-3">
+        <span>🔧</span>
+        <span>Effort</span>
+      </div>
+      <p class="text-lg leading-relaxed">
+        Read-only surface, reusing existing events. No new backend logic.
+      </p>
+    </div>
+    <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-5 text-center">
+      <div class="inline-flex items-center gap-2 bg-emerald-700 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mb-3">
+        <span>💰</span>
+        <span>ROI Band</span>
+      </div>
+      <p class="text-4xl font-bold">₹5–₹80 Cr</p>
+      <p class="text-sm text-gray-600">
+        Annual savings from deflected contacts.
+      </p>
+      <p class="text-xs text-gray-500 italic mt-1">
+        *Modelled band; based on C,r,d,u.*
+      </p>
+    </div>
+    <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-5 text-center">
+      <div class="inline-flex items-center gap-2 bg-sky-700 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mb-3">
+        <span>⏱</span>
+        <span>Why Now</span>
+      </div>
+      <p class="text-lg leading-relaxed">
+        Support is ~95% automated; this is the next lever for pre-emptive
+        clarity.<sup>2</sup>
+      </p>
+    </div>
+  </div>
+</div>
+
+{/* --- Section: Context --- */}
+
+<div id="context" class="my-16 scroll-mt-24">
+  <h2 class="text-3xl font-extrabold mb-4">Context: Scale & Expectations</h2>
+  <p class="text-lg leading-relaxed">
+    Meesho’s footprint is massive (200M MAU; 1.3B orders Apr–Dec 2024).
+    <sup>1</sup> Support runs at ~100k chats/day with ~95% automation and ~90%
+    cost reduction.<sup>2</sup> Users expect a refund tracker, as competitors
+    like Amazon India and Flipkart provide clear timelines and status updates.
+    <sup>4, 5</sup> Meesho’s wide 7–10 day window creates uncertainty.
+    <sup>6</sup>
+  </p>
+</div>
+
+{/* --- Section: Voice of Customer --- */}
+
+<div id="voc" class="my-16 scroll-mt-24">
+  <h2 class="text-3xl font-extrabold mb-6">
+    Voice of the Customer (Public Web)
+  </h2>
+  <div class="grid md:grid-cols-2 gap-6">
+    <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-6 italic">
+      <p class="text-gray-800 text-lg leading-relaxed">
+        “Pickup postponed/cancelled multiple times… still struggling to get my
+        money back.”
+      </p>
+      <span class="block mt-4 not-italic text-sm font-semibold">Source: <a href="https://www.sitejabber.com/reviews/meesho.com" target="_blank" rel="noopener noreferrer" class="text-blue-700 underline-offset-2 hover:underline">Sitejabber Review</a><sup>3</sup></span>
+    </div>
+    <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-6 italic">
+      <p class="text-gray-800 text-lg leading-relaxed">
+        “Return request 11 days back… still no… staff has no clue.”
+      </p>
+      <span class="block mt-4 not-italic text-sm font-semibold">Source: <a href="https://www.trustpilot.com/review/meesho.com" target="_blank" rel="noopener noreferrer" class="text-blue-700 underline-offset-2 hover:underline">Trustpilot Review</a><sup>3</sup></span>
+    </div>
+  </div>
+</div>
+
+{/* --- Section: Persona --- */}
+
+<div
+  id="persona"
+  class="bg-purple-50 border-2 border-black rounded-2xl shadow-[8px_8px_0_0_#000] p-8 my-16 scroll-mt-24"
+>
+  <h2 class="text-3xl font-extrabold mb-4">The User: Meet Priya</h2>
+  <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-6">
+    <p class="text-lg leading-relaxed">
+      Priya is a 28-year-old homemaker in Lucknow. For her, a missing 
+      <b>₹500 refund</b> isn’t a “minor delay” — it decides whether she buys
+      groceries today or waits until Monday. When her refund shows “in limbo,”
+      she doesn’t think about payment gateways or SLAs. She thinks: 
+      <b>“Did I just get scammed?”</b>
+    </p>
+    <p class="text-sm text-gray-600 mt-3 italic">
+      This vignette turns abstract ticket volumes into lived anxiety. Our
+      solution has to fix her trust gap — at scale.
+    </p>
+  </div>
+</div>
+
+{/* --- Section: Solution --- */}
+
+<div id="solution" class="my-16 scroll-mt-24">
+  <h2 class="text-3xl font-extrabold mb-4">
+    The Solution: A Radically Simple Tracker
+  </h2>
+  <p class="text-lg leading-relaxed mb-8">
+    Show users the wheels are turning—no jargon, no ambiguity. Each step shows a
+    plain-English time estimate and the next milestone, with proactive
+    notifications on state changes.
+  </p>
+  <div class="my-10 flex justify-center">
+    <InteractivePrototype />
+  </div>
+  <h3 class="text-2xl font-bold mt-12 mb-6 text-center">
+    Visualizing the Refund Journey
+  </h3>
+  {/* Mobile: Vertical Stepper */}
+  <div class="sm:hidden text-center">
+    <ol class="relative inline-block text-left border-l-2 border-gray-300">
+      <li class="mb-8 ml-8">
+        <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full -left-4 ring-4 ring-white">1</span>
+        <p class="font-semibold">Pickup Scheduled</p>
+      </li>
+      <li class="mb-8 ml-8">
+        <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full -left-4 ring-4 ring-white">2</span>
+        <p class="font-semibold">Item Picked Up</p>
+      </li>
+      <li class="mb-8 ml-8">
+        <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full -left-4 ring-4 ring-white">3</span>
+        <p class="font-semibold">Quality Check Passed</p>
+      </li>
+      <li class="mb-8 ml-8">
+        <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full -left-4 ring-4 ring-white">4</span>
+        <p class="font-semibold">Refund Initiated</p>
+      </li>
+      <li class="mb-8 ml-8">
+        <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full -left-4 ring-4 ring-white">5</span>
+        <p class="font-semibold">Bank Processing</p>
+      </li>
+      <li class="ml-8">
+        <span class="absolute flex items-center justify-center w-8 h-8 bg-emerald-200 text-emerald-800 rounded-full -left-4 ring-4 ring-white">✓</span>
+        <p class="font-semibold text-emerald-600">Amount Credited</p>
+      </li>
+    </ol>
+  </div>
+  {/* Desktop: Horizontal Stepper */}
+  <div class="hidden sm:flex flex-wrap items-center justify-center text-center text-sm sm:text-base gap-y-4">
+    <div class="font-semibold">Pickup Scheduled</div>
+    <div class="text-gray-400 mx-2 text-2xl">›</div>
+    <div class="font-semibold">Item Picked Up</div>
+    <div class="text-gray-400 mx-2 text-2xl">›</div>
+    <div class="font-semibold">QC Passed</div>
+    <div class="text-gray-400 mx-2 text-2xl">›</div>
+    <div class="font-semibold">Refund Initiated</div>
+    <div class="text-gray-400 mx-2 text-2xl">›</div>
+    <div class="font-semibold">Bank Processing</div>
+    <div class="text-gray-400 mx-2 text-2xl">›</div>
+    <div class="font-semibold text-emerald-600">Amount Credited</div>
+  </div>
+</div>
+
+{/* --- Section: MVP Scope --- */}
+
+<div id="mvp" class="my-16 scroll-mt-24">
+  <h2 class="text-3xl font-extrabold mb-6">MVP Scope: Honest Effort Sizing</h2>
+  <div class="grid lg:grid-cols-2 gap-6">
+    <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-6">
+      <h3 class="font-bold text-xl text-green-900 mb-3">✓ Build Now</h3>
+      <ul class="list-disc list-inside space-y-2 text-base leading-relaxed">
+        <li>Read-only tracker surface (app + web).</li>
+        <li>Statuses from existing systems only.</li>
+        <li>Event logging for analytics.</li>
+        <li>Per-step "usually" time estimates.</li>
+      </ul>
+    </div>
+    <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-6">
+      <h3 class="font-bold text-xl text-red-900 mb-3">🚫 Not in MVP</h3>
+      <ul class="list-disc list-inside space-y-2 text-base leading-relaxed">
+        <li>No real-time courier GPS.</li>
+        <li>No refund destination changes.</li>
+        <li>No free-text chat in the tracker.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+{/* --- Section: Measurement --- */}
+
+<div
+  id="measurement"
+  class="bg-blue-50 border-2 border-black rounded-2xl shadow-[8px_8px_0_0_#000] p-8 my-16 scroll-mt-24"
+>
+  <h2 class="text-3xl font-extrabold mb-6">Measurement: A/B with Guardrails</h2>
+  <div class="grid sm:grid-cols-2 gap-6">
+    <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-5">
+      <p class="font-bold text-lg">Population</p>
+      <p class="leading-relaxed">
+        First-time returners in 4–6 geos; 50/50 split.
+      </p>
+    </div>
+    <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-5">
+      <p class="font-bold text-lg">Primary KPI</p>
+      <p class="leading-relaxed">
+        Refund-status contact rate per 1k returners. 
+        <a
+          href="#tldr"
+          class="text-blue-700 underline-offset-2 hover:underline"
+        >
+          (Target: ≥20% reduction)
+        </a>
+      </p>
+    </div>
+    <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-5">
+      <p class="font-bold text-lg">Secondary KPIs</p>
+      <p class="leading-relaxed">
+        Time-to-first repeat order (60 days), NPS/CSAT on refund flow.
+      </p>
+    </div>
+    <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-5">
+      <p class="font-bold text-lg">Attribution</p>
+      <p class="leading-relaxed">
+        Freeze competing refund-comms tests; keep policy copy constant.
+      </p>
+    </div>
+  </div>
+</div>
+
+{/* --- Section: ROI --- */}
+
+<div id="roi" class="my-16 scroll-mt-24">
+  <h2 class="text-3xl font-extrabold mb-4">ROI Model</h2>
+
+
+  <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-6">
+    <div class="flex items-center gap-3">
+      <span class="text-2xl">ℹ️</span>
+      <p class="font-mono text-lg">Savings ≈ C × 365 × r × d × u</p>
+    </div>
+    <p class="text-sm text-gray-600 italic mt-2">*Modelled band; based on the variables below.*</p>
+  </div>
+  
+  
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 text-center">
+    <div class="bg-white border-2 border-black rounded-2xl p-3">
+      <p class="text-2xl font-bold">~100k</p>
+      <p class="text-xs font-semibold uppercase">Contacts/Day (C)</p>
+    </div>
+    <div class="bg-white border-2 border-black rounded-2xl p-3">
+      <p class="text-2xl font-bold">5–15%</p>
+      <p class="text-xs font-semibold uppercase">Refund Share (r)</p>
+    </div>
+    <div class="bg-white border-2 border-black rounded-2xl p-3">
+      <p class="text-2xl font-bold">20–35%</p>
+      <p class="text-xs font-semibold uppercase">Deflection (d)</p>
+    </div>
+    <div class="bg-white border-2 border-black rounded-2xl p-3">
+      <p class="text-2xl font-bold">₹3–10</p>
+      <p class="text-xs font-semibold uppercase">Unit Cost (u)</p>
+    </div>
+  </div>
+  
+  
+  <div class="mt-6 bg-green-100 border-2 border-black rounded-2xl shadow-[4px_4px_0_0_#000] p-5 text-center">
+    <p class="text-3xl font-extrabold text-green-700">₹5–₹80 Cr / year</p>
+    <p class="text-sm text-gray-700 mt-2">
+      Savings band based on input assumptions.  
+      <span class="italic">Even at the low end (₹5Cr), payback > cost in under one quarter.</span>
+    </p>
+  </div>
+</div>
+
+{/* --- Section: Risks --- */}
+
+<div id="risks" class="my-16 scroll-mt-24">
+  <h2 class="text-3xl font-extrabold mb-6">Risks & Mitigations</h2>
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+
+    <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-5">
+
+      <div class="inline-flex items-center gap-2 bg-orange-700 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mb-2">
+        <span>⚠️</span>
+        <span>Risk</span>
+      </div>
+      <p class="font-semibold leading-relaxed">Upstream latency (courier, QC, bank) makes tracker stale.</p>
+
+      <div class="inline-flex items-center gap-2 bg-green-700 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mt-4 mb-2">
+        <span>✓</span>
+        <span>Mitigation</span>
+      </div>
+      <p class="text-sm text-gray-700 leading-relaxed">
+        Show “usually” estimates; flag delays; alert ops on p95 breach.
+      </p>
+    </div>
+
+
+    <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-5">
+
+      <div class="inline-flex items-center gap-2 bg-orange-700 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mb-2">
+        <span>⚠️</span>
+        <span>Risk</span>
+      </div>
+      <p class="font-semibold leading-relaxed">Ambiguous copy (“Refund initiated”) confuses users.</p>
+
+      <div class="inline-flex items-center gap-2 bg-green-700 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mt-4 mb-2">
+        <span>✓</span>
+        <span>Mitigation</span>
+      </div>
+      <p class="text-sm text-gray-700 leading-relaxed">
+        Use plain-English microcopy + show next expected milestone.
+      </p>
+    </div>
+
+
+    <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-5">
+
+      <div class="inline-flex items-center gap-2 bg-orange-700 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mb-2">
+        <span>⚠️</span>
+        <span>Risk</span>
+      </div>
+      <p class="font-semibold leading-relaxed">Bank posting variance causes anxiety.</p>
+
+      <div class="inline-flex items-center gap-2 bg-green-700 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mt-4 mb-2">
+        <span>✓</span>
+        <span>Mitigation</span>
+      </div>
+      <p class="text-sm text-gray-700 leading-relaxed">
+        Show payment-method-specific SLAs (UPI vs. cards).
+      </p>
+    </div>
+
+
+    <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-5">
+
+      <div class="inline-flex items-center gap-2 bg-orange-700 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mb-2">
+        <span>⚠️</span>
+        <span>Risk</span>
+      </div>
+      <p class="font-semibold leading-relaxed">Transparency on delays spikes escalations.</p>
+
+      <div class="inline-flex items-center gap-2 bg-green-700 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mt-4 mb-2">
+        <span>✓</span>
+        <span>Mitigation</span>
+      </div>
+      <p class="text-sm text-gray-700 leading-relaxed">
+        Offer a one-tap “remind me” button before agent handoff.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+{/* --- Section: Sources --- */}
+
+<div id="sources" class="mt-24 pt-8 border-t-4 border-black scroll-mt-24">
+  <h2 class="text-2xl font-bold mb-6">Sources</h2>
+  <ol class="text-sm text-gray-600 space-y-2">
+    <li id="source-1">¹ Meesho scale: <a href="https://www.businessoffashion.com/articles/global-markets/india-bargain-fashion-behemoth-meesho-goes-public-expanded-fashion-beauty-goods/" target="_blank" rel="noopener noreferrer" class="text-blue-700 underline-offset-2 hover:underline">Business of Fashion</a>, <a href="https://m.economictimes.com/tech/technology/annual-report-shows-ipo-bound-meesho-recorded-34-year-on-year-growth-in-orders-in-april-december-2024-period/articleshow/119534627.cms" target="_blank" rel="noopener noreferrer" class="text-blue-700 underline-offset-2 hover:underline">ETtech</a>.</li>
+    <li id="source-2">² Support automation: <a href="https://www.business-standard.com/companies/start-ups/genai-helped-reduce-customer-support-chat-costs-by-90-meesho-cto-barnwal-124080701028_1.html" target="_blank" rel="noopener noreferrer" class="text-blue-700 underline-offset-2 hover:underline">Business Standard</a>.</li>
+    <li id="source-3">³ Public VOC: <a href="https://www.trustpilot.com/review/meesho.com" target="_blank" rel="noopener noreferrer" class="text-blue-700 underline-offset-2 hover:underline">Trustpilot</a>, <a href="https://www.sitejabber.com/reviews/meesho.com" target="_blank" rel="noopener noreferrer" class="text-blue-700 underline-offset-2 hover:underline">Sitejabber</a>.</li>
+    <li id="source-4">⁴ Amazon refund help: <a href="https://www.amazon.in/gp/help/customer/display.html?nodeId=GMP8PC8KBY5FCPM2" target="_blank" rel="noopener noreferrer" class="text-blue-700 underline-offset-2 hover:underline">Status</a>, <a href="https://www.amazon.in/gp/help/customer/display.html?nodeId=G5PG8UG3E7SHGKA6" target="_blank" rel="noopener noreferrer" class="text-blue-700 underline-offset-2 hover:underline">Timelines</a>.</li>
+    <li id="source-5">⁵ Flipkart refund policy: <a href="https://www.flipkart.com/pages/returnpolicy" target="_blank" rel="noopener noreferrer" class="text-blue-700 underline-offset-2 hover:underline">Policy</a>, <a href="https://stories.flipkart.com/my-flipkart-refund-quick-guide/" target="_blank" rel="noopener noreferrer" class="text-blue-700 underline-offset-2 hover:underline">Guide</a>.</li>
+    <li id="source-6">⁶ Meesho refund window: <a href="https://wareiq.com/resources/blogs/meesho-product-return-policy/" target="_blank" rel="noopener noreferrer" class="text-blue-700 underline-offset-2 hover:underline">WareIQ</a>.</li>
+    <li id="source-7">⁷ GenAI voice bot savings: <a href="https://techcrunch.com/2024/11/26/ai-helps-indias-meesho-cut-customer-call-costs-by-75/" target="_blank" rel="noopener noreferrer" class="text-blue-700 underline-offset-2 hover:underline">TechCrunch</a>.</li>
+  </ol>
+</div>
