@@ -268,9 +268,14 @@ import InteractivePrototype from "@components/blog/InteractivePrototype.astro";
     plain-English time estimate and what to expect next. We’ll also send
     proactive notifications as the refund moves from one stage to the next.
   </p>
-  <div class="my-10 flex justify-center">
-    <InteractivePrototype />
-  </div>
+<div class="my-10 flex justify-center">
+  <InteractivePrototype
+    client:visible
+    initialScreen="list"   
+    variant="compact"          
+    style="width:320px;height:640px" 
+  />
+</div>
   <h3 class="text-2xl font-bold mt-12 mb-6 text-center">
     Visualizing the Refund Journey
   </h3>
