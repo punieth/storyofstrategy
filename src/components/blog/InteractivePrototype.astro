@@ -340,65 +340,58 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         const screenOrdersList = document.getElementById("screen-orders-list");
-        const screenOrderDetail = document.getElementById(
-            "screen-order-detail",
-        );
+        const screenOrderDetail = document.getElementById("screen-order-detail");
         const screenEscalation = document.getElementById("screen-escalation");
         const screenComplete = document.getElementById("screen-complete");
 
         const orderCard = document.getElementById("order-1234-card");
         const backBtn = document.getElementById("back-to-orders-btn");
         const escalateBtn = document.getElementById("escalate-btn");
-        const cancelEscalationBtn = document.getElementById(
-            "cancel-escalation-btn",
-        );
-        const confirmEscalationBtn = document.getElementById(
-            "confirm-escalation-btn",
-        );
+        const cancelEscalationBtn = document.getElementById("cancel-escalation-btn");
+        const confirmEscalationBtn = document.getElementById("confirm-escalation-btn");
         const shopAgainBtn = document.getElementById("shop-again-btn");
 
-        function showScreen(screen: HTMLElement | null) {
-            if (!screen) return;
+        const allScreens: (HTMLElement | null)[] = [
+            screenOrdersList,
+            screenOrderDetail,
+            screenEscalation,
+            screenComplete,
+        ];
 
-            const screens = document.querySelectorAll(".prototype-screen");
-            screens.forEach((s) => {
-                const el = s as HTMLElement;
-                el.style.display = "none";
-                el.classList.add("hidden");
+        function showScreen(screenToShow: HTMLElement | null) {
+            if (!screenToShow) return;
+
+            allScreens.forEach(screen => {
+                if (screen) {
+                    screen.classList.add("hidden");
+                    screen.classList.remove("flex");
+                }
             });
 
-            screen.style.display = "flex";
-            screen.classList.remove("hidden");
+            screenToShow.classList.remove("hidden");
+            screenToShow.classList.add("flex");
         }
 
-        if (orderCard)
-            orderCard.addEventListener("click", () =>
-                showScreen(screenOrderDetail),
-            );
-        if (backBtn)
-            backBtn.addEventListener("click", () =>
-                showScreen(screenOrdersList),
-            );
-        if (escalateBtn)
-            escalateBtn.addEventListener("click", () =>
-                showScreen(screenEscalation),
-            );
-        if (cancelEscalationBtn)
-            cancelEscalationBtn.addEventListener("click", () =>
-                showScreen(screenOrderDetail),
-            );
+        if (orderCard) {
+            orderCard.addEventListener("click", () => showScreen(screenOrderDetail));
+        }
+        if (backBtn) {
+            backBtn.addEventListener("click", () => showScreen(screenOrdersList));
+        }
+        if (escalateBtn) {
+            escalateBtn.addEventListener("click", () => showScreen(screenEscalation));
+        }
+        if (cancelEscalationBtn) {
+            cancelEscalationBtn.addEventListener("click", () => showScreen(screenOrderDetail));
+        }
         if (confirmEscalationBtn) {
             confirmEscalationBtn.addEventListener("click", () => {
-                // In a real app, this would trigger an API call
-                alert(
-                    "Your issue has been escalated. We will get back to you shortly.",
-                );
+                alert("Your issue has been escalated. We will get back to you shortly.");
                 showScreen(screenOrderDetail);
             });
         }
-        if (shopAgainBtn)
-            shopAgainBtn.addEventListener("click", () =>
-                showScreen(screenOrdersList),
-            );
+        if (shopAgainBtn) {
+            shopAgainBtn.addEventListener("click", () => showScreen(screenOrdersList));
+        }
     });
 </script>
