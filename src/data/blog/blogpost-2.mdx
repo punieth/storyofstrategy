@@ -23,13 +23,16 @@ import InteractivePrototype from "@components/blog/InteractivePrototype.astro";
         Context
       </a>
       <a href="#voc" class="px-3 py-1 rounded-full hover:bg-gray-200">
-        VOC
+        What Customers Say
       </a>
       <a href="#persona" class="px-3 py-1 rounded-full hover:bg-gray-200">
         Persona
       </a>
       <a href="#solution" class="px-3 py-1 rounded-full hover:bg-gray-200">
         Solution
+      </a>
+      <a href="#mvp" class="px-3 py-1 rounded-full hover:bg-gray-200">
+        MVP
       </a>
       <a href="#measurement" class="px-3 py-1 rounded-full hover:bg-gray-200">
         Measurement
@@ -54,8 +57,8 @@ import InteractivePrototype from "@components/blog/InteractivePrototype.astro";
     The ₹500 Question
   </h1>
   <p class="mt-6 text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-    First-time shoppers don’t fear returns—they fear refunds in limbo. This is a
-    trust problem masquerading as a support problem.
+    Millions ask the same ₹500 question. The answer can unlock Meesho’s next
+    wave of trust.
   </p>
 </div>
 
@@ -73,7 +76,8 @@ import InteractivePrototype from "@components/blog/InteractivePrototype.astro";
         <span>Problem</span>
       </div>
       <p class="text-lg leading-relaxed">
-        “Where’s my refund?” drives avoidable contacts and erodes trust.
+        Users asking “Where’s my refund?” is a top driver of avoidable support
+        tickets and lost trust.
       </p>
     </div>
     <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-5 text-center">
@@ -82,7 +86,8 @@ import InteractivePrototype from "@components/blog/InteractivePrototype.astro";
         <span>The Bet</span>
       </div>
       <p class="text-lg leading-relaxed">
-        A plain-English refund tracker with stage SLAs + proactive nudges.
+        A simple tracker that shows every step, gives clear time promises, and
+        sends updates before they ask.
       </p>
     </div>
     <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-5 text-center">
@@ -91,9 +96,9 @@ import InteractivePrototype from "@components/blog/InteractivePrototype.astro";
         <span>Primary KPI</span>
       </div>
       <p class="text-4xl font-bold">≥20%</p>
-      <p class="text-sm text-gray-600">Reduction in refund-status contacts.</p>
+      <p class="text-sm text-gray-600">reduction in ‘Where’s my refund?’ tickets.</p>
       <p class="text-xs text-gray-500 italic mt-1">
-        *Target; to be validated via A/B.*
+        *KPI = Key Performance Indicator, our main metric for success.*
       </p>
     </div>
     <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-5 text-center">
@@ -102,7 +107,8 @@ import InteractivePrototype from "@components/blog/InteractivePrototype.astro";
         <span>Effort</span>
       </div>
       <p class="text-lg leading-relaxed">
-        Read-only surface, reusing existing events. No new backend logic.
+        This is a simple info screen using data we already have. No heavy
+        engineering lift.
       </p>
     </div>
     <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-5 text-center">
@@ -110,12 +116,10 @@ import InteractivePrototype from "@components/blog/InteractivePrototype.astro";
         <span>💰</span>
         <span>ROI Band</span>
       </div>
-      <p class="text-4xl font-bold">₹5–₹80 Cr</p>
-      <p class="text-sm text-gray-600">
-        Annual savings from deflected contacts.
-      </p>
+      <p class="text-4xl font-bold">₹5–₹80 Cr/year</p>
+      <p class="text-sm text-gray-600">Estimated annual savings.</p>
       <p class="text-xs text-gray-500 italic mt-1">
-        *Modelled band; based on C,r,d,u.*
+        *Modelled range; see ROI for assumptions.*
       </p>
     </div>
     <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-5 text-center">
@@ -124,8 +128,7 @@ import InteractivePrototype from "@components/blog/InteractivePrototype.astro";
         <span>Why Now</span>
       </div>
       <p class="text-lg leading-relaxed">
-        Support is ~95% automated; this is the next lever for pre-emptive
-        clarity.<sup>2</sup>
+        Support is 95% automated; proactive clarity is the next efficiency win.
       </p>
     </div>
   </div>
@@ -133,38 +136,100 @@ import InteractivePrototype from "@components/blog/InteractivePrototype.astro";
 
 {/* --- Section: Context --- */}
 
-<div id="context" class="my-16 scroll-mt-24">
-  <h2 class="text-3xl font-extrabold mb-4">Context: Scale & Expectations</h2>
-  <p class="text-lg leading-relaxed">
-    Meesho’s footprint is massive (200M MAU; 1.3B orders Apr–Dec 2024).
-    <sup>1</sup> Support runs at ~100k chats/day with ~95% automation and ~90%
-    cost reduction.<sup>2</sup> Users expect a refund tracker, as competitors
-    like Amazon India and Flipkart provide clear timelines and status updates.
-    <sup>4, 5</sup> Meesho’s wide 7–10 day window creates uncertainty.
-    <sup>6</sup>
-  </p>
-</div>
-
 {/* --- Section: Voice of Customer --- */}
 
 <div id="voc" class="my-16 scroll-mt-24">
-  <h2 class="text-3xl font-extrabold mb-6">
-    Voice of the Customer (Public Web)
-  </h2>
+  <h2 class="text-3xl font-extrabold mb-2">What Our Customers Are Saying</h2>
+  <p class="text-xs italic text-gray-500 mb-6">*Snapshot of public Voice of Customer (VOC). Themes cluster around delays, opacity, and refund credibility.*</p>
+
+  
   <div class="grid md:grid-cols-2 gap-6">
-    <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-6 italic">
-      <p class="text-gray-800 text-lg leading-relaxed">
-        “Pickup postponed/cancelled multiple times… still struggling to get my
-        money back.”
-      </p>
-      <span class="block mt-4 not-italic text-sm font-semibold">Source: <a href="https://www.sitejabber.com/reviews/meesho.com" target="_blank" rel="noopener noreferrer" class="text-blue-700 underline-offset-2 hover:underline">Sitejabber Review</a><sup>3</sup></span>
-    </div>
-    <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-6 italic">
-      <p class="text-gray-800 text-lg leading-relaxed">
+
+    
+    <article class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-6">
+      <header class="flex items-start justify-between gap-3">
+        <h3 class="text-[11px] font-bold uppercase tracking-wide px-2 py-1 rounded bg-gray-900 text-white inline-block">
+  📦 Pickup / Return Delay
+</h3>
+        <span class="text-[11px] text-gray-500 shrink-0">Multiple posts · 2023–2025</span>
+      </header>
+      <blockquote class="italic text-gray-900 text-lg leading-relaxed mt-3">
+        “Pickup postponed/cancelled multiple times… still struggling to get my money back.”
+      </blockquote>
+      <footer class="mt-3 text-sm text-gray-600">
+        <span class="font-semibold">Sources:</span>
+        <a href="https://www.sitejabber.com/reviews/meesho.com" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:no-underline">Sitejabber</a>
+        <span class="mx-1">•</span>
+        <a href="https://www.trustpilot.com/review/meesho.com" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:no-underline">Trustpilot</a>
+        <span class="mx-1">•</span>
+        <a href="https://www.reddit.com/r/LegalAdviceIndia/comments/1lsu22i/meesho_trying_to_scam_me/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:no-underline">Reddit (3mo)</a>
+      </footer>
+    </article>
+
+
+    <article class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-6">
+      <header class="flex items-start justify-between gap-3">
+     <h3 class="text-[11px] font-bold uppercase tracking-wide px-2 py-1 rounded bg-gray-900 text-white inline-block">
+      💸 Marked Refunded, Not Received
+    </h3>
+        <span class="text-[11px] text-gray-500 shrink-0">Recent · Aug–Sep 2025</span>
+      </header>
+      <blockquote class="italic text-gray-900 text-lg leading-relaxed mt-3">
+        “App shows ‘refund successful’—but nothing in my bank account.”
+      </blockquote>
+      <footer class="mt-3 text-sm text-gray-600">
+        <span class="font-semibold">Sources:</span>
+        <a href="https://www.reddit.com/r/LegalAdviceIndia/comments/1mlp7k6/meesho_scam/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:no-underline">Reddit (1mo)</a>
+        <span class="mx-1">•</span>
+        <a href="https://www.reddit.com/r/IsThisAScamIndia/comments/1gvy9im/meeshos_unresponsive_customer_support_and_delayed/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:no-underline">Reddit (delays & worry)</a>
+      </footer>
+    </article>
+
+    
+    <article class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-6">
+      <header class="flex items-start justify-between gap-3">
+       <h3 class="text-[11px] font-bold uppercase tracking-wide px-2 py-1 rounded bg-gray-900 text-white inline-block">
+      🌀 Opaque Status / Copy
+    </h3>
+        <span class="text-[11px] text-gray-500 shrink-0">Ongoing</span>
+      </header>
+      <blockquote class="italic text-gray-900 text-lg leading-relaxed mt-3">
         “Return request 11 days back… still no… staff has no clue.”
-      </p>
-      <span class="block mt-4 not-italic text-sm font-semibold">Source: <a href="https://www.trustpilot.com/review/meesho.com" target="_blank" rel="noopener noreferrer" class="text-blue-700 underline-offset-2 hover:underline">Trustpilot Review</a><sup>3</sup></span>
-    </div>
+      </blockquote>
+      <footer class="mt-3 text-sm text-gray-600">
+        <span class="font-semibold">Sources:</span>
+        <a href="https://www.trustpilot.com/review/meesho.com" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:no-underline">Trustpilot</a>
+        <span class="mx-1">•</span>
+        <a href="https://www.reddit.com/r/AskIndia/comments/1hly3hl/why_meesho_is_such_a_fraud/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:no-underline">Reddit (9mo)</a>
+      </footer>
+    </article>
+
+    
+    <article class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-6">
+      <header class="flex items-start justify-between gap-3">
+       <h3 class="text-[11px] font-bold uppercase tracking-wide px-2 py-1 rounded bg-gray-900 text-white inline-block">
+      🔐 Security / Fraud Fear
+    </h3>
+        <span class="text-[11px] text-gray-500 shrink-0">Mixed · 2023–2025</span>
+      </header>
+      <blockquote class="italic text-gray-900 text-lg leading-relaxed mt-3">
+        “Got a ‘refund help’ call with a link—looked official. Was it a scam?”
+      </blockquote>
+      <footer class="mt-3 text-sm text-gray-600">
+        <span class="font-semibold">Sources:</span>
+        <a href="https://www.reddit.com/r/india/comments/1d8juje/beware_of_meesho_fraud/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:no-underline">Reddit (2024)</a>
+        <span class="mx-1">•</span>
+        <a href="https://www.reddit.com/r/Kerala/comments/1mlpdae/meesho_scam_stay_safe_yall/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:no-underline">Reddit (1mo)</a>
+      </footer>
+    </article>
+
+  </div>
+
+
+  <div class="mt-6 bg-yellow-50 border-2 border-black rounded-2xl shadow-[4px_4px_0_0_#000] p-4">
+    <p class="text-sm text-gray-800">
+      <strong>Note:</strong> Public forums over-index on negative experiences and are not representative samples. We use them to <strong>surface failure modes</strong> and then validate internally with ticket analytics and call transcripts.
+    </p>
   </div>
 </div>
 
@@ -177,15 +242,17 @@ import InteractivePrototype from "@components/blog/InteractivePrototype.astro";
   <h2 class="text-3xl font-extrabold mb-4">The User: Meet Priya</h2>
   <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-6">
     <p class="text-lg leading-relaxed">
-      Priya is a 28-year-old homemaker in Lucknow. For her, a missing 
-      <b>₹500 refund</b> isn’t a “minor delay” — it decides whether she buys
-      groceries today or waits until Monday. When her refund shows “in limbo,”
-      she doesn’t think about payment gateways or SLAs. She thinks: 
+      Priya is a 28-year-old homemaker in Lucknow. For her, a missing
+      <b>₹500 refund</b> isn’t a “minor delay” — it decides if she buys
+      groceries today or waits. When her refund is in limbo, she doesn’t think
+      about payment gateways. She thinks:
       <b>“Did I just get scammed?”</b>
     </p>
+    <p class="text-lg leading-relaxed mt-4">
+      Multiply Priya by millions, and you see why ₹500 isn’t a small number — it’s a systemic trust issue.
+    </p>
     <p class="text-sm text-gray-600 mt-3 italic">
-      This vignette turns abstract ticket volumes into lived anxiety. Our
-      solution has to fix her trust gap — at scale.
+      This isn’t a “high ticket volume” problem; it’s a human trust problem.
     </p>
   </div>
 </div>
@@ -197,9 +264,9 @@ import InteractivePrototype from "@components/blog/InteractivePrototype.astro";
     The Solution: A Radically Simple Tracker
   </h2>
   <p class="text-lg leading-relaxed mb-8">
-    Show users the wheels are turning—no jargon, no ambiguity. Each step shows a
-    plain-English time estimate and the next milestone, with proactive
-    notifications on state changes.
+    We need to show users the wheels are turning. Each step will show a
+    plain-English time estimate and what to expect next. We’ll also send
+    proactive notifications as the refund moves from one stage to the next.
   </p>
   <div class="my-10 flex justify-center">
     <InteractivePrototype />
@@ -208,45 +275,53 @@ import InteractivePrototype from "@components/blog/InteractivePrototype.astro";
     Visualizing the Refund Journey
   </h3>
   {/* Mobile: Vertical Stepper */}
-  <div class="sm:hidden text-center">
+  <div class="sm:hidden text-center" aria-label="Refund status steps (mobile)">
     <ol class="relative inline-block text-left border-l-2 border-gray-300">
       <li class="mb-8 ml-8">
-        <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full -left-4 ring-4 ring-white">1</span>
+        <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full -left-4 ring-4 ring-white">
+          1
+        </span>
         <p class="font-semibold">Pickup Scheduled</p>
       </li>
       <li class="mb-8 ml-8">
-        <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full -left-4 ring-4 ring-white">2</span>
+        <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full -left-4 ring-4 ring-white">
+          2
+        </span>
         <p class="font-semibold">Item Picked Up</p>
       </li>
       <li class="mb-8 ml-8">
-        <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full -left-4 ring-4 ring-white">3</span>
-        <p class="font-semibold">Quality Check Passed</p>
+        <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full -left-4 ring-4 ring-white">
+          3
+        </span>
+        <p class="font-semibold">Checked & Approved</p>
       </li>
       <li class="mb-8 ml-8">
-        <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full -left-4 ring-4 ring-white">4</span>
-        <p class="font-semibold">Refund Initiated</p>
-      </li>
-      <li class="mb-8 ml-8">
-        <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full -left-4 ring-4 ring-white">5</span>
-        <p class="font-semibold">Bank Processing</p>
+        <span class="absolute flex items-center justify-center w-8 h-8 bg-gray-200 rounded-full -left-4 ring-4 ring-white">
+          4
+        </span>
+        <p class="font-semibold">Refund Sent to Bank</p>
       </li>
       <li class="ml-8">
-        <span class="absolute flex items-center justify-center w-8 h-8 bg-emerald-200 text-emerald-800 rounded-full -left-4 ring-4 ring-white">✓</span>
+        <span class="absolute flex items-center justify-center w-8 h-8 bg-emerald-200 text-emerald-800 rounded-full -left-4 ring-4 ring-white">
+          ✓
+        </span>
         <p class="font-semibold text-emerald-600">Amount Credited</p>
       </li>
     </ol>
   </div>
   {/* Desktop: Horizontal Stepper */}
-  <div class="hidden sm:flex flex-wrap items-center justify-center text-center text-sm sm:text-base gap-y-4">
+  <div
+    class="hidden sm:flex flex-wrap items-center justify-center text-center text-sm sm:text-base gap-y-4"
+    aria-label="Refund status steps"
+  >
     <div class="font-semibold">Pickup Scheduled</div>
     <div class="text-gray-400 mx-2 text-2xl">›</div>
     <div class="font-semibold">Item Picked Up</div>
     <div class="text-gray-400 mx-2 text-2xl">›</div>
-    <div class="font-semibold">QC Passed</div>
+    <div class="font-semibold">Checked & Approved</div>
     <div class="text-gray-400 mx-2 text-2xl">›</div>
-    <div class="font-semibold">Refund Initiated</div>
+    <div class="font-semibold">Refund Sent to Bank</div>
     <div class="text-gray-400 mx-2 text-2xl">›</div>
-    <div class="font-semibold">Bank Processing</div>
     <div class="text-gray-400 mx-2 text-2xl">›</div>
     <div class="font-semibold text-emerald-600">Amount Credited</div>
   </div>
@@ -255,23 +330,32 @@ import InteractivePrototype from "@components/blog/InteractivePrototype.astro";
 {/* --- Section: MVP Scope --- */}
 
 <div id="mvp" class="my-16 scroll-mt-24">
-  <h2 class="text-3xl font-extrabold mb-6">MVP Scope: Honest Effort Sizing</h2>
+  <h2 class="text-3xl font-extrabold mb-6">The Plan: Start Small</h2>
+  <p class="text-xs italic text-gray-500 -mt-4 mb-6">
+    This is our Minimum Viable Product (MVP): the smallest build that delivers real user value.
+  </p>
   <div class="grid lg:grid-cols-2 gap-6">
     <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-6">
-      <h3 class="font-bold text-xl text-green-900 mb-3">✓ Build Now</h3>
+      <h3 class="font-bold text-xl text-green-900 mb-3">
+        ✓ What We'll Build Now
+      </h3>
       <ul class="list-disc list-inside space-y-2 text-base leading-relaxed">
-        <li>Read-only tracker surface (app + web).</li>
-        <li>Statuses from existing systems only.</li>
-        <li>Event logging for analytics.</li>
-        <li>Per-step "usually" time estimates.</li>
+        <li>A simple info screen (engineers call this read-only).</li>
+        <li>Use data we already have from other systems.</li>
+        <li>Track clicks and views to see if people are using it.</li>
+        <li>Show “usually takes X days” estimates for each step.</li>
       </ul>
     </div>
     <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-6">
-      <h3 class="font-bold text-xl text-red-900 mb-3">🚫 Not in MVP</h3>
+      <h3 class="font-bold text-xl text-red-900 mb-3">
+        🚫 What We'll Skip For Now
+      </h3>
       <ul class="list-disc list-inside space-y-2 text-base leading-relaxed">
-        <li>No real-time courier GPS.</li>
-        <li>No refund destination changes.</li>
-        <li>No free-text chat in the tracker.</li>
+        <li>No real-time GPS tracking of the delivery courier.</li>
+        <li>Users cannot change where the refund goes.</li>
+        <li>
+          No live chat on this screen (they can still go to the help center).
+        </li>
       </ul>
     </div>
   </div>
@@ -283,36 +367,34 @@ import InteractivePrototype from "@components/blog/InteractivePrototype.astro";
   id="measurement"
   class="bg-blue-50 border-2 border-black rounded-2xl shadow-[8px_8px_0_0_#000] p-8 my-16 scroll-mt-24"
 >
-  <h2 class="text-3xl font-extrabold mb-6">Measurement: A/B with Guardrails</h2>
+  <h2 class="text-3xl font-extrabold mb-6">How We'll Know It's Working</h2>
   <div class="grid sm:grid-cols-2 gap-6">
     <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-5">
-      <p class="font-bold text-lg">Population</p>
+      <p class="font-bold text-lg">Who We'll Test On</p>
       <p class="leading-relaxed">
-        First-time returners in 4–6 geos; 50/50 split.
+        First-time returners in 4–6 cities, split 50/50 into two groups.
       </p>
     </div>
     <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-5">
-      <p class="font-bold text-lg">Primary KPI</p>
+      <p class="font-bold text-lg">The Main Goal</p>
       <p class="leading-relaxed">
-        Refund-status contact rate per 1k returners. 
-        <a
-          href="#tldr"
-          class="text-blue-700 underline-offset-2 hover:underline"
-        >
-          (Target: ≥20% reduction)
-        </a>
+        Reduce refund-related tickets by ≥20%.
       </p>
     </div>
     <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-5">
-      <p class="font-bold text-lg">Secondary KPIs</p>
+      <p class="font-bold text-lg">Other Things We'll Watch</p>
       <p class="leading-relaxed">
-        Time-to-first repeat order (60 days), NPS/CSAT on refund flow.
+        Do they order again sooner? Are they happier with the refund process?
       </p>
     </div>
     <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-5">
-      <p class="font-bold text-lg">Attribution</p>
+      <p class="font-bold text-lg">Ensuring a Fair Test</p>
       <p class="leading-relaxed">
-        Freeze competing refund-comms tests; keep policy copy constant.
+        We'll pause other refund-related tests to make sure we're measuring only
+        the impact of this change.
+      </p>
+      <p class="text-xs italic text-gray-500 mt-1">
+        *This is called attribution—making sure credit goes to the right cause.*
       </p>
     </div>
   </div>
@@ -321,22 +403,22 @@ import InteractivePrototype from "@components/blog/InteractivePrototype.astro";
 {/* --- Section: ROI --- */}
 
 <div id="roi" class="my-16 scroll-mt-24">
-  <h2 class="text-3xl font-extrabold mb-4">ROI Model</h2>
-
-
+  <h2 class="text-3xl font-extrabold mb-4">How This Saves Money (ROI Model)</h2>
   <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-6">
     <div class="flex items-center gap-3">
       <span class="text-2xl">ℹ️</span>
       <p class="font-mono text-lg">Savings ≈ C × 365 × r × d × u</p>
     </div>
-    <p class="text-sm text-gray-600 italic mt-2">*Modelled band; based on the variables below.*</p>
+    <p class="text-xs italic text-gray-500 mt-4">
+      *Methods note: ticket volume and ROI inputs are modeled from public
+      statements and industry ranges.*
+    </p>
   </div>
-  
-  
+
   <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 text-center">
     <div class="bg-white border-2 border-black rounded-2xl p-3">
       <p class="text-2xl font-bold">~100k</p>
-      <p class="text-xs font-semibold uppercase">Contacts/Day (C)</p>
+      <p class="text-xs font-semibold uppercase">Daily Tickets (C)</p>
     </div>
     <div class="bg-white border-2 border-black rounded-2xl p-3">
       <p class="text-2xl font-bold">5–15%</p>
@@ -344,20 +426,24 @@ import InteractivePrototype from "@components/blog/InteractivePrototype.astro";
     </div>
     <div class="bg-white border-2 border-black rounded-2xl p-3">
       <p class="text-2xl font-bold">20–35%</p>
-      <p class="text-xs font-semibold uppercase">Deflection (d)</p>
+      <p class="text-xs font-semibold uppercase">Tickets Prevented (d)</p>
     </div>
     <div class="bg-white border-2 border-black rounded-2xl p-3">
       <p class="text-2xl font-bold">₹3–10</p>
-      <p class="text-xs font-semibold uppercase">Unit Cost (u)</p>
+      <p class="text-xs font-semibold uppercase">Cost Per Ticket (u)</p>
     </div>
   </div>
-  
-  
+
   <div class="mt-6 bg-green-100 border-2 border-black rounded-2xl shadow-[4px_4px_0_0_#000] p-5 text-center">
-    <p class="text-3xl font-extrabold text-green-700">₹5–₹80 Cr / year</p>
+    <p class="text-3xl font-extrabold text-green-700">₹5–₹80 Cr/year</p>
     <p class="text-sm text-gray-700 mt-2">
-      Savings band based on input assumptions.  
-      <span class="italic">Even at the low end (₹5Cr), payback > cost in under one quarter.</span>
+      Modelled savings band.
+      <span class="italic">
+        Even the low end (₹5Cr) pays back in under three months.
+      </span>
+    </p>
+    <p class="text-sm text-gray-700 mt-2">
+      Even if our assumptions are off by half, the ROI pays back in under six months.
     </p>
   </div>
 </div>
@@ -365,81 +451,73 @@ import InteractivePrototype from "@components/blog/InteractivePrototype.astro";
 {/* --- Section: Risks --- */}
 
 <div id="risks" class="my-16 scroll-mt-24">
-  <h2 class="text-3xl font-extrabold mb-6">Risks & Mitigations</h2>
+  <h2 class="text-3xl font-extrabold mb-6">What Could Go Wrong (Risks)</h2>
   <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-
     <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-5">
-
       <div class="inline-flex items-center gap-2 bg-orange-700 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mb-2">
         <span>⚠️</span>
         <span>Risk</span>
       </div>
-      <p class="font-semibold leading-relaxed">Upstream latency (courier, QC, bank) makes tracker stale.</p>
-
+      <p class="font-semibold leading-relaxed">
+        Delays from partners could make the tracker look dead, killing trust.
+      </p>
       <div class="inline-flex items-center gap-2 bg-green-700 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mt-4 mb-2">
         <span>✓</span>
-        <span>Mitigation</span>
+        <span>Fix</span>
       </div>
       <p class="text-sm text-gray-700 leading-relaxed">
-        Show “usually” estimates; flag delays; alert ops on p95 breach.
+        Show “usually” estimates and clearly flag any delays to the user.
       </p>
     </div>
-
-
     <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-5">
-
       <div class="inline-flex items-center gap-2 bg-orange-700 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mb-2">
         <span>⚠️</span>
         <span>Risk</span>
       </div>
-      <p class="font-semibold leading-relaxed">Ambiguous copy (“Refund initiated”) confuses users.</p>
-
+      <p class="font-semibold leading-relaxed">
+        Corporate jargon (‘Refund Initiated’) kills trust.
+      </p>
       <div class="inline-flex items-center gap-2 bg-green-700 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mt-4 mb-2">
         <span>✓</span>
-        <span>Mitigation</span>
+        <span>Fix</span>
       </div>
       <p class="text-sm text-gray-700 leading-relaxed">
-        Use plain-English microcopy + show next expected milestone.
+        Use plain English and always explain what happens next.
       </p>
     </div>
-
-
     <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-5">
-
       <div class="inline-flex items-center gap-2 bg-orange-700 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mb-2">
         <span>⚠️</span>
         <span>Risk</span>
       </div>
-      <p class="font-semibold leading-relaxed">Bank posting variance causes anxiety.</p>
-
+      <p class="font-semibold leading-relaxed">
+        Bank “last mile” feels like a black box and spikes anxiety.
+      </p>
       <div class="inline-flex items-center gap-2 bg-green-700 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mt-4 mb-2">
         <span>✓</span>
-        <span>Mitigation</span>
+        <span>Fix</span>
       </div>
       <p class="text-sm text-gray-700 leading-relaxed">
-        Show payment-method-specific SLAs (UPI vs. cards).
+        Show specific time promises for each payment type (e.g., UPI vs. cards).
       </p>
     </div>
-
-
     <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-5">
-
       <div class="inline-flex items-center gap-2 bg-orange-700 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mb-2">
         <span>⚠️</span>
         <span>Risk</span>
       </div>
-      <p class="font-semibold leading-relaxed">Transparency on delays spikes escalations.</p>
-
+      <p class="font-semibold leading-relaxed">
+        Showing a delay might actually cause *more* people to contact support.
+      </p>
       <div class="inline-flex items-center gap-2 bg-green-700 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mt-4 mb-2">
         <span>✓</span>
-        <span>Mitigation</span>
+        <span>Fix</span>
       </div>
       <p class="text-sm text-gray-700 leading-relaxed">
-        Offer a one-tap “remind me” button before agent handoff.
+        Offer a one-tap “remind me” option instead of a "contact support"
+        button.
       </p>
     </div>
-
   </div>
 </div>
 
