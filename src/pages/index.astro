@@ -12,156 +12,163 @@ const featured = {
   title="Story Of Strategy | Home"
   description="Portfolio of an engineer-turned-product-builder focused on clarity, first principles, and India’s next wave."
 >
-  <main class="bg-green p-6 flex-grow border-b-15 border-black">
+  <main
+    class="bg-[#f8ffe3] flex-grow border-b-[12px] border-[#111827] px-5 py-8 md:px-10 md:py-12"
+  >
     {/* Accessibility+SEO: put a real H1 once per page */}
     <h1 class="sr-only">
       Story Of Strategy — Product thinking by an engineer moving into PM
     </h1>
 
-    <section id="about" class="grid md:grid-cols-8 gap-8 mt-4">
-      {/* Card 1 — Hero */}
-      <div class="col-span-5">
-        <BrutalCard tone="red">
-          <div class="flex flex-col justify-between items-start gap-4">
-            <blockquote
-              class="mt-4 outfit text-2xl md:text-5xl lg:text-6xl leading-tight"
-            >
-              “Making a <span class="bg-black text-white px-2">simple</span> thing
-              is never simple.”
-            </blockquote>
-            <p class="mt-2 outfit text-xl md:text-3xl lg:text-5xl">
-              I care about turning complexity into clarity.
-            </p>
-            <a href="/blog/blogpost-2/" class="btn"> Read the case study →</a>
-          </div>
-        </BrutalCard>
-      </div>
-
-      {/* Card 2 — About (transition) */}
-      <div class="col-span-3">
-        <BrutalCard tone="orange">
-          <h2 class="text-2xl md:text-4xl lg:text-6xl mb-6 dm-serif">
-            I bridge engineering and product.
-          </h2>
-          <p class="poppins">
-            Grounded in first principles, I look for clarity where others see
-            noise. I began in software engineering, but my drive was never just
-            writing code— it was understanding <em>why</em> we build, not only <em
-              >how</em
-            >. Moving into product management became the natural step.
-          </p>
-        </BrutalCard>
-      </div>
-
-      {/* Card 3 — Philosophy */}
-      <div class="col-span-3">
-        <BrutalCard tone="yellow">
-          <h2 class="text-2xl md:text-4xl lg:text-6xl mb-4 dm-serif">
-            Clarity over complexity.
-          </h2>
-          <p class="poppins">
-            I think in systems and mental models. Simplicity and first
-            principles guide my decisions. My work is about connecting
-            engineering depth with product vision to build what people truly
-            need.
-          </p>
-        </BrutalCard>
-      </div>
-
-      {/* Card 4 — Vision */}
-      <div class="col-span-5">
-        <BrutalCard>
-          <h2 class="text-2xl md:text-4xl lg:text-6xl mb-4 dm-serif">
-            Shaping India’s next wave.
-          </h2>
-          <p class="poppins">
-            The next generation of products from India will influence how
-            millions live and work. That’s where I want to apply my mix of
-            engineering depth and product clarity.
-          </p>
-        </BrutalCard>
-      </div>
-    </section>
-
-    {/* Featured Case Study — adds substance above the fold */}
-    <section id="featured" class="mt-8">
-      <BrutalCard tone="blue">
-        <div class="grid md:grid-cols-8 gap-6 items-start">
-          <div class="md:col-span-5">
-            <h2 class="dm-serif text-2xl md:text-4xl mb-1">
-              Featured case study
-            </h2>
-            <h3 class="outfit text-xl md:text-2xl font-bold mb-4 leading-tight">
-              Refund Transparency — Meesho
-            </h3>
-
-            <div class="grid md:grid-cols-3 gap-4">
-              <BrutalCard tone="yellow" class="p-4">
-                <div class="font-bold uppercase text-lg mb-2">Problem</div>
-                <p class="poppins text-base">
-                  Refund timelines were unclear, creating anxiety and eroding
-                  trust.
-                </p>
-              </BrutalCard>
-              <BrutalCard tone="blue" class="p-4">
-                <div class="font-bold uppercase text-lg mb-2">Approach</div>
-                <p class="poppins text-base">
-                  Simple status tracker with ETA windows, grounded in
-                  first-principles system mapping.
-                </p>
-              </BrutalCard>
-              <BrutalCard tone="orange" class="p-4">
-                <div class="font-bold uppercase text-lg mb-2">
-                  Potential impact
-                </div>
-                <p class="poppins text-base">
-                  ~25% fewer refund-related tickets, ~18% higher task
-                  completion.
-                </p>
-              </BrutalCard>
-            </div>
-          </div>
-
-          <div class="md:col-span-3 flex md:justify-end mt-4 md:mt-0">
-            <div class="flex flex-col gap-3 w-full md:w-auto">
+    <div class="mx-auto flex w-full max-w-6xl flex-col gap-12">
+      <section
+        id="about"
+        class="grid gap-6 items-stretch md:grid-cols-8 md:gap-8"
+      >
+        {/* Card 1 — Hero */}
+        <div class="col-span-5 flex">
+          <BrutalCard tone="red" class="h-full">
+            <div class="flex h-full flex-col justify-between gap-5">
+              <blockquote class="outfit text-2xl leading-tight md:text-5xl lg:text-6xl">
+                “Making a <span class="bg-[#111827] px-2 text-[#f9fafc]">simple</span>
+                thing is never simple.”
+              </blockquote>
+              <p class="outfit text-xl md:text-3xl lg:text-4xl">
+                I care about turning complexity into clarity.
+              </p>
               <a href="/blog/blogpost-2/" class="btn">Read the case study →</a>
-              <a href="/blog/" class="btn btn--ghost">Browse all posts →</a>
+            </div>
+          </BrutalCard>
+        </div>
+
+        {/* Card 2 — About (transition) */}
+        <div class="col-span-3 flex">
+          <BrutalCard tone="orange" class="flex h-full flex-col">
+            <h2 class="dm-serif text-2xl md:text-4xl lg:text-5xl">
+              I bridge engineering and product.
+            </h2>
+            <p class="poppins mt-4 text-base leading-relaxed">
+              Grounded in first principles, I look for clarity where others see
+              noise. I began in software engineering, but my drive was never
+              just writing code— it was understanding <em>why</em> we build, not
+              only <em>how</em>. Moving into product management became the
+              natural step.
+            </p>
+          </BrutalCard>
+        </div>
+
+        {/* Card 3 — Philosophy */}
+        <div class="col-span-3 flex">
+          <BrutalCard tone="yellow" class="flex h-full flex-col">
+            <h2 class="dm-serif text-2xl md:text-4xl lg:text-5xl">
+              Clarity over complexity.
+            </h2>
+            <p class="poppins mt-4 text-base leading-relaxed">
+              I think in systems and mental models. Simplicity and first
+              principles guide my decisions. My work is about connecting
+              engineering depth with product vision to build what people truly
+              need.
+            </p>
+          </BrutalCard>
+        </div>
+
+        {/* Card 4 — Vision */}
+        <div class="col-span-5 flex">
+          <BrutalCard tone="blue" class="flex h-full flex-col">
+            <h2 class="dm-serif text-2xl md:text-4xl lg:text-5xl">
+              Shaping India’s next wave.
+            </h2>
+            <p class="poppins mt-4 text-base leading-relaxed">
+              The next generation of products from India will influence how
+              millions live and work. That’s where I want to apply my mix of
+              engineering depth and product clarity.
+            </p>
+          </BrutalCard>
+        </div>
+      </section>
+
+      {/* Featured Case Study — adds substance above the fold */}
+      <section id="featured" class="space-y-6">
+        <BrutalCard tone="blue">
+          <div class="grid items-start gap-6 md:grid-cols-8">
+            <div class="space-y-4 md:col-span-5">
+              <h2 class="dm-serif text-2xl md:text-4xl">Featured case study</h2>
+              <h3 class="outfit text-xl font-bold leading-tight md:text-2xl">
+                Refund Transparency — Meesho
+              </h3>
+
+              <div class="grid gap-4 md:grid-cols-3">
+                <BrutalCard tone="orange" class="is-subtle flex h-full flex-col">
+                  <div class="font-bold uppercase text-sm tracking-wide">
+                    Problem
+                  </div>
+                  <p class="poppins mt-2 text-sm leading-relaxed">
+                    Refund timelines were unclear, creating anxiety and eroding
+                    trust.
+                  </p>
+                </BrutalCard>
+                <BrutalCard tone="yellow" class="is-subtle flex h-full flex-col">
+                  <div class="font-bold uppercase text-sm tracking-wide">
+                    Approach
+                  </div>
+                  <p class="poppins mt-2 text-sm leading-relaxed">
+                    Simple status tracker with ETA windows, grounded in
+                    first-principles system mapping.
+                  </p>
+                </BrutalCard>
+                <BrutalCard tone="red" class="is-subtle flex h-full flex-col">
+                  <div class="font-bold uppercase text-sm tracking-wide">
+                    Potential impact
+                  </div>
+                  <p class="poppins mt-2 text-sm leading-relaxed">
+                    ~25% fewer refund-related tickets, ~18% higher task
+                    completion.
+                  </p>
+                </BrutalCard>
+              </div>
+            </div>
+
+            <div class="md:col-span-3 flex md:justify-end">
+              <div class="flex w-full flex-col gap-3 md:w-auto">
+                <a href="/blog/blogpost-2/" class="btn">Read the case study →</a>
+                <a href="/blog/" class="btn btn--ghost">Browse all posts →</a>
+              </div>
             </div>
           </div>
-        </div>
-      </BrutalCard>
-    </section>
+        </BrutalCard>
+      </section>
 
-    <section id="about-me" class="mt-12">
-      <BrutalCard tone="yellow">
-        <h2 class="dm-serif text-2xl md:text-4xl mb-6">About Me</h2>
-        <div class="grid md:grid-cols-3 gap-4">
-          <BrutalCard tone="black">
-            <div class="kicker kicker-invert">Engineer</div>
-            <p class="poppins text-sm">
-              7 years as a full-stack builder. Shipped trading apps in 3 months
-              (3× faster). Built UI libraries now powering 300+ developers.
-            </p>
-          </BrutalCard>
+      <section id="about-me" class="space-y-6">
+        <BrutalCard tone="yellow">
+          <h2 class="dm-serif text-2xl md:text-4xl mb-6">About Me</h2>
+          <div class="grid gap-4 md:grid-cols-3">
+            <BrutalCard tone="blue" class="is-subtle flex h-full flex-col">
+              <div class="kicker kicker-invert">Engineer</div>
+              <p class="poppins text-sm leading-relaxed">
+                7 years as a full-stack builder. Shipped trading apps in 3 months
+                (3× faster). Built UI libraries now powering 300+ developers.
+              </p>
+            </BrutalCard>
 
-          <BrutalCard tone="black">
-            <div class="kicker kicker-invert">Builder</div>
-            <p class="poppins text-sm">
-              I question defaults, strip waste, and prove small focused teams
-              can deliver outsized impact.
-            </p>
-          </BrutalCard>
+            <BrutalCard tone="blue" class="is-subtle flex h-full flex-col">
+              <div class="kicker kicker-invert">Builder</div>
+              <p class="poppins text-sm leading-relaxed">
+                I question defaults, strip waste, and prove small focused teams
+                can deliver outsized impact.
+              </p>
+            </BrutalCard>
 
-          <BrutalCard tone="black">
-            <div class="kicker kicker-invert">Next Wave</div>
-            <p class="poppins text-sm">
-              Moving into product management. Systems thinking and
-              first-principles clarity to build what people actually want to
-              use.
-            </p>
-          </BrutalCard>
-        </div>
-      </BrutalCard>
-    </section>
+            <BrutalCard tone="blue" class="is-subtle flex h-full flex-col">
+              <div class="kicker kicker-invert">Next Wave</div>
+              <p class="poppins text-sm leading-relaxed">
+                Moving into product management. Systems thinking and
+                first-principles clarity to build what people actually want to
+                use.
+              </p>
+            </BrutalCard>
+          </div>
+        </BrutalCard>
+      </section>
+    </div>
   </main>
 </Layout>

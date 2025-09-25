@@ -6,12 +6,44 @@ interface Props {
     [key: string]: any;
 }
 
-const palette: Record<NonNullable<Props["tone"]>, string> = {
-    red: "#f87171",
-    orange: "#fb923c",
-    yellow: "#facc15",
-    blue: "#60a5fa",
-    black: "#000000",
+interface PaletteEntry {
+    bg: string;
+    text: string;
+    border: string;
+    shadow: string;
+}
+
+const palette: Record<NonNullable<Props["tone"]>, PaletteEntry> = {
+    red: {
+        bg: "#ff6b6b",
+        text: "#111827",
+        border: "#111827",
+        shadow: "#111827",
+    },
+    orange: {
+        bg: "#ffa94d",
+        text: "#111827",
+        border: "#111827",
+        shadow: "#111827",
+    },
+    yellow: {
+        bg: "#ffef5c",
+        text: "#111827",
+        border: "#111827",
+        shadow: "#111827",
+    },
+    blue: {
+        bg: "#5fb5ff",
+        text: "#0f172a",
+        border: "#0f172a",
+        shadow: "#0f172a",
+    },
+    black: {
+        bg: "#111827",
+        text: "#f9fafc",
+        border: "#05070a",
+        shadow: "#ffef5c",
+    },
 };
 
 const {
@@ -21,13 +53,10 @@ const {
     ...rest
 } = Astro.props as Props;
 
-const bg = (color ?? palette[tone]).toLowerCase();
-const isBlack = tone === "black" || bg === "#000" || bg === "#000000";
+const { bg: toneBg, text: textColor, border: borderColor, shadow: shadowColor } =
+    palette[tone];
 
-/* Auto-contrast vars */
-const borderColor = isBlack ? "#000000" : "#000000"; // white border on black bg
-const shadowColor = isBlack ? "#60a5fa" : "#000000"; // pale-lime shadow on black
-const textColor = isBlack ? "#ffffff" : "#000000";
+const bg = (color ?? toneBg).toLowerCase();
 ---
 
 <style define:vars={{ bg, borderColor, shadowColor, textColor }}>
@@ -36,13 +65,25 @@ const textColor = isBlack ? "#ffffff" : "#000000";
         background-color: var(--bg);
         color: var(--textColor);
         border-radius: 0.5rem;
-        border: 3px solid var(--borderColor);
-        filter: drop-shadow(7px 7px 0 var(--shadowColor));
-        transition: filter 0.2s ease;
-        padding: 1rem;
+        border: 2px solid var(--borderColor);
+        filter: drop-shadow(4px 4px 0 var(--shadowColor));
+        transition: filter 0.2s ease, transform 0.2s ease;
+        transform: translateY(0);
+        padding: clamp(1.25rem, 1.5vw + 1rem, 1.75rem);
     }
     .brutal-card:hover {
-        filter: drop-shadow(5px 5px 0 var(--shadowColor));
+        filter: drop-shadow(2px 2px 0 var(--shadowColor));
+        transform: translateY(-2px);
+    }
+
+    .brutal-card.is-subtle {
+        filter: drop-shadow(2px 2px 0 var(--shadowColor));
+        padding: clamp(1.125rem, 1.25vw + 0.875rem, 1.5rem);
+    }
+
+    .brutal-card.is-flat {
+        filter: none;
+        padding: clamp(1rem, 1vw + 0.75rem, 1.375rem);
     }
 
     /* Make links inherit contrast inside dark cards */

@@ -3,13 +3,14 @@
 @tailwind utilities;
 
 .card-shadow {
-  filter: drop-shadow(7px 7px 0 rgb(0 0 0 / 1));
+  filter: drop-shadow(5px 5px 0 rgb(17 24 39 / 1));
   transition: filter .2s ease, transform .2s ease;
+  transform: translateY(0);
 }
 
 .card-shadow:hover {
-  filter: drop-shadow(5px 5px 0 rgb(0 0 0 / 1));
-  transform: translateY(-1px);
+  filter: drop-shadow(3px 3px 0 rgb(17 24 39 / 1));
+  transform: translateY(-3px);
 }
 
 :root {
@@ -19,12 +20,12 @@
   --sys-color-black: #000000;
 
   /* Theme Tokens */
-  --primary: var(--sys-color-white);
-  --secondary: var(--sys-color-black);
+  --primary: #fffaf0;
+  --secondary: #111827;
   --accent: #d9ff6a;
-  /* lime */
-  --accent-soft: #f5ffcf;
-  /* pale lime */
+  /* electric lime */
+  --accent-soft: #f3ffc2;
+  /* pale lime haze */
   --ink: var(--secondary);
   --shadow: 5px 5px 0 var(--ink);
 }
@@ -34,27 +35,30 @@
   display: inline-block;
   font-weight: 700;
   text-align: center;
-  border: 4px solid var(--ink);
-  padding: .5rem 1rem;
-  background: var(--primary);
-  box-shadow: var(--shadow);
+  border: 3px solid var(--ink);
+  padding: .6rem 1.25rem;
+  background: var(--accent);
+  box-shadow: 4px 4px 0 var(--ink);
   color: var(--ink);
+  letter-spacing: .02em;
   transition: background-color .15s ease, color .15s ease, box-shadow .15s ease, transform .15s ease;
+  transform: translateY(0);
 }
 
 .btn:hover {
-  background: var(--accent);
-  color: var(--ink);
+  background: var(--ink);
+  color: var(--primary);
   box-shadow: 3px 3px 0 var(--ink);
-  transform: translateY(-1px);
+  transform: translateY(-3px);
 }
 
 .btn--ghost {
   background: transparent;
+  color: var(--ink);
 }
 
 .btn--ghost:hover {
-  background: var(--accent-soft);
+  background: var(--accent);
   color: var(--ink);
 }
 
@@ -69,12 +73,12 @@
 
 /* About mini-cards (outline) */
 .block-outline {
-  border: 4px solid var(--ink);
+  border: 2px solid var(--ink);
   background: var(--ink);
   /* black */
   color: var(--primary);
   /* white text */
-  box-shadow: 6px 6px 0 var(--accent-soft);
+  box-shadow: 4px 4px 0 var(--accent-soft);
   /* pale lime shadow */
   padding: 1rem;
   position: relative;
