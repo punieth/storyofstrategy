@@ -243,8 +243,7 @@ export const pillClass = (theme) => `${pillBase} ${pillThemes[theme] ?? ""}`;
     </p>
 
     <div class="w-full max-w-[420px] mx-auto mt-4 sm:mt-6">
-      {/* <InteractivePrototype client:visible initialScreen="Dashboard" variant="compact" style="width:320px;height:640px"/>  */}
-      <App client:visible initialScreen="dashboard"></App>
+      <App client:visible initialScreen="dashboard" />
     </div>
   </BrutalCard>
 </section>
