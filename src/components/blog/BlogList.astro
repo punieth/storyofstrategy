@@ -9,11 +9,11 @@ interface Props {
 const { posts } = Astro.props;
 ---
 
-<ul class='grid md:grid-cols-2 lg:grid-cols-3 gap-8'>
+<ul class='grid gap-8 md:grid-cols-2 xl:grid-cols-3'>
   {
     posts.map((post) => {
       return (
-        <li>
+        <li class='list-none h-full'>
           <BlogSummaryCard post={post} />
         </li>
       );
