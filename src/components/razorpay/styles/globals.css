@@ -5,6 +5,10 @@
   --background: #ffffff;
   --foreground: oklch(0.145 0 0);
   --card: #ffffff;
+
+.my-card-background {
+  background-color: var(--card);
+}
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
@@ -129,7 +133,7 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply outline-ring/50;
   }
 
   body {
@@ -206,9 +210,32 @@ body {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
 
+.phone-frame-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 410px;
+  margin: 0 auto;
+}
+
+.phone-frame {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  padding: 8px;
+  border: 2px solid #000;
+  border-radius: 32px;
+  background-color: #000;
+  box-sizing: content-box;
+  box-shadow: 0 18px 32px rgba(15, 23, 42, 0.18);
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
 .mobile-container {
   width: 390px;
   height: 844px;
-  max-width: 390px;
-  max-height: 844px;
+  border-radius: 28px;
+  overflow: hidden;
+  background-color: #fff;
 }

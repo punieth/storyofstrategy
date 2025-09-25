@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Dashboard } from './components/Dashboard';
 import { PayslipScreen } from './components/PayslipScreen';
 import { DeductionsExplainer } from './components/DeductionsExplainer';
@@ -7,8 +7,48 @@ import { RequestsTracker } from './components/RequestsTracker';
 import { NotificationsScreen } from './components/NotificationsScreen';
 import { DocumentsHub } from './components/DocumentsHub';
 
+const SCREEN_WIDTH = 390;
+const SCREEN_HEIGHT = 844;
+const FRAME_PADDING = 8;
+const FRAME_BORDER = 2;
+const OUTER_WIDTH = SCREEN_WIDTH + (FRAME_PADDING + FRAME_BORDER) * 2;
+const OUTER_HEIGHT = SCREEN_HEIGHT + (FRAME_PADDING + FRAME_BORDER) * 2;
+
 export default function App({ initialScreen = 'dashboard' }) {
   const [currentScreen, setCurrentScreen] = useState(initialScreen);
+  const [scale, setScale] = useState(1);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const updateScale = () => {
+      if (!wrapperRef.current) {
+        return;
+      }
+
+      const availableWidth = wrapperRef.current.offsetWidth;
+      if (!availableWidth) {
+        return;
+      }
+
+      const nextScale = Math.min(1, availableWidth / OUTER_WIDTH);
+      setScale((prev) => (Math.abs(prev - nextScale) < 0.005 ? prev : nextScale));
+    };
+
+    updateScale();
+
+    if (!wrapperRef.current) {
+      return;
+    }
+
+    if (typeof ResizeObserver !== 'undefined') {
+      const observer = new ResizeObserver(() => updateScale());
+      observer.observe(wrapperRef.current);
+      return () => observer.disconnect();
+    }
+
+    window.addEventListener('resize', updateScale);
+    return () => window.removeEventListener('resize', updateScale);
+  }, []);
 
   const handleNavigate = (screen: string) => {
     setCurrentScreen(screen);
@@ -36,24 +76,24 @@ export default function App({ initialScreen = 'dashboard' }) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-      <div className="mobile-container bg-white rounded-2xl overflow-hidden shadow-2xl">
-        {renderScreen()}
-      </div>
-      
-      {/* Screen Navigation Debug Panel (Hidden in production) */}
-      {/* <div className="fixed bottom-4 right-4 bg-black/80 text-white p-2 rounded-lg text-xs space-y-1 opacity-20 hover:opacity-100 transition-opacity">
-        <div className="font-semibold">Current: {currentScreen}</div>
-        <div className="grid grid-cols-2 gap-1 text-xs">
-          <button onClick={() => setCurrentScreen('dashboard')} className="p-1 bg-blue-600 rounded">Dashboard</button>
-          <button onClick={() => setCurrentScreen('payslip')} className="p-1 bg-blue-600 rounded">Payslip</button>
-          <button onClick={() => setCurrentScreen('deductions')} className="p-1 bg-blue-600 rounded">Deductions</button>
-          <button onClick={() => setCurrentScreen('new-request')} className="p-1 bg-blue-600 rounded">New Request</button>
-          <button onClick={() => setCurrentScreen('requests')} className="p-1 bg-blue-600 rounded">Requests</button>
-          <button onClick={() => setCurrentScreen('notifications')} className="p-1 bg-blue-600 rounded">Notifications</button>
-          <button onClick={() => setCurrentScreen('documents')} className="p-1 bg-blue-600 rounded">Documents</button>
+    <div className="flex items-center justify-center p-4">
+      <div
+        ref={wrapperRef}
+        className="phone-frame-wrapper"
+        style={{ height: OUTER_HEIGHT * scale }}
+      >
+        <div
+          className="phone-frame"
+          style={{
+            width: SCREEN_WIDTH,
+            height: SCREEN_HEIGHT,
+            transform: `translateX(-50%) scale(${scale})`,
+            transformOrigin: 'top center',
+          }}
+        >
+          {renderScreen()}
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }

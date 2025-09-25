@@ -220,6 +220,10 @@ html {
   background-color: aliceblue;
 }
 
+.prose-slate {
+  max-width: 80ch;
+}
+
 @keyframes fade-in-up {
   from {
     opacity: 0;

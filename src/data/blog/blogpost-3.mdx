@@ -4,7 +4,7 @@ description: "Designing payroll clarity for RazorpayX employees—because payday
 pubDate: "Sep 26 2025"
 author: "xxxx"
 tags: ["product management", "case study", "razorpayx"]
-imgUrl: "../../assets/astro.jpeg"
+imgUrl: "../../assets/razorpayx.png"
 draft: false
 ---
 
@@ -15,20 +15,20 @@ import "@components/razorpay/styles/globals.css";
 
 <div class="hidden lg:block sticky top-6 z-50 my-8">
   <div class="mx-auto max-w-max border-2 border-black rounded-full bg-white/70 backdrop-blur-sm shadow-lg">
-    <div class="flex items-center gap-x-1 px-3 py-2 text-sm font-semibold">
-      <span class="mr-2 font-bold">On this page:</span>
-      <a href="#tldr" class="px-3 py-1 rounded-full hover:bg-gray-200">TL;DR</a>
-      <a href="#context" class="px-3 py-1 rounded-full hover:bg-gray-200">Context</a>
-      <a href="#jobs" class="px-3 py-1 rounded-full hover:bg-gray-200">Jobs to Be Done</a>
-      <a href="#voc" class="px-3 py-1 rounded-full hover:bg-gray-200">What Employees Say</a>
-      <a href="#solution" class="px-3 py-1 rounded-full hover:bg-gray-200">Solution</a>
-      <a href="#mvp" class="px-3 py-1 rounded-full hover:bg-gray-200">MVP</a>
-      <a href="#measurement" class="px-3 py-1 rounded-full hover:bg-gray-200">Measurement</a>
-      <a href="#roi" class="px-3 py-1 rounded-full hover:bg-gray-200">ROI</a>
-      <a href="#competitive" class="px-3 py-1 rounded-full hover:bg-gray-200">Competitive Lens</a>
-      <a href="#future" class="px-3 py-1 rounded-full hover:bg-gray-200">Expansion Path</a>
-      <a href="#risks" class="px-3 py-1 rounded-full hover:bg-gray-200">Risks</a>
-      <a href="#sources" class="px-3 py-1 rounded-full hover:bg-gray-200">Sources</a>
+    <div class="flex items-center gap-x-1 px-2 py-1 text-[10px] font-semibold">
+      <span class="mr-1 font-bold">On this page:</span>
+      <a href="#tldr" class="px-1.5 py-0.5 rounded-full hover:bg-gray-200">TL;DR</a>
+      <a href="#context" class="px-1.5 py-0.5 rounded-full hover:bg-gray-200">Context</a>
+      <a href="#jobs" class="px-1.5 py-0.5 rounded-full hover:bg-gray-200">Jobs to Be Done</a>
+      <a href="#voc" class="px-1.5 py-0.5 rounded-full hover:bg-gray-200">What Employees Say</a>
+      <a href="#solution" class="px-1.5 py-0.5 rounded-full hover:bg-gray-200">Solution</a>
+      <a href="#mvp" class="px-1.5 py-0.5 rounded-full hover:bg-gray-200">MVP</a>
+      <a href="#measurement" class="px-1.5 py-0.5 rounded-full hover:bg-gray-200">Measurement</a>
+      <a href="#roi" class="px-1.5 py-0.5 rounded-full hover:bg-gray-200">ROI</a>
+      <a href="#competitive" class="px-1.5 py-0.5 rounded-full hover:bg-gray-200">Competitive Lens</a>
+      <a href="#future" class="px-1.5 py-0.5 rounded-full hover:bg-gray-200">Expansion Path</a>
+      <a href="#risks" class="px-1.5 py-0.5 rounded-full hover:bg-gray-200">Risks</a>
+      <a href="#sources" class="px-1.5 py-0.5 rounded-full hover:bg-gray-200">Sources</a>
     </div>
   </div>
 </div>
@@ -160,9 +160,11 @@ import "@components/razorpay/styles/globals.css";
     We designed a 7-screen employee app prototype. It’s minimal, fintech-grade, and consistent with Razorpay’s design system.
   </p>
 
-  <div class="my-8 flex justify-center">
-    {/* <InteractivePrototype client:visible initialScreen="Dashboard" variant="compact" style="width:320px;height:640px"/>  */}
-    <App client:visible initialScreen="dashboard"></App>
+  <div class="my-8 flex justify-center px-4">
+    <div class="w-full max-w-[410px]">
+      {/* <InteractivePrototype client:visible initialScreen="Dashboard" variant="compact" style="width:320px;height:640px"/>  */}
+      <App client:visible initialScreen="dashboard"></App>
+    </div>
   </div>
 </div>
 
