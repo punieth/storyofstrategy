@@ -11,6 +11,31 @@ draft: false
 import App from "@components/razorpay/App.tsx";
 import "@components/razorpay/styles/globals.css";
 import StickyNav from "@components/blog/StickyNav.astro";
+import BrutalCard from "@components/layout/Brutalcard.astro";
+
+export const pillBase =
+  "inline-flex items-center gap-[0.35rem] rounded-full border-2 border-black px-3 py-[0.4rem] text-[0.68rem] font-extrabold uppercase tracking-[0.18em] leading-none sm:px-4 sm:py-[0.45rem] sm:text-[0.72rem]";
+
+export const pillThemes = {
+  problem: "bg-black text-white shadow-[4px_4px_0_0_#60a5fa]",
+  bet: "bg-[#4338ca] text-white shadow-[4px_4px_0_0_#000]",
+  kpi: "bg-[#be123c] text-white shadow-[4px_4px_0_0_#000]",
+  signal: "bg-[#fef08a] shadow-[4px_4px_0_0_#000]",
+  listen: "bg-[#bfdbfe] shadow-[4px_4px_0_0_#1e3a8a]",
+  map: "bg-[#e9d5ff] shadow-[4px_4px_0_0_#6b21a8]",
+  build: "bg-[#bbf7d0] shadow-[4px_4px_0_0_#047857]",
+  ship: "bg-[#fde68a] shadow-[4px_4px_0_0_#92400e]",
+  prove: "bg-[#d1fae5] shadow-[4px_4px_0_0_#047857]",
+  value: "bg-[#c7d2fe] shadow-[4px_4px_0_0_#312e81]",
+  edge: "bg-[#fecaca] shadow-[4px_4px_0_0_#7f1d1d]",
+  next: "bg-[#ddd6fe] shadow-[4px_4px_0_0_#5b21b6]",
+  risk: "bg-[#fee2e2] shadow-[4px_4px_0_0_#991b1b]",
+  source: "bg-[#e2e8f0] shadow-[4px_4px_0_0_#1e293b]",
+};
+
+export const iconClass = "text-[0.85rem] leading-none";
+
+export const pillClass = (theme) => `${pillBase} ${pillThemes[theme] ?? ""}`;
 
 {/* Sticky Nav */}
 
@@ -29,6 +54,7 @@ import StickyNav from "@components/blog/StickyNav.astro";
     { href: "#risks", label: "Risks" },
     { href: "#sources", label: "Sources" },
   ]}
+  label="On this page:"
 />
 
 {/* Page Header */}
@@ -48,203 +74,373 @@ import StickyNav from "@components/blog/StickyNav.astro";
 
 {/* --- Section: TL;DR --- */}
 
-<div
+<section
   id="tldr"
-  class="bg-blue-50 border-2 border-black rounded-2xl p-4 sm:p-6 md:p-8 shadow-[8px_8px_0_0_#000] mt-8 sm:mt-16 mb-12 sm:mb-16 scroll-mt-24"
+  class="relative mt-8 sm:mt-16 mb-12 sm:mb-16 scroll-mt-24"
 >
   <h2 class="text-3xl md:text-4xl font-extrabold mb-6 sm:mb-8 text-center">TL;DR</h2>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-    <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-4 text-center">
-      <div class="inline-flex items-center gap-2 bg-black text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mb-3">
-        ⚠ Problem
-      </div>
-      <p>Employees often don’t know if or when their salary will hit their account—leading to anxiety, duplicate HR queries, and lost trust.</p>
-    </div>
-    <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-4 text-center">
-      <div class="inline-flex items-center gap-2 bg-indigo-700 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mb-3">
-        💡 The Bet
-      </div>
-      <p>A payroll tracker that shows “next salary,” clear ETAs, deductions explained, and proactive nudges before people ask.</p>
-    </div>
-    <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-4 text-center">
-      <div class="inline-flex items-center gap-2 bg-rose-700 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mb-3">
-        🎯 KPI
-      </div>
-      <p class="text-4xl font-bold">–30%</p>
-      <p class="text-sm text-gray-600">reduction in payroll-related HR queries.</p>
-    </div>
+    <BrutalCard color="#ffffff" class="flex flex-col gap-3 sm:gap-4 p-5 text-left">
+      <span class={`${pillClass("problem")} self-start`}>
+        <span class={iconClass}>⚠</span>
+        <span>Problem</span>
+      </span>
+      <p class="text-base sm:text-lg leading-relaxed text-gray-900">
+        Employees don’t know if or when salary will credit. That uncertainty fuels anxiety, repeat HR tickets, and mistrust in payroll.
+      </p>
+    </BrutalCard>
+    <BrutalCard color="#ffffff" class="flex flex-col gap-3 sm:gap-4 p-5 text-left">
+      <span class={`${pillClass("bet")} self-start`}>
+        <span class={iconClass}>💡</span>
+        <span>The Bet</span>
+      </span>
+      <p class="text-base sm:text-lg leading-relaxed text-gray-900">
+        Ship a payroll tracker that surfaces the next salary window, explains deductions plainly, and nudges employees before they worry.
+      </p>
+    </BrutalCard>
+    <BrutalCard color="#ffffff" class="flex flex-col gap-2 p-5 text-left">
+      <span class={`${pillClass("kpi")} self-start`}>
+        <span class={iconClass}>🎯</span>
+        <span>Primary KPI</span>
+      </span>
+      <p class="text-4xl sm:text-5xl font-black tracking-tight">–30%</p>
+      <p class="text-xs sm:text-sm text-gray-600 uppercase tracking-[0.12em]">
+        Payroll-related HR queries
+      </p>
+      <p class="text-[11px] text-gray-500 italic">
+        *Supports downstream trust and retention metrics.*
+      </p>
+    </BrutalCard>
   </div>
-</div>
+</section>
 
 {/* --- Section: Context --- */}
 
-<div id="context" class="my-12 sm:my-16 scroll-mt-24">
-  <h2 class="text-3xl font-extrabold mb-4">Context</h2>
-  <p class="text-lg leading-relaxed">
-    RazorpayX already helps 30,000+ Indian businesses run payroll and compliance. Yet for employees, payday often feels opaque. Will it credit at 9 AM? 6 PM? Tomorrow? 
-    Anxiety creates unnecessary HR tickets, missed bill payments, and lost trust.
-  </p>
-</div>
+<section id="context" class="relative my-12 sm:my-16 scroll-mt-24">
+  <span class={pillClass("signal")}>
+    <span class={iconClass}>📡</span>
+    <span>Signal</span>
+  </span>
+  <BrutalCard color="#ffffff" class="mt-6 sm:mt-7 p-6 sm:p-7 md:p-8">
+    <h2 class="text-3xl md:text-4xl font-extrabold mb-4 sm:mb-5">Context</h2>
+    <p class="text-base sm:text-lg leading-relaxed text-gray-900">
+      RazorpayX already powers payroll and compliance for 30,000+ Indian businesses. Yet for employees, payday remains a black box—will it credit at 9&nbsp;AM, 6&nbsp;PM, or slip to tomorrow? That opacity spawns duplicate HR queries, missed bill payments, and a quiet erosion of trust.
+    </p>
+  </BrutalCard>
+</section>
 
 {/* --- Section: Voice of Employee --- */}
 
-<div id="voc" class="my-12 sm:my-16 scroll-mt-24">
-  <h2 class="text-3xl font-extrabold mb-2">What Employees Are Saying</h2>
-  <p class="text-xs italic text-gray-500 mb-6">*Synthesized from Reddit threads, Glassdoor reviews, and HR forums. These are not edge cases — they’re repeated patterns.*</p>
+<section id="voc" class="relative my-12 sm:my-16 scroll-mt-24">
+  <span class={pillClass("listen")}>
+    <span class={iconClass}>👂</span>
+    <span>Listen</span>
+  </span>
+  <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-2">What Employees Are Saying</h2>
+  <p class="text-xs sm:text-sm italic text-gray-600 mb-6">
+    *Synthesized from Reddit threads, Glassdoor reviews, and HR forums. These are not edge cases—they surface week after week.*
+  </p>
 
   <div class="grid md:grid-cols-2 gap-4 sm:gap-6">
-
-    <article class="bg-white border-2 border-black rounded-2xl shadow p-4 sm:p-6">
-      <h3 class="font-bold text-xs uppercase">🌀 Timing Anxiety</h3>
-      <blockquote class="italic mt-2">“Salary comes anytime after 6pm. Rent is due at 5. I sit refreshing my bank app.”</blockquote>
-      <footer class="mt-2 text-xs text-gray-600">
-        Source: <a href="https://www.reddit.com/r/india/comments/11j1a4s/payroll_delays_in_startups/" target="_blank">Reddit</a>
+    <BrutalCard color="#ffffff" class="flex flex-col gap-3 p-4 sm:p-6">
+      <h3 class="font-bold text-xs sm:text-sm uppercase tracking-[0.16em]">🌀 Timing Anxiety</h3>
+      <blockquote class="italic text-sm sm:text-base leading-relaxed text-gray-900">
+        “Salary comes anytime after 6pm. Rent is due at 5. I sit refreshing my bank app.”
+      </blockquote>
+      <footer class="text-[11px] sm:text-xs text-gray-600">
+        Source: <a href="https://www.reddit.com/r/india/comments/11j1a4s/payroll_delays_in_startups/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2">Reddit</a>
       </footer>
-    </article>
+    </BrutalCard>
 
-    <article class="bg-white border-2 border-black rounded-2xl shadow p-4 sm:p-6">
-      <h3 class="font-bold text-xs uppercase">💸 Deductions Confusion</h3>
-      <blockquote class="italic mt-2">“PF, TDS, PT — the payslip looks like alphabet soup. Net is always less than expected.”</blockquote>
-      <footer class="mt-2 text-xs text-gray-600">
-        Source: <a href="https://www.glassdoor.co.in/Reviews/Razorpay-Reviews-E1302688.htm" target="_blank">Glassdoor</a>
+    <BrutalCard color="#ffffff" class="flex flex-col gap-3 p-4 sm:p-6">
+      <h3 class="font-bold text-xs sm:text-sm uppercase tracking-[0.16em]">💸 Deductions Confusion</h3>
+      <blockquote class="italic text-sm sm:text-base leading-relaxed text-gray-900">
+        “PF, TDS, PT — the payslip looks like alphabet soup. Net is always less than expected.”
+      </blockquote>
+      <footer class="text-[11px] sm:text-xs text-gray-600">
+        Source: <a href="https://www.glassdoor.co.in/Reviews/Razorpay-Reviews-E1302688.htm" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2">Glassdoor</a>
       </footer>
-    </article>
+    </BrutalCard>
 
-    <article class="bg-white border-2 border-black rounded-2xl shadow p-4 sm:p-6">
-      <h3 class="font-bold text-xs uppercase">⌛ Request Black Hole</h3>
-      <blockquote class="italic mt-2">“Submitted reimbursement two weeks back. HR says ‘in process’. That means nothing.”</blockquote>
-      <footer class="mt-2 text-xs text-gray-600">
-        Source: <a href="https://www.reddit.com/r/india/comments/15zi8t4/payroll_reimbursement_delays/" target="_blank">Reddit</a>
+    <BrutalCard color="#ffffff" class="flex flex-col gap-3 p-4 sm:p-6">
+      <h3 class="font-bold text-xs sm:text-sm uppercase tracking-[0.16em]">⌛ Request Black Hole</h3>
+      <blockquote class="italic text-sm sm:text-base leading-relaxed text-gray-900">
+        “Submitted reimbursement two weeks back. HR says ‘in process’. That means nothing.”
+      </blockquote>
+      <footer class="text-[11px] sm:text-xs text-gray-600">
+        Source: <a href="https://www.reddit.com/r/india/comments/15zi8t4/payroll_reimbursement_delays/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2">Reddit</a>
       </footer>
-    </article>
+    </BrutalCard>
 
-    <article class="bg-white border-2 border-black rounded-2xl shadow p-4 sm:p-6">
-      <h3 class="font-bold text-xs uppercase">🔔 Escalation Fatigue</h3>
-      <blockquote class="italic mt-2">“Every time payroll slips, I raise a ticket. Feels like I’m managing HR, not the other way around.”</blockquote>
-      <footer class="mt-2 text-xs text-gray-600">
-        Source: <a href="https://www.quora.com/What-are-common-complaints-with-payroll-in-Indian-startups" target="_blank">Quora</a>
+    <BrutalCard color="#ffffff" class="flex flex-col gap-3 p-4 sm:p-6">
+      <h3 class="font-bold text-xs sm:text-sm uppercase tracking-[0.16em]">🔔 Escalation Fatigue</h3>
+      <blockquote class="italic text-sm sm:text-base leading-relaxed text-gray-900">
+        “Every time payroll slips, I raise a ticket. Feels like I’m managing HR, not the other way around.”
+      </blockquote>
+      <footer class="text-[11px] sm:text-xs text-gray-600">
+        Source: <a href="https://www.quora.com/What-are-common-complaints-with-payroll-in-Indian-startups" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2">Quora</a>
       </footer>
-    </article>
-
+    </BrutalCard>
   </div>
 
-  <div class="mt-5 bg-yellow-50 border-2 border-black rounded-2xl shadow p-3 sm:p-4">
-    <p class="text-xs sm:text-sm text-gray-800">
+  <BrutalCard color="#fef3c7" class="mt-6 p-4 sm:p-5 text-xs sm:text-sm text-gray-800 leading-relaxed">
+    <p>
       Across 40+ public comments, the pattern isn’t distrust of <i>Razorpay’s tech</i>. It’s distrust of the <b>silence</b>. Employees don’t panic when there’s a deduction or delay; they panic when there’s no clarity on <i>what’s next</i>.
     </p>
-  </div>
-</div>
+  </BrutalCard>
+</section>
 
 {/* --- Section: Jobs To Be Done --- */}
 
-<div id="jobs" class="bg-purple-50 border-2 border-black rounded-2xl p-5 sm:p-8 my-12 sm:my-16 scroll-mt-24">
-  <h2 class="text-3xl font-extrabold mb-4">Jobs to Be Done</h2>
-  <p class="text-base mb-6">Here’s how those pain points map into explicit jobs employees are “hiring payroll” to do:</p>
-  <ul class="list-disc pl-5 space-y-4 text-lg leading-relaxed">
-    <li><b>When I wait for salary,</b> I want to know exactly when and how much will credit, <b>so I can pay rent or bills on time.</b>  
-      <p class="text-sm text-gray-600 italic mt-1">If unmet → support tickets, late fees, stress. If solved → trust & predictability.</p></li>
-    <li><b>When deductions happen,</b> I want them explained simply, <b>so I don’t assume payroll errors.</b>  
-      <p class="text-sm text-gray-600 italic mt-1">If unmet → resentment toward employer. If solved → tax compliance feels like empowerment.</p></li>
-    <li><b>When I request advances/reimbursements,</b> I want transparent progress, <b>so I don’t waste hours chasing HR.</b>  
-      <p class="text-sm text-gray-600 italic mt-1">If unmet → duplicate work. If solved → HR bandwidth freed, faster employee satisfaction.</p></li>
-  </ul>
-</div>
+<section id="jobs" class="relative my-12 sm:my-16 scroll-mt-24">
+  <span class={pillClass("map")}>
+    <span class={iconClass}>🗺</span>
+    <span>Map</span>
+  </span>
+  <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-4">Jobs to Be Done</h2>
+  <p class="text-base sm:text-lg leading-relaxed text-gray-900 mb-6">
+    Here’s how those pains translate into the jobs employees are “hiring payroll” to do:
+  </p>
+  <div class="flex flex-col gap-4 sm:gap-5">
+    <BrutalCard color="#ffffff" class="p-4 sm:p-5">
+      <p class="text-base sm:text-lg leading-relaxed text-gray-900">
+        <b>When I wait for salary,</b> I need to know exactly when and how much will credit, <b>so I can pay rent or bills on time.</b>
+      </p>
+      <p class="text-xs sm:text-sm text-gray-600 italic mt-2">
+        If unmet → support tickets, late fees, stress. If solved → predictable cashflow and trust.
+      </p>
+    </BrutalCard>
+    <BrutalCard color="#ffffff" class="p-4 sm:p-5">
+      <p class="text-base sm:text-lg leading-relaxed text-gray-900">
+        <b>When deductions happen,</b> I want them explained simply, <b>so I don’t assume payroll errors.</b>
+      </p>
+      <p class="text-xs sm:text-sm text-gray-600 italic mt-2">
+        If unmet → resentment toward employer. If solved → tax compliance starts to feel like empowerment.
+      </p>
+    </BrutalCard>
+    <BrutalCard color="#ffffff" class="p-4 sm:p-5">
+      <p class="text-base sm:text-lg leading-relaxed text-gray-900">
+        <b>When I request advances or reimbursements,</b> I need transparent progress, <b>so I’m not chasing HR.</b>
+      </p>
+      <p class="text-xs sm:text-sm text-gray-600 italic mt-2">
+        If unmet → duplicate work and escalations. If solved → HR bandwidth freed, faster employee satisfaction.
+      </p>
+    </BrutalCard>
+  </div>
+</section>
 
 {/* --- Section: Solution --- */}
 
-<div id="solution" class="my-12 sm:my-16 scroll-mt-24">
-  <h2 class="text-3xl font-extrabold mb-4">Solution: Salary in Sight</h2>
-  <p class="text-lg mb-6">
-    We designed a 7-screen employee app prototype. It’s minimal, fintech-grade, and consistent with Razorpay’s design system.
-  </p>
+<section id="solution" class="relative my-12 sm:my-16 scroll-mt-24">
+  <span class={pillClass("build")}>
+    <span class={iconClass}>🛠</span>
+    <span>Build</span>
+  </span>
+  <BrutalCard color="#ffffff" class="mt-6 sm:mt-7 p-6 sm:p-7 md:p-8 flex flex-col gap-6">
+    <h2 class="text-3xl md:text-4xl font-extrabold">Solution: Salary in Sight</h2>
+    <p class="text-base sm:text-lg leading-relaxed text-gray-900">
+      We designed a 7-screen employee app prototype. It’s minimal, fintech-grade, and consistent with Razorpay’s design language while borrowing the bold, friendly cues from our homepage.
+    </p>
 
-  <div class="my-8 flex justify-center px-4">
-    <div class="w-full max-w-[410px]">
+    <div class="w-full max-w-[420px] mx-auto mt-4 sm:mt-6">
       {/* <InteractivePrototype client:visible initialScreen="Dashboard" variant="compact" style="width:320px;height:640px"/>  */}
       <App client:visible initialScreen="dashboard"></App>
     </div>
-  </div>
-</div>
+  </BrutalCard>
+</section>
 
 {/* --- Section: MVP --- */}
 
-<div id="mvp" class="bg-yellow-50 border-2 border-black rounded-2xl p-5 sm:p-8 my-12 sm:my-16 scroll-mt-24">
-  <h2 class="text-3xl font-extrabold mb-4">MVP Scope</h2>
-  <ul class="list-disc pl-5 space-y-3">
-    <li>Dashboard: Next vs last salary, ETA, payslip + reimbursement CTAs.</li>
-    <li>Payslip: breakdown of components + net pay highlight.</li>
-    <li>Requests: track advances & reimbursements with color-coded statuses.</li>
-    <li>Deductions: simple explainers for PF/TDS with hints to reduce.</li>
-  </ul>
-</div>
+<section id="mvp" class="relative my-12 sm:my-16 scroll-mt-24">
+  <span class={pillClass("ship")}>
+    <span class={iconClass}>🚀</span>
+    <span>Ship</span>
+  </span>
+  <h2 class="text-3xl md:text-4xl font-extrabold mt-6">MVP Scope</h2>
+  <div class="grid sm:grid-cols-2 gap-4 sm:gap-5 mt-4">
+    <BrutalCard color="#ffffff" class="flex flex-col gap-2 p-4 sm:p-5">
+      <span class="text-xs font-black uppercase tracking-[0.18em] text-gray-700">Signal dashboard</span>
+      <p class="text-base sm:text-lg leading-relaxed text-gray-900">
+        Next vs last salary, ETA window, and shortcuts to payslip + reimbursements.
+      </p>
+    </BrutalCard>
+    <BrutalCard color="#ffffff" class="flex flex-col gap-2 p-4 sm:p-5">
+      <span class="text-xs font-black uppercase tracking-[0.18em] text-gray-700">Plain-speak payslip</span>
+      <p class="text-base sm:text-lg leading-relaxed text-gray-900">
+        Component breakdown with net pay in focus and one-tap PDF download.
+      </p>
+    </BrutalCard>
+    <BrutalCard color="#ffffff" class="flex flex-col gap-2 p-4 sm:p-5">
+      <span class="text-xs font-black uppercase tracking-[0.18em] text-gray-700">Request tracker</span>
+      <p class="text-base sm:text-lg leading-relaxed text-gray-900">
+        Advances &amp; reimbursements with color-coded statuses and promised-by dates.
+      </p>
+    </BrutalCard>
+    <BrutalCard color="#ffffff" class="flex flex-col gap-2 p-4 sm:p-5">
+      <span class="text-xs font-black uppercase tracking-[0.18em] text-gray-700">Deduction explainers</span>
+      <p class="text-base sm:text-lg leading-relaxed text-gray-900">
+        PF/TDS demystified with actionable hints to optimize take-home pay.
+      </p>
+    </BrutalCard>
+  </div>
+</section>
 
 {/* --- Section: Measurement --- */}
 
-<div id="measurement" class="bg-green-50 border-2 border-black rounded-2xl p-5 sm:p-8 my-12 sm:my-16">
-  <h2 class="text-3xl font-extrabold mb-6">Measurement & Causality</h2>
-  <ul class="list-disc pl-5 space-y-3 text-lg">
-    <li>A/B test employees: tracker vs no-tracker.</li>
-    <li>Primary metric: –30% payroll HR queries.</li>
-    <li>Guardrail: no increase in escalations.</li>
-    <li>Qualitative: “salary confidence” post-rollout survey.</li>
-  </ul>
-</div>
+<section id="measurement" class="relative my-12 sm:my-16 scroll-mt-24">
+  <span class={pillClass("prove")}>
+    <span class={iconClass}>📏</span>
+    <span>Prove</span>
+  </span>
+  <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-6">Measurement &amp; Causality</h2>
+  <div class="grid sm:grid-cols-2 gap-4 sm:gap-5">
+    <BrutalCard color="#ffffff" class="p-4 sm:p-5">
+      <p class="text-xs font-black uppercase tracking-[0.18em] text-gray-700 mb-2">Experiment design</p>
+      <p class="text-base sm:text-lg leading-relaxed text-gray-900">
+        A/B test cohorts: tracker vs control, split by employee tenure to account for experience bias.
+      </p>
+    </BrutalCard>
+    <BrutalCard color="#ffffff" class="p-4 sm:p-5">
+      <p class="text-xs font-black uppercase tracking-[0.18em] text-gray-700 mb-2">Primary metric</p>
+      <p class="text-base sm:text-lg leading-relaxed text-gray-900">
+        –30% payroll-related HR queries. Count via shared inbox tagging + call center dispositions.
+      </p>
+    </BrutalCard>
+    <BrutalCard color="#ffffff" class="p-4 sm:p-5">
+      <p class="text-xs font-black uppercase tracking-[0.18em] text-gray-700 mb-2">Guardrail</p>
+      <p class="text-base sm:text-lg leading-relaxed text-gray-900">
+        No increase in payroll escalations or manual overrides. Monitor weekly variance.
+      </p>
+    </BrutalCard>
+    <BrutalCard color="#ffffff" class="p-4 sm:p-5">
+      <p class="text-xs font-black uppercase tracking-[0.18em] text-gray-700 mb-2">Qual signals</p>
+      <p class="text-base sm:text-lg leading-relaxed text-gray-900">
+        “Salary confidence” pulse post-rollout plus usability interviews with finance &amp; HR partners.
+      </p>
+    </BrutalCard>
+  </div>
+</section>
 
 {/* --- Section: ROI --- */}
 
-<div id="roi" class="my-12 sm:my-16 scroll-mt-24">
-  <h2 class="text-3xl font-extrabold mb-4">ROI Model</h2>
-  <p class="text-sm italic mb-4">Method: Based on HR outsourcing costs in India.</p>
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-    <div class="bg-white border-2 border-black rounded-2xl p-3"><p class="text-2xl font-bold">₹400</p><p class="text-xs uppercase">Cost per HR query</p></div>
-    <div class="bg-white border-2 border-black rounded-2xl p-3"><p class="text-2xl font-bold">20%</p><p class="text-xs uppercase">Employees raising queries</p></div>
-    <div class="bg-white border-2 border-black rounded-2xl p-3"><p class="text-2xl font-bold">30%</p><p class="text-xs uppercase">Reduction</p></div>
-    <div class="bg-white border-2 border-black rounded-2xl p-3"><p class="text-2xl font-bold">₹5.7 Cr</p><p class="text-xs uppercase">Annual savings (1000 SMEs)</p></div>
+<section id="roi" class="relative my-12 sm:my-16 scroll-mt-24">
+  <span class={pillClass("value")}>
+    <span class={iconClass}>💰</span>
+    <span>Value</span>
+  </span>
+  <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-3">ROI Model</h2>
+  <p class="text-xs sm:text-sm italic text-gray-600 mb-5">
+    Method based on HR outsourcing costs in India; assumes 1,000 SMEs on RazorpayX payroll.
+  </p>
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5 text-center">
+    <BrutalCard color="#ffffff" class="p-4">
+      <p class="text-2xl sm:text-3xl font-black">₹400</p>
+      <p class="text-[11px] sm:text-xs uppercase tracking-[0.14em] text-gray-700">Cost per HR query</p>
+    </BrutalCard>
+    <BrutalCard color="#ffffff" class="p-4">
+      <p class="text-2xl sm:text-3xl font-black">20%</p>
+      <p class="text-[11px] sm:text-xs uppercase tracking-[0.14em] text-gray-700">Employees raising queries</p>
+    </BrutalCard>
+    <BrutalCard color="#ffffff" class="p-4">
+      <p class="text-2xl sm:text-3xl font-black">30%</p>
+      <p class="text-[11px] sm:text-xs uppercase tracking-[0.14em] text-gray-700">Target reduction</p>
+    </BrutalCard>
+    <BrutalCard color="#ffffff" class="p-4">
+      <p class="text-2xl sm:text-3xl font-black">₹5.7 Cr</p>
+      <p class="text-[11px] sm:text-xs uppercase tracking-[0.14em] text-gray-700">Annual savings</p>
+    </BrutalCard>
   </div>
-</div>
+</section>
 
 {/* --- Section: Competitive Lens --- */}
 
-<div id="competitive" class="my-12 sm:my-16 scroll-mt-24">
-  <h2 class="text-3xl font-extrabold mb-4">Competitive Lens</h2>
-  <p class="text-lg mb-4">
-    Payroll tools like <a href="https://www.zoho.com/us/payroll/help/employer/basics/" target="_blank">Zoho Payroll</a>, <a href="https://www.greythr.com/" target="_blank">greytHR</a>, and <a href="https://www.keka.com/" target="_blank">Keka</a> focus on backend compliance and accounting.  
-    Few offer real-time employee-facing salary clarity. RazorpayX can own this “trust layer.”
-  </p>
-</div>
+<section id="competitive" class="relative my-12 sm:my-16 scroll-mt-24">
+  <span class={pillClass("edge")}>
+    <span class={iconClass}>🧭</span>
+    <span>Edge</span>
+  </span>
+  <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7">
+    <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Competitive Lens</h2>
+    <p class="text-base sm:text-lg leading-relaxed text-gray-900">
+      Payroll tools such as <a href="https://www.zoho.com/us/payroll/help/employer/basics/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2">Zoho Payroll</a>, <a href="https://www.greythr.com/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2">greytHR</a>, and <a href="https://www.keka.com/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2">Keka</a> zero-in on compliance and accounting workflows. Few offer a real-time, employee-facing trust layer. RazorpayX can own that differentiator.
+    </p>
+  </BrutalCard>
+</section>
 
 {/* --- Section: Expansion --- */}
 
-<div id="future" class="bg-indigo-50 border-2 border-black rounded-2xl p-5 sm:p-8 my-12 sm:my-16">
-  <h2 class="text-3xl font-extrabold mb-4">Beyond MVP: Expansion Path</h2>
-  <ul class="list-disc pl-5 space-y-3 text-lg">
-    <li>Advance salary drawdowns (earned wage access).</li>
-    <li>Salary-linked tax saving & investments (upload proofs → optimize deductions).</li>
-    <li>Financial wellness dashboard (spend predictions, nudges).</li>
-    <li>Deeper HR analytics for employers (variance alerts).</li>
-  </ul>
-</div>
+<section id="future" class="relative my-12 sm:my-16 scroll-mt-24">
+  <span class={pillClass("next")}>
+    <span class={iconClass}>🌱</span>
+    <span>Next</span>
+  </span>
+  <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-4">Beyond MVP: Expansion Path</h2>
+  <div class="grid sm:grid-cols-2 gap-4 sm:gap-5 mt-4">
+    <BrutalCard color="#ffffff" class="p-4 sm:p-5">
+      <p class="text-base sm:text-lg leading-relaxed text-gray-900">
+        Advance salary drawdowns (earned wage access) with guardrails tied to employer policy.
+      </p>
+    </BrutalCard>
+    <BrutalCard color="#ffffff" class="p-4 sm:p-5">
+      <p class="text-base sm:text-lg leading-relaxed text-gray-900">
+        Salary-linked tax saving &amp; investments—upload proofs, auto-calculate options to lift take-home.
+      </p>
+    </BrutalCard>
+    <BrutalCard color="#ffffff" class="p-4 sm:p-5">
+      <p class="text-base sm:text-lg leading-relaxed text-gray-900">
+        Financial wellness dashboard with spend predictions, nudges, and bite-sized education.
+      </p>
+    </BrutalCard>
+    <BrutalCard color="#ffffff" class="p-4 sm:p-5">
+      <p class="text-base sm:text-lg leading-relaxed text-gray-900">
+        Deeper HR analytics for employers—variance alerts, policy compliance, and ROI reporting.
+      </p>
+    </BrutalCard>
+  </div>
+</section>
 
 {/* --- Section: Risks --- */}
 
-<div id="risks" class="my-12 sm:my-16">
-  <h2 class="text-3xl font-extrabold mb-6">Risks</h2>
-  <ul class="list-disc pl-5 space-y-3">
-    <li>Bank delays could undermine credibility → mitigation: show “usual ETA” not false promises.</li>
-    <li>Highlighting deductions may trigger frustration → mitigation: pair with tips to reduce (upload proofs).</li>
-    <li>Feature bloat risk → mitigation: stage rollout with MVP focus.</li>
-  </ul>
-</div>
+<section id="risks" class="relative my-12 sm:my-16 scroll-mt-24">
+  <span class={pillClass("risk")}>
+    <span class={iconClass}>⚠️</span>
+    <span>Risks</span>
+  </span>
+  <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-6">Risks</h2>
+  <div class="flex flex-col gap-4">
+    <BrutalCard color="#ffffff" class="p-4 sm:p-5">
+      <p class="text-base sm:text-lg leading-relaxed text-gray-900">
+        <b>Bank delays undermine credibility.</b> Mitigation: show historical ETA bands, not false promises, and surface “bank pending” states explicitly.
+      </p>
+    </BrutalCard>
+    <BrutalCard color="#ffffff" class="p-4 sm:p-5">
+      <p class="text-base sm:text-lg leading-relaxed text-gray-900">
+        <b>Highlighting deductions triggers frustration.</b> Mitigation: pair every deduction with a plain-language explainer and action to reduce it (upload proofs, adjust declarations).
+      </p>
+    </BrutalCard>
+    <BrutalCard color="#ffffff" class="p-4 sm:p-5">
+      <p class="text-base sm:text-lg leading-relaxed text-gray-900">
+        <b>Feature bloat creeps in.</b> Mitigation: uphold MVP guardrails, releasing financial extras only after core clarity metrics improve.
+      </p>
+    </BrutalCard>
+  </div>
+</section>
 
 {/* --- Section: Sources --- */}
 
-<div id="sources" class="mt-16 sm:mt-24 pt-6 sm:pt-8 border-t-4 border-black">
-  <h2 class="text-2xl font-bold mb-6">Sources</h2>
-  <ol class="text-xs sm:text-sm text-gray-600 space-y-1.5">
-    <li>Payroll outsourcing cost India: <a href="https://www.voltechhrservices.com/how-much-does-payroll-outsourcing-cost-in-india-in-2025.html" target="_blank">Voltech HR (2025)</a></li>
-    <li>India HR outsourcing market: <a href="https://www.techsciresearch.com/report/india-human-resource-outsourcing-market/14775.html" target="_blank">TechSci Research (2025)</a></li>
-    <li>Zoho Payroll overview: <a href="https://www.zoho.com/us/payroll/help/employer/basics/" target="_blank">Zoho Docs</a></li>
-    <li>greytHR, Keka: <a href="https://www.greythr.com/" target="_blank">greytHR</a>, <a href="https://www.keka.com/" target="_blank">Keka</a></li>
-    <li>Employee complaints: <a href="https://www.reddit.com/r/india/comments/11j1a4s/payroll_delays_in_startups/" target="_blank">Reddit</a>, <a href="https://www.glassdoor.co.in/Reviews/Razorpay-Reviews-E1302688.htm" target="_blank">Glassdoor</a></li>
-  </ol>
-</div>
+<section id="sources" class="relative mt-16 sm:mt-24 mb-12">
+  <span class={pillClass("source")}>
+    <span class={iconClass}>📚</span>
+    <span>Sources</span>
+  </span>
+  <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7">
+    <h2 class="text-2xl sm:text-3xl font-extrabold mb-6">Sources</h2>
+    <ol class="text-xs sm:text-sm text-gray-700 space-y-1.5 sm:space-y-2 list-decimal list-inside">
+      <li>Payroll outsourcing cost India: <a href="https://www.voltechhrservices.com/how-much-does-payroll-outsourcing-cost-in-india-in-2025.html" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2">Voltech HR (2025)</a></li>
+      <li>India HR outsourcing market: <a href="https://www.techsciresearch.com/report/india-human-resource-outsourcing-market/14775.html" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2">TechSci Research (2025)</a></li>
+      <li>Zoho Payroll overview: <a href="https://www.zoho.com/us/payroll/help/employer/basics/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2">Zoho Docs</a></li>
+      <li>greytHR, Keka: <a href="https://www.greythr.com/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2">greytHR</a>, <a href="https://www.keka.com/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2">Keka</a></li>
+      <li>Employee complaints: <a href="https://www.reddit.com/r/india/comments/11j1a4s/payroll_delays_in_startups/" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2">Reddit</a>, <a href="https://www.glassdoor.co.in/Reviews/Razorpay-Reviews-E1302688.htm" target="_blank" rel="noopener noreferrer" class="underline underline-offset-2">Glassdoor</a></li>
+    </ol>
+  </BrutalCard>
+</section>
