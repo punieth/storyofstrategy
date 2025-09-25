@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import UnoCSS from 'unocss/astro';
 import mdx from '@astrojs/mdx';
+import react from "@astrojs/react";
 
 export default defineConfig({
   // used to generate images
@@ -12,7 +13,7 @@ export default defineConfig({
       ? `https://${process.env.VERCEL_URL}/`
       : 'https://localhost:3000/',
   trailingSlash: 'ignore',
-  integrations: [sitemap(), UnoCSS({ injectReset: true }), mdx()],
+  integrations: [sitemap(), UnoCSS({ injectReset: true }), mdx(), react()],
   vite: {
     optimizeDeps: {
       exclude: ['@resvg/resvg-js'],
