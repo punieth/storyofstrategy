@@ -7,8 +7,8 @@ import { RequestsTracker } from './components/RequestsTracker';
 import { NotificationsScreen } from './components/NotificationsScreen';
 import { DocumentsHub } from './components/DocumentsHub';
 
-export default function App() {
-  const [currentScreen, setCurrentScreen] = useState('dashboard');
+export default function App({ initialScreen = 'dashboard' }) {
+  const [currentScreen, setCurrentScreen] = useState(initialScreen);
 
   const handleNavigate = (screen: string) => {
     setCurrentScreen(screen);

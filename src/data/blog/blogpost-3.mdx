@@ -8,7 +8,8 @@ imgUrl: "../../assets/astro.jpeg"
 draft: false
 ---
 
-import InteractivePrototype from "@components/razorpay/App.tsx";
+import App from "@components/razorpay/App.tsx";
+import "@components/razorpay/styles/globals.css";
 
 {/* Sticky Nav */}
 
@@ -160,7 +161,8 @@ import InteractivePrototype from "@components/razorpay/App.tsx";
   </p>
 
   <div class="my-8 flex justify-center">
-    <InteractivePrototype client:visible initialScreen="Dashboard" variant="compact" style="width:320px;height:640px"/>
+    {/* <InteractivePrototype client:visible initialScreen="Dashboard" variant="compact" style="width:320px;height:640px"/>  */}
+    <App client:visible initialScreen="dashboard"></App>
   </div>
 </div>
 
