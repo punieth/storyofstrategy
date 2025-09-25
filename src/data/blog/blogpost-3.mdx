@@ -10,35 +10,33 @@ draft: false
 
 import App from "@components/razorpay/App.tsx";
 import "@components/razorpay/styles/globals.css";
+import StickyNav from "@components/blog/StickyNav.astro";
 
 {/* Sticky Nav */}
 
-<div class="hidden lg:block sticky top-6 z-50 my-8">
-  <div class="mx-auto max-w-max border-2 border-black rounded-full bg-white/70 backdrop-blur-sm shadow-lg">
-    <div class="flex items-center gap-x-1 px-2 py-1 text-[10px] font-semibold">
-      <span class="mr-1 font-bold">On this page:</span>
-      <a href="#tldr" class="px-1.5 py-0.5 rounded-full hover:bg-gray-200">TL;DR</a>
-      <a href="#context" class="px-1.5 py-0.5 rounded-full hover:bg-gray-200">Context</a>
-      <a href="#jobs" class="px-1.5 py-0.5 rounded-full hover:bg-gray-200">Jobs to Be Done</a>
-      <a href="#voc" class="px-1.5 py-0.5 rounded-full hover:bg-gray-200">What Employees Say</a>
-      <a href="#solution" class="px-1.5 py-0.5 rounded-full hover:bg-gray-200">Solution</a>
-      <a href="#mvp" class="px-1.5 py-0.5 rounded-full hover:bg-gray-200">MVP</a>
-      <a href="#measurement" class="px-1.5 py-0.5 rounded-full hover:bg-gray-200">Measurement</a>
-      <a href="#roi" class="px-1.5 py-0.5 rounded-full hover:bg-gray-200">ROI</a>
-      <a href="#competitive" class="px-1.5 py-0.5 rounded-full hover:bg-gray-200">Competitive Lens</a>
-      <a href="#future" class="px-1.5 py-0.5 rounded-full hover:bg-gray-200">Expansion Path</a>
-      <a href="#risks" class="px-1.5 py-0.5 rounded-full hover:bg-gray-200">Risks</a>
-      <a href="#sources" class="px-1.5 py-0.5 rounded-full hover:bg-gray-200">Sources</a>
-    </div>
-  </div>
-</div>
+<StickyNav
+  items={[
+    { href: "#tldr", label: "TL;DR" },
+    { href: "#context", label: "Context" },
+    { href: "#jobs", label: "Jobs to Be Done" },
+    { href: "#voc", label: "What Employees Say" },
+    { href: "#solution", label: "Solution" },
+    { href: "#mvp", label: "MVP" },
+    { href: "#measurement", label: "Measurement" },
+    { href: "#roi", label: "ROI" },
+    { href: "#competitive", label: "Competitive Lens" },
+    { href: "#future", label: "Expansion Path" },
+    { href: "#risks", label: "Risks" },
+    { href: "#sources", label: "Sources" },
+  ]}
+/>
 
 {/* Page Header */}
 
 <div class="text-center mt-6 sm:mt-12 mb-4 sm:mb-12">
-  <span class="inline-flex items-center gap-2 px-2.5 sm:px-3 py-0.5 sm:py-1 text-[11px] sm:text-xs font-black uppercase tracking-[0.2em] text-black bg-[#cde5ff] border border-black/70 sm:border-2 shadow-[3px_3px_0_0_#00000055] sm:shadow-[4px_4px_0_0_#000] rounded-full sm:rounded-lg">
+  <span class="inline-flex items-center gap-2 px-2.5 sm:px-3 py-0.5 sm:py-1 text-[11px] sm:text-xs font-black uppercase tracking-[0.2em] text-black bg-[#f5ff85] border border-black/70 sm:border-2 shadow-[3px_3px_0_0_#00000055] sm:shadow-[4px_4px_0_0_#000] rounded-full sm:rounded-lg">
     <span class="block h-1.5 w-1.5 rounded-full bg-black"></span>
-    A Product Teardown
+    A Case Study
   </span>
   <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight pt-3 sm:pt-4">
     Salary in Sight

@@ -1,0 +1,45 @@
+---
+interface NavItem {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  items: NavItem[];
+  label?: string;
+  class?: string;
+}
+
+const {
+  items = [],
+  label = 'On this page:',
+  class: className = '',
+} = Astro.props as Props;
+---
+
+{items.length > 0 && (
+  <nav
+    aria-label="In-page navigation"
+    class={`hidden lg:block sticky top-6 z-40 my-8 ${className}`.trim()}
+  >
+    <div class="mx-auto w-full max-w-[90rem] px-2">
+      <div class="flex justify-center">
+        <div
+          class="inline-flex flex-nowrap items-center gap-1.5 rounded-full border-2 border-black bg-white/70 px-3.5 py-1.5 text-[13px] font-medium shadow-lg backdrop-blur-sm whitespace-nowrap"
+        >
+          <span class="mr-1.5 font-semibold text-[13px] text-black">
+            {label}
+          </span>
+          {items.map((item) => (
+            <a
+              href={item.href}
+              class="rounded-full px-2.5 py-1 text-[13px] transition-colors duration-150 hover:bg-gray-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black whitespace-nowrap"
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </nav>
+)}
