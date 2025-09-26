@@ -13,7 +13,7 @@ const posts = await getCollection('blog').then((collection) =>
   description='Brutal Blog | On this page you can find a collection of blogposts'
   pageTitle='Brutal Blog'
 >
-  <main class='flex-grow bg-[#fffaf0] px-6 py-10 md:px-10'>
+  <main class='flex-grow theme-surface px-6 py-10 md:px-10'>
     <BlogList posts={posts} />
   </main>
 </Layout>

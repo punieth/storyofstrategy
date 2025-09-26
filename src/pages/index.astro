@@ -13,7 +13,8 @@ const featured = {
   description="Portfolio of an engineer-turned-product-builder focused on clarity, first principles, and India’s next wave."
 >
   <main
-    class="bg-[#f8ffe3] flex-grow border-b-[12px] border-[#111827] px-5 py-8 md:px-10 md:py-12"
+    class="theme-surface flex-grow border-b-[12px] px-5 py-8 md:px-10 md:py-12"
+    style="border-color: var(--ink);"
   >
     {/* Accessibility+SEO: put a real H1 once per page */}
     <h1 class="sr-only">
@@ -30,7 +31,10 @@ const featured = {
           <BrutalCard tone="red" class="h-full">
             <div class="flex h-full flex-col justify-between gap-5">
               <blockquote class="outfit text-2xl leading-tight md:text-5xl lg:text-6xl">
-                “Making a <span class="bg-[#111827] px-2 text-[#f9fafc]">simple</span>
+                “Making a
+                <span class="px-2" style="background: var(--ink); color: var(--primary);">
+                  simple
+                </span>
                 thing is never simple.”
               </blockquote>
               <p class="outfit text-xl md:text-3xl lg:text-4xl">

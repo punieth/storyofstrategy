@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 .card-shadow {
-  filter: drop-shadow(5px 5px 0 rgb(17 24 39 / 1));
+  filter: drop-shadow(5px 5px 0 var(--shadow-color));
   transition: filter .2s ease, transform .2s ease;
   transform: translateY(0);
 }
 
 .card-shadow:hover {
-  filter: drop-shadow(3px 3px 0 rgb(17 24 39 / 1));
+  filter: drop-shadow(3px 3px 0 var(--shadow-color));
   transform: translateY(-3px);
 }
 
@@ -28,6 +28,82 @@
   /* pale lime haze */
   --ink: var(--secondary);
   --shadow: 5px 5px 0 var(--ink);
+  --shadow-color: rgba(17, 24, 39, 1);
+  --surface: #f8ffe3;
+  --surface-panel: #ffffff;
+  --surface-chip: #fbffdd;
+  --surface-chip-hover: #efff92;
+  --text-primary: #111827;
+}
+
+html[data-theme='dark'] {
+  color-scheme: dark;
+  --primary: #0f172a;
+  --secondary: #f8fafc;
+  --accent: #ffb454;
+  --accent-soft: #ffd8a1;
+  --shadow: 5px 5px 0 var(--ink);
+  --shadow-color: rgba(248, 250, 252, 0.85);
+  --surface: #0f172a;
+  --surface-panel: #152238;
+  --surface-chip: #1c2d45;
+  --surface-chip-hover: #273b56;
+  --text-primary: #f8fafc;
+}
+
+body {
+  background: var(--surface);
+  color: var(--text-primary);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.theme-surface {
+  background: var(--surface);
+  color: inherit;
+  transition: background-color 0.25s ease;
+}
+
+.theme-panel {
+  background: var(--surface-panel);
+  color: var(--text-primary);
+  transition: background-color 0.25s ease, color 0.25s ease;
+  border-color: var(--ink);
+}
+
+.theme-chip {
+  background: var(--surface-chip);
+  color: var(--text-primary);
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  border-color: var(--ink);
+}
+
+.theme-chip:hover {
+  background: var(--surface-chip-hover);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+html[data-theme='dark'] .theme-panel {
+  border-color: var(--text-primary) !important;
+}
+
+html[data-theme='dark'] .theme-chip {
+  border-color: var(--text-primary) !important;
+}
+
+html[data-theme='dark'] .bg-white {
+  background-color: var(--surface-panel) !important;
+  color: var(--text-primary) !important;
+}
+
+html[data-theme='dark'] .border-black,
+html[data-theme='dark'] .border-\[\#111827\] {
+  border-color: var(--ink) !important;
+}
+
+html[data-theme='dark'] .text-black,
+html[data-theme='dark'] .text-\[\#111827\] {
+  color: var(--text-primary) !important;
 }
 
 /* Buttons */
@@ -54,7 +130,7 @@
 
 .btn--ghost {
   background: transparent;
-  color: var(--ink);
+  color: var(--text-primary);
 }
 
 .btn--ghost:hover {

@@ -18,9 +18,13 @@ const publishedOn = new Intl.DateTimeFormat('en-US', {
 <BrutalCard
   tone={tone}
   color='#ffffff'
-  class='blog-summary is-subtle flex h-full flex-col gap-6 border-2 border-[#111827]'
+  class='blog-summary is-subtle flex h-full flex-col gap-6 border-2'
+  style='border-color: var(--ink); color: var(--text-primary);'
 >
-  <div class='overflow-hidden rounded-xl border-[3px] border-[#111827] bg-white shadow-[4px_4px_0_0_rgba(17,24,39,0.35)]'>
+  <div
+    class='overflow-hidden rounded-xl border-[3px] bg-white shadow-[4px_4px_0_0_rgba(17,24,39,0.35)]'
+    style='border-color: var(--ink);'
+  >
     <Image
       src={post.data.imgUrl}
       alt={post.data.title}
@@ -30,27 +34,36 @@ const publishedOn = new Intl.DateTimeFormat('en-US', {
     />
   </div>
 
-  <div class='flex flex-col gap-4 text-[#111827]'>
-    <span class='inline-flex w-fit items-center gap-2 rounded-full border-2 border-[#111827] bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] shadow-[3px_3px_0_0_rgba(17,24,39,0.55)]'>
-      <span class='block h-2 w-2 rounded-full bg-[#111827]'></span>
+  <div class='flex flex-col gap-4'>
+    <span
+      class='inline-flex w-fit items-center gap-2 rounded-full border-2 bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] shadow-[3px_3px_0_0_rgba(17,24,39,0.55)]'
+      style='border-color: var(--ink); color: var(--text-primary);'
+    >
+      <span class='block h-2 w-2 rounded-full' style='background: var(--ink);'></span>
       {publishedOn}
     </span>
 
     <div class='space-y-3'>
-      <h3 class='dm-serif text-2xl font-black leading-tight text-[#111827] md:text-[1.75rem]'>
+      <h3 class='dm-serif text-2xl font-black leading-tight md:text-[1.75rem]'>
         {post.data.title}
       </h3>
-      <span class='block h-[6px] w-16 skew-x-[-25deg] bg-[#111827] shadow-[3px_3px_0_rgba(17,24,39,0.4)]'></span>
+      <span
+        class='block h-[6px] w-16 skew-x-[-25deg]'
+        style='background: var(--ink); box-shadow: 3px 3px 0 rgba(17,24,39,0.4);'
+      ></span>
     </div>
   </div>
 
-  <p class='poppins text-sm leading-relaxed text-[#111827]/90 md:text-base'>
+  <p class='poppins text-sm leading-relaxed opacity-90 md:text-base'>
     {post.data.description}
   </p>
 
   <div class='mt-auto flex flex-col gap-4'>
     {post.data.draft && (
-      <span class='inline-flex w-fit items-center gap-2 rounded-full border-2 border-[#111827] bg-[#fef08a] px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#111827] shadow-[3px_3px_0_0_rgba(17,24,39,0.55)]'>
+      <span
+        class='inline-flex w-fit items-center gap-2 rounded-full border-2 bg-[#fef08a] px-3 py-1 text-xs font-bold uppercase tracking-wide shadow-[3px_3px_0_0_rgba(17,24,39,0.55)]'
+        style='border-color: var(--ink); color: var(--ink);'
+      >
         Draft in progress
       </span>
     )}
