@@ -7,13 +7,13 @@
 }
 
 .card-shadow {
-  box-shadow: 5px 5px 0 rgb(17 24 39 / 1);
+  box-shadow: 4px 4px 0 rgb(17 24 39 / 1);
   transition: box-shadow .2s ease, transform .2s ease;
   transform: translateY(0);
 }
 
 .card-shadow:hover, .card-shadow:active {
-  box-shadow: 3px 3px 0 rgb(17 24 39 / 1);
+  box-shadow: 2px 2px 0 rgb(17 24 39 / 1);
   transform: translateY(-3px);
 }
 
@@ -249,37 +249,4 @@ html {
 
 * {
   -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -webkit-appearance: none;
-}
-
-.ios-touch-fix {
-  -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
-  -webkit-touch-callout: none !important;
-  -webkit-user-select: none !important;
-  tap-highlight-color: rgba(0,0,0,0) !important;
-  touch-action: manipulation !important;
-}
-
-/* iOS Safari specific */
-@supports (-webkit-touch-callout: none) {
-  .ios-touch-fix:active {
-    background-color: #f3ffc2 !important; /* --accent-soft color */
-    transition: none !important;
-  }
-}
-
-/* iOS Safari specific - use box-shadow instead of filter */
-@supports (-webkit-touch-callout: none) {
-  .card-shadow {
-    filter: none !important;
-    box-shadow: 5px 5px 0 rgb(17 24 39 / 1) !important;
-    transition: box-shadow .2s ease, transform .2s ease !important;
-  }
-  
-  .card-shadow:hover, .card-shadow:active {
-    box-shadow: 3px 3px 0 rgb(17 24 39 / 1) !important;
-    transform: translateY(-3px) !important;
-  }
 }
