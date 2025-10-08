@@ -247,3 +247,26 @@ html {
 .fade-in-up {
   animation: fade-in-up 0.5s ease-in-out;
 }
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-appearance: none;
+}
+
+.ios-touch-fix {
+  -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  tap-highlight-color: rgba(0,0,0,0) !important;
+  touch-action: manipulation !important;
+}
+
+/* iOS Safari specific */
+@supports (-webkit-touch-callout: none) {
+  .ios-touch-fix:active {
+    background-color: #f3ffc2 !important; /* --accent-soft color */
+    transition: none !important;
+  }
+}

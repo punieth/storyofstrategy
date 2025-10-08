@@ -61,15 +61,15 @@ const { pageTitle } = Astro.props;
   <nav class='md:hidden flex'>
     <h2 class='hidden'>Mobile Navigation</h2>
     <ul class='flex gap-4 items-center poppins'>
-      <li class='bg-white text-green border-black border-2 rounded card-shadow hover:bg-light-green active:bg-light-green transition-all duration-200'>
-        <a href='/blog/' class='p-1 px-2 block -webkit-tap-highlight-color-transparent touch-manipulation' title='Go to Blog'>Blog</a>
+      <li class='bg-white text-green border-black border-2 rounded card-shadow hover:bg-light-green active:bg-light-green transition-all duration-200 ios-touch-fix'>
+        <a href='/blog/' class='p-1 px-2 block -webkit-tap-highlight-color-transparent touch-manipulation select-none' title='Go to Blog'>Blog</a>
       </li>
       {
         socialIcons.map((item) => (
-          <li class='bg-white text-green border-black border-2 rounded card-shadow hover:bg-light-green active:bg-light-green transition-all duration-200'>
+          <li class='bg-white text-green border-black border-2 rounded card-shadow hover:bg-light-green active:bg-light-green transition-all duration-200 ios-touch-fix'>
             <a
               href={item.url}
-              class='p-1 block -webkit-tap-highlight-color-transparent touch-manipulation'
+              class='p-1 block -webkit-tap-highlight-color-transparent touch-manipulation select-none'
               target='_blank'
               title={`See @ElianCodes on ${item.name}`}
             >
