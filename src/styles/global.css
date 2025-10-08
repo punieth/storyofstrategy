@@ -11,6 +11,7 @@
 .card-shadow:hover {
   filter: drop-shadow(3px 3px 0 rgb(17 24 39 / 1));
   transform: translateY(-3px);
+  
 }
 
 :root {
@@ -220,7 +221,7 @@ html {
   border-right: none;
 }
 
-:::selection {
+::selection {
   background-color: aliceblue;
 }
 
