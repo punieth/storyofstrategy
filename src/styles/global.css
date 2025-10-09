@@ -7,13 +7,13 @@
 }
 
 .card-shadow {
-  box-shadow: 4px 4px 0 rgb(17 24 39 / 1);
-  transition: box-shadow .15s ease, transform .15s ease;
+  filter: drop-shadow(4px 4px 0 rgb(17 24 39 / 1));
+  transition: filter .15s ease, transform .15s ease;
   transform: translateY(0);
 }
 
 .card-shadow:hover, .card-shadow:active {
-  box-shadow: 2px 2px 0 rgb(17 24 39 / 1);
+  filter: drop-shadow(2px 2px 0 rgb(17 24 39 / 1));
   transform: translateY(-3px);
 }
 
@@ -245,31 +245,4 @@ html {
 
 .fade-in-up {
   animation: fade-in-up 0.5s ease-in-out;
-}
-
-/* iOS Safari specific - use box-shadow instead of filter */
-/* iOS Safari specific - force box-shadow over any filter */
-@supports (-webkit-touch-callout: none) {
-  .card-shadow {
-    filter: none !important;
-    box-shadow: 4px 4px 0 rgb(17 24 39 / 1) !important;
-    transition: box-shadow .15s ease, transform .15s ease !important;
-  }
-  
-  .card-shadow:hover, .card-shadow:active {
-    filter: none !important;
-    box-shadow: 2px 2px 0 rgb(17 24 39 / 1) !important;
-    transform: translateY(-3px) !important;
-  }
-}
-
-/* Mobile-specific override to ensure no filter shadows */
-@media (max-width: 768px) {
-  .card-shadow {
-    filter: none !important;
-  }
-  
-  .card-shadow:hover, .card-shadow:active {
-    filter: none !important;
-  }
 }
