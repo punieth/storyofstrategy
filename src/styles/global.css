@@ -247,6 +247,29 @@ html {
   animation: fade-in-up 0.5s ease-in-out;
 }
 
-* {
-  -webkit-tap-highlight-color: transparent;
+/* iOS Safari specific - use box-shadow instead of filter */
+/* iOS Safari specific - force box-shadow over any filter */
+@supports (-webkit-touch-callout: none) {
+  .card-shadow {
+    filter: none !important;
+    box-shadow: 4px 4px 0 rgb(17 24 39 / 1) !important;
+    transition: box-shadow .15s ease, transform .15s ease !important;
+  }
+  
+  .card-shadow:hover, .card-shadow:active {
+    filter: none !important;
+    box-shadow: 2px 2px 0 rgb(17 24 39 / 1) !important;
+    transform: translateY(-3px) !important;
+  }
+}
+
+/* Mobile-specific override to ensure no filter shadows */
+@media (max-width: 768px) {
+  .card-shadow {
+    filter: none !important;
+  }
+  
+  .card-shadow:hover, .card-shadow:active {
+    filter: none !important;
+  }
 }
