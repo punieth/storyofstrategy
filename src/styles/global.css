@@ -250,13 +250,13 @@ html {
 @supports (-webkit-touch-callout: none) {
   .card-shadow {
     filter: none !important;
-    /* box-shadow: 4px 4px 0 rgb(17 24 39 / 1) !important; */
-    /* transition: box-shadow .15s ease, transform .15s ease !important; */
+    box-shadow: 4px 4px 0 rgb(17 24 39 / 1) !important;
+    transition: box-shadow .1s ease, transform .1s ease !important;
   }
   
   .card-shadow:hover, .card-shadow:active {
     filter: none !important;
-    /* box-shadow: 2px 2px 0 rgb(17 24 39 / 1) !important; */
-    /* transform: translateY(-3px) !important; */
+    box-shadow: 2px 2px 0 rgb(17 24 39 / 1) !important;
+    transform: translateY(-3px) !important;
   }
 }
