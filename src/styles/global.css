@@ -261,37 +261,42 @@ html {
   }
 }
 
-/* Simple mobile scrolling fix */
+/* Smooth bounce scrolling fix for iOS */
 @supports (-webkit-touch-callout: none) {
-  /* Fix sticky header behavior on mobile */
-  header[class*="sticky"] {
-    /* Prevent flickering by using hardware acceleration */
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-    /* Ensure smooth rendering */
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-  }
-  
-  /* Allow natural iOS scrolling behavior */
+  /* Enable natural iOS bounce behavior */
   body {
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: auto; /* Allow bounce */
+  }
+  
+  /* Fix header during overscroll bounce */
+  header[class*="sticky"] {
+    /* Remove conflicting hardware acceleration */
+    -webkit-transform: none;
+    transform: none;
+    -webkit-backface-visibility: visible;
+    backface-visibility: visible;
+    
+    /* Prevent layout shifts during bounce */
+    will-change: auto;
+    
+    /* Ensure proper stacking during overscroll */
+    z-index: 50;
   }
 }
 
-/* Alternative: if the sticky header is still causing issues, try this instead */
-@media (max-width: 768px) {
-  /* Use fixed positioning instead of sticky on mobile */
-  header[class*="sticky"] {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    z-index: 50 !important;
+/* Alternative approach: disable sticky during overscroll */
+@supports (-webkit-touch-callout: none) {
+  /* When overscrolling, temporarily disable sticky behavior */
+  body:not(:active) header[class*="sticky"] {
+    /* Let header scroll naturally during bounce */
+    position: relative;
+    top: auto;
   }
   
-  /* Add padding to body to account for fixed header */
-  body {
-    padding-top: 80px; /* Adjust this value based on your header height */
+  /* Re-enable sticky when scrolling normally */
+  body:active header[class*="sticky"] {
+    position: sticky;
+    top: 0;
   }
 }
