@@ -261,61 +261,43 @@ html {
   }
 }
 
-/* Replace the current mobile scrolling fixes with this: */
-
-/* iOS Safari fullscreen viewport height handling */
-@supports (-webkit-touch-callout: none) {
-  /* Use dynamic viewport height for fullscreen iOS Safari */
-  html, body {
-    min-height: 100vh;
-    min-height: 100dvh; /* Dynamic viewport height */
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  /* Handle fullscreen bounce scrolling */
-  body {
-    overscroll-behavior-y: auto; /* Allow bounce */
-    overflow-x: hidden;
-  }
-  
-  /* Fix sticky header in fullscreen mode */
-  @media (max-width: 768px) {
-    header[class*="sticky"] {
-      /* Use fixed positioning in fullscreen to prevent conflicts */
-      position: fixed !important;
-      top: 0 !important;
-      left: 0 !important;
-      right: 0 !important;
-      z-index: 50 !important;
-      
-      /* Prevent hardware acceleration conflicts */
-      -webkit-transform: none !important;
-      transform: none !important;
-      -webkit-backface-visibility: visible !important;
-      backface-visibility: visible !important;
-    }
-    
-    /* Add padding to body for fixed header */
-    body {
-      padding-top: 80px; /* Adjust based on your header height */
-    }
-    
-    /* Ensure main content scrolls properly */
-    main {
-      /* Reset min-height for fixed header layout */
-      min-height: auto;
-    }
-  }
-}
-
-/* Alternative: complete sticky header removal for mobile */
+/* Simple solution: remove sticky header on mobile entirely */
 @media (max-width: 768px) {
   header[class*="sticky"] {
     position: relative !important;
     top: auto !important;
   }
   
+  /* Remove any body padding that was added for sticky header */
   body {
     padding-top: 0 !important;
+  }
+  
+  /* Ensure smooth scrolling on mobile */
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Alternative: if you want to keep the header visible, try this */
+@media (max-width: 768px) {
+  header[class*="sticky"] {
+    /* Use fixed positioning instead of sticky */
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 100 !important;
+    
+    /* Remove all conflicting styles */
+    transform: none !important;
+    -webkit-transform: none !important;
+    will-change: auto !important;
+    -webkit-backface-visibility: visible !important;
+    backface-visibility: visible !important;
+  }
+  
+  body {
+    padding-top: 80px !important; /* Adjust based on header height */
   }
 }
