@@ -261,42 +261,32 @@ html {
   }
 }
 
-/* Smooth bounce scrolling fix for iOS */
+/* Targeted fix for end-of-page bounce flickering */
 @supports (-webkit-touch-callout: none) {
-  /* Enable natural iOS bounce behavior */
-  body {
+  /* Enable smooth momentum scrolling */
+  html, body {
     -webkit-overflow-scrolling: touch;
-    overscroll-behavior-y: auto; /* Allow bounce */
   }
   
-  /* Fix header during overscroll bounce */
-  header[class*="sticky"] {
-    /* Remove conflicting hardware acceleration */
-    -webkit-transform: none;
-    transform: none;
-    -webkit-backface-visibility: visible;
-    backface-visibility: visible;
-    
-    /* Prevent layout shifts during bounce */
+  /* Allow natural bounce but prevent layout issues */
+  body {
+    overscroll-behavior-y: contain;
+    overflow-x: hidden;
+  }
+  
+  /* Fix content area behavior at end of page */
+  main {
+    /* Prevent content shifts during overscroll */
+    contain: layout style;
+    /* Ensure proper content flow */
+    min-height: calc(100vh - 80px); /* Adjust 80px to match header height */
+  }
+  
+  /* Ensure header doesn't interfere with bounce */
+  header {
+    /* Remove any conflicting styles */
     will-change: auto;
-    
-    /* Ensure proper stacking during overscroll */
-    z-index: 50;
-  }
-}
-
-/* Alternative approach: disable sticky during overscroll */
-@supports (-webkit-touch-callout: none) {
-  /* When overscrolling, temporarily disable sticky behavior */
-  body:not(:active) header[class*="sticky"] {
-    /* Let header scroll naturally during bounce */
-    position: relative;
-    top: auto;
-  }
-  
-  /* Re-enable sticky when scrolling normally */
-  body:active header[class*="sticky"] {
-    position: sticky;
-    top: 0;
+    transform: none;
+    -webkit-transform: none;
   }
 }
