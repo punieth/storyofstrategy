@@ -260,3 +260,42 @@ html {
     transform: translateY(-3px) !important;
   }
 }
+
+/* Mobile viewport and scrolling fixes */
+@supports (-webkit-touch-callout: none) {
+  /* Prevent viewport height changes on mobile */
+  html, body {
+    height: 100%;
+    min-height: -webkit-fill-available;
+  }
+  
+  /* Disable smooth scrolling on mobile to prevent flickering */
+  html {
+    scroll-behavior: auto !important;
+  }
+  
+  /* Prevent overscroll bouncing that can cause flickering */
+  body {
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Ensure main content doesn't cause layout shifts */
+  main {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+  }
+}
+
+/* Additional mobile fixes for iOS Safari */
+@supports (-webkit-appearance: none) {
+  html {
+    /* Prevent zoom on input focus */
+    -webkit-text-size-adjust: 100%;
+  }
+  
+  /* Improve touch responsiveness */
+  * {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
+}
