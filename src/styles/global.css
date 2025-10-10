@@ -261,41 +261,37 @@ html {
   }
 }
 
-/* Mobile viewport and scrolling fixes */
+/* Simple mobile scrolling fix */
 @supports (-webkit-touch-callout: none) {
-  /* Prevent viewport height changes on mobile */
-  html, body {
-    height: 100%;
-    min-height: -webkit-fill-available;
+  /* Fix sticky header behavior on mobile */
+  header[class*="sticky"] {
+    /* Prevent flickering by using hardware acceleration */
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    /* Ensure smooth rendering */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
   }
   
-  /* Disable smooth scrolling on mobile to prevent flickering */
-  html {
-    scroll-behavior: auto !important;
-  }
-  
-  /* Prevent overscroll bouncing that can cause flickering */
+  /* Allow natural iOS scrolling behavior */
   body {
-    overscroll-behavior: none;
     -webkit-overflow-scrolling: touch;
-  }
-  
-  /* Ensure main content doesn't cause layout shifts */
-  main {
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
   }
 }
 
-/* Additional mobile fixes for iOS Safari */
-@supports (-webkit-appearance: none) {
-  html {
-    /* Prevent zoom on input focus */
-    -webkit-text-size-adjust: 100%;
+/* Alternative: if the sticky header is still causing issues, try this instead */
+@media (max-width: 768px) {
+  /* Use fixed positioning instead of sticky on mobile */
+  header[class*="sticky"] {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 50 !important;
   }
   
-  /* Improve touch responsiveness */
-  * {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  /* Add padding to body to account for fixed header */
+  body {
+    padding-top: 80px; /* Adjust this value based on your header height */
   }
 }
