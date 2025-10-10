@@ -1,7 +1,10 @@
 ---
 interface Props {
-    tone?: "red" | "orange" | "yellow" | "blue" | "black";
+    tone?: "red" | "orange" | "yellow" | "blue" | "black" | "green" | "purple" | "pink" | "gray" | "cyan";
     color?: string;
+    textColor?: string;
+    borderColor?: string;
+    shadowColor?: string;
     class?: string;
     [key: string]: any;
 }
@@ -13,6 +16,7 @@ interface PaletteEntry {
     shadow: string;
 }
 
+// Enhanced palette with expanded neobrutalist colors
 const palette: Record<NonNullable<Props["tone"]>, PaletteEntry> = {
     red: {
         bg: "#ff6b6b",
@@ -44,19 +48,80 @@ const palette: Record<NonNullable<Props["tone"]>, PaletteEntry> = {
         border: "#05070a",
         shadow: "#ffef5c",
     },
+    green: {
+        bg: "#10b981",
+        text: "#111827",
+        border: "#111827",
+        shadow: "#111827",
+    },
+    purple: {
+        bg: "#8b5cf6",
+        text: "#ffffff",
+        border: "#6d28d9",
+        shadow: "#6d28d9",
+    },
+    pink: {
+        bg: "#ec4899",
+        text: "#ffffff",
+        border: "#be185d",
+        shadow: "#be185d",
+    },
+    gray: {
+        bg: "#6b7280",
+        text: "#ffffff",
+        border: "#374151",
+        shadow: "#374151",
+    },
+    cyan: {
+        bg: "#06b6d4",
+        text: "#ffffff",
+        border: "#0891b2",
+        shadow: "#0891b2",
+    },
 };
+
+// Helper function to determine if color is light or dark
+function isLightColor(hexColor: string): boolean {
+    const hex = hexColor.replace('#', '');
+    const r = parseInt(hex.substr(0, 2), 16);
+    const g = parseInt(hex.substr(2, 2), 16);
+    const b = parseInt(hex.substr(4, 2), 16);
+    const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+    return brightness > 128;
+}
+
+// Helper function to darken a color
+function darkenColor(hexColor: string, percent: number): string {
+    const hex = hexColor.replace('#', '');
+    const r = Math.max(0, parseInt(hex.substr(0, 2), 16) * (1 - percent / 100));
+    const g = Math.max(0, parseInt(hex.substr(2, 2), 16) * (1 - percent / 100));
+    const b = Math.max(0, parseInt(hex.substr(4, 2), 16) * (1 - percent / 100));
+    return `#${Math.round(r).toString(16).padStart(2, '0')}${Math.round(g).toString(16).padStart(2, '0')}${Math.round(b).toString(16).padStart(2, '0')}`;
+}
 
 const {
     tone = "red",
     color,
+    textColor: customTextColor,
+    borderColor: customBorderColor,
+    shadowColor: customShadowColor,
     class: className = "",
     ...rest
 } = Astro.props as Props;
 
-const { bg: toneBg, text: textColor, border: borderColor, shadow: shadowColor } =
-    palette[tone];
+const { bg: toneBg, text: toneText, border: toneBorder, shadow: toneShadow } = palette[tone];
 
-const bg = (color ?? toneBg).toLowerCase();
+// Determine final colors
+const bg = color ? color.toLowerCase() : toneBg;
+
+// Auto-determine text color if not provided
+const textColor = customTextColor ?? (color ? (isLightColor(color) ? '#111827' : '#ffffff') : toneText);
+
+// Auto-determine border color if not provided
+const borderColor = customBorderColor ?? (color ? darkenColor(color, 20) : toneBorder);
+
+// Auto-determine shadow color if not provided
+const shadowColor = customShadowColor ?? (color ? darkenColor(color, 40) : toneShadow);
 ---
 
 <style define:vars={{ bg, borderColor, shadowColor, textColor }}>
