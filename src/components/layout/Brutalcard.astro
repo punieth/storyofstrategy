@@ -132,13 +132,29 @@ const shadowColor = customShadowColor ?? (color ? darkenColor(color, 40) : toneS
         border-radius: 0.5rem;
         border: 2px solid var(--borderColor);
         filter: drop-shadow(4px 4px 0 var(--shadowColor));
-        transition: filter 0.2s ease, transform 0.2s ease;
+        box-shadow: none; /* Default to no box-shadow */
+        transition: filter 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
         transform: translateY(0);
         padding: clamp(1.25rem, 1.5vw + 1rem, 1.75rem);
     }
+
     .brutal-card:hover {
         filter: drop-shadow(2px 2px 0 var(--shadowColor));
         transform: translateY(-2px);
+    }
+
+    /* iOS stability: use box-shadow instead of filter */
+    @supports (-webkit-touch-callout: none) {
+        .brutal-card {
+            filter: none;
+            box-shadow: 4px 4px 0 var(--shadowColor);
+            -webkit-transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+        .brutal-card:hover {
+            filter: none;
+            box-shadow: 2px 2px 0 var(--shadowColor);
+        }
     }
 
     .brutal-card.is-subtle {
@@ -161,7 +177,6 @@ const shadowColor = customShadowColor ?? (color ? darkenColor(color, 40) : toneS
         .brutal-card {
             -webkit-transform: translateZ(0);
             backface-visibility: hidden;
-            will-change: filter;
         }
     }
 </style>
