@@ -108,27 +108,39 @@ const { pageTitle } = Astro.props;
 
 <script>
   if (typeof window !== "undefined") {
-    const body = document.body;
-    if (body && body.classList.contains("blog-post-layout")) {
-      const header = document.querySelector("[data-site-header]");
-      if (header) {
-        let lastScroll = window.scrollY;
-        const threshold = 10;
-
-        const handleScroll = () => {
-          const currentScroll = window.scrollY;
-
-          if (currentScroll > lastScroll + threshold && currentScroll > header.getBoundingClientRect().height) {
-            header.classList.add("is-hidden");
-          } else if (currentScroll < lastScroll - threshold) {
-            header.classList.remove("is-hidden");
-          }
-
-          lastScroll = currentScroll;
-        };
-
-        window.addEventListener("scroll", handleScroll, { passive: true });
+    const initHeaderScroll = () => {
+      const body = document.body;
+      if (!body || !body.classList.contains("blog-post-layout")) {
+        return;
       }
+
+      const header = document.querySelector("[data-site-header]");
+      if (!header) {
+        return;
+      }
+
+      let lastScroll = window.scrollY;
+      const headerHeight = header.getBoundingClientRect().height;
+
+      const handleScroll = () => {
+        const currentScroll = window.scrollY;
+
+        if (currentScroll > headerHeight && currentScroll > lastScroll) {
+          header.classList.add("is-hidden");
+        } else if (currentScroll < lastScroll) {
+          header.classList.remove("is-hidden");
+        }
+
+        lastScroll = currentScroll;
+      };
+
+      window.addEventListener("scroll", handleScroll, { passive: true });
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initHeaderScroll, { once: true });
+    } else {
+      initHeaderScroll();
     }
   }
 </script>

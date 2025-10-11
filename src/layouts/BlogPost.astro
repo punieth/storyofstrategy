@@ -16,7 +16,7 @@ const { author, pubDate, headings, description, title } = Astro.props;
 ---
 
 <Layout title={title} description={description} ogImage={ogImage} classList="bg-[#f4ffe6] blog-post-layout">
-  <main class="px-4 sm:px-6 pt-28 pb-10 sm:pt-32 sm:pb-12 md:pt-36 md:pb-16 mx-auto w-full max-w-[90rem]">
+  <main class="px-4 sm:px-6 pt-20 pb-10 sm:pt-24 sm:pb-12 md:pt-28 md:pb-16 mx-auto w-full max-w-[90rem]">
     <BlogPostLayout {pubDate} {author} {title}>
       <slot />
     </BlogPostLayout>
