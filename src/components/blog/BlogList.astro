@@ -13,7 +13,7 @@ const { posts } = Astro.props;
   {
     posts.map((post) => {
       return (
-        <li class='list-none h-full'>
+        <li class='list-none'>
           <BlogSummaryCard post={post} />
         </li>
       );
