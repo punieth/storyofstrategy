@@ -106,8 +106,12 @@ const { pageTitle } = Astro.props;
   </nav>
 </header>
 
-<script>
-  if (typeof window !== "undefined") {
+<script is:inline>
+  (() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
     const initHeaderScroll = () => {
       const body = document.body;
       if (!body || !body.classList.contains("blog-post-layout")) {
@@ -121,13 +125,21 @@ const { pageTitle } = Astro.props;
 
       let lastScroll = window.scrollY;
       const headerHeight = header.getBoundingClientRect().height;
+      const threshold = 8;
 
       const handleScroll = () => {
-        const currentScroll = window.scrollY;
+        if (window.matchMedia("(min-width: 768px)").matches) {
+          header.classList.remove("is-hidden");
+          lastScroll = window.scrollY;
+          return;
+        }
 
-        if (currentScroll > headerHeight && currentScroll > lastScroll) {
+        const currentScroll = window.scrollY;
+        const delta = currentScroll - lastScroll;
+
+        if (currentScroll > headerHeight && delta > threshold) {
           header.classList.add("is-hidden");
-        } else if (currentScroll < lastScroll) {
+        } else if (delta < -threshold || currentScroll <= headerHeight) {
           header.classList.remove("is-hidden");
         }
 
@@ -135,6 +147,15 @@ const { pageTitle } = Astro.props;
       };
 
       window.addEventListener("scroll", handleScroll, { passive: true });
+      window.addEventListener(
+        "resize",
+        () => {
+          if (window.matchMedia("(min-width: 768px)").matches) {
+            header.classList.remove("is-hidden");
+          }
+        },
+        { passive: true }
+      );
     };
 
     if (document.readyState === "loading") {
@@ -142,5 +163,5 @@ const { pageTitle } = Astro.props;
     } else {
       initHeaderScroll();
     }
-  }
+  })();
 </script>
