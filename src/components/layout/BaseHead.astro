@@ -49,7 +49,7 @@ const { title, description, ogImage } = Astro.props;
 
   <title>Story Of Strategy | {title}</title>
 
-  <ViewTransitions />
+  <ViewTransitions fallback="swap" />
 
   <slot />
 </head>
