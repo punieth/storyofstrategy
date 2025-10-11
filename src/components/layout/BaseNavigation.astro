@@ -111,26 +111,24 @@ const { pageTitle } = Astro.props;
     const body = document.body;
     if (body && body.classList.contains("blog-post-layout")) {
       const header = document.querySelector("[data-site-header]");
-      if (!header) {
-        return;
+      if (header) {
+        let lastScroll = window.scrollY;
+        const threshold = 10;
+
+        const handleScroll = () => {
+          const currentScroll = window.scrollY;
+
+          if (currentScroll > lastScroll + threshold && currentScroll > header.getBoundingClientRect().height) {
+            header.classList.add("is-hidden");
+          } else if (currentScroll < lastScroll - threshold) {
+            header.classList.remove("is-hidden");
+          }
+
+          lastScroll = currentScroll;
+        };
+
+        window.addEventListener("scroll", handleScroll, { passive: true });
       }
-
-      let lastScroll = window.scrollY;
-      const threshold = 10;
-
-      const handleScroll = () => {
-        const currentScroll = window.scrollY;
-
-        if (currentScroll > lastScroll + threshold && currentScroll > header.getBoundingClientRect().height) {
-          header.classList.add("is-hidden");
-        } else if (currentScroll < lastScroll - threshold) {
-          header.classList.remove("is-hidden");
-        }
-
-        lastScroll = currentScroll;
-      };
-
-      window.addEventListener("scroll", handleScroll, { passive: true });
     }
   }
 </script>
