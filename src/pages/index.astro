@@ -13,7 +13,7 @@ const featured = {
   description="Portfolio of an engineer-turned-product-builder focused on clarity, first principles, and India’s next wave."
 >
   <main
-    class="bg-[#f8ffe3] flex-grow border-b-[12px] border-[#111827] px-5 py-8 md:px-10 md:py-12"
+    class="page-surface flex-grow border-b-[12px] border-frame px-5 py-8 md:px-10 md:py-12"
   >
     {/* Accessibility+SEO: put a real H1 once per page */}
     <h1 class="sr-only">
@@ -27,23 +27,23 @@ const featured = {
       >
         {/* Card 1 — Hero */}
         <div class="col-span-5 flex">
-          <BrutalCard tone="red" class="h-full">
+          <BrutalCard tone="hero" class="h-full">
             <div class="flex h-full flex-col justify-between gap-5">
               <blockquote class="outfit text-2xl leading-tight md:text-5xl lg:text-6xl">
-                “Making a <span class="bg-[#111827] px-2 text-[#f9fafc]">simple</span>
+                “Making a <span class="inline-chip">simple</span>
                 thing is never simple.”
               </blockquote>
               <p class="outfit text-xl md:text-3xl lg:text-4xl">
                 I care about turning complexity into clarity.
               </p>
-              <a href="/blog/blogpost-2/" class="btn">Read the case study →</a>
+              <a href="/blog/blogpost-2/" class="btn btn--sun">Read the case study →</a>
             </div>
           </BrutalCard>
         </div>
 
         {/* Card 2 — About (transition) */}
         <div class="col-span-3 flex">
-          <BrutalCard tone="orange" class="flex h-full flex-col">
+          <BrutalCard tone="bridge" class="flex h-full flex-col">
             <h2 class="dm-serif text-2xl md:text-4xl lg:text-5xl">
               I bridge engineering and product.
             </h2>
@@ -59,7 +59,7 @@ const featured = {
 
         {/* Card 3 — Philosophy */}
         <div class="col-span-3 flex">
-          <BrutalCard tone="yellow" class="flex h-full flex-col">
+          <BrutalCard tone="principles" class="flex h-full flex-col">
             <h2 class="dm-serif text-2xl md:text-4xl lg:text-5xl">
               Clarity over complexity.
             </h2>
@@ -74,7 +74,7 @@ const featured = {
 
         {/* Card 4 — Vision */}
         <div class="col-span-5 flex">
-          <BrutalCard tone="blue" class="flex h-full flex-col">
+          <BrutalCard tone="vision" class="flex h-full flex-col">
             <h2 class="dm-serif text-2xl md:text-4xl lg:text-5xl">
               Shaping India’s next wave.
             </h2>
@@ -89,7 +89,7 @@ const featured = {
 
       {/* Featured Case Study — adds substance above the fold */}
       <section id="featured" class="space-y-6">
-        <BrutalCard tone="cyan">
+        <BrutalCard tone="case">
           <div class="grid items-start gap-6 md:grid-cols-8">
             <div class="space-y-4 md:col-span-5">
               <h2 class="dm-serif text-2xl md:text-4xl">Featured case study</h2>
@@ -98,7 +98,7 @@ const featured = {
               </h3>
 
               <div class="grid gap-4 md:grid-cols-3">
-                <BrutalCard tone="green" class="is-subtle flex h-full flex-col">
+                <BrutalCard tone="case-note" class="is-subtle flex h-full flex-col">
                   <div class="font-bold uppercase text-sm tracking-wide">
                     Problem
                   </div>
@@ -107,7 +107,7 @@ const featured = {
                     trust.
                   </p>
                 </BrutalCard>
-                <BrutalCard tone="green" class="is-subtle flex h-full flex-col">
+                <BrutalCard tone="case-note" class="is-subtle flex h-full flex-col">
                   <div class="font-bold uppercase text-sm tracking-wide">
                     Approach
                   </div>
@@ -116,7 +116,7 @@ const featured = {
                     first-principles system mapping.
                   </p>
                 </BrutalCard>
-                <BrutalCard tone="green" class="is-subtle flex h-full flex-col">
+                <BrutalCard tone="case-note" class="is-subtle flex h-full flex-col">
                   <div class="font-bold uppercase text-sm tracking-wide">
                     Potential impact
                   </div>
@@ -130,7 +130,7 @@ const featured = {
 
             <div class="md:col-span-3 flex md:justify-end">
               <div class="flex w-full flex-col gap-3 md:w-auto">
-                <a href="/blog/blogpost-2/" class="btn">Read the case study →</a>
+                <a href="/blog/blogpost-2/" class="btn btn--sun">Read the case study →</a>
                 <a href="/blog/" class="btn btn--ghost">Browse all posts →</a>
               </div>
             </div>
@@ -139,10 +139,10 @@ const featured = {
       </section>
 
       <section id="about-me" class="space-y-6">
-        <BrutalCard tone="yellow">
+        <BrutalCard tone="profile">
           <h2 class="dm-serif text-2xl md:text-4xl mb-6">About Me</h2>
           <div class="grid gap-4 md:grid-cols-3">
-            <BrutalCard tone="blue" class="is-subtle flex h-full flex-col">
+            <BrutalCard tone="profile-engineer" class="is-subtle flex h-full flex-col">
               <div class="kicker kicker-invert">Engineer</div>
               <p class="poppins text-sm leading-relaxed">
                 7 years as a full-stack builder. Shipped trading apps in 3 months
@@ -150,7 +150,7 @@ const featured = {
               </p>
             </BrutalCard>
 
-            <BrutalCard tone="orange" class="is-subtle flex h-full flex-col">
+            <BrutalCard tone="profile-builder" class="is-subtle flex h-full flex-col">
               <div class="kicker kicker-invert">Builder</div>
               <p class="poppins text-sm leading-relaxed">
                 I question defaults, strip waste, and prove small focused teams
@@ -158,7 +158,7 @@ const featured = {
               </p>
             </BrutalCard>
 
-            <BrutalCard tone="red" class="is-subtle flex h-full flex-col">
+            <BrutalCard tone="profile-next" class="is-subtle flex h-full flex-col">
               <div class="kicker kicker-invert">Next Wave</div>
               <p class="poppins text-sm leading-relaxed">
                 Moving into product management. Systems thinking and

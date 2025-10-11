@@ -1,6 +1,28 @@
 ---
 interface Props {
-    tone?: "red" | "orange" | "yellow" | "blue" | "black" | "green" | "purple" | "pink" | "gray" | "cyan";
+    tone?:
+        | "hero"
+        | "bridge"
+        | "principles"
+        | "vision"
+        | "case"
+        | "case-note"
+        | "profile"
+        | "profile-note"
+        | "profile-engineer"
+        | "profile-builder"
+        | "profile-next"
+        | "neutral"
+        | "red"
+        | "orange"
+        | "yellow"
+        | "blue"
+        | "cyan"
+        | "green"
+        | "black"
+        | "gray"
+        | "purple"
+        | "pink";
     color?: string;
     textColor?: string;
     borderColor?: string;
@@ -16,67 +38,138 @@ interface PaletteEntry {
     shadow: string;
 }
 
-// Enhanced palette with expanded neobrutalist colors
 const palette: Record<NonNullable<Props["tone"]>, PaletteEntry> = {
+    hero: {
+        bg: "var(--tone-hero-bg)",
+        text: "var(--tone-hero-text)",
+        border: "var(--tone-hero-border)",
+        shadow: "var(--tone-hero-shadow)",
+    },
+    bridge: {
+        bg: "var(--tone-bridge-bg)",
+        text: "var(--tone-bridge-text)",
+        border: "var(--tone-bridge-border)",
+        shadow: "var(--tone-bridge-shadow)",
+    },
+    principles: {
+        bg: "var(--tone-principles-bg)",
+        text: "var(--tone-principles-text)",
+        border: "var(--tone-principles-border)",
+        shadow: "var(--tone-principles-shadow)",
+    },
+    vision: {
+        bg: "var(--tone-vision-bg)",
+        text: "var(--tone-vision-text)",
+        border: "var(--tone-vision-border)",
+        shadow: "var(--tone-vision-shadow)",
+    },
+    case: {
+        bg: "var(--tone-case-bg)",
+        text: "var(--tone-case-text)",
+        border: "var(--tone-case-border)",
+        shadow: "var(--tone-case-shadow)",
+    },
+    "case-note": {
+        bg: "var(--tone-case-sub-bg)",
+        text: "var(--tone-case-sub-text)",
+        border: "var(--tone-case-sub-border)",
+        shadow: "var(--tone-case-sub-shadow)",
+    },
+    profile: {
+        bg: "var(--tone-profile-bg)",
+        text: "var(--tone-profile-text)",
+        border: "var(--tone-profile-border)",
+        shadow: "var(--tone-profile-shadow)",
+    },
+    "profile-note": {
+        bg: "var(--tone-profile-engineer-bg)",
+        text: "var(--tone-profile-engineer-text)",
+        border: "var(--tone-profile-engineer-border)",
+        shadow: "var(--tone-profile-engineer-shadow)",
+    },
+    "profile-engineer": {
+        bg: "var(--tone-profile-engineer-bg)",
+        text: "var(--tone-profile-engineer-text)",
+        border: "var(--tone-profile-engineer-border)",
+        shadow: "var(--tone-profile-engineer-shadow)",
+    },
+    "profile-builder": {
+        bg: "var(--tone-profile-builder-bg)",
+        text: "var(--tone-profile-builder-text)",
+        border: "var(--tone-profile-builder-border)",
+        shadow: "var(--tone-profile-builder-shadow)",
+    },
+    "profile-next": {
+        bg: "var(--tone-profile-next-bg)",
+        text: "var(--tone-profile-next-text)",
+        border: "var(--tone-profile-next-border)",
+        shadow: "var(--tone-profile-next-shadow)",
+    },
+    neutral: {
+        bg: "var(--tone-neutral-bg)",
+        text: "var(--tone-neutral-text)",
+        border: "var(--tone-neutral-border)",
+        shadow: "var(--tone-neutral-shadow)",
+    },
     red: {
-        bg: "#ff6b6b",
-        text: "#111827",
-        border: "#111827",
-        shadow: "#111827",
+        bg: "var(--tone-hero-bg)",
+        text: "var(--tone-hero-text)",
+        border: "var(--tone-hero-border)",
+        shadow: "var(--tone-hero-shadow)",
     },
     orange: {
-        bg: "#ffa94d",
-        text: "#111827",
-        border: "#111827",
-        shadow: "#111827",
+        bg: "var(--tone-bridge-bg)",
+        text: "var(--tone-bridge-text)",
+        border: "var(--tone-bridge-border)",
+        shadow: "var(--tone-bridge-shadow)",
     },
     yellow: {
-        bg: "#ffef5c",
-        text: "#111827",
-        border: "#111827",
-        shadow: "#111827",
+        bg: "var(--tone-principles-bg)",
+        text: "var(--tone-principles-text)",
+        border: "var(--tone-principles-border)",
+        shadow: "var(--tone-principles-shadow)",
     },
     blue: {
-        bg: "#5fb5ff",
-        text: "#0f172a",
-        border: "#0f172a",
-        shadow: "#0f172a",
-    },
-    black: {
-        bg: "#111827",
-        text: "#f9fafc",
-        border: "#05070a",
-        shadow: "#ffef5c",
-    },
-    green: {
-        bg: "#00ff00",
-        text: "#000000",
-        border: "#000000",
-        shadow: "#000000",
-    },
-    purple: {
-        bg: "#8b5cf6",
-        text: "#ffffff",
-        border: "#6d28d9",
-        shadow: "#6d28d9",
-    },
-    pink: {
-        bg: "#ec4899",
-        text: "#ffffff",
-        border: "#be185d",
-        shadow: "#be185d",
-    },
-    gray: {
-        bg: "#ff0080",
-        text: "#ffffff",
-        border: "#cc0066",
-        shadow: "#cc0066",
+        bg: "var(--tone-vision-bg)",
+        text: "var(--tone-vision-text)",
+        border: "var(--tone-vision-border)",
+        shadow: "var(--tone-vision-shadow)",
     },
     cyan: {
-        bg: "#00ffff",
-        text: "#000000",
-        border: "#000000",
-        shadow: "#000000",
+        bg: "var(--tone-case-bg)",
+        text: "var(--tone-case-text)",
+        border: "var(--tone-case-border)",
+        shadow: "var(--tone-case-shadow)",
+    },
+    green: {
+        bg: "var(--tone-case-sub-bg)",
+        text: "var(--tone-case-sub-text)",
+        border: "var(--tone-case-sub-border)",
+        shadow: "var(--tone-case-sub-shadow)",
+    },
+    black: {
+        bg: "var(--tone-profile-bg)",
+        text: "var(--tone-profile-text)",
+        border: "var(--tone-profile-border)",
+        shadow: "var(--tone-profile-shadow)",
+    },
+    gray: {
+        bg: "var(--tone-neutral-bg)",
+        text: "var(--tone-neutral-text)",
+        border: "var(--tone-neutral-border)",
+        shadow: "var(--tone-neutral-shadow)",
+    },
+    purple: {
+        bg: "var(--tone-profile-next-bg)",
+        text: "var(--tone-profile-next-text)",
+        border: "var(--tone-profile-next-border)",
+        shadow: "var(--tone-profile-next-shadow)",
+    },
+    pink: {
+        bg: "var(--tone-profile-builder-bg)",
+        text: "var(--tone-profile-builder-text)",
+        border: "var(--tone-profile-builder-border)",
+        shadow: "var(--tone-profile-builder-shadow)",
     },
 };
 
@@ -100,7 +193,7 @@ function darkenColor(hexColor: string, percent: number): string {
 }
 
 const {
-    tone = "red",
+    tone = "hero",
     color,
     textColor: customTextColor,
     borderColor: customBorderColor,
