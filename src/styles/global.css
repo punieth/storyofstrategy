@@ -101,6 +101,80 @@
   --ink: var(--ink-strong);
 }
 
+body {
+  font-family: "Outfit", sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink-strong);
+}
+
+.brutal-headline {
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  color: inherit;
+}
+
+.brutal-headline-strong {
+  font-family: "Outfit", sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  text-transform: none;
+  color: inherit;
+}
+
+.brutal-title {
+  font-family: "Outfit", sans-serif;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: clamp(1.125rem, 1.6vw + 1rem, 1.625rem);
+  text-shadow: 2px 2px 0 rgba(31, 23, 32, 0.65);
+}
+
+.brutal-shout {
+  font-family: "Outfit", sans-serif;
+  font-weight: 780;
+  letter-spacing: -0.005em;
+  text-transform: none;
+  color: inherit;
+}
+
+.brutal-body {
+  font-family: "Outfit", sans-serif;
+  font-weight: 480;
+  letter-spacing: -0.006em;
+  line-height: 1.48;
+  color: inherit;
+}
+
+.brutal-label {
+  font-family: "Outfit", sans-serif;
+  font-weight: 720;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  text-shadow: none;
+}
+
+.brutal-label--light {
+  color: rgba(245, 247, 255, 0.85);
+}
+
+.brutal-label--ink {
+  color: rgba(29, 39, 113, 0.95);
+}
+
+.brutal-body--ink {
+  color: rgba(29, 39, 113, 0.9);
+}
+
+.brutal-card.tone-profile-next .brutal-body {
+  color: #ffffff;
+  font-weight: 520;
+}
+
 /* Buttons */
 .page-surface {
   background: var(--surface-canvas);
@@ -119,14 +193,16 @@
 
 .btn {
   display: inline-block;
-  font-weight: 700;
+  font-family: "Outfit", sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
   text-align: center;
   border: 3px solid var(--frame-border);
   padding: .6rem 1.25rem;
   background: var(--accent-cta);
   box-shadow: 4px 4px 0 var(--frame-border);
   color: var(--surface-raised);
-  letter-spacing: .02em;
   transition: background-color .15s ease, color .15s ease, box-shadow .15s ease, transform .15s ease;
   transform: translateY(0);
 }
@@ -204,10 +280,12 @@
   top: -.6rem;
   background: var(--badge-bg);
   color: var(--badge-text);
-  padding: 2px 6px;
-  font-size: .7rem;
+  padding: 2px 7px;
+  font-size: .68rem;
   text-transform: uppercase;
-  letter-spacing: .06em;
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.28em;
 }
 
 .kicker-invert {

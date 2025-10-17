@@ -1,0 +1,191 @@
+---
+title: 'NotebookLM - Insight Graph PRD'
+author: 'Punith Rathnakar'
+tags: ["prd", "ux", "design", "notebooklm"]
+pubDate: '2025-10-15'
+description: 'A visual representation of the Product Requirements Document for the NotebookLM Insight Graph feature.'
+imgUrl: '../../assets/notebooklm.png'
+---
+
+{/* 
+  REVERTED DESIGN
+  - Header colors rotate through a defined palette.
+  - Content elements use a more distinct, neobrutalist-inspired design.
+*/}
+
+
+export const Section = ({ title, icon, number, color, children }) => (
+    <div class="bg-white border-2 border-black rounded-none shadow-[4px_4px_0_#000] mb-12">
+        <div class={`flex items-center p-4 border-b-2 border-black ${color}`}>
+            <span class="text-2xl mr-4">{icon}</span>
+            <h2 class="text-2xl font-bold">{number}. {title}</h2>
+        </div>
+        <div class="p-6 space-y-6">
+            {children}
+        </div>
+    </div>
+);
+
+export const Quote = ({ source, children }) => (
+    <blockquote class="border-l-4 border-black pl-4 py-2 my-4 bg-gray-50">
+        <p class="italic text-lg">{children}</p>
+        <cite class="block not-italic text-right font-semibold mt-2">- {source}</cite>
+    </blockquote>
+);
+
+export const TimelineItem = ({ phase, title, features }) => (
+    <div class="relative pl-8">
+        <div class="absolute -left-2 top-1 w-5 h-5 bg-black rounded-full border-4 border-white"></div>
+        <h4 class="font-bold text-lg">{phase}: {title}</h4>
+        <p class="text-gray-600">{features}</p>
+    </div>
+);
+
+export const StatCard = ({ value, label }) => (
+    <div class="border-2 border-black bg-white p-4 text-center rounded-none shadow-[2px_2px_0_#000]">
+        <p class="text-3xl font-bold">{value}</p>
+        <p class="text-sm font-semibold uppercase tracking-wider">{label}</p>
+    </div>
+);
+
+<div class="font-mono bg-gray-100 p-4 md:p-8">
+
+<div class="text-center mb-12">
+    <h1 class="text-5xl font-bold">🧠 NotebookLM – Insight Graph</h1>
+    <p class="italic text-xl mt-2">“Connecting not just your notes, but your thoughts.”</p>
+</div>
+
+<Section icon="📝" number="1" title="Executive Summary" color='bg-yellow-500'>
+    <p>The Insight Graph connects concepts across notebooks—surfacing hidden relationships, themes, and the evolution of ideas—turning NotebookLM from a note summarizer into a true reasoning space.</p>
+    <div class="p-4 bg-blue-100 border-2 border-black mt-4">
+        <h3 class="font-bold text-blue-800">Vision:</h3>
+        <p class="italic">“To transform NotebookLM into a connected, trusted, and intelligent knowledge system that helps users see meaning across everything they know.”</p>
+    </div>
+</Section>
+
+<Section icon="📈" number="2" title="Why Now" color='bg-yellow-300'>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="border-2 border-black p-4 bg-gray-50"><strong>Knowledge Fragmentation:</strong> Avg. worker uses 6.3 apps.</div>
+        <div class="border-2 border-black p-4 bg-gray-50"><strong>User Demand:</strong> >75% of feedback asks for linking.</div>
+        <div class="border-2 border-black p-4 bg-gray-50"><strong>Tech Maturity:</strong> Gemini 1.5 Pro makes it feasible.</div>
+        <div class="border-2 border-black p-4 bg-gray-50"><strong>Competitive Gap:</strong> Win with trustworthy, cited links.</div>
+    </div>
+</Section>
+
+<Section icon="❓" number="3" title="Problem Statement" color='bg-yellow-300'>
+    <p>Users accumulate dozens of notebooks, but insights remain isolated. This limits the product's perceived intelligence and long-term stickiness.</p>
+    <div class="mt-4 bg-red-100 border-2 border-black p-6 text-center">
+        <p class="font-bold text-2xl">“NotebookLM understands documents—but not relationships.”</p>
+    </div>
+</Section>
+
+<Section icon="🎯" number="4" title="Goals & Non-Goals" color='bg-yellow-300'>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="border-2 border-green-700 bg-green-50 p-4">
+            <h3 class="text-xl font-bold text-green-700">Goals ✅</h3>
+            <ul class="list-disc pl-5 mt-2 space-y-2"><li>Enable discovery</li><li>Increase retention (+10%)</li><li>Boost session depth (+20%)</li><li>Achieve high usefulness (≥80%)</li></ul>
+        </div>
+        <div class="border-2 border-red-700 bg-red-50 p-4">
+            <h3 class="text-xl font-bold text-red-700">Non-Goals ❌</h3>
+            <ul class="list-disc pl-5 mt-2 space-y-2"><li>Real-time synthesis</li><li>Manual graph editing</li><li>Mobile parity</li></ul>
+        </div>
+    </div>
+</Section>
+
+<Section icon="👥" number="5" title="Target Users" color='bg-yellow-300'>
+    <table class="w-full border-collapse border-2 border-black">
+        <thead class="bg-black text-white text-left"><tr class="bg-black text-white text-left"><th class="border-2 border-black p-3">Persona</th><th class="border-2 border-black p-3">Pain Point</th><th class="border-2 border-black p-3">Desired Outcome</th></tr></thead>
+        <tbody>
+            <tr class="bg-white"><td class="border-2 border-black p-3 font-semibold">Researcher</td><td class="border-2 border-black p-3">Repeats work</td><td class="border-2 border-black p-3">See “Bias” across notebooks</td></tr>
+            <tr class="bg-gray-50"><td class="border-2 border-black p-3 font-semibold">Strategist</td><td class="border-2 border-black p-3">Copies notes</td><td class="border-2 border-black p-3">Surface reusable frameworks</td></tr>
+            <tr class="bg-white"><td class="border-2 border-black p-3 font-semibold">Writer</td><td class="border-2 border-black p-3">Forgets drafts</td><td class="border-2 border-black p-3">Trace idea evolution</td></tr>
+        </tbody>
+    </table>
+</Section>
+
+<Section icon="🗺️" number="6" title="User Journey" color='bg-yellow-300'>
+    <div class="flex items-center justify-center space-x-4">
+        <div class="text-center"> <p class="text-4xl">😫</p> <p class="font-bold">Before</p> <p class="text-sm">Manual search, no connections.</p> </div>
+        <p class="text-5xl font-mono">→</p>
+        <div class="text-center"> <p class="text-4xl">✨</p> <p class="font-bold">After</p> <p class="text-sm">Insight panel, instant context.</p> </div>
+    </div>
+</Section>
+
+<Section icon="💡" number="7" title="Proposed Solution — MVP" color='bg-yellow-300'>
+    <p><span class="font-bold">Concept:</span> A lightweight, trustworthy overlay that visualizes relationships via asynchronous, user-scoped semantic linking.</p>
+    <div class="mt-4 p-4 bg-gray-50 border-2 border-black grid grid-cols-3 gap-4 text-center">
+        <div><p class="text-2xl">⚡</p><p class="font-bold">Fast Loading</p><p class="text-xs">(&lt;200 ms)</p></div>
+        <div><p class="text-2xl">🃏</p><p class="font-bold">Static Cards</p><p class="text-xs">w/ Snippets</p></div>
+        <div><p class="text-2xl">🔍</p><p class="font-bold">Progressive Disclosure</p><p class="text-xs">3 → 10 Nodes</p></div>
+    </div>
+</Section>
+
+<Section icon="🛡️" number="8" title="MVP Scope & De-Risking" color='bg-yellow-300'>
+    <div class="space-y-4">
+        <div class="flex items-start"><span class="text-xl mr-3">🐢</span><div><span class="font-bold">Latency/Cost:</span> Mitigated by asynchronous batch jobs.</div></div>
+        <div class="flex items-start"><span class="text-xl mr-3">🔒</span><div><span class="font-bold">Privacy:</span> Mitigated by user-scoped, opt-in linking.</div></div>
+        <div class="flex items-start"><span class="text-xl mr-3">🤖</span><div><span class="font-bold">Hallucination:</span> Mitigated by static cards with direct citations.</div></div>
+        <div class="flex items-start"><span class="text-xl mr-3">🤯</span><div><span class="font-bold">Cognitive Overload:</span> Mitigated by progressive disclosure.</div></div>
+    </div>
+</Section>
+
+<Section icon="✔️" number="9" title="User Stories & AC" color='bg-yellow-300'>
+    <ul class="space-y-3">
+        <li><span class="font-bold">Story 1:</span> As a user, I see related notebooks. <span class="block pl-5 text-sm text-gray-600">AC: Top 3 nodes appear &lt;200ms.</span></li>
+        <li><span class="font-bold">Story 2:</span> I can expand to see more connections. <span class="block pl-5 text-sm text-gray-600">AC: Up to 10 nodes load &lt;500ms.</span></li>
+        <li><span class="font-bold">Story 3:</span> I can click a node to open its content. <span class="block pl-5 text-sm text-gray-600">AC: Navigates to source.</span></li>
+    </ul>
+</Section>
+
+<Section icon="📊" number="10" title="Success Metrics / KPIs" color='bg-yellow-300'>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <StatCard value="+10%" label="Retention" />
+        <StatCard value="+20%" label="Depth" />
+        <StatCard value="≥80%" label="Trust" />
+        <StatCard value="&lt;200ms" label="Load Time" />
+    </div>
+</Section>
+
+<Section icon="🔒" number="11" title="Responsible AI & Privacy" color='bg-yellow-300'>
+    <ul class="list-disc pl-5 space-y-2"><li>Links are computed only between user-approved notebooks.</li><li>All connections cite specific source paragraphs to be verifiable.</li><li>Confidence scores are displayed for each link.</li><li>Users can delete or dismiss irrelevant connections.</li></ul>
+</Section>
+
+<Section icon="⚠️" number="12" title="Risks & Dependencies" color='bg-yellow-300'>
+    <dl><dt class="font-bold">Risk: Embedding drift</dt><dd class="pl-4 mb-2">Mitigation: Re-compute weekly.</dd><dt class="font-bold">Risk: UX over-complexity</dt><dd class="pl-4 mb-2">Mitigation: Progressive disclosure.</dd><dt class="font-bold">Risk: Infra cost creep</dt><dd class="pl-4">Mitigation: Sampling & caching.</dd></dl>
+</Section>
+
+<Section icon="⚙️" number="13" title="Technical Notes" color='bg-yellow-300'>
+    <ul class="list-none space-y-2">
+        <li><span class="font-semibold bg-gray-200 px-2 py-1">Chunk Size:</span> ≈ 500 tokens</li>
+        <li><span class="font-semibold bg-gray-200 px-2 py-1">Similarity:</span> cosine ≥ 0.82</li>
+        <li><span class="font-semibold bg-gray-200 px-2 py-1">Vector Index:</span> Colossus / Faiss hybrid</li>
+        <li><span class="font-semibold bg-gray-200 px-2 py-1">Update Cadence:</span> Nightly (active) / Weekly (inactive)</li>
+    </ul>
+</Section>
+
+<Section icon="🚀" number="14" title="Future Opportunities" color='bg-yellow-300'>
+    <div class="border-l-4 border-black space-y-8 py-2">
+        <TimelineItem phase="Phase 2" title="Structured Meaning" features="Topic Clusters, Narrative Threads, User-created Links" />
+        <TimelineItem phase="Phase 3" title="Action Layer" features="Export to Docs/Slides, Story Mode" />
+        <TimelineItem phase="Phase 4" title="Collaboration" features="Shared Graphs, API Integrations" />
+    </div>
+</Section>
+
+<Section icon="🌐" number="15" title="Ecosystem Alignment" color='bg-yellow-300'>
+    <ul class="list-disc pl-5 space-y-2"><li><span class="font-bold">Gemini for Workspace:</span> Transform clusters into Docs/Slides.</li><li><span class="font-bold">Google Drive:</span> Cross-link Drive files to graph nodes.</li><li><span class="font-bold">Search SGE:</span> Extend to “answers from your own knowledge.”</li></ul>
+</Section>
+
+<Section icon="💬" number="16" title="Voice of the User" color='bg-yellow-300'>
+    <Quote source="TheBusinessDive 2024">“You can’t connect your notebooks … each works like a separate folder.”</Quote>
+    <Quote source="Reddit r/notebooklm">“NotebookLM is awesome but adding links is painful.”</Quote>
+</Section>
+
+<Section icon="🏆" number="17" title="Success Narrative" color='bg-yellow-300'>
+    <Quote source="An Ideal User">“I used to treat NotebookLM like a smarter Notion page. Now it feels like a map of my brain.”</Quote>
+</Section>
+
+<Section icon="📎" number="18" title="Appendix" color='bg-yellow-300'>
+    <ul class="list-disc pl-5 space-y-2"><li>Public Limits (Support Docs)</li><li>Hallucination Rate Comparisons [arXiv:2509.25498]</li><li>Infrastructure Diagram</li></ul>
+</Section>
+
+</div>

@@ -11,25 +11,12 @@ const getFontPath = (name: string) => join(appDir, "public", "fonts", name);
     {
       name: "Outfit",
       display: "swap",
-      selector: ".outfit",
+      selector: ".outfit, .poppins",
       fallback: "sans-serif",
       src: [
         {
           style: "normal",
           path: getFontPath("outfit.ttf"),
-        },
-      ],
-    },
-    {
-      display: "swap",
-      name: "Poppins",
-      selector: ".poppins",
-      fallback: "sans-serif",
-      src: [
-        {
-          preload: false,
-          style: "normal",
-          path: getFontPath("poppins.ttf"),
         },
       ],
     },

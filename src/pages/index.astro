@@ -29,11 +29,11 @@ const featured = {
         <div class="col-span-5 flex">
           <BrutalCard tone="hero" class="h-full">
             <div class="flex h-full flex-col justify-between gap-5">
-              <blockquote class="outfit text-2xl leading-tight md:text-5xl lg:text-6xl">
+              <blockquote class="brutal-headline-strong text-2xl leading-tight md:text-5xl lg:text-6xl">
                 “Making a <span class="inline-chip">simple</span>
                 thing is never simple.”
               </blockquote>
-              <p class="outfit text-xl md:text-3xl lg:text-4xl">
+              <p class="brutal-headline text-xl md:text-3xl lg:text-4xl leading-tight">
                 I care about turning complexity into clarity.
               </p>
               <a href="/blog/blogpost-2/" class="btn btn--sun">Read the case study →</a>
@@ -44,10 +44,10 @@ const featured = {
         {/* Card 2 — About (transition) */}
         <div class="col-span-3 flex">
           <BrutalCard tone="bridge" class="flex h-full flex-col">
-            <h2 class="dm-serif text-2xl md:text-4xl lg:text-5xl">
+            <h2 class="brutal-headline text-2xl md:text-4xl lg:text-5xl">
               I bridge engineering and product.
             </h2>
-            <p class="poppins mt-4 text-base leading-relaxed">
+            <p class="brutal-body mt-4 text-base md:text-lg">
               Grounded in first principles, I look for clarity where others see
               noise. I began in software engineering, but my drive was never
               just writing code— it was understanding <em>why</em> we build, not
@@ -60,10 +60,10 @@ const featured = {
         {/* Card 3 — Philosophy */}
         <div class="col-span-3 flex">
           <BrutalCard tone="principles" class="flex h-full flex-col">
-            <h2 class="dm-serif text-2xl md:text-4xl lg:text-5xl">
+            <h2 class="brutal-headline text-2xl md:text-4xl lg:text-5xl">
               Clarity over complexity.
             </h2>
-            <p class="poppins mt-4 text-base leading-relaxed">
+            <p class="brutal-body mt-4 text-base md:text-lg">
               I think in systems and mental models. Simplicity and first
               principles guide my decisions. My work is about connecting
               engineering depth with product vision to build what people truly
@@ -75,10 +75,10 @@ const featured = {
         {/* Card 4 — Vision */}
         <div class="col-span-5 flex">
           <BrutalCard tone="vision" class="flex h-full flex-col">
-            <h2 class="dm-serif text-2xl md:text-4xl lg:text-5xl">
+            <h2 class="brutal-title md:text-4xl lg:text-5xl">
               Shaping India’s next wave.
             </h2>
-            <p class="poppins mt-4 text-base leading-relaxed">
+            <p class="brutal-body mt-4 text-base md:text-lg">
               The next generation of products from India will influence how
               millions live and work. That’s where I want to apply my mix of
               engineering depth and product clarity.
@@ -92,35 +92,37 @@ const featured = {
         <BrutalCard tone="case">
           <div class="grid items-start gap-6 md:grid-cols-8">
             <div class="space-y-4 md:col-span-5">
-              <h2 class="dm-serif text-2xl md:text-4xl">Featured case study</h2>
-              <h3 class="outfit text-xl font-bold leading-tight md:text-2xl">
+              <h2 class="brutal-label brutal-label--light text-xs md:text-sm tracking-[0.24em]">
+                Featured case study
+              </h2>
+              <h3 class="brutal-headline-strong text-2xl leading-tight md:text-4xl">
                 Refund Transparency — Meesho
               </h3>
 
               <div class="grid gap-4 md:grid-cols-3">
                 <BrutalCard tone="case-note" class="is-subtle flex h-full flex-col">
-                  <div class="font-bold uppercase text-sm tracking-wide">
+                  <div class="brutal-label brutal-label--ink text-sm tracking-[0.16em]">
                     Problem
                   </div>
-                  <p class="poppins mt-2 text-sm leading-relaxed">
+                  <p class="brutal-body brutal-body--ink mt-2 text-sm leading-snug">
                     Refund timelines were unclear, creating anxiety and eroding
                     trust.
                   </p>
                 </BrutalCard>
                 <BrutalCard tone="case-note" class="is-subtle flex h-full flex-col">
-                  <div class="font-bold uppercase text-sm tracking-wide">
+                  <div class="brutal-label brutal-label--ink text-sm tracking-[0.16em]">
                     Approach
                   </div>
-                  <p class="poppins mt-2 text-sm leading-relaxed">
+                  <p class="brutal-body brutal-body--ink mt-2 text-sm leading-snug">
                     Simple status tracker with ETA windows, grounded in
                     first-principles system mapping.
                   </p>
                 </BrutalCard>
                 <BrutalCard tone="case-note" class="is-subtle flex h-full flex-col">
-                  <div class="font-bold uppercase text-sm tracking-wide">
+                  <div class="brutal-label brutal-label--ink text-sm tracking-[0.16em]">
                     Potential impact
                   </div>
-                  <p class="poppins mt-2 text-sm leading-relaxed">
+                  <p class="brutal-body brutal-body--ink mt-2 text-sm leading-snug">
                     ~25% fewer refund-related tickets, ~18% higher task
                     completion.
                   </p>
@@ -140,11 +142,13 @@ const featured = {
 
       <section id="about-me" class="space-y-6">
         <BrutalCard tone="profile">
-          <h2 class="dm-serif text-2xl md:text-4xl mb-6">About Me</h2>
+          <h2 class="brutal-headline-strong text-2xl md:text-4xl mb-6">
+            About Me
+          </h2>
           <div class="grid gap-4 md:grid-cols-3">
             <BrutalCard tone="profile-engineer" class="is-subtle flex h-full flex-col">
               <div class="kicker kicker-invert">Engineer</div>
-              <p class="poppins text-sm leading-relaxed">
+              <p class="brutal-body text-base leading-relaxed">
                 7 years as a full-stack builder. Shipped trading apps in 3 months
                 (3× faster). Built UI libraries now powering 300+ developers.
               </p>
@@ -152,7 +156,7 @@ const featured = {
 
             <BrutalCard tone="profile-builder" class="is-subtle flex h-full flex-col">
               <div class="kicker kicker-invert">Builder</div>
-              <p class="poppins text-sm leading-relaxed">
+              <p class="brutal-body text-base leading-relaxed">
                 I question defaults, strip waste, and prove small focused teams
                 can deliver outsized impact.
               </p>
@@ -160,7 +164,7 @@ const featured = {
 
             <BrutalCard tone="profile-next" class="is-subtle flex h-full flex-col">
               <div class="kicker kicker-invert">Next Wave</div>
-              <p class="poppins text-sm leading-relaxed">
+              <p class="brutal-body text-base leading-relaxed">
                 Moving into product management. Systems thinking and
                 first-principles clarity to build what people actually want to
                 use.

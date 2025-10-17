@@ -274,6 +274,6 @@ const shadowColor = customShadowColor ?? (color ? darkenColor(color, 40) : toneS
     }
 </style>
 
-<div class={`brutal-card ${className}`} {...rest}>
+<div class={`brutal-card tone-${tone} ${className}`} data-tone={tone} {...rest}>
     <slot />
 </div>
