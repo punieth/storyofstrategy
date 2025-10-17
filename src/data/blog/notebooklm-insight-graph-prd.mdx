@@ -7,185 +7,568 @@ description: 'A visual representation of the Product Requirements Document for t
 imgUrl: '../../assets/notebooklm.png'
 ---
 
-{/* 
-  REVERTED DESIGN
-  - Header colors rotate through a defined palette.
-  - Content elements use a more distinct, neobrutalist-inspired design.
-*/}
+import StickyNav from "@components/blog/StickyNav.astro";
+import BrutalCard from "@components/layout/Brutalcard.astro";
 
+export const pillBase =
+  "inline-flex items-center gap-[0.35rem] rounded-full border-2 border-black px-3 py-[0.4rem] text-[0.68rem] font-extrabold uppercase tracking-[0.18em] leading-none sm:px-4 sm:py-[0.45rem] sm:text-[0.72rem]";
 
-export const Section = ({ title, icon, number, color, children }) => (
-    <div class="bg-white border-2 border-black rounded-none shadow-[4px_4px_0_#000] mb-12">
-        <div class={`flex items-center p-4 border-b-2 border-black ${color}`}>
-            <span class="text-2xl mr-4">{icon}</span>
-            <h2 class="text-2xl font-bold">{number}. {title}</h2>
+export const pillThemes = {
+  summary: "bg-[#f5ff85] text-black shadow-[4px_4px_0_0_#000]",
+  urgency: "bg-[#fde68a] text-black shadow-[4px_4px_0_0_#f97316]",
+  problem: "bg-[#fecdd3] text-black shadow-[4px_4px_0_0_#be123c]",
+  goal: "bg-[#bbf7d0] text-black shadow-[4px_4px_0_0_#047857]",
+  persona: "bg-[#e0f2fe] text-black shadow-[4px_4px_0_0_#1d4ed8]",
+  journey: "bg-[#ddd6fe] text-black shadow-[4px_4px_0_0_#5b21b6]",
+  build: "bg-[#fef9c3] text-black shadow-[4px_4px_0_0_#78350f]",
+  shield: "bg-[#fce7f3] text-black shadow-[4px_4px_0_0_#9d174d]",
+  metric: "bg-[#d1fae5] text-black shadow-[4px_4px_0_0_#0f766e]",
+  trust: "bg-[#fee2e2] text-black shadow-[4px_4px_0_0_#b91c1c]",
+  risk: "bg-[#c7d2fe] text-black shadow-[4px_4px_0_0_#312e81]",
+  tech: "bg-[#f1f5f9] text-black shadow-[4px_4px_0_0_#1e293b]",
+  future: "bg-[#f5d0fe] text-black shadow-[4px_4px_0_0_#7e22ce]",
+  ecosystem: "bg-[#fef3c7] text-black shadow-[4px_4px_0_0_#b45309]",
+  voice: "bg-[#cffafe] text-black shadow-[4px_4px_0_0_#0e7490]",
+};
+
+export const iconClass = "text-[0.85rem] leading-none";
+
+export const pillClass = (theme) => `${pillBase} ${pillThemes[theme] ?? ""}`;
+
+<div class="bg-[#f7f7f3] font-mono">
+  <div class="mx-auto max-w-5xl px-4 sm:px-6 md:px-8 pt-6">
+    <StickyNav
+      items={[
+        { href: "#executive-summary", label: "Executive Summary" },
+        { href: "#why-now", label: "Why Now" },
+        { href: "#problem", label: "Problem" },
+        { href: "#goals", label: "Goals" },
+        { href: "#personas", label: "Target Users" },
+        { href: "#journey", label: "User Journey" },
+        { href: "#solution", label: "Solution" },
+        { href: "#scope", label: "De-Risking" },
+        { href: "#stories", label: "User Stories" },
+        { href: "#metrics", label: "Metrics" },
+        { href: "#responsible-ai", label: "Responsible AI" },
+        { href: "#risks", label: "Risks" },
+        { href: "#technical", label: "Technical Notes" },
+        { href: "#future", label: "Future Path" },
+        { href: "#ecosystem", label: "Ecosystem" },
+        { href: "#voice", label: "Voice of User" },
+      ]}
+      label="Navigate"
+    />
+  </div>
+  <main class="mx-auto max-w-5xl px-4 sm:px-6 md:px-8 py-10 sm:py-12">
+    <header class="text-center">
+      <span class="inline-flex items-center gap-2 px-3 py-1 text-[11px] sm:text-xs font-black uppercase tracking-[0.2em] text-black bg-[#caff6a] border border-black/70 sm:border-2 shadow-[3px_3px_0_0_#00000055] sm:shadow-[4px_4px_0_0_#000] rounded-full sm:rounded-lg">
+        <span class="block h-1.5 w-1.5 rounded-full bg-black"></span>
+        Product Requirement
+      </span>
+      <h1 class="mt-4 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
+        🧠 NotebookLM - Insight Graph
+      </h1>
+      <p class="mt-4 text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+        "Connecting not just your notes, but your thoughts."
+      </p>
+
+      <div class="mt-10 text-left">
+        <div class="bg-white border-2 border-black shadow-[10px_10px_0_0_#000] rounded-3xl px-6 py-6 sm:px-8 sm:py-8 relative overflow-hidden">
+          <div class="absolute -top-16 -left-12 h-36 w-36 border-2 border-black rounded-full bg-[#caff6a] rotate-6 opacity-70 pointer-events-none"></div>
+          <div class="absolute -bottom-16 -right-16 h-44 w-44 border-2 border-black rounded-full bg-[#f5d0fe] -rotate-6 opacity-60 pointer-events-none"></div>
+          <div class="relative z-10 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 text-left">
+            <div class="bg-black text-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] px-4 py-4">
+              <p class="text-[11px] font-black uppercase tracking-[0.2em]">Opportunity</p>
+              <p class="mt-3 text-base sm:text-lg leading-relaxed">
+                Turn fragmented notebooks into a living map so NotebookLM feels like cognition, not storage.
+              </p>
+            </div>
+            <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] px-4 py-4">
+              <p class="text-[11px] font-black uppercase tracking-[0.2em]">Promise</p>
+              <p class="mt-3 text-base sm:text-lg leading-relaxed text-gray-900">
+                Surface relationships with citations and confidence so every connection is trustworthy on first glance.
+              </p>
+            </div>
+            <div class="bg-[#fef08a] border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] px-4 py-4">
+              <p class="text-[11px] font-black uppercase tracking-[0.2em]">Tempo</p>
+              <p class="mt-3 text-base sm:text-lg leading-relaxed text-gray-900">
+                Batch-link nightly, keep graph loads under 200 ms, and grow retention +10% by week 12.
+              </p>
+            </div>
+          </div>
         </div>
-        <div class="p-6 space-y-6">
-            {children}
+      </div>
+    </header>
+
+    <section id="executive-summary" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("summary")} inline-flex`}>🧭 Executive Summary</span>
+      <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7 shadow-[8px_8px_0_0_#000] border-2 border-black rounded-2xl">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Executive Summary</h2>
+        <p class="text-base sm:text-lg leading-relaxed text-gray-900">
+          NotebookLM today helps users synthesize information within a single notebook. But as their knowledge sprawls across topics, insights fracture. The Insight Graph connects concepts across notebooks, surfacing relationships, themes, and the evolution of ideas so NotebookLM graduates from note summarizer to true reasoning space.
+        </p>
+        <BrutalCard color="#f5ff85" class="mt-6 p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+          <h3 class="text-lg font-extrabold uppercase tracking-[0.18em] text-gray-900">Vision</h3>
+          <p class="mt-3 text-base sm:text-lg leading-relaxed text-gray-900">
+            "To transform NotebookLM into a connected, trusted, and intelligent knowledge system that helps users see meaning across everything they know."
+          </p>
+        </BrutalCard>
+      </BrutalCard>
+    </section>
+
+    <section id="why-now" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("urgency")} inline-flex`}>⏱ Why Now</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-5">The Moment to Ship</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+          <p class="text-[12px] font-semibold uppercase tracking-[0.16em] text-gray-600">Trend</p>
+          <h3 class="mt-2 text-xl font-bold text-gray-900">Knowledge fragmentation is exploding</h3>
+          <p class="mt-3 text-sm sm:text-base text-gray-800 leading-relaxed">
+            The average knowledge worker uses 6.3 apps for notes and research (IDC 2025). 58% of NotebookLM beta users keep more than five notebooks within 30 days.
+          </p>
+        </BrutalCard>
+        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+          <p class="text-[12px] font-semibold uppercase tracking-[0.16em] text-gray-600">Trend</p>
+          <h3 class="mt-2 text-xl font-bold text-gray-900">User demand is explicit</h3>
+          <p class="mt-3 text-sm sm:text-base text-gray-800 leading-relaxed">
+            More than 75% of Reddit feedback threads call out the lack of linking or organization. TheBusinessDive 2024 captured it best: "You can't connect notebooks; they work like separate folders."
+          </p>
+        </BrutalCard>
+        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+          <p class="text-[12px] font-semibold uppercase tracking-[0.16em] text-gray-600">Trend</p>
+          <h3 class="mt-2 text-xl font-bold text-gray-900">LLM retrieval finally matured</h3>
+          <p class="mt-3 text-sm sm:text-base text-gray-800 leading-relaxed">
+            Gemini 1.5 Pro delivers a 1M-token context window and efficient embedding APIs, enabling pre-computed cross-document relationships without latency spikes.
+          </p>
+        </BrutalCard>
+        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+          <p class="text-[12px] font-semibold uppercase tracking-[0.16em] text-gray-600">Trend</p>
+          <h3 class="mt-2 text-xl font-bold text-gray-900">Competitive gap is winnable</h3>
+          <p class="mt-3 text-sm sm:text-base text-gray-800 leading-relaxed">
+            Notion AI and Mem AI market "semantic linking" but lack Google's trust and grounding. NotebookLM can win by mixing semantic intelligence with verifiable citations.
+          </p>
+        </BrutalCard>
+      </div>
+    </section>
+
+    <section id="problem" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("problem")} inline-flex`}>🧩 Problem</span>
+      <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7 border-2 border-black shadow-[8px_8px_0_0_#000] rounded-2xl">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Problem Statement</h2>
+        <p class="text-base sm:text-lg leading-relaxed text-gray-900">
+          Users juggle dozens of notebooks across domains. Each notebook is rich with insights yet isolated, forcing people to duplicate work and lose context when ideas overlap. The fragmentation limits how intelligent NotebookLM feels and erodes long-term stickiness.
+        </p>
+        <div class="mt-6 bg-[#fee2e2] border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl px-5 py-6 text-center">
+          <p class="text-xl sm:text-2xl font-black tracking-tight text-gray-900">
+            "NotebookLM understands documents - but not relationships."
+          </p>
         </div>
-    </div>
-);
+      </BrutalCard>
+    </section>
 
-export const Quote = ({ source, children }) => (
-    <blockquote class="border-l-4 border-black pl-4 py-2 my-4 bg-gray-50">
-        <p class="italic text-lg">{children}</p>
-        <cite class="block not-italic text-right font-semibold mt-2">- {source}</cite>
-    </blockquote>
-);
+    <section id="goals" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("goal")} inline-flex`}>🎯 Goals</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-5">Goals & Non-Goals</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+        <BrutalCard color="#ffffff" class="p-6 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+          <h3 class="text-lg font-extrabold uppercase tracking-[0.16em] text-gray-900 flex items-center gap-2">
+            <span>✅</span> Goals
+          </h3>
+          <ul class="mt-4 space-y-3 text-sm sm:text-base leading-relaxed text-gray-900">
+            <li>Enable trustable discovery of cross-notebook relationships with low latency.</li>
+            <li>Increase retention of multi-notebook users by 10% quarter over quarter.</li>
+            <li>Boost session depth with 20% more click-throughs via graph links.</li>
+            <li>Reach at least 80% positive usefulness rating in in-product surveys.</li>
+          </ul>
+        </BrutalCard>
+        <BrutalCard color="#ffffff" class="p-6 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+          <h3 class="text-lg font-extrabold uppercase tracking-[0.16em] text-gray-900 flex items-center gap-2">
+            <span>🚫</span> Non-Goals
+          </h3>
+          <ul class="mt-4 space-y-3 text-sm sm:text-base leading-relaxed text-gray-900">
+            <li>Real-time generative synthesis across notebooks.</li>
+            <li>Manual graph editing or user-authored edges (phase 2).</li>
+            <li>Full mobile parity or collaborative graphs (phase 3+).</li>
+          </ul>
+        </BrutalCard>
+      </div>
+    </section>
 
-export const TimelineItem = ({ phase, title, features }) => (
-    <div class="relative pl-8">
-        <div class="absolute -left-2 top-1 w-5 h-5 bg-black rounded-full border-4 border-white"></div>
-        <h4 class="font-bold text-lg">{phase}: {title}</h4>
-        <p class="text-gray-600">{features}</p>
-    </div>
-);
-
-export const StatCard = ({ value, label }) => (
-    <div class="border-2 border-black bg-white p-4 text-center rounded-none shadow-[2px_2px_0_#000]">
-        <p class="text-3xl font-bold">{value}</p>
-        <p class="text-sm font-semibold uppercase tracking-wider">{label}</p>
-    </div>
-);
-
-<div class="font-mono bg-gray-100 p-4 md:p-8">
-
-<div class="text-center mb-12">
-    <h1 class="text-5xl font-bold">🧠 NotebookLM – Insight Graph</h1>
-    <p class="italic text-xl mt-2">“Connecting not just your notes, but your thoughts.”</p>
-</div>
-
-<Section icon="📝" number="1" title="Executive Summary" color='bg-yellow-500'>
-    <p>The Insight Graph connects concepts across notebooks—surfacing hidden relationships, themes, and the evolution of ideas—turning NotebookLM from a note summarizer into a true reasoning space.</p>
-    <div class="p-4 bg-blue-100 border-2 border-black mt-4">
-        <h3 class="font-bold text-blue-800">Vision:</h3>
-        <p class="italic">“To transform NotebookLM into a connected, trusted, and intelligent knowledge system that helps users see meaning across everything they know.”</p>
-    </div>
-</Section>
-
-<Section icon="📈" number="2" title="Why Now" color='bg-yellow-300'>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="border-2 border-black p-4 bg-gray-50"><strong>Knowledge Fragmentation:</strong> Avg. worker uses 6.3 apps.</div>
-        <div class="border-2 border-black p-4 bg-gray-50"><strong>User Demand:</strong> >75% of feedback asks for linking.</div>
-        <div class="border-2 border-black p-4 bg-gray-50"><strong>Tech Maturity:</strong> Gemini 1.5 Pro makes it feasible.</div>
-        <div class="border-2 border-black p-4 bg-gray-50"><strong>Competitive Gap:</strong> Win with trustworthy, cited links.</div>
-    </div>
-</Section>
-
-<Section icon="❓" number="3" title="Problem Statement" color='bg-yellow-300'>
-    <p>Users accumulate dozens of notebooks, but insights remain isolated. This limits the product's perceived intelligence and long-term stickiness.</p>
-    <div class="mt-4 bg-red-100 border-2 border-black p-6 text-center">
-        <p class="font-bold text-2xl">“NotebookLM understands documents—but not relationships.”</p>
-    </div>
-</Section>
-
-<Section icon="🎯" number="4" title="Goals & Non-Goals" color='bg-yellow-300'>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="border-2 border-green-700 bg-green-50 p-4">
-            <h3 class="text-xl font-bold text-green-700">Goals ✅</h3>
-            <ul class="list-disc pl-5 mt-2 space-y-2"><li>Enable discovery</li><li>Increase retention (+10%)</li><li>Boost session depth (+20%)</li><li>Achieve high usefulness (≥80%)</li></ul>
+    <section id="personas" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("persona")} inline-flex`}>🧑‍🤝‍🧑 Target Users</span>
+      <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7 border-2 border-black shadow-[8px_8px_0_0_#000] rounded-2xl overflow-x-auto">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Personas & Jobs</h2>
+        <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+          Three core personas drive Insight Graph adoption. Each card maps their jobs, friction, and the outcome that makes NotebookLM indispensable.
+        </p>
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+          <article class="relative border-2 border-black rounded-2xl bg-white shadow-[6px_6px_0_0_#000] p-5 overflow-hidden">
+            <div class="absolute -top-10 -right-12 h-32 w-32 bg-[#e0f2fe] border-2 border-black rounded-full opacity-60 pointer-events-none"></div>
+            <div class="relative z-10 flex flex-col gap-4">
+              <h3 class="text-lg font-extrabold uppercase tracking-[0.14em] text-gray-900">Researcher / Student</h3>
+              <div class="space-y-3 text-sm sm:text-base text-gray-900 leading-relaxed">
+                <div class="border-2 border-black rounded-xl px-3 py-2 bg-[#f8fafc]">
+                  <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-600">Need</p>
+                  <p class="mt-1">Connect recurring topics across studies.</p>
+                </div>
+                <div class="border-2 border-black rounded-xl px-3 py-2 bg-white">
+                  <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-600">Pain</p>
+                  <p class="mt-1">Repeats work and loses context when switching notebooks.</p>
+                </div>
+                <div class="border-2 border-black rounded-xl px-3 py-2 bg-[#bbf7d0]">
+                  <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-600">Desired Outcome</p>
+                  <p class="mt-1">See how "bias" appears across ML and statistics notebooks.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="relative border-2 border-black rounded-2xl bg-white shadow-[6px_6px_0_0_#000] p-5 overflow-hidden">
+            <div class="absolute -bottom-12 -left-10 h-36 w-36 bg-[#fde68a] border-2 border-black rounded-full opacity-60 pointer-events-none"></div>
+            <div class="relative z-10 flex flex-col gap-4">
+              <h3 class="text-lg font-extrabold uppercase tracking-[0.14em] text-gray-900">Product / Strategy Professional</h3>
+              <div class="space-y-3 text-sm sm:text-base text-gray-900 leading-relaxed">
+                <div class="border-2 border-black rounded-xl px-3 py-2 bg-[#fef9c3]">
+                  <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-600">Need</p>
+                  <p class="mt-1">Cross-pollinate insights from multiple projects.</p>
+                </div>
+                <div class="border-2 border-black rounded-xl px-3 py-2 bg-white">
+                  <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-600">Pain</p>
+                  <p class="mt-1">Copies notes manually into new docs.</p>
+                </div>
+                <div class="border-2 border-black rounded-xl px-3 py-2 bg-[#bfdbfe]">
+                  <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-600">Desired Outcome</p>
+                  <p class="mt-1">Surface reusable frameworks instantly.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="relative border-2 border-black rounded-2xl bg-white shadow-[6px_6px_0_0_#000] p-5 overflow-hidden">
+            <div class="absolute -top-8 -left-12 h-28 w-28 bg-[#fecdd3] border-2 border-black rounded-full opacity-70 pointer-events-none"></div>
+            <div class="relative z-10 flex flex-col gap-4">
+              <h3 class="text-lg font-extrabold uppercase tracking-[0.14em] text-gray-900">Writer / Creator</h3>
+              <div class="space-y-3 text-sm sm:text-base text-gray-900 leading-relaxed">
+                <div class="border-2 border-black rounded-xl px-3 py-2 bg-[#fef2f2]">
+                  <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-600">Need</p>
+                  <p class="mt-1">Trace narrative evolution across drafts.</p>
+                </div>
+                <div class="border-2 border-black rounded-xl px-3 py-2 bg-white">
+                  <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-600">Pain</p>
+                  <p class="mt-1">Forgets earlier angles and loses momentum.</p>
+                </div>
+                <div class="border-2 border-black rounded-xl px-3 py-2 bg-[#bbf7d0]">
+                  <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-600">Desired Outcome</p>
+                  <p class="mt-1">Watch idea -> iteration -> final piece in one map.</p>
+                </div>
+              </div>
+            </div>
+          </article>
         </div>
-        <div class="border-2 border-red-700 bg-red-50 p-4">
-            <h3 class="text-xl font-bold text-red-700">Non-Goals ❌</h3>
-            <ul class="list-disc pl-5 mt-2 space-y-2"><li>Real-time synthesis</li><li>Manual graph editing</li><li>Mobile parity</li></ul>
+      </BrutalCard>
+    </section>
+
+    <section id="journey" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("journey")} inline-flex`}>🗺 User Journey</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-5">From Fragmented Notes to Connected Insight</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+        <BrutalCard color="#ffffff" class="p-6 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+          <h3 class="text-lg font-extrabold uppercase tracking-[0.16em] text-gray-900 flex items-center gap-2">
+            <span>⬅</span> Before
+          </h3>
+          <ul class="mt-4 space-y-3 text-sm sm:text-base text-gray-900 leading-relaxed">
+            <li>Opens notebooks one at a time with no signal of related content elsewhere.</li>
+            <li>Manual search across folders and notebooks leads to fatigue.</li>
+            <li>Insights stay trapped, causing duplication and missed connections.</li>
+          </ul>
+        </BrutalCard>
+        <BrutalCard color="#ffffff" class="p-6 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+          <h3 class="text-lg font-extrabold uppercase tracking-[0.16em] text-gray-900 flex items-center gap-2">
+            <span>➡</span> After
+          </h3>
+          <ul class="mt-4 space-y-3 text-sm sm:text-base text-gray-900 leading-relaxed">
+            <li>Insight Graph panel introduces the top three related notebooks immediately.</li>
+            <li>Hover reveals preview snippets with citations; expand to explore up to ten nodes.</li>
+            <li>Click jumps straight to the source paragraph, recasting NotebookLM as a living memory system.</li>
+          </ul>
+        </BrutalCard>
+      </div>
+    </section>
+
+    <section id="solution" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("build")} inline-flex`}>🛠 Solution</span>
+      <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7 border-2 border-black shadow-[8px_8px_0_0_#000] rounded-2xl">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Proposed Solution - Insight Graph MVP</h2>
+        <p class="text-base sm:text-lg text-gray-900 leading-relaxed">
+          A lightweight, trustworthy overlay that visualizes relationships across notebooks using asynchronous, user-scoped semantic linking.
+        </p>
+        <div class="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <BrutalCard color="#fef08a" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+            <h3 class="text-lg font-extrabold uppercase tracking-[0.16em] text-gray-900">Key Behaviors</h3>
+            <ul class="mt-3 space-y-3 text-sm sm:text-base text-gray-900 leading-relaxed">
+              <li>Pre-computed embeddings ensure the graph loads under 200 ms.</li>
+              <li>Static insight cards surface related notebooks with snippets and citations.</li>
+              <li>Progressive disclosure keeps the default view focused on three nodes, expandable to ten.</li>
+              <li>User opt-in linking keeps privacy intentional ("Connect A + B + C").</li>
+            </ul>
+          </BrutalCard>
+          <BrutalCard color="#e0f2fe" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+            <h3 class="text-lg font-extrabold uppercase tracking-[0.16em] text-gray-900">MVP Architecture</h3>
+            <ol class="mt-3 space-y-3 text-sm sm:text-base text-gray-900 leading-relaxed list-decimal list-inside">
+              <li>Chunk and embed all notebook sources nightly.</li>
+              <li>Compute top-k cross-notebook similarities via asynchronous jobs.</li>
+              <li>Persist relationships as metadata scoped to the user.</li>
+              <li>Render a graph UI on demand with Material Design network chip components.</li>
+            </ol>
+          </BrutalCard>
         </div>
-    </div>
-</Section>
+      </BrutalCard>
+    </section>
 
-<Section icon="👥" number="5" title="Target Users" color='bg-yellow-300'>
-    <table class="w-full border-collapse border-2 border-black">
-        <thead class="bg-black text-white text-left"><tr class="bg-black text-white text-left"><th class="border-2 border-black p-3">Persona</th><th class="border-2 border-black p-3">Pain Point</th><th class="border-2 border-black p-3">Desired Outcome</th></tr></thead>
-        <tbody>
-            <tr class="bg-white"><td class="border-2 border-black p-3 font-semibold">Researcher</td><td class="border-2 border-black p-3">Repeats work</td><td class="border-2 border-black p-3">See “Bias” across notebooks</td></tr>
-            <tr class="bg-gray-50"><td class="border-2 border-black p-3 font-semibold">Strategist</td><td class="border-2 border-black p-3">Copies notes</td><td class="border-2 border-black p-3">Surface reusable frameworks</td></tr>
-            <tr class="bg-white"><td class="border-2 border-black p-3 font-semibold">Writer</td><td class="border-2 border-black p-3">Forgets drafts</td><td class="border-2 border-black p-3">Trace idea evolution</td></tr>
-        </tbody>
-    </table>
-</Section>
+    <section id="scope" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("shield")} inline-flex`}>🛡 De-Risking</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-5">MVP Scope & De-Risking</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+          <p class="text-xs font-semibold uppercase tracking-[0.16em] text-gray-600">Challenge</p>
+          <h3 class="mt-2 text-lg font-bold text-gray-900">Latency and cost</h3>
+          <p class="mt-3 text-sm sm:text-base text-gray-900 leading-relaxed">Asynchronous linking through batch jobs keeps compute lightweight and scalable.</p>
+        </BrutalCard>
+        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+          <p class="text-xs font-semibold uppercase tracking-[0.16em] text-gray-600">Challenge</p>
+          <h3 class="mt-2 text-lg font-bold text-gray-900">Privacy and control</h3>
+          <p class="mt-3 text-sm sm:text-base text-gray-900 leading-relaxed">User-scoped linking ensures intentional consent with opt-in selection per notebook.</p>
+        </BrutalCard>
+        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+          <p class="text-xs font-semibold uppercase tracking-[0.16em] text-gray-600">Challenge</p>
+          <h3 class="mt-2 text-lg font-bold text-gray-900">Hallucination risk</h3>
+          <p class="mt-3 text-sm sm:text-base text-gray-900 leading-relaxed">Static cards pair every relationship with a cited source to reinforce grounding.</p>
+        </BrutalCard>
+        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+          <p class="text-xs font-semibold uppercase tracking-[0.16em] text-gray-600">Challenge</p>
+          <h3 class="mt-2 text-lg font-bold text-gray-900">Cognitive overload</h3>
+          <p class="mt-3 text-sm sm:text-base text-gray-900 leading-relaxed">Progressive disclosure maintains a clean visual hierarchy and reduces overwhelm.</p>
+        </BrutalCard>
+      </div>
+    </section>
 
-<Section icon="🗺️" number="6" title="User Journey" color='bg-yellow-300'>
-    <div class="flex items-center justify-center space-x-4">
-        <div class="text-center"> <p class="text-4xl">😫</p> <p class="font-bold">Before</p> <p class="text-sm">Manual search, no connections.</p> </div>
-        <p class="text-5xl font-mono">→</p>
-        <div class="text-center"> <p class="text-4xl">✨</p> <p class="font-bold">After</p> <p class="text-sm">Insight panel, instant context.</p> </div>
-    </div>
-</Section>
+    <section id="stories" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("build")} inline-flex`}>📋 User Stories</span>
+      <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7 border-2 border-black shadow-[8px_8px_0_0_#000] rounded-2xl">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-4">User Stories & Acceptance Criteria</h2>
+        <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+          Stories ladder directly into the MVP: every acceptance chip locks latency, trust, or freshness so the graph feels instant and reliable on mobile and desktop.
+        </p>
+        <div class="mt-6 space-y-4">
+          <article class="border-2 border-black rounded-2xl bg-white shadow-[6px_6px_0_0_#000] p-5">
+            <div class="flex items-start gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-full border-2 border-black bg-[#bbf7d0] font-black text-lg">1</span>
+              <div class="flex-1">
+                <h3 class="text-base sm:text-lg font-bold text-gray-900 leading-snug">
+                  As a user, I see related notebooks in the Insight Graph panel.
+                </h3>
+                <div class="mt-3 border-2 border-black rounded-xl bg-[#f8fafc] px-3 py-2">
+                  <span class="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-600">Acceptance</span>
+                  <p class="mt-1 text-sm sm:text-base text-gray-900">Top three nodes appear under 200 ms with title, snippet, and source.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="border-2 border-black rounded-2xl bg-white shadow-[6px_6px_0_0_#000] p-5">
+            <div class="flex items-start gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-full border-2 border-black bg-[#fde68a] font-black text-lg">2</span>
+              <div class="flex-1">
+                <h3 class="text-base sm:text-lg font-bold text-gray-900 leading-snug">
+                  I can expand the graph to explore more connections.
+                </h3>
+                <div class="mt-3 border-2 border-black rounded-xl bg-[#fff7ed] px-3 py-2">
+                  <span class="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-600">Acceptance</span>
+                  <p class="mt-1 text-sm sm:text-base text-gray-900">Up to ten additional nodes load under 500 ms.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="border-2 border-black rounded-2xl bg-white shadow-[6px_6px_0_0_#000] p-5">
+            <div class="flex items-start gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-full border-2 border-black bg-[#fecdd3] font-black text-lg">3</span>
+              <div class="flex-1">
+                <h3 class="text-base sm:text-lg font-bold text-gray-900 leading-snug">
+                  I can click a node to open its content.
+                </h3>
+                <div class="mt-3 border-2 border-black rounded-xl bg-[#fef2f2] px-3 py-2">
+                  <span class="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-600">Acceptance</span>
+                  <p class="mt-1 text-sm sm:text-base text-gray-900">Node navigation opens the source paragraph or notebook page.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="border-2 border-black rounded-2xl bg-white shadow-[6px_6px_0_0_#000] p-5">
+            <div class="flex items-start gap-3">
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-full border-2 border-black bg-[#bae6fd] font-black text-lg">4</span>
+              <div class="flex-1">
+                <h3 class="text-base sm:text-lg font-bold text-gray-900 leading-snug">
+                  The graph reflects new information soon after I add sources.
+                </h3>
+                <div class="mt-3 border-2 border-black rounded-xl bg-[#e0f2fe] px-3 py-2">
+                  <span class="text-[11px] font-semibold uppercase tracking-[0.16em] text-gray-600">Acceptance</span>
+                  <p class="mt-1 text-sm sm:text-base text-gray-900">New links appear within 24 hours of notebook updates.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </BrutalCard>
+    </section>
 
-<Section icon="💡" number="7" title="Proposed Solution — MVP" color='bg-yellow-300'>
-    <p><span class="font-bold">Concept:</span> A lightweight, trustworthy overlay that visualizes relationships via asynchronous, user-scoped semantic linking.</p>
-    <div class="mt-4 p-4 bg-gray-50 border-2 border-black grid grid-cols-3 gap-4 text-center">
-        <div><p class="text-2xl">⚡</p><p class="font-bold">Fast Loading</p><p class="text-xs">(&lt;200 ms)</p></div>
-        <div><p class="text-2xl">🃏</p><p class="font-bold">Static Cards</p><p class="text-xs">w/ Snippets</p></div>
-        <div><p class="text-2xl">🔍</p><p class="font-bold">Progressive Disclosure</p><p class="text-xs">3 → 10 Nodes</p></div>
-    </div>
-</Section>
+    <section id="metrics" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("metric")} inline-flex`}>📊 Metrics</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-5">Success Metrics & KPIs</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+        <BrutalCard color="#ffffff" class="p-6 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+          <h3 class="text-lg font-extrabold uppercase tracking-[0.16em] text-gray-900">Engagement</h3>
+          <p class="mt-3 text-sm sm:text-base text-gray-900 leading-relaxed">20% of users with two or more notebooks open Insight Graph within seven days.</p>
+        </BrutalCard>
+        <BrutalCard color="#ffffff" class="p-6 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+          <h3 class="text-lg font-extrabold uppercase tracking-[0.16em] text-gray-900">Depth</h3>
+          <p class="mt-3 text-sm sm:text-base text-gray-900 leading-relaxed">20% lift in pages visited that originate from graph links.</p>
+        </BrutalCard>
+        <BrutalCard color="#ffffff" class="p-6 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+          <h3 class="text-lg font-extrabold uppercase tracking-[0.16em] text-gray-900">Retention & Trust</h3>
+          <ul class="mt-3 space-y-3 text-sm sm:text-base text-gray-900 leading-relaxed">
+            <li>10% increase in 90-day retention for multi-notebook users.</li>
+            <li>At least 80% positive relevance rating for surfaced links.</li>
+          </ul>
+        </BrutalCard>
+        <BrutalCard color="#ffffff" class="p-6 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+          <h3 class="text-lg font-extrabold uppercase tracking-[0.16em] text-gray-900">Operational & Business</h3>
+          <ul class="mt-3 space-y-3 text-sm sm:text-base text-gray-900 leading-relaxed">
+            <li>Graph load times under 200 ms and false link rate below 25%.</li>
+            <li>Increase NotebookLM Pro conversions by 12% with advanced knowledge features.</li>
+          </ul>
+        </BrutalCard>
+      </div>
+    </section>
 
-<Section icon="🛡️" number="8" title="MVP Scope & De-Risking" color='bg-yellow-300'>
-    <div class="space-y-4">
-        <div class="flex items-start"><span class="text-xl mr-3">🐢</span><div><span class="font-bold">Latency/Cost:</span> Mitigated by asynchronous batch jobs.</div></div>
-        <div class="flex items-start"><span class="text-xl mr-3">🔒</span><div><span class="font-bold">Privacy:</span> Mitigated by user-scoped, opt-in linking.</div></div>
-        <div class="flex items-start"><span class="text-xl mr-3">🤖</span><div><span class="font-bold">Hallucination:</span> Mitigated by static cards with direct citations.</div></div>
-        <div class="flex items-start"><span class="text-xl mr-3">🤯</span><div><span class="font-bold">Cognitive Overload:</span> Mitigated by progressive disclosure.</div></div>
-    </div>
-</Section>
+    <section id="responsible-ai" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("trust")} inline-flex`}>🔒 Responsible AI</span>
+      <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7 border-2 border-black shadow-[8px_8px_0_0_#000] rounded-2xl">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Responsible AI & Privacy Safeguards</h2>
+        <ul class="space-y-3 text-sm sm:text-base text-gray-900 leading-relaxed">
+          <li>Compute links only between notebooks the user explicitly approves.</li>
+          <li>Cite exact source paragraphs for every connection to stay verifiable.</li>
+          <li>Display confidence scores so users can calibrate trust.</li>
+          <li>Hold cross-user or shared linking until privacy review passes.</li>
+          <li>Allow users to delete or dismiss irrelevant connections instantly.</li>
+        </ul>
+      </BrutalCard>
+    </section>
 
-<Section icon="✔️" number="9" title="User Stories & AC" color='bg-yellow-300'>
-    <ul class="space-y-3">
-        <li><span class="font-bold">Story 1:</span> As a user, I see related notebooks. <span class="block pl-5 text-sm text-gray-600">AC: Top 3 nodes appear &lt;200ms.</span></li>
-        <li><span class="font-bold">Story 2:</span> I can expand to see more connections. <span class="block pl-5 text-sm text-gray-600">AC: Up to 10 nodes load &lt;500ms.</span></li>
-        <li><span class="font-bold">Story 3:</span> I can click a node to open its content. <span class="block pl-5 text-sm text-gray-600">AC: Navigates to source.</span></li>
-    </ul>
-</Section>
+    <section id="risks" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("risk")} inline-flex`}>⚠ Risks</span>
+      <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7 border-2 border-black shadow-[8px_8px_0_0_#000] rounded-2xl">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-5">Risks & Dependencies</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+          <BrutalCard color="#eef2ff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+            <h3 class="text-lg font-bold text-gray-900">Embedding drift over time</h3>
+            <p class="mt-2 text-sm sm:text-base text-gray-900 leading-relaxed">Re-compute similarities weekly and version embeddings to keep relevance fresh.</p>
+          </BrutalCard>
+          <BrutalCard color="#eef2ff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+            <h3 class="text-lg font-bold text-gray-900">UX over-complexity</h3>
+            <p class="mt-2 text-sm sm:text-base text-gray-900 leading-relaxed">Progressive disclosure and opinionated visual hierarchy keep the graph approachable.</p>
+          </BrutalCard>
+          <BrutalCard color="#eef2ff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+            <h3 class="text-lg font-bold text-gray-900">Infrastructure cost creep</h3>
+            <p class="mt-2 text-sm sm:text-base text-gray-900 leading-relaxed">Sample long-tail notebooks and cache popular link sets to control spend.</p>
+          </BrutalCard>
+          <BrutalCard color="#eef2ff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+            <h3 class="text-lg font-bold text-gray-900">Trust erosion from false positives</h3>
+            <p class="mt-2 text-sm sm:text-base text-gray-900 leading-relaxed">Capture feedback loops and use active learning to demote bad links quickly.</p>
+          </BrutalCard>
+        </div>
+        <div class="mt-6 border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] bg-[#f8fafc] px-5 py-4">
+          <h3 class="text-sm sm:text-base font-extrabold uppercase tracking-[0.16em] text-gray-900">Key Dependencies</h3>
+          <ul class="mt-3 space-y-2 text-sm sm:text-base text-gray-900 leading-relaxed">
+            <li>Vector index infrastructure and Gemini API batch embedding pipeline.</li>
+            <li>Privacy team review for scoped linking and data retention.</li>
+            <li>Material design system updates for network visualization components.</li>
+          </ul>
+        </div>
+      </BrutalCard>
+    </section>
 
-<Section icon="📊" number="10" title="Success Metrics / KPIs" color='bg-yellow-300'>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <StatCard value="+10%" label="Retention" />
-        <StatCard value="+20%" label="Depth" />
-        <StatCard value="≥80%" label="Trust" />
-        <StatCard value="&lt;200ms" label="Load Time" />
-    </div>
-</Section>
+    <section id="technical" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("tech")} inline-flex`}>⚙ Technical Notes</span>
+      <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7 border-2 border-black shadow-[8px_8px_0_0_#000] rounded-2xl">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Technical Details</h2>
+        <ul class="space-y-3 text-sm sm:text-base text-gray-900 leading-relaxed">
+          <li>Chunk size around 500 tokens; cosine similarity threshold 0.82 determines linking.</li>
+          <li>Hybrid Colossus and Faiss vector index for scale and low latency retrieval.</li>
+          <li>Update cadence: nightly for active users, weekly for inactive cohorts.</li>
+          <li>Graph visualization reuses Material Design network chip patterns for familiarity.</li>
+        </ul>
+      </BrutalCard>
+    </section>
 
-<Section icon="🔒" number="11" title="Responsible AI & Privacy" color='bg-yellow-300'>
-    <ul class="list-disc pl-5 space-y-2"><li>Links are computed only between user-approved notebooks.</li><li>All connections cite specific source paragraphs to be verifiable.</li><li>Confidence scores are displayed for each link.</li><li>Users can delete or dismiss irrelevant connections.</li></ul>
-</Section>
+    <section id="future" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("future")} inline-flex`}>🚀 Future Path</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-5">Future Opportunities</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+          <h3 class="text-sm sm:text-base font-extrabold uppercase tracking-[0.16em] text-gray-900">Phase 2 - Structured Meaning</h3>
+          <ul class="mt-3 space-y-3 text-sm sm:text-base text-gray-900 leading-relaxed">
+            <li>Topic clusters</li>
+            <li>Narrative threads</li>
+            <li>User-created links</li>
+          </ul>
+        </BrutalCard>
+        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+          <h3 class="text-sm sm:text-base font-extrabold uppercase tracking-[0.16em] text-gray-900">Phase 3 - Action Layer</h3>
+          <ul class="mt-3 space-y-3 text-sm sm:text-base text-gray-900 leading-relaxed">
+            <li>Export to Docs or Slides</li>
+            <li>Story mode for presentations</li>
+          </ul>
+        </BrutalCard>
+        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+          <h3 class="text-sm sm:text-base font-extrabold uppercase tracking-[0.16em] text-gray-900">Phase 4 - Collaboration & Ecosystem</h3>
+          <ul class="mt-3 space-y-3 text-sm sm:text-base text-gray-900 leading-relaxed">
+            <li>Shared graphs for teams</li>
+            <li>Public publishing and embeds</li>
+            <li>API integrations</li>
+          </ul>
+        </BrutalCard>
+      </div>
+    </section>
 
-<Section icon="⚠️" number="12" title="Risks & Dependencies" color='bg-yellow-300'>
-    <dl><dt class="font-bold">Risk: Embedding drift</dt><dd class="pl-4 mb-2">Mitigation: Re-compute weekly.</dd><dt class="font-bold">Risk: UX over-complexity</dt><dd class="pl-4 mb-2">Mitigation: Progressive disclosure.</dd><dt class="font-bold">Risk: Infra cost creep</dt><dd class="pl-4">Mitigation: Sampling & caching.</dd></dl>
-</Section>
+    <section id="ecosystem" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("ecosystem")} inline-flex`}>🌐 Ecosystem</span>
+      <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7 border-2 border-black shadow-[8px_8px_0_0_#000] rounded-2xl">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Ecosystem Alignment</h2>
+        <ul class="space-y-3 text-sm sm:text-base text-gray-900 leading-relaxed">
+          <li>Gemini for Workspace: convert graph clusters into Docs or Slides summaries.</li>
+          <li>Google Drive: cross-link Drive files back to graph nodes.</li>
+          <li>Search Generative Experience: extend Insight Graph to "answers from your knowledge."</li>
+          <li>Android and Pixel: ship an Insight Graph widget for mobile quick navigation.</li>
+        </ul>
+      </BrutalCard>
+    </section>
 
-<Section icon="⚙️" number="13" title="Technical Notes" color='bg-yellow-300'>
-    <ul class="list-none space-y-2">
-        <li><span class="font-semibold bg-gray-200 px-2 py-1">Chunk Size:</span> ≈ 500 tokens</li>
-        <li><span class="font-semibold bg-gray-200 px-2 py-1">Similarity:</span> cosine ≥ 0.82</li>
-        <li><span class="font-semibold bg-gray-200 px-2 py-1">Vector Index:</span> Colossus / Faiss hybrid</li>
-        <li><span class="font-semibold bg-gray-200 px-2 py-1">Update Cadence:</span> Nightly (active) / Weekly (inactive)</li>
-    </ul>
-</Section>
-
-<Section icon="🚀" number="14" title="Future Opportunities" color='bg-yellow-300'>
-    <div class="border-l-4 border-black space-y-8 py-2">
-        <TimelineItem phase="Phase 2" title="Structured Meaning" features="Topic Clusters, Narrative Threads, User-created Links" />
-        <TimelineItem phase="Phase 3" title="Action Layer" features="Export to Docs/Slides, Story Mode" />
-        <TimelineItem phase="Phase 4" title="Collaboration" features="Shared Graphs, API Integrations" />
-    </div>
-</Section>
-
-<Section icon="🌐" number="15" title="Ecosystem Alignment" color='bg-yellow-300'>
-    <ul class="list-disc pl-5 space-y-2"><li><span class="font-bold">Gemini for Workspace:</span> Transform clusters into Docs/Slides.</li><li><span class="font-bold">Google Drive:</span> Cross-link Drive files to graph nodes.</li><li><span class="font-bold">Search SGE:</span> Extend to “answers from your own knowledge.”</li></ul>
-</Section>
-
-<Section icon="💬" number="16" title="Voice of the User" color='bg-yellow-300'>
-    <Quote source="TheBusinessDive 2024">“You can’t connect your notebooks … each works like a separate folder.”</Quote>
-    <Quote source="Reddit r/notebooklm">“NotebookLM is awesome but adding links is painful.”</Quote>
-</Section>
-
-<Section icon="🏆" number="17" title="Success Narrative" color='bg-yellow-300'>
-    <Quote source="An Ideal User">“I used to treat NotebookLM like a smarter Notion page. Now it feels like a map of my brain.”</Quote>
-</Section>
-
-<Section icon="📎" number="18" title="Appendix" color='bg-yellow-300'>
-    <ul class="list-disc pl-5 space-y-2"><li>Public Limits (Support Docs)</li><li>Hallucination Rate Comparisons [arXiv:2509.25498]</li><li>Infrastructure Diagram</li></ul>
-</Section>
-
+    <section id="voice" class="scroll-mt-24 mt-12 sm:mt-16 mb-12 sm:mb-16">
+      <span class={`${pillClass("voice")} inline-flex`}>💬 Voice of the User</span>
+      <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7 border-2 border-black shadow-[8px_8px_0_0_#000] rounded-2xl space-y-6">
+        <h2 class="text-3xl md:text-4xl font-extrabold">What People Are Saying</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+          <BrutalCard color="#f8fafc" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+            <blockquote class="text-base sm:text-lg italic leading-relaxed text-gray-900">
+              "You can't connect your notebooks ... each works like a separate folder."
+            </blockquote>
+            <p class="mt-3 text-xs sm:text-sm font-semibold uppercase tracking-[0.14em] text-gray-600 text-right">TheBusinessDive, 2024</p>
+          </BrutalCard>
+          <BrutalCard color="#f8fafc" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+            <blockquote class="text-base sm:text-lg italic leading-relaxed text-gray-900">
+              "NotebookLM is awesome but adding links is painful."
+            </blockquote>
+            <p class="mt-3 text-xs sm:text-sm font-semibold uppercase tracking-[0.14em] text-gray-600 text-right">Reddit · r/notebooklm</p>
+          </BrutalCard>
+        </div>
+      </BrutalCard>
+    </section>
+  </main>
 </div>
