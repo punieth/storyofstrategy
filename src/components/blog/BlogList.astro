@@ -7,16 +7,53 @@ interface Props {
 }
 
 const { posts } = Astro.props;
+const toneCycle: Array<'yellow' | 'orange' | 'blue' | 'red'> = [
+  'yellow',
+  'orange',
+  'blue',
+  'red',
+];
 ---
 
-<ul class='grid gap-8 md:grid-cols-2 xl:grid-cols-3'>
-  {
-    posts.map((post) => {
-      return (
-        <li class='list-none'>
-          <BlogSummaryCard post={post} />
-        </li>
-      );
-    })
-  }
-</ul>
+<section class='blog-feed-shell relative mx-auto w-full max-w-[90rem] px-4 py-16 sm:px-6 lg:px-8'>
+  <div class='relative overflow-hidden rounded-[2.25rem] border-[3px] border-[#111827] bg-gradient-to-br from-[#fff4e3] via-[#fffdf4] to-[#f1f7ff] p-6 shadow-[18px_18px_0_0_rgba(17,24,39,0.38)] sm:p-8 lg:p-12'>
+    <div class='pointer-events-none absolute -left-12 -top-14 hidden h-32 w-32 rotate-[-8deg] border-[3px] border-[#111827] bg-[#fde68a]/80 shadow-[12px_12px_0_rgba(17,24,39,0.3)] lg:block'></div>
+    <div class='pointer-events-none absolute -right-16 bottom-8 hidden h-36 w-36 rotate-12 border-[3px] border-[#111827] bg-[#bfdbfe]/70 shadow-[14px_14px_0_rgba(17,24,39,0.28)] lg:block'></div>
+
+    <div class='relative space-y-16'>
+      <div class='space-y-8'>
+        <span class='inline-flex w-fit items-center gap-3 rounded-full border-2 border-[#111827] bg-white px-4 py-2 text-xs font-black uppercase tracking-[0.3em] text-[#111827] shadow-[6px_6px_0_rgba(17,24,39,0.35)]'>
+          Field Notes
+          <span class='block h-2 w-2 rounded-full bg-[#111827]'></span>
+        </span>
+
+        <div class='grid gap-6 lg:grid-cols-[minmax(0,1fr)_0.65fr] lg:items-end'>
+          <h2 class='dm-serif text-4xl font-black leading-[1.05] text-[#111827] sm:text-5xl lg:text-[3.6rem]'>
+            Product Stories & Strategy Moves
+          </h2>
+          <p class='poppins max-w-2xl text-sm leading-relaxed text-[#111827]/80 lg:justify-self-end lg:text-right sm:text-base'>
+            Experiments, learnings, and frameworks explored through detailed breakdowns of real product challenges. Thought starter cards highlight the focus of each story.
+          </p>
+        </div>
+
+        <div class='flex flex-wrap items-center gap-4 text-[0.65rem] font-semibold uppercase tracking-[0.35em] text-[#111827]/55'>
+          <span class='h-[3px] w-12 bg-[#111827]'></span>
+          Latest dispatches from case studies, research notes, and product experiments.
+        </div>
+      </div>
+
+      <ul class='grid auto-rows-fr gap-10 lg:grid-cols-2 2xl:grid-cols-3'>
+        {
+          posts.map((post, index) => {
+            const tone = toneCycle[index % toneCycle.length];
+            return (
+              <li class='list-none'>
+                <BlogSummaryCard post={post} tone={tone} />
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+  </div>
+</section>

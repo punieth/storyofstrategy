@@ -1,6 +1,5 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { Image } from 'astro:assets';
 import BrutalCard from '@components/layout/Brutalcard.astro';
 
 interface Props {
@@ -9,54 +8,154 @@ interface Props {
 }
 
 const { post, tone = 'yellow' } = Astro.props;
+const enrichedFrontmatter = post.data as typeof post.data & {
+  category?: string;
+  readTime?: string;
+  tags?: string[];
+};
+const motifPalette: Record<NonNullable<Props['tone']>, { base: string; highlight: string; accent: string }> = {
+  yellow: {
+    base: '#fff7d6',
+    highlight: '#ffe9a8',
+    accent: '#facc15',
+  },
+  orange: {
+    base: '#ffe6d4',
+    highlight: '#ffcba0',
+    accent: '#f97316',
+  },
+  blue: {
+    base: '#e1edff',
+    highlight: '#c7ddff',
+    accent: '#2563eb',
+  },
+  red: {
+    base: '#ffe0e0',
+    highlight: '#ffbcbc',
+    accent: '#ef4444',
+  },
+};
+const companyThemes: Record<
+  string,
+  {
+    name: string;
+    tagline: string;
+    palette?: Partial<{ base: string; highlight: string; accent: string }>;
+  }
+> = {
+  'meesho-case-study': {
+    name: 'Meesho',
+    tagline: 'Social Commerce Trust Loop',
+    palette: { base: '#ffe9f3', highlight: '#ffd1ea', accent: '#ec4899' },
+  },
+  'razorpay-case-study': {
+    name: 'Razorpay',
+    tagline: 'Checkout Confidence Systems',
+    palette: { base: '#e5f0ff', highlight: '#cddbff', accent: '#1d4ed8' },
+  },
+  'notebooklm-case-study': {
+    name: 'NotebookLM',
+    tagline: 'AI Research Companion',
+    palette: { base: '#ebe8ff', highlight: '#dcd6ff', accent: '#7c3aed' },
+  },
+  'nobroker-prd': {
+    name: 'NoBroker',
+    tagline: 'Owner Performance Coach',
+    palette: { base: '#fff3d6', highlight: '#ffdca8', accent: '#ea580c' },
+  },
+};
 const publishedOn = new Intl.DateTimeFormat('en-US', {
   month: 'short',
   day: 'numeric',
   year: 'numeric',
 }).format(post.data.pubDate);
+const category = enrichedFrontmatter.category ?? 'Product Strategy';
+const readTime = enrichedFrontmatter.readTime ?? '5 min read';
+const entryKey = post.id.split('/').pop() ?? post.id;
+const companyTheme = companyThemes[entryKey];
+const motifBase = motifPalette[tone];
+const motif = companyTheme?.palette
+  ? {
+      base: companyTheme.palette.base ?? motifBase.base,
+      highlight: companyTheme.palette.highlight ?? motifBase.highlight,
+      accent: companyTheme.palette.accent ?? motifBase.accent,
+    }
+  : motifBase;
+const companyName = companyTheme?.name ?? category;
+const motifTagline = companyTheme?.tagline ?? post.data.author ?? 'Field Notes';
+const motifBackground = `radial-gradient(circle at 18% 22%, ${motif.highlight}, transparent 60%), linear-gradient(135deg, ${motif.base}, ${motif.highlight})`;
+const motifStripeOverlay = `repeating-linear-gradient(125deg, transparent 0 28px, ${motif.accent} 28px 44px)`;
 ---
 <BrutalCard
   tone={tone}
   color='#ffffff'
-  class='blog-summary is-subtle flex flex-col gap-6 border-2 border-[#111827]'
+  class='blog-summary is-subtle flex h-full flex-col gap-8 border-2 border-[#111827]'
 >
-  <div class='overflow-hidden rounded-xl border-[3px] border-[#111827] bg-white shadow-[4px_4px_0_0_rgba(17,24,39,0.35)]'>
-    <Image
-      src={post.data.imgUrl}
-      alt={post.data.title}
-      width={720}
-      height={540}
-      class='h-48 w-full object-cover'
-    />
-  </div>
+  <div class='flex flex-col gap-8 text-[#111827]'>
+    <div
+      class='group relative h-48 overflow-hidden rounded-[1.75rem] border-[3px] border-[#111827] shadow-[8px_8px_0_rgba(17,24,39,0.35)] transition-transform duration-200 ease-out hover:translate-x-[-3px] hover:translate-y-[-3px] hover:shadow-[12px_12px_0_rgba(17,24,39,0.45)] sm:h-56 lg:h-60'
+      style={`background: ${motifBackground};`}
+    >
+      <div
+        class='pointer-events-none absolute inset-0 opacity-30'
+        style={`background-image: ${motifStripeOverlay}; mix-blend-multiply;`}
+      ></div>
+      <div class='pointer-events-none absolute -left-7 top-5 hidden h-20 w-20 rotate-[-12deg] border-2 border-[#111827] bg-white/60 shadow-[6px_6px_0_rgba(17,24,39,0.28)] sm:block'></div>
+      <div class='pointer-events-none absolute bottom-6 right-6 hidden h-16 w-16 rotate-[18deg] border-2 border-dashed border-[#111827] bg-white/40 shadow-[5px_5px_0_rgba(17,24,39,0.24)] md:block'></div>
 
-  <div class='flex flex-col gap-4 text-[#111827]'>
-    <span class='inline-flex w-fit items-center gap-2 rounded-full border-2 border-[#111827] bg-white px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] shadow-[3px_3px_0_0_rgba(17,24,39,0.55)]'>
-      <span class='block h-2 w-2 rounded-full bg-[#111827]'></span>
-      {publishedOn}
-    </span>
+      <div class='relative z-10 flex h-full flex-col gap-4 px-5 py-5 sm:px-6 sm:py-6'>
+        <div class='inline-flex flex-wrap items-center gap-2 rounded-full border-2 border-[#111827] bg-white/85 px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.32em] text-[#111827] shadow-[4px_4px_0_rgba(17,24,39,0.3)] sm:text-[0.68rem]'>
+          <span>{category}</span>
+          <span class='mx-1 inline-block h-[3px] w-6 bg-[#111827]/55'></span>
+          <span>{publishedOn}</span>
+          <span>·</span>
+          <span>{readTime}</span>
+        </div>
 
-    <div class='space-y-3'>
-      <h3 class='dm-serif text-2xl font-black leading-tight text-[#111827] md:text-[1.75rem]'>
+        <div class='mt-auto space-y-3'>
+          <span class='poppins text-[0.68rem] font-semibold uppercase tracking-[0.32em] text-[#111827]/60'>Case Focus</span>
+          <div class='relative overflow-hidden rounded-[1.5rem] border-[3px] border-[#111827] bg-white/88 px-5 py-4 shadow-[6px_6px_0_rgba(17,24,39,0.38)] backdrop-blur-sm sm:px-6 sm:py-5'>
+            <span class='pointer-events-none absolute -right-10 -top-10 hidden h-24 w-24 rotate-12 border-2 border-dashed border-[#111827]/40 sm:block'></span>
+            <div class='relative flex items-center justify-between gap-4'>
+              <span class='dm-serif text-[clamp(1.8rem,6vw,3.2rem)] font-black uppercase leading-[0.9] tracking-tight text-[#111827]'>
+                {companyName}
+              </span>
+              <span class='poppins hidden min-w-[5rem] text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-[#111827]/60 sm:block'>
+                {post.data.author ?? 'Product Strategy'}
+              </span>
+            </div>
+            <span class='relative mt-3 block h-[4px] w-20 bg-[#111827] shadow-[3px_3px_0_rgba(17,24,39,0.35)]'></span>
+            <span class='relative mt-3 block text-[0.7rem] font-semibold uppercase tracking-[0.3em] text-[#111827]/70 sm:text-[0.75rem]'>
+              {motifTagline}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class='space-y-6'>
+      <h3 class='dm-serif text-[1.6rem] font-black leading-tight text-[#111827] sm:text-2xl lg:text-[1.9rem]'>
         {post.data.title}
       </h3>
-      <span class='block h-[6px] w-16 skew-x-[-25deg] bg-[#111827] shadow-[3px_3px_0_rgba(17,24,39,0.4)]'></span>
+      <p class='poppins text-sm leading-relaxed text-[#111827]/85 md:text-base'>
+        {post.data.description}
+      </p>
     </div>
-  </div>
 
-  <p class='poppins text-sm leading-relaxed text-[#111827]/90 md:text-base'>
-    {post.data.description}
-  </p>
+    <div class='mt-auto flex flex-col gap-4'>
+      {post.data.draft && (
+        <span class='inline-flex w-fit items-center gap-2 rounded-full border-2 border-[#111827] bg-[#fef08a] px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#111827] shadow-[4px_4px_0_rgba(17,24,39,0.4)]'>
+          Draft in progress
+        </span>
+      )}
 
-  <div class='mt-auto flex flex-col gap-4'>
-    {post.data.draft && (
-      <span class='inline-flex w-fit items-center gap-2 rounded-full border-2 border-[#111827] bg-[#fef08a] px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#111827] shadow-[3px_3px_0_0_rgba(17,24,39,0.55)]'>
-        Draft in progress
-      </span>
-    )}
-
-    <a class='btn self-start' href={`/blog/${post.id}/`}>
-      Read post →
-    </a>
+      <a
+        class='inline-flex w-fit items-center gap-3 rounded-full border-[3px] border-[#111827] bg-[#111827] px-6 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-[6px_6px_0_rgba(17,24,39,0.4)] transition-transform duration-150 ease-out hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[8px_8px_0_rgba(17,24,39,0.38)]'
+        href={`/blog/${post.id}/`}
+      >
+        Read Post
+        <span class='text-lg'>↗</span>
+      </a>
+    </div>
   </div>
 </BrutalCard>
