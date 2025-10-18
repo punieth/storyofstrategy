@@ -13,7 +13,14 @@ const enrichedFrontmatter = post.data as typeof post.data & {
   readTime?: string;
   tags?: string[];
 };
-const motifPalette: Record<NonNullable<Props['tone']>, { base: string; highlight: string; accent: string }> = {
+interface MotifColors {
+  base: string;
+  highlight: string;
+  accent: string;
+  border?: string;
+  stripe?: string;
+}
+const motifPalette: Record<NonNullable<Props['tone']>, MotifColors> = {
   yellow: {
     base: '#fff7d6',
     highlight: '#ffe9a8',
@@ -40,28 +47,52 @@ const companyThemes: Record<
   {
     name: string;
     tagline: string;
-    palette?: Partial<{ base: string; highlight: string; accent: string }>;
+    palette?: Partial<MotifColors>;
   }
 > = {
   'meesho-case-study': {
     name: 'Meesho',
     tagline: 'Social Commerce Trust Loop',
-    palette: { base: '#ffe9f3', highlight: '#ffd1ea', accent: '#ec4899' },
+    palette: {
+      base: '#fff0f8',
+      highlight: '#ffd4ec',
+      accent: '#f43397',
+      border: '#9f1f68',
+      stripe: '#d946ef',
+    },
   },
   'razorpay-case-study': {
     name: 'Razorpay',
     tagline: 'Checkout Confidence Systems',
-    palette: { base: '#e5f0ff', highlight: '#cddbff', accent: '#1d4ed8' },
+    palette: {
+      base: '#e7f1ff',
+      highlight: '#cfe2ff',
+      accent: '#2b84ea',
+      border: '#0b1f4b',
+      stripe: '#0bc3e8',
+    },
   },
   'notebooklm-case-study': {
     name: 'NotebookLM',
     tagline: 'AI Research Companion',
-    palette: { base: '#ebe8ff', highlight: '#dcd6ff', accent: '#7c3aed' },
+    palette: {
+      base: '#f0f5ff',
+      highlight: '#dfe6ff',
+      accent: '#7c3aed',
+      border: '#1e1b4b',
+      stripe: '#38bdf8',
+    },
   },
   'nobroker-prd': {
     name: 'NoBroker',
     tagline: 'Owner Performance Coach',
-    palette: { base: '#fff3d6', highlight: '#ffdca8', accent: '#ea580c' },
+    palette: {
+      base: '#fff5f2',
+      highlight: '#ffd9cf',
+      accent: '#f04438',
+      border: '#9f1a11',
+      stripe: '#fb923c',
+    },
   },
 };
 const publishedOn = new Intl.DateTimeFormat('en-US', {
@@ -74,88 +105,86 @@ const readTime = enrichedFrontmatter.readTime ?? '5 min read';
 const entryKey = post.id.split('/').pop() ?? post.id;
 const companyTheme = companyThemes[entryKey];
 const motifBase = motifPalette[tone];
-const motif = companyTheme?.palette
-  ? {
-      base: companyTheme.palette.base ?? motifBase.base,
-      highlight: companyTheme.palette.highlight ?? motifBase.highlight,
-      accent: companyTheme.palette.accent ?? motifBase.accent,
-    }
-  : motifBase;
+const motif: MotifColors = {
+  ...motifBase,
+  ...(companyTheme?.palette ?? {}),
+};
 const companyName = companyTheme?.name ?? category;
-const motifTagline = companyTheme?.tagline ?? post.data.author ?? 'Field Notes';
-const motifBackground = `radial-gradient(circle at 18% 22%, ${motif.highlight}, transparent 60%), linear-gradient(135deg, ${motif.base}, ${motif.highlight})`;
-const motifStripeOverlay = `repeating-linear-gradient(125deg, transparent 0 28px, ${motif.accent} 28px 44px)`;
+const heroWord = companyName.toUpperCase();
+const accentColor = motif.accent ?? '#111827';
+const borderColor = motif.border ?? '#111827';
+const baseTint = motif.base ?? '#ffffff';
+const headerPattern =
+  motif.stripe ??
+  `repeating-linear-gradient(135deg, transparent 0 10px, ${accentColor} 10px 20px)`;
 ---
 <BrutalCard
   tone={tone}
-  color='#ffffff'
-  class='blog-summary is-subtle flex h-full flex-col gap-8 border-2 border-[#111827]'
+  color='#fbfaf5'
+  class='blog-summary group flex flex-col border-2 border-[#111827] bg-[#fbfaf5]'
+  style='aspect-ratio: 1;'
 >
-  <div class='flex flex-col gap-8 text-[#111827]'>
-    <div
-      class='group relative h-48 overflow-hidden rounded-[1.75rem] border-[3px] border-[#111827] shadow-[8px_8px_0_rgba(17,24,39,0.35)] transition-transform duration-200 ease-out hover:translate-x-[-3px] hover:translate-y-[-3px] hover:shadow-[12px_12px_0_rgba(17,24,39,0.45)] sm:h-56 lg:h-60'
-      style={`background: ${motifBackground};`}
+  <div
+    class='flex h-full flex-col justify-between gap-6 border-[3px] border-[#111827] bg-white p-6 text-[#111827] shadow-[14px_14px_0_rgba(17,24,39,0.38)] transition-transform duration-150 ease-out hover:-translate-y-[4px] hover:shadow-[18px_18px_0_rgba(17,24,39,0.32)] sm:p-7'
+    style={`border-color: ${borderColor};`}
+  >
+    <header
+      class='relative flex flex-col gap-5 border-b-[3px] pb-4 sm:flex-row sm:items-center sm:justify-between'
+      style={`border-color: ${borderColor};`}
     >
-      <div
-        class='pointer-events-none absolute inset-0 opacity-30'
-        style={`background-image: ${motifStripeOverlay}; mix-blend-multiply;`}
-      ></div>
-      <div class='pointer-events-none absolute -left-7 top-5 hidden h-20 w-20 rotate-[-12deg] border-2 border-[#111827] bg-white/60 shadow-[6px_6px_0_rgba(17,24,39,0.28)] sm:block'></div>
-      <div class='pointer-events-none absolute bottom-6 right-6 hidden h-16 w-16 rotate-[18deg] border-2 border-dashed border-[#111827] bg-white/40 shadow-[5px_5px_0_rgba(17,24,39,0.24)] md:block'></div>
-
-      <div class='relative z-10 flex h-full flex-col gap-4 px-5 py-5 sm:px-6 sm:py-6'>
-        <div class='inline-flex flex-wrap items-center gap-2 rounded-full border-2 border-[#111827] bg-white/85 px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.32em] text-[#111827] shadow-[4px_4px_0_rgba(17,24,39,0.3)] sm:text-[0.68rem]'>
-          <span>{category}</span>
-          <span class='mx-1 inline-block h-[3px] w-6 bg-[#111827]/55'></span>
-          <span>{publishedOn}</span>
-          <span>·</span>
-          <span>{readTime}</span>
-        </div>
-
-        <div class='mt-auto space-y-3'>
-          <span class='poppins text-[0.68rem] font-semibold uppercase tracking-[0.32em] text-[#111827]/60'>Case Focus</span>
-          <div class='relative overflow-hidden rounded-[1.5rem] border-[3px] border-[#111827] bg-white/88 px-5 py-4 shadow-[6px_6px_0_rgba(17,24,39,0.38)] backdrop-blur-sm sm:px-6 sm:py-5'>
-            <span class='pointer-events-none absolute -right-10 -top-10 hidden h-24 w-24 rotate-12 border-2 border-dashed border-[#111827]/40 sm:block'></span>
-            <div class='relative flex items-center justify-between gap-4'>
-              <span class='dm-serif text-[clamp(1.8rem,6vw,3.2rem)] font-black uppercase leading-[0.9] tracking-tight text-[#111827]'>
-                {companyName}
-              </span>
-              <span class='poppins hidden min-w-[5rem] text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-[#111827]/60 sm:block'>
-                {post.data.author ?? 'Product Strategy'}
-              </span>
-            </div>
-            <span class='relative mt-3 block h-[4px] w-20 bg-[#111827] shadow-[3px_3px_0_rgba(17,24,39,0.35)]'></span>
-            <span class='relative mt-3 block text-[0.7rem] font-semibold uppercase tracking-[0.3em] text-[#111827]/70 sm:text-[0.75rem]'>
-              {motifTagline}
-            </span>
-          </div>
-        </div>
+      <div class='flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-3'>
+        <span
+          class='grid h-10 w-10 place-items-center border-[3px] border-[#111827] bg-white text-xs font-bold uppercase tracking-[0.3em]'
+          style={`background: ${baseTint}; border-color: ${borderColor};`}
+        >
+          ∎
+        </span>
+        <span
+          class='dm-serif max-w-full text-balance font-black uppercase leading-[0.92] tracking-[0.16em] text-center sm:text-left'
+          style={`font-size: clamp(1.4rem, 3.2vw, 2.1rem); word-break: break-word; overflow-wrap: anywhere;`}
+        >
+          {heroWord}
+        </span>
       </div>
-    </div>
+      <div
+        class='h-8 w-full flex-1 rounded-sm border-[3px]'
+        style={`background: ${headerPattern}; border-color: ${borderColor};`}
+        aria-hidden='true'
+      ></div>
+    </header>
 
-    <div class='space-y-6'>
-      <h3 class='dm-serif text-[1.6rem] font-black leading-tight text-[#111827] sm:text-2xl lg:text-[1.9rem]'>
+    <div class='space-y-4'>
+      <h3 class='dm-serif text-[1.55rem] font-black leading-[1.05] sm:text-[1.8rem]'>
         {post.data.title}
       </h3>
-      <p class='poppins text-sm leading-relaxed text-[#111827]/85 md:text-base'>
+      <p class='poppins text-sm leading-relaxed text-[#111827]/80 md:text-[0.92rem]'>
         {post.data.description}
       </p>
     </div>
 
-    <div class='mt-auto flex flex-col gap-4'>
-      {post.data.draft && (
-        <span class='inline-flex w-fit items-center gap-2 rounded-full border-2 border-[#111827] bg-[#fef08a] px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#111827] shadow-[4px_4px_0_rgba(17,24,39,0.4)]'>
-          Draft in progress
-        </span>
-      )}
-
-      <a
-        class='inline-flex w-fit items-center gap-3 rounded-full border-[3px] border-[#111827] bg-[#111827] px-6 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-white shadow-[6px_6px_0_rgba(17,24,39,0.4)] transition-transform duration-150 ease-out hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[8px_8px_0_rgba(17,24,39,0.38)]'
-        href={`/blog/${post.id}/`}
-      >
-        Read Post
-        <span class='text-lg'>↗</span>
-      </a>
+    <div class='flex flex-wrap items-center gap-5 text-[0.72rem] uppercase tracking-[0.22em] text-[#111827]'>
+      <span class='inline-flex items-center gap-2 font-semibold'>
+        <span class='block h-[3px] w-8 bg-[#111827]' aria-hidden='true'></span>
+        Published {publishedOn}
+      </span>
+      <span class='inline-flex items-center gap-2 font-semibold'>
+        <span class='block h-[3px] w-8 bg-[#111827]' aria-hidden='true'></span>
+        Read Time {readTime}
+      </span>
     </div>
+
+    <a
+      class='inline-flex items-center gap-3 self-start bg-[#111827] px-4 py-2 text-[0.72rem] font-black uppercase tracking-[0.22em] text-white shadow-[9px_9px_0_rgba(17,24,39,0.38)] transition-transform duration-150 ease-out hover:-translate-y-[2px] hover:shadow-[12px_12px_0_rgba(17,24,39,0.3)]'
+      href={`/blog/${post.id}/`}
+    >
+      <span class='whitespace-nowrap'>Open Case Study</span>
+      <span
+        class='grid h-6 w-6 place-items-center text-sm font-semibold text-[#111827] shadow-[4px_4px_0_rgba(17,24,39,0.35)]'
+        style={`background-color: ${accentColor};`}
+        aria-hidden='true'
+      >
+        ↗
+      </span>
+    </a>
   </div>
 </BrutalCard>

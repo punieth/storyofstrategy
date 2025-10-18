@@ -15,34 +15,40 @@ const toneCycle: Array<'yellow' | 'orange' | 'blue' | 'red'> = [
 ];
 ---
 
-<section class='blog-feed-shell relative mx-auto w-full max-w-[90rem] px-4 py-16 sm:px-6 lg:px-8'>
-  <div class='relative overflow-hidden rounded-[2.25rem] border-[3px] border-[#111827] bg-gradient-to-br from-[#fff4e3] via-[#fffdf4] to-[#f1f7ff] p-6 shadow-[18px_18px_0_0_rgba(17,24,39,0.38)] sm:p-8 lg:p-12'>
-    <div class='pointer-events-none absolute -left-12 -top-14 hidden h-32 w-32 rotate-[-8deg] border-[3px] border-[#111827] bg-[#fde68a]/80 shadow-[12px_12px_0_rgba(17,24,39,0.3)] lg:block'></div>
-    <div class='pointer-events-none absolute -right-16 bottom-8 hidden h-36 w-36 rotate-12 border-[3px] border-[#111827] bg-[#bfdbfe]/70 shadow-[14px_14px_0_rgba(17,24,39,0.28)] lg:block'></div>
+<section class='blog-feed-shell relative mx-auto w-full max-w-[92rem] px-4 py-20 sm:px-6 lg:px-10'>
+  <div class='relative overflow-hidden border-[4px] border-[#111827] bg-[#fbfaf5] shadow-[22px_22px_0_rgba(17,24,39,0.45)]'>
+    <div
+      class='pointer-events-none absolute inset-y-0 left-0 hidden w-[5.5rem] border-r-[4px] border-[#111827] bg-[#111827] lg:block'
+      aria-hidden='true'
+    >
+      <div
+        class='absolute inset-[10%_15%] border-[3px] border-white'
+        style='background: repeating-linear-gradient(180deg, transparent 0 12px, #fbfaf5 12px 24px); mix-blend-mode: screen;'
+      ></div>
+    </div>
 
-    <div class='relative space-y-16'>
-      <div class='space-y-8'>
-        <span class='inline-flex w-fit items-center gap-3 rounded-full border-2 border-[#111827] bg-white px-4 py-2 text-xs font-black uppercase tracking-[0.3em] text-[#111827] shadow-[6px_6px_0_rgba(17,24,39,0.35)]'>
-          Field Notes
-          <span class='block h-2 w-2 rounded-full bg-[#111827]'></span>
-        </span>
-
-        <div class='grid gap-6 lg:grid-cols-[minmax(0,1fr)_0.65fr] lg:items-end'>
-          <h2 class='dm-serif text-4xl font-black leading-[1.05] text-[#111827] sm:text-5xl lg:text-[3.6rem]'>
-            Product Stories & Strategy Moves
+    <div class='relative z-10 space-y-16 px-6 py-12 sm:px-10 lg:px-16 lg:py-16 lg:pl-[7.5rem]'>
+      <div class='flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between'>
+        <div class='space-y-4'>
+          <span class='inline-flex w-fit items-center gap-3 border-[3px] border-[#111827] bg-white px-5 py-2 text-[0.75rem] font-black uppercase tracking-[0.32em] text-[#111827] shadow-[10px_10px_0_rgba(17,24,39,0.35)]'>
+            Field Notes
+            <span class='block h-[10px] w-[10px] border-[3px] border-[#111827] bg-[#fff4e3]' aria-hidden='true'></span>
+          </span>
+          <h2 class='dm-serif text-[3rem] font-black uppercase leading-[0.95] tracking-[0.16em] text-[#111827] sm:text-[3.6rem]'>
+            Product Stories
           </h2>
-          <p class='poppins max-w-2xl text-sm leading-relaxed text-[#111827]/80 lg:justify-self-end lg:text-right sm:text-base'>
-            Experiments, learnings, and frameworks explored through detailed breakdowns of real product challenges. Thought starter cards highlight the focus of each story.
-          </p>
         </div>
-
-        <div class='flex flex-wrap items-center gap-4 text-[0.65rem] font-semibold uppercase tracking-[0.35em] text-[#111827]/55'>
-          <span class='h-[3px] w-12 bg-[#111827]'></span>
-          Latest dispatches from case studies, research notes, and product experiments.
-        </div>
+        <p class='poppins max-w-2xl border-[3px] border-[#111827] bg-white px-6 py-5 text-sm leading-relaxed text-[#111827]/85 shadow-[12px_12px_0_rgba(17,24,39,0.32)] lg:text-base'>
+          Deep dives on how teams ship, scale, and sharpen product intuition. Each write-up is a distilled playbook with clear artefacts, tradeoffs, and forward experiments.
+        </p>
       </div>
 
-      <ul class='grid auto-rows-fr gap-10 lg:grid-cols-2 2xl:grid-cols-3'>
+      <div class='flex flex-wrap items-center gap-4 border-y-[3px] border-[#111827] py-6 text-[0.7rem] font-semibold uppercase tracking-[0.34em] text-[#111827]/55'>
+        <span class='block h-[3px] w-14 bg-[#111827]' aria-hidden='true'></span>
+        Latest dispatches from case studies, research notes, and product experiments.
+      </div>
+
+      <ul class='grid auto-rows-fr gap-10 md:grid-cols-2 lg:pl-4'>
         {
           posts.map((post, index) => {
             const tone = toneCycle[index % toneCycle.length];
