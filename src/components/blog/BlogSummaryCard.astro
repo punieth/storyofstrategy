@@ -112,12 +112,35 @@ const motif: MotifColors = {
 const companyName = companyTheme?.name ?? category;
 const heroWord = companyName.toUpperCase();
 const accentColor = motif.accent ?? '#111827';
-const borderColor = motif.border ?? '#111827';
+const borderColor = '#111827';
 const baseTint = motif.base ?? '#ffffff';
 const headerPattern =
   motif.stripe ??
   `repeating-linear-gradient(135deg, transparent 0 10px, ${accentColor} 10px 20px)`;
 ---
+<style>
+  .dynamic-shadow {
+    filter: drop-shadow(8px 8px 0 #111827);
+    transition: filter 0.2s ease-out, transform 0.2s ease-out;
+  }
+  .dynamic-shadow:hover {
+    filter: drop-shadow(4px 4px 0 #111827);
+    transform: translateY(-4px);
+  }
+
+  /* iOS fallback */
+  @supports (-webkit-touch-callout: none) {
+    .dynamic-shadow {
+      filter: none;
+      box-shadow: 8px 8px 0 #111827;
+      transition: box-shadow 0.2s ease-out, transform 0.2s ease-out;
+    }
+    .dynamic-shadow:hover {
+      filter: none;
+      box-shadow: 4px 4px 0 #111827;
+    }
+  }
+</style>
 <BrutalCard
   tone={tone}
   color='#fbfaf5'
@@ -126,7 +149,7 @@ const headerPattern =
   style='border-width: 1px;'
 >
   <div
-    class='flex h-full flex-col justify-between gap-4 border border-[#111827]/25 bg-white p-3 text-[#111827] transition-transform duration-150 ease-out hover:-translate-y-[4px] sm:border-[3px] sm:border-[#111827] sm:bg-white sm:p-6'
+    class='dynamic-shadow flex h-full flex-col justify-between gap-4 rounded-xl border border-[#111827]/25 bg-white p-3 text-[#111827] sm:border-[3px] sm:border-[#111827] sm:bg-white sm:p-6'
     style={`border-color: ${borderColor};`}
   >
     <header
