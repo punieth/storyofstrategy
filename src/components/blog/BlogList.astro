@@ -48,13 +48,13 @@ const toneCycle: Array<'yellow' | 'orange' | 'blue' | 'red'> = [
         Latest dispatches from case studies, research notes, and product experiments.
       </div>
 
-      <div class='sm:mx-0'>
-        <ul class='flex flex-col gap-6 -mx-4 md:grid md:auto-rows-fr md:grid-cols-2 md:gap-10 md:justify-items-stretch md:px-0 lg:pl-4'>
+      <div class='sm:p-0'>
+        <ul class='flex flex-col gap-6 md:grid md:auto-rows-fr md:grid-cols-2 md:gap-10 md:justify-items-stretch md:px-0 lg:pl-4'>
           {
             posts.map((post, index) => {
               const tone = toneCycle[index % toneCycle.length];
               return (
-                <li class='list-none w-full mx-4'>
+                <li class='list-none w-full'>
                   <BlogSummaryCard post={post} tone={tone} />
                 </li>
               );
