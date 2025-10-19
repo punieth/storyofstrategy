@@ -23,27 +23,233 @@ const toneCycle: Array<'yellow' | 'orange' | 'blue' | 'red'> = [
       filter: drop-shadow(22px 22px 0 rgba(17,24,39,0.45));
     }
   }
-  .neo-rule {
-    position: relative;
-    display: block;
-    height: 10px;
-    margin-inline: auto;
-    width: min(34rem, 94%);
-    border: 3px solid #111827;
-    background: repeating-linear-gradient(
-      135deg,
-      #111827 0 14px,
-      #fbfaf5 14px 28px
-    );
-    box-shadow: 6px 6px 0 rgba(17, 24, 39, 0.24);
+  .accent-column {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 5.5rem;
+    border-right: 4px solid #111827;
+    background: #f3f0f8;
+    padding: 3rem 1.35rem;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2.25rem;
+    box-shadow: inset -6px 0 0 rgba(17, 24, 39, 0.08);
   }
-  .neo-rule::after {
+  .accent-orbit {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border: 3px solid #111827;
+    border-radius: 1.5rem;
+    background: #fbfaf5;
+    box-shadow: 7px 7px 0 rgba(17, 24, 39, 0.18);
+    overflow: hidden;
+  }
+  .accent-orbit::before {
     content: '';
     position: absolute;
-    inset: 2px -6px -6px 6px;
-    border: 3px solid rgba(17, 24, 39, 0.85);
-    pointer-events: none;
-    mix-blend-mode: multiply;
+    inset: 20%;
+    border: 3px solid rgba(17, 24, 39, 0.28);
+    border-radius: 50%;
+  }
+  .accent-orbit::after {
+    content: '';
+    position: absolute;
+    width: 0.65rem;
+    height: 0.65rem;
+    border: 3px solid #111827;
+    border-radius: 50%;
+    background: #a7f0ff;
+    top: 18%;
+    right: 18%;
+    box-shadow: 3px 3px 0 rgba(17, 24, 39, 0.2);
+  }
+  .accent-dial {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border: 3px solid #111827;
+    border-radius: 1.35rem;
+    background: linear-gradient(135deg, #fbfaf5 10%, #ffe7e0 55%, #fbfaf5 100%);
+    box-shadow: 8px 8px 0 rgba(17, 24, 39, 0.22);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .accent-dial::before,
+  .accent-dial::after {
+    content: '';
+    position: absolute;
+    background: #111827;
+  }
+  .accent-dial::before {
+    width: 68%;
+    height: 3px;
+  }
+  .accent-dial::after {
+    height: 68%;
+    width: 3px;
+  }
+  .accent-dial__dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border: 3px solid #111827;
+    border-radius: 50%;
+    background: #fbfaf5;
+    box-shadow: 2px 2px 0 rgba(17, 24, 39, 0.24);
+  }
+  .accent-dial__hand {
+    position: absolute;
+    width: 2px;
+    height: 36%;
+    background: #111827;
+    transform-origin: bottom;
+    transform: translateY(-10%) rotate(-18deg);
+  }
+  .accent-bars {
+    width: 100%;
+    border: 3px solid #111827;
+    border-radius: 1.1rem;
+    background: #fbfaf5;
+    box-shadow: 6px 6px 0 rgba(17, 24, 39, 0.18);
+    padding: 0.85rem 0.7rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.45rem;
+  }
+  .accent-bars__bar {
+    display: block;
+    height: 6px;
+    border: 3px solid #111827;
+    border-radius: 999px;
+    background: #fbfaf5;
+    box-shadow: 3px 3px 0 rgba(17, 24, 39, 0.2);
+  }
+  .accent-bars__bar:nth-child(1) {
+    width: 68%;
+    background: #ffe977;
+  }
+  .accent-bars__bar:nth-child(2) {
+    width: 88%;
+    background: #a7f0ff;
+  }
+  .accent-bars__bar:nth-child(3) {
+    width: 54%;
+    background: #fbfaf5;
+  }
+  .field-marker {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: #111827;
+    padding-left: 1.5rem;
+  }
+  .field-marker::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 1.1rem;
+    height: 0.2rem;
+    background: #111827;
+    transform: translateY(-50%);
+    box-shadow: 3px 3px 0 rgba(17, 24, 39, 0.2);
+  }
+  .field-marker::after {
+    content: '';
+    width: 0.65rem;
+    height: 0.65rem;
+    border: 3px solid #111827;
+    border-radius: 50%;
+    background: #a7f0ff;
+  }
+  .mission-annotation {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 34rem;
+    border-left: 5px solid #111827;
+    padding: 0.35rem 0 0.35rem 2rem;
+    color: rgba(17, 24, 39, 0.86);
+    font-size: 0.96rem;
+    line-height: 1.7;
+  }
+  .mission-annotation::before {
+    content: '';
+    position: absolute;
+    left: 0.65rem;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(17, 24, 39, 0.22) 0 8px,
+      transparent 8px 16px
+    );
+  }
+  .mission-annotation__tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #111827;
+  }
+  .mission-annotation__tag::before {
+    content: '//';
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    color: rgba(17, 24, 39, 0.6);
+  }
+  .mission-annotation__body {
+    margin: 0;
+  }
+  .neo-separator {
+    position: relative;
+    display: block;
+    height: 16px;
+    margin-inline: auto;
+    width: min(36rem, 95%);
+    border: 3px solid #111827;
+    background: #fbfaf5;
+    box-shadow: 6px 6px 0 rgba(17, 24, 39, 0.22);
+  }
+  .neo-separator::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 12%;
+    right: 12%;
+    height: 3px;
+    background: #111827;
+    transform: translateY(-50%);
+  }
+  .neo-separator::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 50%;
+    right: 0.75rem;
+    border: 3px solid #111827;
+    background: #a7f0ff;
+    box-shadow: 6px 6px 0 rgba(17, 24, 39, 0.22);
+    transform: translateY(-50%) rotate(2deg);
   }
   /* iOS fallback */
   @supports (-webkit-touch-callout: none) {
@@ -61,33 +267,39 @@ const toneCycle: Array<'yellow' | 'orange' | 'blue' | 'red'> = [
 <section class='blog-feed-shell relative mx-auto w-full max-w-[92rem] px-0 pt-9 pb-14 sm:px-6 sm:pt-12 sm:pb-20 lg:px-10'>
   <div class='gray-shadow relative rounded-xl border-[4px] border-[#111827] bg-[#fbfaf5] lg:overflow-hidden'>
     <div
-      class='pointer-events-none absolute inset-y-0 left-0 hidden w-[5.5rem] border-r-[4px] border-[#111827] bg-[#1f1720] lg:block'
+      class='accent-column pointer-events-none hidden lg:flex'
       aria-hidden='true'
     >
-      <div
-        class='absolute inset-[10%_15%] border-[3px] border-white'
-        style='background: repeating-linear-gradient(135deg, #fff3e6 0 16px, #07d474 16px 32px, #1f1720 32px 48px); mix-blend-mode: normal; opacity: 1;'
-      ></div>
+      <div class='accent-orbit' aria-hidden='true'></div>
+      <div class='accent-dial'>
+        <span class='accent-dial__dot'></span>
+        <span class='accent-dial__hand'></span>
+      </div>
+      <div class='accent-bars' aria-hidden='true'>
+        <span class='accent-bars__bar'></span>
+        <span class='accent-bars__bar'></span>
+        <span class='accent-bars__bar'></span>
+      </div>
     </div>
 
     <div class='relative z-10 space-y-12 px-2 py-8 sm:space-y-16 sm:px-10 sm:py-12 lg:px-16 lg:py-16 lg:pl-[7.5rem]'>
       <div class='flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between'>
-        <div class='space-y-4'>
-          <span class='inline-flex w-fit items-center gap-3 border-[3px] border-[#111827] bg-white px-5 py-2 text-[0.75rem] font-black uppercase tracking-[0.32em] text-[#111827] shadow-[5px_5px_0_rgba(17,24,39,0.35)] sm:shadow-[10px_10px_0_rgba(17,24,39,0.35)]'>
-            Field Notes
-            <span class='block h-[10px] w-[10px] border-[3px] border-[#111827] bg-[#fff4e3]' aria-hidden='true'></span>
-          </span>
+        <div class='space-y-5'>
+          <span class='field-marker'>Field Notes</span>
           <h2 class='dm-serif text-[3rem] font-black uppercase leading-[0.95] tracking-[0.16em] text-[#111827] sm:text-[3.6rem]'>
             Product Stories
           </h2>
         </div>
-        <p class='poppins max-w-2xl border-[3px] border-[#111827] bg-white px-6 py-5 text-sm leading-relaxed text-[#111827]/85 shadow-[6px_6px_0_rgba(17,24,39,0.32)] sm:shadow-[12px_12px_0_rgba(17,24,39,0.32)] lg:text-base'>
-          Deep dives on how teams ship, scale, and sharpen product intuition. Each write-up is a distilled playbook with clear artefacts, tradeoffs, and forward experiments.
-        </p>
+        <div class='mission-annotation poppins'>
+          <span class='mission-annotation__tag'>Deep Dives</span>
+          <p class='mission-annotation__body'>
+            On how teams ship, scale, and sharpen product intuition. Each write-up is a distilled playbook with clear artefacts, tradeoffs, and forward experiments.
+          </p>
+        </div>
       </div>
 
       <div class='py-4'>
-        <div class='neo-rule' role='presentation'>
+        <div class='neo-separator' role='presentation'>
         </div>
       </div>
 
