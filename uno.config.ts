@@ -18,4 +18,9 @@ export default defineConfig({
     }),
     presetTypography(),
   ],
+  theme: {
+    colors: {
+      cream: '#fbfaf5',
+    },
+  },
 });

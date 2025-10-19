@@ -14,9 +14,71 @@ const toneCycle: Array<'yellow' | 'orange' | 'blue' | 'red'> = [
   'red',
 ];
 ---
-
+<style>
+  .gray-shadow {
+    filter: drop-shadow(10px 10px 0 rgba(17,24,39,0.45));
+  }
+  @media (min-width: 640px) {
+    .gray-shadow {
+      filter: drop-shadow(22px 22px 0 rgba(17,24,39,0.45));
+    }
+  }
+  .neo-rule {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.75rem;
+    margin-inline: auto;
+    max-width: 32rem;
+  }
+  .neo-rule__rail {
+    flex: 1;
+    min-width: 3.25rem;
+    height: 14px;
+    border: 3px solid #111827;
+    background: repeating-linear-gradient(
+      135deg,
+      rgba(17, 24, 39, 0.92) 0 18px,
+      #fff4e3 18px 32px
+    );
+    box-shadow: 6px 6px 0 rgba(17, 24, 39, 0.3);
+  }
+  .neo-rule__badge {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.55rem 1.75rem;
+    border: 3px solid #111827;
+    background: #ffffff;
+    box-shadow: 6px 6px 0 rgba(17, 24, 39, 0.35);
+  }
+  .neo-rule__badge::after {
+    content: '';
+    display: block;
+    width: 0.85rem;
+    height: 0.85rem;
+    border: 3px solid #111827;
+    background: #07d474;
+    transform: rotate(12deg);
+    box-shadow: 4px 4px 0 rgba(17, 24, 39, 0.3);
+  }
+  /* iOS fallback */
+  @supports (-webkit-touch-callout: none) {
+    .gray-shadow {
+      filter: none;
+      box-shadow: 10px 10px 0 rgba(17,24,39,0.45);
+    }
+    @media (min-width: 640px) {
+      .gray-shadow {
+        box-shadow: 22px 22px 0 rgba(17,24,39,0.45);
+      }
+    }
+  }
+</style>
 <section class='blog-feed-shell relative mx-auto w-full max-w-[92rem] px-0 pt-9 pb-14 sm:px-6 sm:pt-12 sm:pb-20 lg:px-10'>
-  <div class='relative rounded-xl border-[4px] border-[#111827] bg-[#fbfaf5] shadow-[10px_10px_0_rgba(17,24,39,0.45)] sm:shadow-[22px_22px_0_rgba(17,24,39,0.45)] lg:overflow-hidden'>
+  <div class='gray-shadow relative rounded-xl border-[4px] border-[#111827] bg-[#fbfaf5] lg:overflow-hidden'>
     <div
       class='pointer-events-none absolute inset-y-0 left-0 hidden w-[5.5rem] border-r-[4px] border-[#111827] bg-[#1f1720] lg:block'
       aria-hidden='true'
@@ -30,7 +92,7 @@ const toneCycle: Array<'yellow' | 'orange' | 'blue' | 'red'> = [
     <div class='relative z-10 space-y-12 px-2 py-8 sm:space-y-16 sm:px-10 sm:py-12 lg:px-16 lg:py-16 lg:pl-[7.5rem]'>
       <div class='flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between'>
         <div class='space-y-4'>
-          <span class='inline-flex w-fit items-center gap-3 border-[3px] border-[#111827] bg-white px-5 py-2 text-[0.75rem] font-black uppercase tracking-[0.32em] text-[#111827] shadow-[10px_10px_0_rgba(17,24,39,0.35)]'>
+          <span class='inline-flex w-fit items-center gap-3 border-[3px] border-[#111827] bg-white px-5 py-2 text-[0.75rem] font-black uppercase tracking-[0.32em] text-[#111827] shadow-[5px_5px_0_rgba(17,24,39,0.35)] sm:shadow-[10px_10px_0_rgba(17,24,39,0.35)]'>
             Field Notes
             <span class='block h-[10px] w-[10px] border-[3px] border-[#111827] bg-[#fff4e3]' aria-hidden='true'></span>
           </span>
@@ -38,18 +100,21 @@ const toneCycle: Array<'yellow' | 'orange' | 'blue' | 'red'> = [
             Product Stories
           </h2>
         </div>
-        <p class='poppins max-w-2xl border-[3px] border-[#111827] bg-white px-6 py-5 text-sm leading-relaxed text-[#111827]/85 shadow-[12px_12px_0_rgba(17,24,39,0.32)] lg:text-base'>
+        <p class='poppins max-w-2xl border-[3px] border-[#111827] bg-white px-6 py-5 text-sm leading-relaxed text-[#111827]/85 shadow-[6px_6px_0_rgba(17,24,39,0.32)] sm:shadow-[12px_12px_0_rgba(17,24,39,0.32)] lg:text-base'>
           Deep dives on how teams ship, scale, and sharpen product intuition. Each write-up is a distilled playbook with clear artefacts, tradeoffs, and forward experiments.
         </p>
       </div>
 
-      <div class='flex flex-wrap items-center gap-4 border-y-[3px] border-[#111827] py-6 text-[0.7rem] font-semibold uppercase tracking-[0.34em] text-[#111827]/55'>
-        <span class='block h-[3px] w-14 bg-[#111827]' aria-hidden='true'></span>
-        Latest dispatches from case studies, research notes, and product experiments.
+      <div class='py-4'>
+        <div class='neo-rule' role='presentation'>
+          <span class='neo-rule__rail' aria-hidden='true'></span>
+          <span class='neo-rule__badge' aria-hidden='true'></span>
+          <span class='neo-rule__rail' aria-hidden='true'></span>
+        </div>
       </div>
 
       <div class='sm:p-0'>
-        <ul class='flex flex-col gap-2 md:grid md:auto-rows-fr md:grid-cols-2 md:gap-10 md:justify-items-stretch md:px-0 lg:pl-4'>
+        <ul class='flex flex-col gap-8 px-4 md:grid md:auto-rows-fr md:grid-cols-2 md:gap-10 md:justify-items-stretch md:px-0 lg:pl-4'>
           {
             posts.map((post, index) => {
               const tone = toneCycle[index % toneCycle.length];
