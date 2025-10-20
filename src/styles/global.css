@@ -164,13 +164,13 @@ body {
 }
 
 .brutal-label--ink {
-  color: #0f1a4d;
+  color: #1d2771;
   font-weight: 400;
-  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.25);
 }
 
 .brutal-body--ink {
-  color: #0f1a4d;
+  color: #1d2771;
   font-weight: 600;
   letter-spacing: 0.012em;
   font-size: 1.02em;
