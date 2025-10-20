@@ -142,19 +142,20 @@ body {
 }
 
 .brutal-body {
-  font-family: "Outfit", sans-serif;
-  font-weight: 480;
-  letter-spacing: -0.006em;
-  line-height: 1.48;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.6;
   color: inherit;
+  font-size: 1.05em;
 }
 
 .brutal-label {
-  font-family: "Outfit", sans-serif;
-  font-weight: 720;
+  font-family: "Righteous", sans-serif;
+  font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
-  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  font-size: 0.75rem;
   text-shadow: none;
 }
 
@@ -163,16 +164,30 @@ body {
 }
 
 .brutal-label--ink {
-  color: rgba(29, 39, 113, 0.95);
+  color: #0f1a4d;
+  font-weight: 400;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .brutal-body--ink {
-  color: rgba(29, 39, 113, 0.9);
+  color: #0f1a4d;
+  font-weight: 600;
+  letter-spacing: 0.012em;
+  font-size: 1.02em;
 }
 
 .brutal-card.tone-profile-next .brutal-body {
   color: #ffffff;
-  font-weight: 520;
+  font-weight: 600;
+  letter-spacing: 0.015em;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.brutal-card.tone-profile-engineer .brutal-body,
+.brutal-card.tone-profile-builder .brutal-body {
+  font-weight: 600;
+  letter-spacing: 0.015em;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15);
 }
 
 /* Buttons */
