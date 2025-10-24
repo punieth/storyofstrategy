@@ -1,0 +1,240 @@
+Zepto teardown → research dossier (consumer app, India)
+
+
+1) Context & hypotheses (2–3)
+	•	What Zepto optimizes now:
+Speed as primary promise (10-min) with wide catalog expansion (electronics, pharmacy) riding recent scale/funding; “10-min everywhere” positioning is explicit in app listing and press.  ￼
+Availability via dense dark-store buildout and assortment breadth; ops narrative highlights rapid pick/pack under ~1–2 minutes.  ￼
+Margin via fees, private labels, and membership swap (Pass → Daily); multiple user reports flag “handling/processing/surge” add-ons; analysts note improving private-label mix.  ￼
+	•	Likely failure modes in the app flow:
+Pricing opacity (discounts offset by fees; device-level price variance claims) eroding trust at cart/checkout.  ￼
+Post-order issues (OOS/substitutions, expired/damaged items, refund friction; Zepto Cash vs source refunds) create costly support loops and churn.  ￼
+Notification fatigue / re-engagement spam generating backlash and opt-outs.  ￼
+
+⸻
+
+2) Voice of Customer (VoC) — recent, 1-liners clustered (quotes + links/dates)
+
+Pain points (12–18)
+
+Pricing opacity / fees
+	•	“Discount cash applied… but charged full on delivery — total scam.” — Play Store, May 4, 2025.  ￼
+	•	“‘Handling fee’ makes Supersaver pricing almost a scam.” — r/Chennai, ~Apr 2025.  ￼
+	•	“Bill jumped after COD — surge added later.” — r/mumbai, ~May 2025.  ￼
+	•	“Different prices on two phones for same product.” — Play Store, Jul 16, 2025.  ￼
+
+Refunds / CS friction
+	•	“UPI paid, items not delivered, no refund.” — Play Store, Jul 16, 2025.  ￼
+	•	“Refund to source greyed out; forced into Zepto Cash.” — r/StartUpIndia, ~Apr 2025.  ￼
+	•	“Torn oats; support denied refund despite video proof.” — r/kolkata, Oct 6, 2025.  ￼
+	•	“Refund promised ₹50, app shows ₹1.” — X, 2025.  ￼
+
+Quality / OOS & substitutions
+	•	“Expired whey protein; refused return.” — r/FuckZepto, ~Aug 2025.  ￼
+	•	“App showed expiry fine; cancelled at door thankfully.” — r/FuckZepto, ~Jul 2025.  ￼
+
+Address/geo / serviceability
+	•	“Location ‘not serviceable’ at address I used 1,000 times.” — r/gurgaon, ~Apr–May 2025.  ￼
+	•	“Delivered to address neither selected nor existing in my list.” — r/mumbai, ~Sep 2025.  ￼
+
+UX friction / support access
+	•	“Rainfall excuse; no way to talk to agent in app.” — r/bangalore, ~May 2024.  ￼
+
+Notifications / tipping
+	•	“Stop bombarding me with notifications.” — Vir Das on NDTV coverage, Jun 18, 2024.  ￼
+	•	“Tip push despite delivery charges.” — r/delhi, ~May 2025.  ￼
+
+Trust/safety / compliance backdrop
+	•	“FDA suspended a Zepto warehouse license (Dharavi).” — TOI, Jun 1, 2025.  ￼
+
+Delights (6–8)
+	•	“10-min actually works; great for urgent needs.” — App listing promise echoed across users.  ￼
+	•	“Catalog breadth (electronics to groceries) in minutes.” — App listing.  ￼
+	•	“Tip data suggests riders can earn extra (avg ₹19; max ₹7,000).” — Mint citing Zepto spokesperson, Aug 10, 2024.  ￼
+	•	“Café cooked food in 10 minutes.” — App listing Zepto Café.  ￼
+	•	“Pharmacy in 10 minutes (select metros). — ET BrandEquity, Aug 8, 2025.  ￼
+	•	“Dense city coverage list keeps growing.” — App listing cities.  ￼
+
+Note: Social posts are directional; verify with field tests to quantify prevalence.
+
+⸻
+
+3) Framework pass
+
+AARRR (2–3 bullets each)
+	•	Acquisition
+Wins: 10-min promise; broad SKUs; frequent promos.  ￼
+Gaps: Social backlash on spammy notification/SMS; negative word-of-mouth on refunds.  ￼
+	•	Activation (first session → first checkout)
+Wins: Fast perceived ETAs; aggressive “free cash/discounts” nudges.  ￼
+Gaps: Cart math confusion (handling/processing/surge adds); device-price inconsistency claims.  ￼
+	•	Retention
+Wins: Category expansion (pharmacy, café) raises use-cases.  ￼
+Gaps: Refund friction and quality variance drive uninstalls/churn.  ￼
+	•	Revenue
+Wins: Fees, private label mix, membership pivot.  ￼
+Risks: Short-term ARPU boosts may trade off with LTV via trust erosion.
+	•	Referral
+Wins: “Wow” on speed can be shareable.
+Gaps: Public threads skew negative on trust/pricing; riders’ experience stories dampen goodwill.  ￼
+
+HEART (score 1–5; 5=best)
+	•	Happiness: 3.0 — High headline rating but many 1-star refund/fee complaints.  ￼
+	•	Engagement: 4.0 — Frequent orders driven by speed & category depth.  ￼
+	•	Adoption: 4.5 — 100M+ installs; national expansion.  ￼
+	•	Retention: 3.0 — Issues post-delivery (refunds/quality) threaten repeat use.  ￼
+	•	Task success: 3.5 — Fast delivery success vs. cart/fee clarity + support access gaps.  ￼
+
+JTBD (5–7 jobs; acceptance tests)
+	1.	When I realize I’m missing a key ingredient 20 mins before cooking, I want to get it within 10 mins, so I can proceed without delaying dinner.
+Accept: ETA ≤10, delivered ≤12; no OOS; receipt matches app.
+	2.	When a baby/health item is urgently needed, I want to trust availability and quality (expiry, seal), so I can use it safely now.
+Accept: Expiry ≥3 months; damage check photos stored; easy refund if defective.
+	3.	When I stock up weekly, I want to keep total spend predictable, so I can avoid fee surprises.
+Accept: Cart total within ±₹5 of final; fees itemized upfront; no after-placement fee drift.
+	4.	When an item is OOS, I want to approve/decline substitutions with control, so I can avoid unwanted products.
+Accept: Pre-delivery substitution prompt with price deltas; one-tap decline.
+	5.	When something goes wrong, I want to get a source refund quickly, so I can retain trust and reorder.
+Accept: ≤72h refund to source (prepaid); clear status; no forced wallet unless COD.  ￼
+	6.	When I’m price-sensitive, I want to compare fees vs membership in-flow, so I can choose cheapest path.
+Accept: Side-by-side cost compare; transparent Pass/Daily terms.  ￼
+
+⸻
+
+4) Competitive snapshot (key consumer levers)
+
+Item	Zepto	Blinkit	Swiggy Instamart	BigBasket (BB Now)
+Headline ETA	10-min promise (cities list)	10-min; claims avg ~8–10 in narratives	10–15-min PR; 100+ cities expansion 2025	Rolling out 10-min nationwide by FY26
+Fees notes	Handling/processing/surge fee complaints; “Supersaver” terms	Extra charges complaints exist	Fees vary; city & surge	Slot/instant mix; fees vary
+Substitutions UX	Limited public detail; picker flow implied	Allowed for select SKUs per policy explainers	Category-dependent; 24h windows typical	“No-questions return at delivery;” per-category windows
+Refunds/TAT	To source for prepaid; Zepto Cash for COD; stated TAT ≤7 business days	Policy varies; returns allowed for damaged/wrong; mixed consumer reports	Refund policy on Swiggy site; 2–4 days user reports	Returns at delivery or within windows; policy pages
+Membership	Pass replaced by Daily (pricing experiments in 2025)	Blinkit Gold (via Zomato ecosystem)	Swiggy One (benefits across Swiggy)	BB Star/BB Now promos
+Play Store rating (India)	4.7; 100M+ installs	(Blinkit app) page shows high 4+; exact varies	Swiggy app 4.3; 100M+	BigBasket 4.8; 100M+
+Notable UX	Heavy promo/“free cash”; Café & Pharmacy	Deep instant fashion/returns pilots	Integrated with Swiggy food & Dineout	Strong return-at-door norm
+
+Sources: Zepto app listing & ToS (ETA, refunds)  ￼; Blinkit terms/return explainers & reports  ￼; Instamart expansion & policy references  ￼; BigBasket policy pages & Reuters FY26 10-min rollout plan; BB return FAQ.  ￼; Ratings: Play Store pages.  ￼
+
+⸻
+
+5) Top problems (ranked 1–7)
+	1.	Cart/checkout price opacity → trust erosion
+Evidence: discount reversals; handling/processing/surge added later; device-price variance claims.  ￼
+Suspected cause: pricing/promo engine & fee toggles applied late; experiments without clear disclosures.
+Impact (hyp.): ↑order abandonment, ↓NPS, ↑support contacts; LTV↓.
+Diagnostic: server logs comparing cart_total_at_confirm vs invoice_total; diff histogram by city/device; A/B disclosure copy.
+	2.	Refund friction & wallet-locking
+Evidence: non-delivered/defective items with denied or delayed refunds; forced Zepto Cash perceptions.  ￼
+Cause: policy ambiguity, QA photo “proof” over-reliance; COD wallet constraint.  ￼
+Impact: ↑churn post-incident; social complaints.
+Diagnostic: cohort churn 30-day post-refund interaction; SLA vs actual TAT; % forced wallet vs source.
+	3.	Quality control (expired/damaged) & weak substitution UX
+Evidence: expired/damaged protein/oats; substitution control unclear.  ￼
+Cause: dark-store QC variance; picker SLA pressure; limited customer approval loop.
+Impact: ↑refund cost, ↓repeat rate.
+Diagnostic: item-level defect rates by store; substitution acceptance/cancel rates; picker chat availability audit.
+	4.	Notification/SMS spam undermines engagement
+Evidence: celebrity complaint; threads on daily spam.  ￼
+Cause: aggressive growth CRM, poor frequency capping; lack of promo vs transactional separation.
+Impact: OS-level notification blocks; reputational hits; deliverability↓.
+Diagnostic: opt-out rates; DAU change after CRM sends; push category tagging audit.
+	5.	Address/geo accuracy & serviceability toggling
+Evidence: longtime addresses suddenly “not serviceable”; mis-delivery to wrong address.  ￼
+Cause: polygon changes, dark-store switching, geocoding drift; weak fallbacks.
+Impact: lost orders, CS contacts.
+Diagnostic: map boundary diffs vs last month; % orders failing at address-validation; heatmap of “not serviceable” retries.
+	6.	Tipping UX timing (pre-delivery only)
+Evidence: users can tip before/during but not after delivery; low tip penetration (~5%).  ￼
+Cause: pre-tip bias for conversion; missing post-order nudge.
+Impact: foregone rider earnings goodwill; user frustration.
+Diagnostic: A/B post-delivery tip prompt; tip attach rate vs NPS.
+	7.	Policy/compliance risk perception
+Evidence: FDA license suspension news; workplace allegations press.  ￼
+Cause: rapid scale; uneven governance.
+Impact: localized outage risk; trust hit.
+Diagnostic: store compliance checklist adherence rate; incident comms latency.
+
+⸻
+
+6) Field-test data to collect this week (1–2 small orders)
+
+Screens / metrics to capture
+	•	Onboarding & address: serviceability message; map pin vs GPS; address save/edit latency.
+	•	Search/browse: #results for 5 staple queries; OOS count; category badges.
+	•	PDP: stock status freshness; expiry info (pharma/FMCG); substitution hints.
+	•	Cart/fees: line-item fees (delivery/handling/processing/surge), tip prompts timing; compare cart_confirm_total vs final_invoice_total (screenshot both).
+	•	Coupons & payment: success/fail; wallet vs source refunds option visibility.
+	•	ETA promise & tracking: promised ETA vs actual; timeline events (packed, out for delivery, delivered).
+	•	Picker chat/substitutions: whether available; approval UI; price delta clarity.
+	•	Order completion & refund path: raise a benign issue (e.g., short expiry); measure refund to source days; any push to wallet.
+	•	Notifications cadence: capture every push/SMS from add-to-cart → 48h post-delivery; categorize promo vs transactional.
+	•	Store switching: does app auto-switch store between sessions; banner disclosure.
+
+(Optional: run same journey on Blinkit/Instamart/BB Now for baseline.)
+
+⸻
+
+7) PRD seed (tie to top problems) — opportunity areas (v0, no AI)
+
+A) Upfront Price Truths (UPT)
+	•	Objective: Eliminate cart→invoice drift and hidden-fee perception.
+	•	Primary KPI: Δ(|invoice−confirm| ≤₹2) rate to 95%+. Guardrails: conversion not ↓ >2%.
+	•	v0: Fee calculator runs before payment selection; single “Fees & Discounts” drawer with deterministic math; freeze fees post-confirm (except user-approved changes).
+	•	Risks/trade-offs: Slight AOV dip; promo cannibalization.
+	•	Experiment: A/B transparent fees module vs control; success if complaint rate on “fees/charges” ↓50% and checkout conversion ≥-1%.
+
+B) Refunds That Earn Trust
+	•	Objective: Source-refund reliability and visibility.
+	•	KPI: % refunds to source (prepaid) within ≤72h; CS tickets/order ↓. Guardrail: refund abuse ≤ baseline.
+	•	v0: Refund tracker in Order Details (timestamps, RRN); default source for prepaid; explicit COD→Zepto Cash rationale; proactive push on refund state changes.
+	•	Experiment: Holdout by cities; success if NPS post-issue +8 pts, complaint volume −30%.  ￼
+
+C) Substitution with Consent
+	•	Objective: Raise user control & satisfaction on OOS.
+	•	KPI: Substitution approval rate, item acceptance NPS; refunds due to wrong subs ↓.
+	•	v0: Pre-dispatch one-tap approve/decline with price/brand delta; timeout default = no sub; “Always allow for X brand” preference.
+	•	Experiment: A/B on top 200 SKUs; success if approval ≥40% and post-order complaints on subs −30%.
+
+D) Respectful Re-engagement
+	•	Objective: Reduce spam perception while preserving revenue.
+	•	KPI: Push opt-out rate ↓30%; CTR stable (±5%); complaint mentions on spam ↓.
+	•	v0: Frequency caps by category; promo vs transactional channels separated; quiet hours; easy in-app controls surfaced in Profile.
+	•	Experiment: Ramp by cohorts; success if opt-out ↓ and DAU unaffected.
+
+⸻
+
+8) What NOT to do now
+	•	No wireframes, no full PRD narrative, no design polish.
+	•	Don’t widen scope to partner/ops tooling.
+	•	Don’t add AI-assist features; fix fundamentals first (price clarity, refunds, substitutions, CRM caps).
+
+⸻
+
+Competitive & market context quick notes
+	•	Funding & expansion pressure: $450M raise at $7B; plan to add “several hundred” dark stores; expect promo pressure & cash burn — intensifies fee/promo experimentation that drives user distrust if opaque.  ￼
+	•	Category creep: Pharmacy and electronics raise QA/refund stakes (expiry/returnability) vs groceries.  ￼
+	•	Industry norms: All major rivals trumpet 10-min; differentiation tilts to trust & clarity rather than sheer speed.  ￼
+
+⸻
+
+Appendix: policies & references (for teardown footnotes)
+	•	Zepto Terms (refunds): prepaid → source; COD → Zepto Cash; TAT ≤7 business days.  ￼
+	•	Membership shift: Pass → Daily reported Apr 2025; private label → margin narrative.  ￼
+	•	Play Store snapshot: Zepto 4.7/100M+, BigBasket 4.8/100M+, Swiggy app 4.3/100M+.  ￼
+	•	Return policy benchmarks: BigBasket “return at delivery/within window”; Instamart 24-hour typical per explainers; Blinkit damaged/wrong accepted.  ￼
+
+⸻
+
+Devil’s-advocate notes (to stress-test your mental model)
+	•	You’re assuming “speed” is the edge. Data suggests trust clarity (fees/refunds/quality) is now the battleground; speed is commoditized. If we optimize further for speed at the expense of transparency, we may grow DAU but kill LTV.
+	•	You’re treating fee experiments as tactical. They’re core to unit economics; if not made transparent, they create a systemic trust deficit that CRM can’t patch.
+	•	You’re underweighting compliance & category risk. Pharmacy/packaged foods raise regulatory & QA exposure; a single incident can nuke cohorts.
+
+⸻
+
+(Optional) Field-notes checklist to gather while you test
+	•	App version; city/area; account state (non-member vs member).
+	•	Payment methods shown; refund options offered in-flow.
+	•	Screenshots: cart confirm total; final invoice; fees drawer; substitution prompt; refund tracker; push/SMS timeline.
+	•	Picker chat availability; store banner (if auto-switched); ETA promised vs delivered (timestamps).
+	•	Any membership upsell copy, cart promos, minimum order nudges.
+
