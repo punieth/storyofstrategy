@@ -23,6 +23,13 @@ const socialIcons = [
 ];
 
 const { pageTitle } = Astro.props;
+const currentPath = Astro.url?.pathname ?? "/";
+const filteredNavigationItems = navigationItems.filter((item) => {
+  if (item.url === "/" && currentPath === "/") {
+    return false;
+  }
+  return true;
+});
 ---
 
 <header data-site-header class='bg-[#f5ff85] border-4 border-black shadow-[2px_2px_0_2px_#000] md:shadow-[4px_4px_0_4px_#000] sticky top-0 z-50 transition-transform duration-200 will-change-transform'>
@@ -43,7 +50,7 @@ const { pageTitle } = Astro.props;
       <h2 class="hidden">Navigation</h2>
       <ul class="flex items-center gap-4 poppins">
         {
-          navigationItems.map((item) => (
+          filteredNavigationItems.map((item) => (
             <li>
               <Button href={item.url} title={`Go to ${item.name}`}>
                 {item.name}
@@ -164,6 +171,4 @@ const { pageTitle } = Astro.props;
       initHeaderScroll();
     }
   })();
-</script>
-);
 </script>
