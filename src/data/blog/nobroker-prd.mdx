@@ -1,9 +1,9 @@
 ---
-title: 'NoBroker: Owner Performance Coach PRD'
+title: 'NoBroker: When Help Feels Pushy Abroad'
 author: 'Punith Rathnakar'
-tags: ["prd", "product management", "ux", "nobroker", "real estate"]
-pubDate: '2025-10-17'
-description: 'A detailed PRD for NoBrokers Owner Performance Coach feature : a non-AI coaching layer to boost listing quality and inquiries.'
+tags: ["teardown", "product management", "ux", "nobroker", "real estate", "nri"]
+pubDate: '2025-10-30'
+description: 'A product teardown examining how NoBrokers first contact experience breaks trust for NRI owners—and how to fix it with calm, context-aware design.'
 imgUrl: '../../assets/no-broker.png'
 ---
 
@@ -11,21 +11,19 @@ import StickyNav from "@components/blog/StickyNav.astro";
 import BrutalCard from "@components/layout/Brutalcard.astro";
 
 export const pillBase =
-  "inline-flex items-center gap-[0.35rem] rounded-full border-2 border-black px-3 py-[0.4rem] text-[0.68rem] font-extrabold uppercase tracking-[0.18em] leading-none sm:px-4 sm:py-[0.45rem] sm:text-[0.72rem]";
+  "inline-flex items-center gap-[0.35rem] border-2 border-black px-3 py-[0.4rem] text-[0.68rem] font-extrabold uppercase tracking-[0.18em] leading-none sm:px-4 sm:py-[0.45rem] sm:text-[0.72rem]";
 
 export const pillThemes = {
-  summary: "bg-black text-white shadow-[4px_4px_0_0_#fff]",
-  problem: "bg-red-600 text-white shadow-[4px_4px_0_0_#000]",
-  goal: "bg-white text-black shadow-[4px_4px_0_0_#000]",
-  persona: "bg-gray-800 text-white shadow-[4px_4px_0_0_#fff]",
-  build: "bg-gray-200 text-black shadow-[4px_4px_0_0_#000]",
-  shield: "bg-white text-black shadow-[4px_4px_0_0_#000]",
-  metric: "bg-red-500 text-white shadow-[4px_4px_0_0_#000]",
-  trust: "bg-black text-white shadow-[4px_4px_0_0_#fff]",
-  risk: "bg-gray-600 text-white shadow-[4px_4px_0_0_#fff]",
-  tech: "bg-white text-black shadow-[4px_4px_0_0_#000]",
-  future: "bg-red-700 text-white shadow-[4px_4px_0_0_#000]",
-  ecosystem: "bg-gray-300 text-black shadow-[4px_4px_0_0_#000]",
+  summary: "bg-white text-black shadow-[3px_3px_0_0_#000]",
+  context: "bg-black text-white shadow-[3px_3px_0_0_#caff6a]",
+  persona: "bg-[#caff6a] text-black shadow-[3px_3px_0_0_#000]",
+  journey: "bg-red-500 text-white shadow-[3px_3px_0_0_#000]",
+  pain: "bg-red-600 text-white shadow-[3px_3px_0_0_#000]",
+  competitive: "bg-gray-200 text-black shadow-[3px_3px_0_0_#000]",
+  solution: "bg-[#60a5fa] text-white shadow-[3px_3px_0_0_#000]",
+  mvp: "bg-white text-black shadow-[3px_3px_0_0_#000]",
+  metric: "bg-black text-white shadow-[3px_3px_0_0_#fff]",
+  reflection: "bg-gray-800 text-white shadow-[3px_3px_0_0_#caff6a]",
 };
 
 export const iconClass = "text-[0.85rem] leading-none";
@@ -33,27 +31,16 @@ export const iconClass = "text-[0.85rem] leading-none";
 export const pillClass = (theme) => `${pillBase} ${pillThemes[theme] ?? ""}`;
 
 export const navItems = [
-  { href: "#tldr", label: "TL;DR" },
   { href: "#executive-summary", label: "Executive Summary" },
-  { href: "#problem", label: "Problem" },
-  { href: "#causal-chain", label: "Causal Chain" },
-  { href: "#jtbd", label: "Jobs To Be Done" },
-  { href: "#design-principles", label: "Design Principles" },
-  { href: "#objectives", label: "Objectives & OKRs" },
-  { href: "#hypotheses", label: "Hypotheses" },
-  { href: "#scope", label: "Scope & Prioritization" },
-  { href: "#requirements", label: "Detailed Requirements" },
-  { href: "#data-model", label: "Data Model" },
-  { href: "#analytics", label: "Analytics" },
-  { href: "#rollout", label: "Rollout" },
-  { href: "#gtm", label: "GTM Strategy" },
-  { href: "#risks", label: "Risks" },
-  { href: "#content-copy", label: "Content & Copy" },
-  { href: "#compliance", label: "Compliance" },
-  { href: "#delivery", label: "Delivery Plan" },
-  { href: "#acceptance", label: "Acceptance Criteria" },
-  { href: "#open-questions", label: "Open Questions" },
-  { href: "#sources", label: "Sources & TL;DR" },
+  { href: "#business-context", label: "Business Context" },
+  { href: "#personas", label: "Personas" },
+  { href: "#journey-map", label: "Journey Map" },
+  { href: "#pain-points", label: "Pain Points" },
+  { href: "#competitive", label: "Competitive Reflection" },
+  { href: "#solutions", label: "Solution Concepts" },
+  { href: "#mvp-scope", label: "MVP Scope" },
+  { href: "#metrics", label: "Success Metrics" },
+  { href: "#reflection", label: "Reflection" },
 ];
 
 <div class="nobroker-prd-page bg-[#f7f7f7] font-sans md:font-mono overflow-x-hidden">
@@ -64,910 +51,744 @@ export const navItems = [
   <main class="mx-auto max-w-5xl px-4 sm:px-6 md:px-8 pt-12 pb-16 sm:pt-14 sm:pb-20 lg:pt-16 lg:pb-24">
     <div class="pt-6">
       <header class="text-center">
-        <span class="inline-flex items-center gap-2 px-3 py-1 text-[11px] sm:text-xs font-black uppercase tracking-[0.2em] text-black bg-[#caff6a] border border-black/70 sm:border-2 shadow-[3px_3px_0_0_#00000055] sm:shadow-[4px_4px_0_0_#000] rounded-full sm:rounded-lg">
+        <span class="inline-flex items-center gap-2 px-3 py-1 text-[11px] sm:text-xs font-black uppercase tracking-[0.2em] text-black bg-white border-2 border-black shadow-[3px_3px_0_0_#000]">
           <span class="block h-1.5 w-1.5 rounded-full bg-black"></span>
-          Product Requirements
+          Product Teardown
         </span>
         <h1 class="mt-4 text-[2.15rem] sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.15] sm:leading-tight text-center">
-          🧩 NoBroker:<br /> Owner Performance Coach
+          🧩 When Help Feels<br /> Pushy Abroad
         </h1>
         <p class="mt-4 text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-          A non-AI, rule-based coaching layer that helps property owners fix underperforming listings across photos, copy/amenities, pricing, and responsiveness—to drive more qualified inquiries, faster.
+          Fixing NoBroker's First Contact Problem for NRI Owners
         </p>
 
-        <div class="mt-10 text-left">
-          <div class="bg-black text-white border-2 border-black shadow-[10px_10px_0_0_#caff6a] rounded-3xl px-4 py-6 sm:px-6 sm:py-8 text-center">
-            <h3 class="text-2xl font-black uppercase tracking-wider">Empower Owners, Boost Listings</h3>
-            <p class="mt-4 text-lg">A non-AI coaching layer for better rentals</p>
+        <div class="mt-10">
+          <div class="bg-black text-white border-2 border-black shadow-[8px_8px_0_0_#caff6a] px-4 py-6 sm:px-6 sm:py-8 text-center">
+            <h3 class="text-2xl font-black uppercase tracking-wider">The Promise vs. The Experience</h3>
+            <p class="mt-4 text-lg">"No Brokerage. Full Control." — until the calls start.</p>
           </div>
         </div>
       </header>
     </div>
-    <section id="tldr" class="scroll-mt-24 mt-6 sm:mt-8">
-      <span class={`${pillClass("summary")} inline-flex`}>📋 TL;DR</span>
-      <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-        <BrutalCard color="#ffffff" class="p-5 text-left">
-          <span class={`${pillClass("problem")} self-start mb-3`}>
-            <span class={iconClass}>⚠</span>
-            <span>Problem</span>
-          </span>
-          <p class="text-base sm:text-lg leading-relaxed text-gray-900">
-            Owners struggle to see why listings underperform; tenants face low-quality/stale listings; support gets "why no leads?" tickets.
-          </p>
-        </BrutalCard>
-        <BrutalCard color="#ffffff" class="p-5 text-left">
-          <span class={`${pillClass("goal")} self-start mb-3`}>
-            <span class={iconClass}>🎯</span>
-            <span>Solution</span>
-          </span>
-          <p class="text-base sm:text-lg leading-relaxed text-gray-900">
-            Embed a coach that benchmarks listings, flags top 3 fixes, and tracks progress.
-          </p>
-        </BrutalCard>
-        <BrutalCard color="#ffffff" class="p-5 text-left">
-          <span class={`${pillClass("metric")} self-start mb-3`}>
-            <span class={iconClass}>📊</span>
-            <span>Impact</span>
-          </span>
-          <p class="text-4xl font-bold">+15%</p>
-          <p class="text-sm text-gray-600">Inquiries within 30 days after fixes.</p>
-        </BrutalCard>
-        <BrutalCard color="#ffffff" class="p-5 text-left">
-          <span class={`${pillClass("build")} self-start mb-3`}>
-            <span class={iconClass}>🛠</span>
-            <span>MVP</span>
-          </span>
-          <p class="text-base sm:text-lg leading-relaxed text-gray-900">
-            Local benchmarks, photo heuristics, description checker.
-          </p>
-        </BrutalCard>
-        <BrutalCard color="#ffffff" class="p-5 text-left">
-          <span class={`${pillClass("trust")} self-start mb-3`}>
-            <span class={iconClass}>🔒</span>
-            <span>Approach</span>
-          </span>
-          <p class="text-base sm:text-lg leading-relaxed text-gray-900">
-            Rule-based, non-AI; empowering, not prescriptive.
-          </p>
-        </BrutalCard>
-        <BrutalCard color="#ffffff" class="p-5 text-left">
-          <span class={`${pillClass("future")} self-start mb-3`}>
-            <span class={iconClass}>🚀</span>
-            <span>Phase 2</span>
-          </span>
-          <p class="text-base sm:text-lg leading-relaxed text-gray-900">
-            Pricing sensitivity, responsiveness tracker.
-          </p>
-        </BrutalCard>
-      </div>
-    </section>
 
     <section id="executive-summary" class="scroll-mt-24 mt-12 sm:mt-16">
-      <span class={`${pillClass("summary")} inline-flex`}>🧭 Executive Summary</span>
-      <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7 shadow-[8px_8px_0_0_#000] border-2 border-black rounded-2xl">
+      <span class={`${pillClass("summary")} inline-flex`}>📄 Executive Summary</span>
+      <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7 shadow-[6px_6px_0_0_#000] border-2 border-black">
         <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Executive Summary</h2>
-        <p class="text-base sm:text-lg leading-relaxed text-gray-900">
-          Owners can't see why their listings underperform; tenants encounter low-quality/stale listings; support gets “why no leads?” tickets; refunds/plan-churn follow. The solution: embed a coach inside the owner experience that benchmarks the listing vs local top performers, flags the few highest-leverage fixes, and tracks improvement.
+        <p class="text-base sm:text-lg leading-relaxed text-gray-900 mb-4">
+          NoBroker's promise — "No Brokerage. Full Control." — is one of the most powerful emotional contracts in Indian proptech. But for Non-Resident Indian (NRI) homeowners, that promise often breaks within the first hour of using the product.
         </p>
-        <BrutalCard color="#f5ff85" class="mt-6 p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-          <h3 class="text-lg font-extrabold uppercase tracking-[0.18em] text-gray-900">North Star</h3>
-          <p class="mt-3 text-base sm:text-lg leading-relaxed text-gray-900">
-            % of owners achieving ≥+15% inquiries within 30 days after applying ≥1 coach fix.
-          </p>
-        </BrutalCard>
-        <BrutalCard color="#d1fae5" class="mt-6 p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-          <h3 class="text-lg font-extrabold uppercase tracking-[0.18em] text-gray-900">Business Impact</h3>
-          <p class="mt-3 text-base sm:text-lg leading-relaxed text-gray-900">
-            Projected +15% lift in qualified inquiries correlates with ~5-7% refund reduction and ~3-4% renewal increase, justifying investment.
-          </p>
-        </BrutalCard>
-      </BrutalCard>
-    </section>
-
-    <section id="problem" class="scroll-mt-24 mt-12 sm:mt-16">
-      <span class={`${pillClass("problem")} inline-flex`}>🧩 Problem Statement</span>
-      <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7 border-2 border-black shadow-[8px_8px_0_0_#000] rounded-2xl">
-        <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Problem Statement</h2>
         <p class="text-base sm:text-lg leading-relaxed text-gray-900">
-          Owners lack visibility into listing underperformance; tenants face low-quality listings; support is overwhelmed with "why no leads?" queries leading to refunds and churn.
+          Minutes after listing a property, owners abroad receive multiple calls and WhatsApp messages from "relationship managers." Instead of reassurance, the experience creates anxiety, spam warnings, and loss of trust.
         </p>
-        <div class="mt-6 bg-[#fee2e2] border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl px-5 py-6 text-center">
-          <p class="text-xl sm:text-2xl font-black tracking-tight text-gray-900">
-            "Owners are flying blind; tenants get what they don't want."
+        <div class="mt-6 bg-red-50 border-2 border-black shadow-[4px_4px_0_0_#000] px-5 py-4">
+          <p class="text-base italic text-gray-700">
+            This teardown examines how a well-intentioned first touchpoint—designed for speed and service in India—feels intrusive and chaotic abroad, and how NoBroker can restore trust through calm, context-aware design.
           </p>
         </div>
       </BrutalCard>
     </section>
 
-    <section id="causal-chain" class="scroll-mt-24 mt-12 sm:mt-16">
-      <span class={`${pillClass("goal")} inline-flex`}>🔗 Causal Chain</span>
-      <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-5">Systems View</h2>
-      <div class="bg-white border-2 border-black shadow-[8px_8px_0_0_#000] rounded-2xl p-6 sm:p-8">
-        <p class="text-base sm:text-lg leading-relaxed text-gray-900 mb-6">
-          We intervene at input levers (photos, copy/amenities, pricing, responsiveness) to shift the whole funnel.
-        </p>
-        <div class="text-center space-y-4 md:space-y-0 md:flex md:items-center md:justify-center md:space-x-4">
-          <div class="inline-block bg-black text-white px-4 py-2 rounded-lg shadow-[6px_6px_0_0_#caff6a] font-bold">Listing Quality ↑</div>
-          <div class="hidden md:block text-4xl">→</div>
-          <div class="md:hidden text-2xl">↓</div>
-          <div class="inline-block bg-black text-white px-4 py-2 rounded-lg shadow-[6px_6px_0_0_#60a5fa] font-bold">Tenant Trust & Intent ↑</div>
-          <div class="hidden md:block text-4xl">→</div>
-          <div class="md:hidden text-2xl">↓</div>
-          <div class="inline-block bg-black text-white px-4 py-2 rounded-lg shadow-[6px_6px_0_0_#fef08a] font-bold">Views → Inquiries → Visits → Closures ↑</div>
-          <div class="hidden md:block text-4xl">→</div>
-          <div class="md:hidden text-2xl">↓</div>
-          <div class="inline-block bg-red-600 text-white px-4 py-2 rounded-lg shadow-[6px_6px_0_0_#1f2937] font-bold">Refunds ↓, Renewals ↑, Support ↓</div>
+    <section id="business-context" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("context")} inline-flex`}>💼 Business Context</span>
+      <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7 border-2 border-black shadow-[6px_6px_0_0_#000]">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Business Context</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+          <div class="border-2 border-black bg-[#caff6a] p-4 shadow-[3px_3px_0_0_#000]">
+            <p class="text-sm font-bold uppercase tracking-wider">Revenue</p>
+            <p class="text-2xl font-black mt-1">₹803 Cr</p>
+            <p class="text-xs mt-1">FY24, growing 30% YoY</p>
+          </div>
+          <div class="border-2 border-black bg-white p-4 shadow-[3px_3px_0_0_#000]">
+            <p class="text-sm font-bold uppercase tracking-wider">Model</p>
+            <p class="text-2xl font-black mt-1">Freemium</p>
+            <p class="text-xs mt-1">95% free, 5% paid</p>
+          </div>
         </div>
+        <ul class="space-y-2 text-base sm:text-lg leading-relaxed text-gray-900 mb-4">
+          <li><strong>Core funnel:</strong> Free listing → engagement → paid plan → home services</li>
+          <li><strong>Challenge:</strong> Retaining property owners long enough to convert</li>
+          <li><strong>Observation:</strong> D7 churn among free owners estimated at ~35–40%</li>
+        </ul>
+        <div class="bg-red-50 border-2 border-black shadow-[4px_4px_0_0_#000] px-5 py-4">
+          <p class="text-base font-bold text-gray-900">
+            For Indian users, instant outreach by RMs feels like premium attention.<br/>
+            For NRIs, the same behavior signals spam.
+          </p>
+          <p class="text-sm text-gray-700 mt-2 italic">The problem isn't service intent—it's context blindness.</p>
+        </div>
+      </BrutalCard>
+    </section>
+
+    <section id="personas" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("persona")} inline-flex`}>👥 Personas</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-5">Three Types of NRI Owners</h2>
+      <div class="space-y-6">
+        <BrutalCard color="#ffffff" class="p-6 border-2 border-black shadow-[6px_6px_0_0_#000]">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="bg-[#caff6a] border-2 border-black px-3 py-1 font-black text-sm">1</div>
+            <h3 class="text-2xl font-extrabold">The Independent Owner</h3>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <p class="text-base mb-2"><strong>Name:</strong> Rajesh, 46, Boston</p>
+              <p class="text-base mb-2"><strong>Background:</strong> Software engineer; owns a 2BHK in Whitefield, Bengaluru</p>
+              <p class="text-base mb-2"><strong>Traits:</strong> Tech-savvy, used to Zillow/Redfin; expects asynchronous support</p>
+            </div>
+            <div>
+              <p class="text-base mb-2"><strong>Goal:</strong> Rent out property efficiently and securely</p>
+              <p class="text-base mb-2"><strong>Fear:</strong> Being scammed or misunderstood due to distance</p>
+              <div class="bg-red-50 border-2 border-black p-3 mt-3">
+                <p class="text-sm italic">"Give me calm control over my Indian home from afar."</p>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 bg-gray-100 border-l-4 border-black pl-4 py-2">
+            <p class="text-base italic">"I love the idea of NoBroker — but it started to sound like every broker I tried to avoid."</p>
+          </div>
+        </BrutalCard>
+        <BrutalCard color="#ffffff" class="p-6 border-2 border-black shadow-[6px_6px_0_0_#000]">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="bg-[#caff6a] border-2 border-black px-3 py-1 font-black text-sm">2</div>
+            <h3 class="text-2xl font-extrabold">The Dependent Owner</h3>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <p class="text-base mb-2"><strong>Name:</strong> Meera, 58, London</p>
+              <p class="text-base mb-2"><strong>Background:</strong> Semi-retired; depends on her son for tech help</p>
+              <p class="text-base mb-2"><strong>Traits:</strong> Prefers human help, but gets anxious when contacted by multiple people</p>
+            </div>
+            <div>
+              <p class="text-base mb-2"><strong>Goal:</strong> Rent her house in Chennai</p>
+              <p class="text-base mb-2"><strong>Fear:</strong> Confusing genuine service with scams</p>
+              <div class="bg-red-50 border-2 border-black p-3 mt-3">
+                <p class="text-sm italic">"Make me feel safe — help me trust who's real."</p>
+              </div>
+            </div>
+          </div>
+        </BrutalCard>
+
+        <BrutalCard color="#ffffff" class="p-6 border-2 border-black shadow-[6px_6px_0_0_#000]">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="bg-[#caff6a] border-2 border-black px-3 py-1 font-black text-sm">3</div>
+            <h3 class="text-2xl font-extrabold">The Busy Investor</h3>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <p class="text-base mb-2"><strong>Name:</strong> Arjun, 39, Dubai</p>
+              <p class="text-base mb-2"><strong>Background:</strong> Owns 3 apartments across cities</p>
+              <p class="text-base mb-2"><strong>Traits:</strong> Time-poor, transactional mindset</p>
+            </div>
+            <div>
+              <p class="text-base mb-2"><strong>Goal:</strong> Optimize listing conversions</p>
+              <p class="text-base mb-2"><strong>Pain:</strong> Multiple random calls disrupt work schedule</p>
+              <div class="bg-red-50 border-2 border-black p-3 mt-3">
+                <p class="text-sm italic">"Respect my time — send insights, not interruptions."</p>
+              </div>
+            </div>
+          </div>
+        </BrutalCard>
       </div>
     </section>
 
-    <section id="jtbd" class="scroll-mt-24 mt-12 sm:mt-16">
-      <span class={`${pillClass("persona")} inline-flex`}>🧑‍💼 Jobs To Be Done</span>
-      <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7 border-2 border-black shadow-[8px_8px_0_0_#000] rounded-2xl overflow-x-auto">
-        <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Jobs To Be Done (JTBD)</h2>
-        <p class="text-sm sm:text-base text-gray-700 leading-relaxed mb-6">
-          Replacing personas with JTBD for design drivers.
-        </p>
+    <section id="journey-map" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("journey")} inline-flex`}>🗺️ Journey Map</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-5">From Confidence to Confusion</h2>
+      <BrutalCard color="#ffffff" class="p-6 sm:p-7 border-2 border-black shadow-[6px_6px_0_0_#000]">
+        <p class="text-base mb-6 font-bold italic">The first 24 hours—meant to build trust—become a trust inversion. Human chaos replaces digital calm.</p>
+        
         <div class="space-y-4">
-          <BrutalCard color="#e0f2fe" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-            <p class="text-base sm:text-lg font-bold">When listing live 5–7 days, few inquiries:</p>
-            <p class="text-sm sm:text-base leading-relaxed">I don’t know what’s wrong. So I can see the top 2–3 fixes and do them in < 15 min.</p>
-            <p class="text-xs italic mt-2"><strong>Design Driver:</strong> Health score + prioritized To-Dos</p>
-          </BrutalCard>
-          <BrutalCard color="#fef9c3" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-            <p class="text-base sm:text-lg font-bold">When I paid for a plan:</p>
-            <p class="text-sm sm:text-base leading-relaxed">I’m anxious I won’t get ROI. So I can see proof of improvement (views/inquiries).</p>
-            <p class="text-xs italic mt-2"><strong>Design Driver:</strong> Before/after deltas & milestones</p>
-          </BrutalCard>
-          <BrutalCard color="#ddd6fe" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-            <p class="text-base sm:text-lg font-bold">When remote/busy:</p>
-            <p class="text-sm sm:text-base leading-relaxed">I can’t spend hours tweaking. So I get simple, local-benchmarked suggestions.</p>
-            <p class="text-xs italic mt-2"><strong>Design Driver:</strong> Local benchmarks, chips, templates</p>
-          </BrutalCard>
-          <BrutalCard color="#fecdd3" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-            <p class="text-base sm:text-lg font-bold">When getting chats but no visits:</p>
-            <p class="text-sm sm:text-base leading-relaxed">I don’t know what tenants value. So I can highlight missing selling points.</p>
-            <p class="text-xs italic mt-2"><strong>Design Driver:</strong> Amenity gaps + copy templates</p>
-          </BrutalCard>
-          <BrutalCard color="#bbf7d0" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-            <p class="text-base sm:text-lg font-bold">When many leads, low quality:</p>
-            <p class="text-sm sm:text-base leading-relaxed">I waste time. So I can nudge price/filters/eligibility to refine.</p>
-            <p class="text-xs italic mt-2"><strong>Design Driver:</strong> Price sensitivity + pre-qual tips</p>
-          </BrutalCard>
-        </div>
-      </BrutalCard>
-    </section>
-
-    <section id="design-principles" class="scroll-mt-24 mt-12 sm:mt-16">
-      <span class={`${pillClass("persona")} inline-flex`}>🎨 Design Principles & UX Vision</span>
-      <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7 border-2 border-black shadow-[8px_8px_0_0_#000] rounded-2xl">
-        <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Design Principles & UX Vision</h2>
-        <p class="text-base sm:text-lg leading-relaxed text-gray-900 mb-6">
-          The user experience should feel like a helpful, private coach, not a stern critic. The tone should be encouraging, data-informed, and always focused on empowering the owner to succeed.
-        </p>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-          <BrutalCard color="#bbf7d0" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-            <h3 class="text-lg font-extrabold uppercase tracking-[0.16em] text-gray-900">Empowering, not Prescriptive</h3>
-            <p class="mt-3 text-sm sm:text-base leading-relaxed">Give owners clear data and suggestions, but always leave them in control of the final decision.</p>
-          </BrutalCard>
-          <BrutalCard color="#e0f2fe" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-            <h3 class="text-lg font-extrabold uppercase tracking-[0.16em] text-gray-900">Simple & Actionable</h3>
-            <p class="mt-3 text-sm sm:text-base leading-relaxed">Avoid jargon. Focus on a few, high-impact tasks. The user should know what to do in seconds.</p>
-          </BrutalCard>
-          <BrutalCard color="#fef9c3" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-            <h3 class="text-lg font-extrabold uppercase tracking-[0.16em] text-gray-900">Celebrate Progress</h3>
-            <p class="mt-3 text-sm sm:text-base leading-relaxed">Use positive reinforcement and visualize impact (e.g., "+20% views!") to build momentum and user confidence.</p>
-          </BrutalCard>
-          <BrutalCard color="#fee2e2" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-            <h3 class="text-lg font-extrabold uppercase tracking-[0.16em] text-gray-900">Trustworthy & Transparent</h3>
-            <p class="mt-3 text-sm sm:text-base leading-relaxed">Be clear about where data comes from (e.g., "based on 50 similar listings near you"). Never shame the user.</p>
-          </BrutalCard>
-        </div>
-        <BrutalCard color="#fce7f3" class="mt-6 p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-          <h3 class="text-lg font-extrabold uppercase tracking-[0.16em] text-gray-900">Non-Jobs (explicitly out)</h3>
-          <ul class="mt-3 space-y-2 text-sm sm:text-base leading-relaxed">
-            <li>Auto-rewriting owner’s description (no AI for MVP). The backend architecture should, however, be modular enough to potentially incorporate ML models for features like photo-tagging or suggestion generation in future phases.</li>
-            <li>Publicly shaming/“grading” owners.</li>
-            <li>Changing search ranking (phase 3+ only).</li>
-          </ul>
-        </BrutalCard>
-      </BrutalCard>
-    </section>
-    <section id="objectives" class="scroll-mt-24 mt-12 sm:mt-16">
-      <span class={`${pillClass("goal")} inline-flex`}>🎯 Objectives & OKRs</span>
-      <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-5">Objectives, OKRs & North Star</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-        <BrutalCard color="#ffffff" class="p-6 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-          <h3 class="text-lg font-extrabold uppercase tracking-[0.16em] text-gray-900">North Star</h3>
-          <p class="mt-4 text-base sm:text-lg leading-relaxed text-gray-900">
-            % of owners achieving ≥+15% inquiries within 30 days after applying ≥1 coach fix.
-          </p>
-        </BrutalCard>
-        <BrutalCard color="#ffffff" class="p-6 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-          <h3 class="text-lg font-extrabold uppercase tracking-[0.16em] text-gray-900">Quarterly OKRs</h3>
-          <ul class="mt-4 space-y-2 text-sm sm:text-base leading-relaxed text-gray-900">
-            <li><strong>O1 (Quality):</strong> Raise % listings meeting baseline (≥8 photos + local amenities ≥6 + desc ≥120 words).</li>
-            <li><strong>O2 (Conversion):</strong> Improve listing → inquiry efficiency (+15–25% median inquiries/view).</li>
-            <li><strong>O3 (Retention/Cost):</strong> Reduce refunds (–30%) and support load (–30% “why no leads?”).</li>
-          </ul>
-        </BrutalCard>
-      </div>
-    </section>
-
-    <section id="hypotheses" class="scroll-mt-24 mt-12 sm:mt-16">
-      <span class={`${pillClass("build")} inline-flex`}>🧪 Hypotheses & Experiments</span>
-      <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-5">Falsifiable Hypotheses</h2>
-      <div class="space-y-4">
-        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-          <p class="text-base sm:text-lg font-bold">H1: Max 3 fixes increases adoption to ≥30% in 7 days.</p>
-          <p class="text-sm sm:text-base leading-relaxed mt-2">Test: A/B max-3 vs full-list; metric = ≥1 fix completion.</p>
-        </BrutalCard>
-        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-          <p class="text-base sm:text-lg font-bold">H2: Local benchmarks boost trust and action more than generic tips.</p>
-          <p class="text-sm sm:text-base leading-relaxed mt-2">Test: A/B local vs citywide; metric = fix adoption, CSAT.</p>
-        </BrutalCard>
-        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-          <p class="text-base sm:text-lg font-bold">H3: Progress deltas sustain engagement.</p>
-          <p class="text-sm sm:text-base leading-relaxed mt-2">Test: A/B deltas vs no; metric = 30-day retention.</p>
-        </BrutalCard>
-        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-          <p class="text-base sm:text-lg font-bold">H4: Sequencing photos & price first boosts impact.</p>
-          <p class="text-sm sm:text-base leading-relaxed mt-2">Test: Multivariate order; metric = inquiries delta at day-14.</p>
-        </BrutalCard>
-      </div>
-
-    </section>
-
-    <section id="scope" class="scroll-mt-24 mt-12 sm:mt-16">
-          <span class={`${pillClass("shield")} inline-flex`}>🎯 Scope & Prioritization</span>
-      <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-5">Scope & Prioritization (RICE)</h2>
-      <div class="grid gap-4 sm:gap-5 md:grid-cols-2 xl:grid-cols-3">
-        <BrutalCard color="#ffffff" class="p-6 border-2 border-black shadow-[6px_6px_0_0_#0f172a] rounded-2xl">
-          <header class="flex items-start justify-between gap-4">
-            <div>
-              <p class="text-xs font-semibold uppercase tracking-[0.22em] text-gray-600">A</p>
-              <h3 class="mt-1 text-lg sm:text-xl font-extrabold text-gray-900">Local Benchmark Comparison</h3>
+          <div class="border-2 border-black bg-white p-4 shadow-[4px_4px_0_0_#000]">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="bg-black text-white border-2 border-black px-3 py-1 font-black text-sm">1️⃣</div>
+              <h4 class="font-black text-lg">Post-Listing</h4>
             </div>
-            <span class="inline-flex items-center justify-center rounded-full bg-black px-3 py-1 text-xs font-black uppercase tracking-[0.18em] text-white shadow-[4px_4px_0_0_#caff6a]">RICE 50</span>
-          </header>
-          <p class="mt-3 text-sm sm:text-base text-gray-700">Benchmark every listing against the top-10 in the micro-market and surface three highest-leverage fixes.</p>
-          <dl class="mt-4 grid grid-cols-2 gap-3 text-sm sm:text-base font-semibold">
-            <div>
-              <dt class="text-[11px] uppercase tracking-[0.22em] text-gray-500">Reach</dt>
-              <dd class="text-gray-900">5</dd>
-            </div>
-            <div>
-              <dt class="text-[11px] uppercase tracking-[0.22em] text-gray-500">Impact</dt>
-              <dd class="text-gray-900">5</dd>
-            </div>
-            <div>
-              <dt class="text-[11px] uppercase tracking-[0.22em] text-gray-500">Confidence</dt>
-              <dd class="text-gray-900">4</dd>
-            </div>
-            <div>
-              <dt class="text-[11px] uppercase tracking-[0.22em] text-gray-500">Effort</dt>
-              <dd class="text-gray-900">2</dd>
-            </div>
-          </dl>
-        </BrutalCard>
-        <BrutalCard color="#ffffff" class="p-6 border-2 border-black shadow-[6px_6px_0_0_#0f172a] rounded-2xl">
-          <header class="flex items-start justify-between gap-4">
-            <div>
-              <p class="text-xs font-semibold uppercase tracking-[0.22em] text-gray-600">B</p>
-              <h3 class="mt-1 text-lg sm:text-xl font-extrabold text-gray-900">Photo Heuristics & Fixes</h3>
-            </div>
-            <span class="inline-flex items-center justify-center rounded-full bg-black px-3 py-1 text-xs font-black uppercase tracking-[0.18em] text-white shadow-[4px_4px_0_0_#ff90e8]">RICE 40</span>
-          </header>
-          <p class="mt-3 text-sm sm:text-base text-gray-700">Deterministic checks for coverage, lighting, ordering, and inspiration to lift inquiry conversion.</p>
-          <dl class="mt-4 grid grid-cols-2 gap-3 text-sm sm:text-base font-semibold">
-            <div>
-              <dt class="text-[11px] uppercase tracking-[0.22em] text-gray-500">Reach</dt>
-              <dd class="text-gray-900">4</dd>
-            </div>
-            <div>
-              <dt class="text-[11px] uppercase tracking-[0.22em] text-gray-500">Impact</dt>
-              <dd class="text-gray-900">5</dd>
-            </div>
-            <div>
-              <dt class="text-[11px] uppercase tracking-[0.22em] text-gray-500">Confidence</dt>
-              <dd class="text-gray-900">3</dd>
-            </div>
-            <div>
-              <dt class="text-[11px] uppercase tracking-[0.22em] text-gray-500">Effort</dt>
-              <dd class="text-gray-900">3</dd>
-            </div>
-          </dl>
-        </BrutalCard>
-        <BrutalCard color="#ffffff" class="p-6 border-2 border-black shadow-[6px_6px_0_0_#0f172a] rounded-2xl">
-          <header class="flex items-start justify-between gap-4">
-            <div>
-              <p class="text-xs font-semibold uppercase tracking-[0.22em] text-gray-600">C</p>
-              <h3 class="mt-1 text-lg sm:text-xl font-extrabold text-gray-900">Description & Amenities Checker</h3>
-            </div>
-            <span class="inline-flex items-center justify-center rounded-full bg-black px-3 py-1 text-xs font-black uppercase tracking-[0.18em] text-white shadow-[4px_4px_0_0_#fde68a]">RICE 35</span>
-          </header>
-          <p class="mt-3 text-sm sm:text-base text-gray-700">Guided copy and proximity chips to articulate value in minutes.</p>
-          <dl class="mt-4 grid grid-cols-2 gap-3 text-sm sm:text-base font-semibold">
-            <div>
-              <dt class="text-[11px] uppercase tracking-[0.22em] text-gray-500">Reach</dt>
-              <dd class="text-gray-900">4</dd>
-            </div>
-            <div>
-              <dt class="text-[11px] uppercase tracking-[0.22em] text-gray-500">Impact</dt>
-              <dd class="text-gray-900">4</dd>
-            </div>
-            <div>
-              <dt class="text-[11px] uppercase tracking-[0.22em] text-gray-500">Confidence</dt>
-              <dd class="text-gray-900">4</dd>
-            </div>
-            <div>
-              <dt class="text-[11px] uppercase tracking-[0.22em] text-gray-500">Effort</dt>
-              <dd class="text-gray-900">3</dd>
-            </div>
-          </dl>
-        </BrutalCard>
-        <BrutalCard color="#ffffff" class="p-6 border-2 border-black shadow-[6px_6px_0_0_#0f172a] rounded-2xl">
-          <header class="flex items-start justify-between gap-4">
-            <div>
-              <p class="text-xs font-semibold uppercase tracking-[0.22em] text-gray-600">D · Phase 2</p>
-              <h3 class="mt-1 text-lg sm:text-xl font-extrabold text-gray-900">Price Sensitivity & Range</h3>
-            </div>
-            <span class="inline-flex items-center justify-center rounded-full bg-black px-3 py-1 text-xs font-black uppercase tracking-[0.18em] text-white shadow-[4px_4px_0_0_#bef264]">RICE 22</span>
-          </header>
-          <p class="mt-3 text-sm sm:text-base text-gray-700">Highlight the fast-closing price band with projected inquiry lift for adjustments.</p>
-          <dl class="mt-4 grid grid-cols-2 gap-3 text-sm sm:text-base font-semibold">
-            <div>
-              <dt class="text-[11px] uppercase tracking-[0.22em] text-gray-500">Reach</dt>
-              <dd class="text-gray-900">3</dd>
-            </div>
-            <div>
-              <dt class="text-[11px] uppercase tracking-[0.22em] text-gray-500">Impact</dt>
-              <dd class="text-gray-900">4</dd>
-            </div>
-            <div>
-              <dt class="text-[11px] uppercase tracking-[0.22em] text-gray-500">Confidence</dt>
-              <dd class="text-gray-900">3</dd>
-            </div>
-            <div>
-              <dt class="text-[11px] uppercase tracking-[0.22em] text-gray-500">Effort</dt>
-              <dd class="text-gray-900">4</dd>
-            </div>
-          </dl>
-        </BrutalCard>
-        <BrutalCard color="#ffffff" class="p-6 border-2 border-black shadow-[6px_6px_0_0_#0f172a] rounded-2xl">
-          <header class="flex items-start justify-between gap-4">
-            <div>
-              <p class="text-xs font-semibold uppercase tracking-[0.22em] text-gray-600">E · Phase 2</p>
-              <h3 class="mt-1 text-lg sm:text-xl font-extrabold text-gray-900">Responsiveness Tracker</h3>
-            </div>
-            <span class="inline-flex items-center justify-center rounded-full bg-black px-3 py-1 text-xs font-black uppercase tracking-[0.18em] text-white shadow-[4px_4px_0_0_#c4b5fd]">RICE 22</span>
-          </header>
-          <p class="mt-3 text-sm sm:text-base text-gray-700">Coach response latency, unattended chats, and availability so owners never ghost leads.</p>
-          <dl class="mt-4 grid grid-cols-2 gap-3 text-sm sm:text-base font-semibold">
-            <div>
-              <dt class="text-[11px] uppercase tracking-[0.22em] text-gray-500">Reach</dt>
-              <dd class="text-gray-900">3</dd>
-            </div>
-            <div>
-              <dt class="text-[11px] uppercase tracking-[0.22em] text-gray-500">Impact</dt>
-              <dd class="text-gray-900">3</dd>
-            </div>
-            <div>
-              <dt class="text-[11px] uppercase tracking-[0.22em] text-gray-500">Confidence</dt>
-              <dd class="text-gray-900">4</dd>
-            </div>
-            <div>
-              <dt class="text-[11px] uppercase tracking-[0.22em] text-gray-500">Effort</dt>
-              <dd class="text-gray-900">2</dd>
-            </div>
-          </dl>
-        </BrutalCard>
-      </div>
-      <div class="mt-6 rounded-2xl border-2 border-black bg-[#fef9c3] px-4 py-3 shadow-[4px_4px_0_0_#f59e0b] text-sm sm:text-base text-gray-900">
-        <span class="font-black uppercase tracking-[0.18em] text-xs sm:text-sm text-gray-800">Release Plan</span>
-        <p class="mt-2 leading-relaxed"><strong>Phase 1:</strong> Ship A + B + C to every owner. <strong>Phase 2:</strong> Unlock D + E once adoption stabilises & deltas trend positive.</p>
-      </div>
-    </section>
-
-    <section id="requirements" class="scroll-mt-24 mt-12 sm:mt-16">
-      <span class={`${pillClass("build")} inline-flex`}>📋 Detailed Requirements</span>
-      <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-5">Detailed Requirements (by Module)</h2>
-      <div class="grid gap-6 xl:gap-8 lg:grid-cols-2">
-        <BrutalCard color="#e0f2fe" class="p-6 sm:p-7 border-2 border-black shadow-[6px_6px_0_0_#1d4ed8] rounded-2xl">
-          <header class="flex items-start gap-4">
-            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-black bg-white text-sm font-black tracking-[0.22em]">A</span>
-            <div>
-              <h3 class="text-xl sm:text-2xl font-extrabold text-gray-900">Local Benchmark Comparison</h3>
-              <p class="mt-1 text-sm sm:text-base text-gray-700">Frame performance against the top-10 micro-market peers.</p>
-            </div>
-          </header>
-          <div class="mt-5 space-y-5">
-            <section>
-              <h4 class="inline-flex items-center gap-2 rounded-full border border-black bg-white px-3 py-1 text-[11px] font-black uppercase tracking-[0.22em] text-gray-900 shadow-[2px_2px_0_0_#000]">Signals Ingested</h4>
-              <ul class="mt-2 space-y-1.5 text-sm sm:text-base leading-relaxed text-gray-800">
-                <li>Locality/PIN, property type, BHK, furnishing, owner plan tier.</li>
-                <li>Top-10 medians for photos, amenities, price band, freshness, response time.</li>
-              </ul>
-            </section>
-            <section>
-              <h4 class="inline-flex items-center gap-2 rounded-full border border-black bg-white px-3 py-1 text-[11px] font-black uppercase tracking-[0.22em] text-gray-900 shadow-[2px_2px_0_0_#000]">Coach Output</h4>
-              <ul class="mt-2 space-y-1.5 text-sm sm:text-base leading-relaxed text-gray-800">
-                <li>Health score dial with colour-coded deltas + location badge.</li>
-                <li>Three gap cards with contextual CTAs (edit photos, tweak copy, adjust price).</li>
-              </ul>
-            </section>
-            <section>
-              <h4 class="inline-flex items-center gap-2 rounded-full border border-black bg-white px-3 py-1 text-[11px] font-black uppercase tracking-[0.22em] text-gray-900 shadow-[2px_2px_0_0_#000]">Acceptance Criteria</h4>
-              <ul class="mt-2 space-y-1.5 text-sm sm:text-base leading-relaxed text-gray-800">
-                <li>Benchmarks scoped to ≤5 km micro-market and refreshed daily.</li>
-                <li>Never surface >3 fixes simultaneously; queue stores backlog.</li>
-                <li>Refresh timestamp mirrors data warehouse within ±1 day.</li>
-              </ul>
-            </section>
-          </div>
-        </BrutalCard>
-        <BrutalCard color="#dcfce7" class="p-6 sm:p-7 border-2 border-black shadow-[6px_6px_0_0_#15803d] rounded-2xl">
-          <header class="flex items-start gap-4">
-            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-black bg-white text-sm font-black tracking-[0.22em]">B</span>
-            <div>
-              <h3 class="text-xl sm:text-2xl font-extrabold text-gray-900">Photo Heuristics & Fixes</h3>
-              <p class="mt-1 text-sm sm:text-base text-gray-700">Force coverage, lighting, and framing quality without ML.</p>
-            </div>
-          </header>
-          <div class="mt-5 space-y-5">
-            <section>
-              <h4 class="inline-flex items-center gap-2 rounded-full border border-black bg-white px-3 py-1 text-[11px] font-black uppercase tracking-[0.22em] text-gray-900 shadow-[2px_2px_0_0_#000]">Signals Ingested</h4>
-              <ul class="mt-2 space-y-1.5 text-sm sm:text-base leading-relaxed text-gray-800">
-                <li>Photo count ≥8, mandatory room coverage, duplicate detection.</li>
-                <li>Brightness index &lt;0.35, EXIF timestamp, aspect ratio sanity check.</li>
-              </ul>
-            </section>
-            <section>
-              <h4 class="inline-flex items-center gap-2 rounded-full border border-black bg-white px-3 py-1 text-[11px] font-black uppercase tracking-[0.22em] text-gray-900 shadow-[2px_2px_0_0_#000]">Coach Output</h4>
-              <ul class="mt-2 space-y-1.5 text-sm sm:text-base leading-relaxed text-gray-800">
-                <li>Inline pill tags above thumbnails (“Too dark”, “Missing kitchen”).</li>
-                <li>Quick reorder chips + inspiration gallery pulled from top performers.</li>
-              </ul>
-            </section>
-            <section>
-              <h4 class="inline-flex items-center gap-2 rounded-full border border-black bg-white px-3 py-1 text-[11px] font-black uppercase tracking-[0.22em] text-gray-900 shadow-[2px_2px_0_0_#000]">Acceptance Criteria</h4>
-              <ul class="mt-2 space-y-1.5 text-sm sm:text-base leading-relaxed text-gray-800">
-                <li>Issue tags surface within 60s of upload.</li>
-                <li>Replacing a photo clears its tag instantly.</li>
-                <li>Dismissed tags remain hidden unless the underlying data changes.</li>
-              </ul>
-            </section>
-          </div>
-        </BrutalCard>
-        <BrutalCard color="#fef9c3" class="p-6 sm:p-7 border-2 border-black shadow-[6px_6px_0_0_#a16207] rounded-2xl">
-          <header class="flex items-start gap-4">
-            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-black bg-white text-sm font-black tracking-[0.22em]">C</span>
-            <div>
-              <h3 class="text-xl sm:text-2xl font-extrabold text-gray-900">Description & Amenities Checker</h3>
-              <p class="mt-1 text-sm sm:text-base text-gray-700">Help owners articulate value, locality proof, and uniqueness.</p>
-            </div>
-          </header>
-          <div class="mt-5 space-y-5">
-            <section>
-              <h4 class="inline-flex items-center gap-2 rounded-full border border-black bg-white px-3 py-1 text-[11px] font-black uppercase tracking-[0.22em] text-gray-900 shadow-[2px_2px_0_0_#000]">Signals Ingested</h4>
-              <ul class="mt-2 space-y-1.5 text-sm sm:text-base leading-relaxed text-gray-800">
-                <li>Amenity catalog by locality + proximity to transit/landmarks.</li>
-                <li>Copy heuristics: ≥120 words, 3 paragraphs, 2 bullet markers.</li>
-              </ul>
-            </section>
-            <section>
-              <h4 class="inline-flex items-center gap-2 rounded-full border border-black bg-white px-3 py-1 text-[11px] font-black uppercase tracking-[0.22em] text-gray-900 shadow-[2px_2px_0_0_#000]">Coach Output</h4>
-              <ul class="mt-2 space-y-1.5 text-sm sm:text-base leading-relaxed text-gray-800">
-                <li>“Add this” chips injecting templated copy referencing locality proof.</li>
-                <li>Real-time completeness meter with celebratory state on finish.</li>
-              </ul>
-            </section>
-            <section>
-              <h4 class="inline-flex items-center gap-2 rounded-full border border-black bg-white px-3 py-1 text-[11px] font-black uppercase tracking-[0.22em] text-gray-900 shadow-[2px_2px_0_0_#000]">Acceptance Criteria</h4>
-              <ul class="mt-2 space-y-1.5 text-sm sm:text-base leading-relaxed text-gray-800">
-                <li>Chips reflect live data (amenity availability + proximity &lt;1 km).</li>
-                <li>Score updates within 300 ms of edits.</li>
-                <li>Fallback copy states when catalog data missing (no blank UI).</li>
-              </ul>
-            </section>
-          </div>
-        </BrutalCard>
-        <BrutalCard color="#ede9fe" class="p-6 sm:p-7 border-2 border-black shadow-[6px_6px_0_0_#5b21b6] rounded-2xl">
-          <header class="flex items-start gap-4">
-            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-black bg-white text-sm font-black tracking-[0.22em]">D</span>
-            <div class="flex-1">
-              <div class="flex flex-wrap items-center gap-3">
-                <h3 class="text-xl sm:text-2xl font-extrabold text-gray-900">Price Sensitivity & Range</h3>
-                <span class="inline-flex items-center rounded-full border border-black bg-white px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.18em]">Phase 2</span>
-              </div>
-              <p class="mt-1 text-sm sm:text-base text-gray-700">Quantify the gap between current rent and the fast-closing band.</p>
-            </div>
-          </header>
-          <div class="mt-5 space-y-5">
-            <section>
-              <h4 class="inline-flex items-center gap-2 rounded-full border border-black bg-white px-3 py-1 text-[11px] font-black uppercase tracking-[0.22em] text-gray-900 shadow-[2px_2px_0_0_#000]">Signals Ingested</h4>
-              <ul class="mt-2 space-y-1.5 text-sm sm:text-base leading-relaxed text-gray-800">
-                <li>Comparable listings (closed/high inquiry) from last 60–90 days.</li>
-                <li>Derivations: median, interquartile band, sample size, refresh cadence.</li>
-              </ul>
-            </section>
-            <section>
-              <h4 class="inline-flex items-center gap-2 rounded-full border border-black bg-white px-3 py-1 text-[11px] font-black uppercase tracking-[0.22em] text-gray-900 shadow-[2px_2px_0_0_#000]">Coach Output</h4>
-              <ul class="mt-2 space-y-1.5 text-sm sm:text-base leading-relaxed text-gray-800">
-                <li>Slider with highlighted ideal band + projection (“Drop ₹1–2k → +15% inquiries”).</li>
-                <li>One-click price update with undo window and confirmation modal.</li>
-              </ul>
-            </section>
-            <section>
-              <h4 class="inline-flex items-center gap-2 rounded-full border border-black bg-white px-3 py-1 text-[11px] font-black uppercase tracking-[0.22em] text-gray-900 shadow-[2px_2px_0_0_#000]">Acceptance Criteria</h4>
-              <ul class="mt-2 space-y-1.5 text-sm sm:text-base leading-relaxed text-gray-800">
-                <li>Module header shows sample size + last updated timestamp.</li>
-                <li>Never suggest below platform minimum or owner floor.</li>
-              </ul>
-            </section>
-          </div>
-        </BrutalCard>
-        <BrutalCard color="#fee2e2" class="p-6 sm:p-7 border-2 border-black shadow-[6px_6px_0_0_#b91c1c] rounded-2xl">
-          <header class="flex items-start gap-4">
-            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-black bg-white text-sm font-black tracking-[0.22em]">E</span>
-            <div class="flex-1">
-              <div class="flex flex-wrap items-center gap-3">
-                <h3 class="text-xl sm:text-2xl font-extrabold text-gray-900">Responsiveness & Engagement</h3>
-                <span class="inline-flex items-center rounded-full border border-black bg-white px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.18em]">Phase 2</span>
-              </div>
-              <p class="mt-1 text-sm sm:text-base text-gray-700">Keep owners accountable to tenant follow-ups.</p>
-            </div>
-          </header>
-          <div class="mt-5 space-y-5">
-            <section>
-              <h4 class="inline-flex items-center gap-2 rounded-full border border-black bg-white px-3 py-1 text-[11px] font-black uppercase tracking-[0.22em] text-gray-900 shadow-[2px_2px_0_0_#000]">Signals Ingested</h4>
-              <ul class="mt-2 space-y-1.5 text-sm sm:text-base leading-relaxed text-gray-800">
-                <li>Average first-response latency and % unanswered &gt;24h.</li>
-                <li>Availability hours and owner-configured "away" overrides.</li>
-              </ul>
-            </section>
-            <section>
-              <h4 class="inline-flex items-center gap-2 rounded-full border border-black bg-white px-3 py-1 text-[11px] font-black uppercase tracking-[0.22em] text-gray-900 shadow-[2px_2px_0_0_#000]">Coach Output</h4>
-              <ul class="mt-2 space-y-1.5 text-sm sm:text-base leading-relaxed text-gray-800">
-                <li>Comparative chip (“You: 36h · Top performers: &lt;12h”).</li>
-                <li>Quick actions: enable push/SMS alerts, add co-admin, send saved replies.</li>
-              </ul>
-            </section>
-            <section>
-              <h4 class="inline-flex items-center gap-2 rounded-full border border-black bg-white px-3 py-1 text-[11px] font-black uppercase tracking-[0.22em] text-gray-900 shadow-[2px_2px_0_0_#000]">Acceptance Criteria</h4>
-              <ul class="mt-2 space-y-1.5 text-sm sm:text-base leading-relaxed text-gray-800">
-                <li>Metrics recompute daily; spam tenants excluded automatically.</li>
-                <li>“Away” mode pauses penalties up to 7 days with audit log.</li>
-              </ul>
-            </section>
-          </div>
-        </BrutalCard>
-        <BrutalCard color="#cffafe" class="p-6 sm:p-8 border-2 border-black shadow-[6px_6px_0_0_#0e7490] rounded-2xl lg:col-span-2">
-          <header class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div class="flex items-center gap-3">
-              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 border-black bg-white text-sm font-black tracking-[0.22em]">H</span>
+            <div class="grid sm:grid-cols-3 gap-3 text-sm">
               <div>
-                <h3 class="text-xl sm:text-2xl font-extrabold text-gray-900">Health Score & To-Do Summary</h3>
-                <p class="mt-1 text-sm sm:text-base text-gray-700">One score, smart task sequencing, and visible momentum.</p>
+                <p class="font-bold text-xs uppercase tracking-wider text-gray-600 mb-1">Scene</p>
+                <p>Uploads photos, clicks Post</p>
+              </div>
+              <div>
+                <p class="font-bold text-xs uppercase tracking-wider text-gray-600 mb-1">Emotion</p>
+                <p class="text-green-700 font-bold">😌 Relief</p>
+              </div>
+              <div>
+                <p class="font-bold text-xs uppercase tracking-wider text-gray-600 mb-1">Product Response</p>
+                <p>Simple toast</p>
               </div>
             </div>
-            <span class="inline-flex items-center rounded-full border border-black bg-white px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-gray-900">Always On</span>
-          </header>
-          <div class="mt-6 grid gap-4 sm:grid-cols-2">
-            <section>
-              <h4 class="inline-flex items-center gap-2 rounded-full border border-black bg-white px-3 py-1 text-[11px] font-black uppercase tracking-[0.22em] text-gray-900 shadow-[2px_2px_0_0_#000]">Score Model</h4>
-              <ul class="mt-2 space-y-1.5 text-sm sm:text-base leading-relaxed text-gray-800">
-                <li>Weighted blend: Photos 35%, Description 25%, Price 25%, Response 15%.</li>
-                <li>Weights configurable per city/segment via feature flags.</li>
-              </ul>
-            </section>
-            <section>
-              <h4 class="inline-flex items-center gap-2 rounded-full border border-black bg-white px-3 py-1 text-[11px] font-black uppercase tracking-[0.22em] text-gray-900 shadow-[2px_2px_0_0_#000]">To-Do Engine</h4>
-              <ul class="mt-2 space-y-1.5 text-sm sm:text-base leading-relaxed text-gray-800">
-                <li>Ranks tasks by impact × effort, reveals max three at a time.</li>
-                <li>Completion triggers micro-celebrations and unlocks next task.</li>
-              </ul>
-            </section>
-            <section class="sm:col-span-2">
-              <h4 class="inline-flex items-center gap-2 rounded-full border border-black bg-white px-3 py-1 text-[11px] font-black uppercase tracking-[0.22em] text-gray-900 shadow-[2px_2px_0_0_#000]">Progress Card</h4>
-              <BrutalCard color="#fef9c3" class="mt-2 border-2 border-black shadow-[4px_4px_0_0_#a16207] rounded-2xl px-4 py-3">
-                <p class="text-sm sm:text-base leading-relaxed text-gray-900">Displays enquiry delta (views, inquiries, visits) after ≥24h with sparkline micro-visuals so owners feel momentum.</p>
-                <ul class="mt-2 space-y-1.5 text-sm sm:text-base leading-relaxed text-gray-800">
-                  <li>Data mirrors analytics warehouse within ±5%.</li>
-                  <li>Supports weekly comparison for paid plans and auto-hides when insufficient data.</li>
-                </ul>
-              </BrutalCard>
-            </section>
+            <div class="mt-3 bg-red-50 border-l-4 border-red-600 p-2">
+              <p class="text-xs font-bold">❌ Missing: No reassurance or next step</p>
+            </div>
+          </div>
+
+          <div class="border-2 border-black bg-gray-50 p-4 shadow-[4px_4px_0_0_#000]">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="bg-black text-white border-2 border-black px-3 py-1 font-black text-sm">2️⃣</div>
+              <h4 class="font-black text-lg">15 Minutes Later</h4>
+            </div>
+            <div class="grid sm:grid-cols-3 gap-3 text-sm">
+              <div>
+                <p class="font-bold text-xs uppercase tracking-wider text-gray-600 mb-1">Scene</p>
+                <p>2–3 calls marked "Spam Risk"</p>
+              </div>
+              <div>
+                <p class="font-bold text-xs uppercase tracking-wider text-gray-600 mb-1">Emotion</p>
+                <p class="text-yellow-700 font-bold">😕 Confusion</p>
+              </div>
+              <div>
+                <p class="font-bold text-xs uppercase tracking-wider text-gray-600 mb-1">Product Response</p>
+                <p>CRM auto-triggers RM calls</p>
+              </div>
+            </div>
+            <div class="mt-3 bg-red-50 border-l-4 border-red-600 p-2">
+              <p class="text-xs font-bold">❌ Missing: No consent or awareness</p>
+            </div>
+          </div>
+
+          <div class="border-2 border-black bg-white p-4 shadow-[4px_4px_0_0_#000]">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="bg-black text-white border-2 border-black px-3 py-1 font-black text-sm">3️⃣</div>
+              <h4 class="font-black text-lg">30 Minutes Later</h4>
+            </div>
+            <div class="grid sm:grid-cols-3 gap-3 text-sm">
+              <div>
+                <p class="font-bold text-xs uppercase tracking-wider text-gray-600 mb-1">Scene</p>
+                <p>WhatsApp from unknown number</p>
+              </div>
+              <div>
+                <p class="font-bold text-xs uppercase tracking-wider text-gray-600 mb-1">Emotion</p>
+                <p class="text-orange-700 font-bold">😤 Annoyance</p>
+              </div>
+              <div>
+                <p class="font-bold text-xs uppercase tracking-wider text-gray-600 mb-1">Product Response</p>
+                <p>No verification of identity</p>
+              </div>
+            </div>
+            <div class="mt-3 bg-red-50 border-l-4 border-red-600 p-2">
+              <p class="text-xs font-bold">❌ Missing: No trust cue</p>
+            </div>
+          </div>
+
+          <div class="border-2 border-black bg-red-50 p-4 shadow-[4px_4px_0_0_#000]">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="bg-red-600 text-white border-2 border-black px-3 py-1 font-black text-sm">4️⃣</div>
+              <h4 class="font-black text-lg">Nighttime (3 AM Boston)</h4>
+            </div>
+            <div class="grid sm:grid-cols-3 gap-3 text-sm">
+              <div>
+                <p class="font-bold text-xs uppercase tracking-wider text-gray-600 mb-1">Scene</p>
+                <p>Missed 4 more calls</p>
+              </div>
+              <div>
+                <p class="font-bold text-xs uppercase tracking-wider text-gray-600 mb-1">Emotion</p>
+                <p class="text-red-700 font-bold">😰 Anxiety</p>
+              </div>
+              <div>
+                <p class="font-bold text-xs uppercase tracking-wider text-gray-600 mb-1">Product Response</p>
+                <p>No timezone sensitivity</p>
+              </div>
+            </div>
+            <div class="mt-3 bg-red-100 border-l-4 border-red-600 p-2">
+              <p class="text-xs font-bold">❌ Missing: No quiet hours</p>
+            </div>
+          </div>
+
+          <div class="border-2 border-black bg-gray-50 p-4 shadow-[4px_4px_0_0_#000]">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="bg-black text-white border-2 border-black px-3 py-1 font-black text-sm">5️⃣</div>
+              <h4 class="font-black text-lg">Next Day</h4>
+            </div>
+            <div class="grid sm:grid-cols-3 gap-3 text-sm">
+              <div>
+                <p class="font-bold text-xs uppercase tracking-wider text-gray-600 mb-1">Scene</p>
+                <p>Opens app; 0 views</p>
+              </div>
+              <div>
+                <p class="font-bold text-xs uppercase tracking-wider text-gray-600 mb-1">Emotion</p>
+                <p class="text-gray-700 font-bold">😒 Cynicism</p>
+              </div>
+              <div>
+                <p class="font-bold text-xs uppercase tracking-wider text-gray-600 mb-1">Product Response</p>
+                <p>Silent dashboard</p>
+              </div>
+            </div>
+            <div class="mt-3 bg-red-50 border-l-4 border-red-600 p-2">
+              <p class="text-xs font-bold">❌ Missing: No feedback loop</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 border-2 border-black bg-white p-4">
+          <p class="text-sm font-bold uppercase tracking-wider text-gray-600 mb-2">📸 Current Experience</p>
+          <div class="border-2 border-black overflow-hidden">
+            <img 
+              src="/src/assets/no-broker-teardown/nobroker-before-my-listings.jpeg" 
+              alt="My Listings - Current NoBroker UI showing the dashboard experience"
+              class="w-full h-auto object-contain max-h-[600px]"
+            />
+          </div>
+          <p class="text-xs text-gray-600 mt-2 italic">My Listings (Current NoBroker UI)</p>
+        </div>
+      </BrutalCard>
+    </section>
+
+    <section id="pain-points" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("pain")} inline-flex`}>⚠️ Pain Points</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-5">Three Core Pain Points</h2>
+      <div class="space-y-6">
+        <BrutalCard color="#ffffff" class="p-6 border-2 border-black shadow-[6px_6px_0_0_#000]">
+          <div class="flex items-start gap-4 mb-3">
+            <div class="bg-red-600 text-white border-2 border-black px-3 py-1 font-black text-sm">1</div>
+            <h3 class="text-2xl font-extrabold">Uniform Outreach Model</h3>
+          </div>
+          <p class="text-base sm:text-lg leading-relaxed text-gray-900 mb-3">
+            All owners are treated the same. The CRM workflow—assign RM → call → WhatsApp → upsell—is geography-blind. For NRIs, this Indian immediacy feels like intrusion.
+          </p>
+          <div class="bg-gray-100 border-2 border-black p-4">
+            <p class="text-sm italic font-bold">Context-blind automation sounds like chaos to users who expect calm.</p>
           </div>
         </BrutalCard>
+
+        <BrutalCard color="#ffffff" class="p-6 border-2 border-black shadow-[6px_6px_0_0_#000]">
+          <div class="flex items-start gap-4 mb-3">
+            <div class="bg-red-600 text-white border-2 border-black px-3 py-1 font-black text-sm">2</div>
+            <h3 class="text-2xl font-extrabold">No Digital Proof of Identity</h3>
+          </div>
+          <p class="text-base sm:text-lg leading-relaxed text-gray-900 mb-3">
+            Owners abroad can't tell if the person calling is truly from NoBroker. No in-app verification, no visual identity, no audit trail.
+          </p>
+          <div class="bg-gray-100 border-2 border-black p-4">
+            <p class="text-sm italic font-bold">In absence of trust cues, even genuine help feels unsafe.</p>
+          </div>
+        </BrutalCard>
+
+        <BrutalCard color="#ffffff" class="p-6 border-2 border-black shadow-[6px_6px_0_0_#000]">
+          <div class="flex items-start gap-4 mb-3">
+            <div class="bg-red-600 text-white border-2 border-black px-3 py-1 font-black text-sm">3</div>
+            <h3 class="text-2xl font-extrabold">The Broken Promise of "NoBroker"</h3>
+          </div>
+          <p class="text-base sm:text-lg leading-relaxed text-gray-900 mb-3">
+            The brand itself sets an expectation: independence, control, transparency. Early unsolicited calls feel like betrayal.
+          </p>
+          <div class="bg-gray-100 border-2 border-black p-4">
+            <p class="text-sm italic font-bold">Brand promises create emotional baselines; breaking them magnifies friction.</p>
+          </div>
+        </BrutalCard>
+      </div>
+
+      <div class="mt-6 border-2 border-black bg-white p-4 shadow-[4px_4px_0_0_#000]">
+        <p class="text-sm font-bold uppercase tracking-wider text-gray-600 mb-2">📸 The Spam Problem</p>
+        <div class="border-2 border-black overflow-hidden">
+          <img 
+            src="/src/assets/no-broker-teardown/nobroker-before-spam-2.jpeg" 
+            alt="RM Call Screen showing Spam Risk label for NRI users"
+            class="w-full h-auto object-contain max-h-[600px]"
+          />
+        </div>
+        <p class="text-xs text-gray-600 mt-2 italic">RM calls appearing as "Spam Risk" to NRI users</p>
       </div>
     </section>
 
-    <section id="data-model" class="scroll-mt-24 mt-12 sm:mt-16">
-      <span class={`${pillClass("tech")} inline-flex`}>🗄 Data Model</span>
-      <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-5">Data Model & Instrumentation</h2>
-      <div class="grid gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
-        <BrutalCard color="#ffffff" class="p-6 sm:p-8 border-2 border-black shadow-[6px_6px_0_0_#0f172a] rounded-3xl break-words min-w-0">
-          <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <h3 class="text-2xl font-extrabold text-gray-900">Storage Spine</h3>
-            <span class="inline-flex items-center rounded-full border border-black bg-black px-3 py-1 text-xs font-black uppercase tracking-[0.18em] text-white shadow-[4px_4px_0_0_#caff6a]">Data Flow</span>
-          </div>
-          <p class="mt-3 text-sm sm:text-base text-gray-700">Snapshots and facts tracked per listing keep the coach deterministic and auditable.</p>
-          <div class="mt-6 grid gap-4 xl:grid-cols-2">
-            <section class="w-full min-w-0 break-words rounded-2xl border-2 border-black bg-[#e0f2fe] px-4 py-3 shadow-[4px_4px_0_0_#1d4ed8]">
-              <h4 class="text-sm font-bold uppercase tracking-[0.18em] text-gray-900">ListingQualitySnapshot</h4>
-              <p class="mt-2 text-sm sm:text-base leading-relaxed text-gray-800 break-words">`listing_id`, `ts`, photo metrics, amenity counts, proximity, price band, response_time_avg, health_score.</p>
-            </section>
-            <section class="w-full min-w-0 break-words rounded-2xl border-2 border-black bg-[#dcfce7] px-4 py-3 shadow-[4px_4px_0_0_#15803d]">
-              <h4 class="text-sm font-bold uppercase tracking-[0.18em] text-gray-900">OwnerCoachAction</h4>
-              <p class="mt-2 text-sm sm:text-base leading-relaxed text-gray-800 break-words">Captures action payloads, completion state, timestamps for audit + sequencing.</p>
-            </section>
-            <section class="w-full min-w-0 break-words rounded-2xl border-2 border-black bg-[#fde68a] px-4 py-3 shadow-[4px_4px_0_0_#ca8a04]">
-              <h4 class="text-sm font-bold uppercase tracking-[0.18em] text-gray-900">CoachExposure</h4>
-              <p class="mt-2 text-sm sm:text-base leading-relaxed text-gray-800 break-words">Variants, modules_shown[], to_dos_shown[], CTR, health_score at exposure.</p>
-            </section>
-            <section class="w-full min-w-0 break-words rounded-2xl border-2 border-black bg-[#fecdd3] px-4 py-3 shadow-[4px_4px_0_0_#be123c]">
-              <h4 class="text-sm font-bold uppercase tracking-[0.18em] text-gray-900">CoachOutcomes</h4>
-              <p class="mt-2 text-sm sm:text-base leading-relaxed text-gray-800 break-words">Pre/post windows for views, inquiries, visits, closures to compute deltas.</p>
-            </section>
-          </div>
-        </BrutalCard>
-        <BrutalCard color="#ffffff" class="p-6 sm:p-8 border-2 border-black shadow-[6px_6px_0_0_#0f172a] rounded-3xl break-words min-w-0">
-          <h3 class="text-2xl font-extrabold text-gray-900">Instrumentation & Events</h3>
-          <p class="mt-3 text-sm sm:text-base text-gray-700">Events connect UI behaviour to outcomes so experimentation stays tight.</p>
-          <ul class="mt-4 space-y-3 text-sm sm:text-base leading-relaxed text-gray-800">
-            <li><strong>coach_view_opened</strong>, <strong>coach_top_fix_clicked</strong>, <strong>coach_fix_completed</strong>, <strong>coach_dismissed</strong></li>
-            <li><strong>listing_photo_upload</strong>, <strong>listing_price_updated</strong>, <strong>listing_desc_updated</strong></li>
-            <li><strong>views_delta_computed</strong>, <strong>inquiries_delta_computed</strong>, <strong>retention_cohort_bucketed</strong></li>
-          </ul>
-          <div class="mt-6 rounded-2xl border-2 border-black bg-[#cffafe] px-4 py-4 shadow-[4px_4px_0_0_#0e7490]">
-            <h4 class="text-sm font-bold uppercase tracking-[0.18em] text-gray-900">Pipeline Notes</h4>
-            <ul class="mt-2 space-y-1.5 text-sm leading-relaxed text-gray-800">
-              <li>Nightly dbt job hydrates `ListingQualitySnapshot` + recalculates deltas.</li>
-              <li>Feature flags stored in LaunchDarkly control module availability per city.</li>
-              <li>Metrics roll into Looker dashboard segmented by cohort + experiment arm.</li>
-            </ul>
-          </div>
-        </BrutalCard>
-      </div>
-      <div class="mt-6 grid gap-4 sm:grid-cols-3">
-        <div class="flex items-start gap-3 rounded-2xl border-2 border-black bg-white px-4 py-4 shadow-[4px_4px_0_0_#0f172a]">
-          <span class="flex h-9 w-9 items-center justify-center rounded-full border border-black bg-black text-sm font-black uppercase tracking-[0.18em] text-white">1</span>
-          <p class="text-sm sm:text-base text-gray-800">Snapshots updated nightly → coach highlights gaps next login.</p>
-        </div>
-        <div class="flex items-start gap-3 rounded-2xl border-2 border-black bg-white px-4 py-4 shadow-[4px_4px_0_0_#0f172a]">
-          <span class="flex h-9 w-9 items-center justify-center rounded-full border border-black bg-black text-sm font-black uppercase tracking-[0.18em] text-white">2</span>
-          <p class="text-sm sm:text-base text-gray-800">Fix actions emit events → outcomes table records deltas.</p>
-        </div>
-        <div class="flex items-start gap-3 rounded-2xl border-2 border-black bg-white px-4 py-4 shadow-[4px_4px_0_0_#0f172a]">
-          <span class="flex h-9 w-9 items-center justify-center rounded-full border border-black bg-black text-sm font-black uppercase tracking-[0.18em] text-white">3</span>
-          <p class="text-sm sm:text-base text-gray-800">Dashboards stitch it together for experimentation & GTM feedback.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="analytics" class="scroll-mt-24 mt-12 sm:mt-16">
-      <span class={`${pillClass("metric")} inline-flex`}>📊 Analytics & Dashboards</span>
-      <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-5">Analytics & Dashboards</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-          <h3 class="text-lg font-extrabold uppercase tracking-[0.16em] text-gray-900">Owner Funnel</h3>
-          <p class="mt-3 text-sm sm:text-base leading-relaxed">Exposure → click → fix → delta (%) → 30-day retention.</p>
-        </BrutalCard>
-        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-          <h3 class="text-lg font-extrabold uppercase tracking-[0.16em] text-gray-900">Module Impact</h3>
-          <p class="mt-3 text-sm sm:text-base leading-relaxed">Per-module adoption & average delta.</p>
-        </BrutalCard>
-        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-          <h3 class="text-lg font-extrabold uppercase tracking-[0.16em] text-gray-900">Refund/Support Overlay</h3>
-          <p class="mt-3 text-sm sm:text-base leading-relaxed">Monthly correlation: usage vs refunds/tickets.</p>
-        </BrutalCard>
-        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-          <h3 class="text-lg font-extrabold uppercase tracking-[0.16em] text-gray-900">Cohorts</h3>
-          <p class="mt-3 text-sm sm:text-base leading-relaxed">By locality, property type, plan tier.</p>
-        </BrutalCard>
-      </div>
-    </section>
-
-    <section id="rollout" class="scroll-mt-24 mt-12 sm:mt-16">
-      <span class={`${pillClass("future")} inline-flex`}>🚀 Rollout & Experiments</span>
-      <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-5">Rollout & Experiments</h2>
+    <section id="competitive" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("competitive")} inline-flex`}>🔍 Competitive Reflection</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-5">Learning from the Market</h2>
+      
       <div class="space-y-4">
-        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-          <h3 class="text-lg font-extrabold">Phase-1 (MVP): Cities BLR + Pune</h3>
-          <p class="mt-2 text-sm sm:text-base leading-relaxed">A/B1: Coach vs control. Gates: ≥25% complete ≥1 fix; +12% inquiries interim; CSAT ≥4.0.</p>
+        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[4px_4px_0_0_#000]">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="bg-gray-200 border-2 border-black px-3 py-1 font-black text-sm">🏢</div>
+            <h3 class="text-xl font-extrabold">Zillow (US)</h3>
+          </div>
+          <div class="space-y-2 text-sm">
+            <div>
+              <p class="font-bold text-xs uppercase tracking-wider text-gray-600">Core Promise</p>
+              <p>Calm analytics, owner dashboards</p>
+            </div>
+            <div>
+              <p class="font-bold text-xs uppercase tracking-wider text-gray-600">Contact Model</p>
+              <p>100% self-serve</p>
+            </div>
+            <div class="bg-[#caff6a] border-2 border-black p-2 mt-2">
+              <p class="font-bold text-xs">💡 Key Learning: Transparency > immediacy</p>
+            </div>
+          </div>
         </BrutalCard>
-        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-          <h3 class="text-lg font-extrabold">Phase-2: Add Pricing & Responsiveness</h3>
-          <p class="mt-2 text-sm sm:text-base leading-relaxed">A/B2: With vs without deltas. Gate: refunds –20% by week-8.</p>
+
+        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[4px_4px_0_0_#000]">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="bg-gray-200 border-2 border-black px-3 py-1 font-black text-sm">🏢</div>
+            <h3 class="text-xl font-extrabold">MagicBricks (India)</h3>
+          </div>
+          <div class="space-y-2 text-sm">
+            <div>
+              <p class="font-bold text-xs uppercase tracking-wider text-gray-600">Core Promise</p>
+              <p>Broker marketplace</p>
+            </div>
+            <div>
+              <p class="font-bold text-xs uppercase tracking-wider text-gray-600">Contact Model</p>
+              <p>Aggressive upsells</p>
+            </div>
+            <div class="bg-[#caff6a] border-2 border-black p-2 mt-2">
+              <p class="font-bold text-xs">💡 Key Learning: Indian immediacy model</p>
+            </div>
+          </div>
         </BrutalCard>
-        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-          <h3 class="text-lg font-extrabold">Phase-3: Incentives & Visibility</h3>
-          <p class="mt-2 text-sm sm:text-base leading-relaxed">Optional ranking tie-in.</p>
+
+        <BrutalCard color="#caff6a" class="p-5 border-2 border-black shadow-[4px_4px_0_0_#000]">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="bg-black text-white border-2 border-black px-3 py-1 font-black text-sm">⭐</div>
+            <h3 class="text-xl font-extrabold">NoBroker</h3>
+          </div>
+          <div class="space-y-2 text-sm">
+            <div>
+              <p class="font-bold text-xs uppercase tracking-wider text-gray-900">Core Promise</p>
+              <p>Independence, zero brokerage</p>
+            </div>
+            <div>
+              <p class="font-bold text-xs uppercase tracking-wider text-gray-900">Contact Model</p>
+              <p>Hybrid (CRM calls + self-serve app)</p>
+            </div>
+            <div class="bg-white border-2 border-black p-2 mt-2">
+              <p class="font-bold text-xs">💡 Key Learning: Needs contextual service differentiation</p>
+            </div>
+          </div>
         </BrutalCard>
-        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-          <h3 class="text-lg font-extrabold">GTM Strategy</h3>
-          <p class="mt-2 text-sm sm:text-base leading-relaxed">Internal readiness, beta in BLR/Pune, full launch +2 weeks with notifications & email.</p>
+      </div>
+
+      <div class="mt-6 bg-[#60a5fa] text-white border-2 border-black p-5 shadow-[4px_4px_0_0_#000]">
+        <p class="text-lg font-bold">➡ Opportunity: Bring Western calm to Indian scale.</p>
+        <p class="mt-2">A "trust-first" experience could differentiate NoBroker globally.</p>
+      </div>
+    </section>
+
+    <section id="solutions" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("solution")} inline-flex`}>💡 Solution Concepts</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-5">Three Solutions for Trust Recovery</h2>
+      <div class="space-y-6">
+        <BrutalCard color="#ffffff" class="p-6 sm:p-7 border-2 border-black shadow-[6px_6px_0_0_#000]">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="bg-[#60a5fa] text-white border-2 border-black px-3 py-1 font-black">✳️ 1</div>
+            <h3 class="text-2xl font-extrabold">NRI Quiet Mode</h3>
+          </div>
+          <p class="text-base sm:text-lg leading-relaxed text-gray-900 mb-4">
+            <strong>Idea:</strong> Delay human contact for 72 hours after listing; provide asynchronous updates instead.
+          </p>
+          <div class="bg-gray-50 border-2 border-black p-4 mb-4">
+            <p class="font-bold mb-2">How it works:</p>
+            <ul class="space-y-2 text-sm">
+              <li>• Auto-detect international number during signup</li>
+              <li>• After posting, show modal: "Choose how we contact you"</li>
+              <li>• Options: [WhatsApp Digest] [Email Only] [Call Later] [No Contact for 3 Days]</li>
+              <li>• Default to non-intrusive mode</li>
+            </ul>
+          </div>
+          <div class="bg-[#caff6a] border-2 border-black p-4">
+            <p class="font-bold">Impact: Restores peace, respects time zones, lowers churn risk.</p>
+          </div>
+          <div class="mt-4 border-2 border-black bg-white p-3">
+            <p class="text-xs font-bold uppercase tracking-wider text-gray-600 mb-2">📸 Solution Design</p>
+            <div class="border-2 border-black overflow-hidden">
+              <img 
+                src="/src/assets/no-broker-teardown/nobroker-quiet-mode.png" 
+                alt="Consent Modal showing Quiet Mode preference settings"
+                class="w-full h-auto object-contain max-h-[600px]"
+              />
+            </div>
+            <p class="text-xs text-gray-600 mt-2 italic">Consent Modal (Quiet Mode Settings)</p>
+          </div>
+        </BrutalCard>
+
+        <BrutalCard color="#ffffff" class="p-6 sm:p-7 border-2 border-black shadow-[6px_6px_0_0_#000]">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="bg-[#60a5fa] text-white border-2 border-black px-3 py-1 font-black">✳️ 2</div>
+            <h3 class="text-2xl font-extrabold">Verified Handshake 2.0</h3>
+          </div>
+          <p class="text-base sm:text-lg leading-relaxed text-gray-900 mb-4">
+            <strong>Idea:</strong> Replace surprise calls with verified digital intros.
+          </p>
+          <div class="bg-gray-50 border-2 border-black p-4 mb-4">
+            <p class="font-bold mb-2">Flow:</p>
+            <ol class="space-y-2 text-sm list-decimal list-inside">
+              <li>RM assigned → user receives verified in-app card: "Priya Sharma (Verified 🛡️) — Your NoBroker Guide"</li>
+              <li>Primary CTA: "Message on WhatsApp"</li>
+              <li>Secondary: "Change Preferences"</li>
+              <li>Tooltip: "What does Verified mean?"</li>
+            </ol>
+          </div>
+          <div class="bg-[#caff6a] border-2 border-black p-4">
+            <p class="font-bold">Why it matters: Provides identity before voice, reducing perceived spam and increasing brand credibility.</p>
+          </div>
+          <div class="mt-4 border-2 border-black bg-white p-3">
+            <p class="text-xs font-bold uppercase tracking-wider text-gray-600 mb-2">📸 Solution Design</p>
+            <div class="border-2 border-black overflow-hidden">
+              <img 
+                src="/src/assets/no-broker-teardown/nobroker-verified-handshake.png" 
+                alt="Verified Contact Card showing RM profile with verification badge"
+                class="w-full h-auto object-contain max-h-[600px]"
+              />
+            </div>
+            <p class="text-xs text-gray-600 mt-2 italic">Verified Contact Card with RM profile</p>
+          </div>
+        </BrutalCard>
+
+        <BrutalCard color="#ffffff" class="p-6 sm:p-7 border-2 border-black shadow-[6px_6px_0_0_#000]">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="bg-[#60a5fa] text-white border-2 border-black px-3 py-1 font-black">✳️ 3</div>
+            <h3 class="text-2xl font-extrabold">Weekly Visibility Digest</h3>
+          </div>
+          <p class="text-base sm:text-lg leading-relaxed text-gray-900 mb-4">
+            <strong>Idea:</strong> Give NRIs predictable, digestible updates—no surprise calls.
+          </p>
+          <div class="bg-gray-50 border-2 border-black p-4 mb-4">
+            <p class="font-bold mb-2">Delivery: WhatsApp message or email once per week</p>
+            <p class="font-bold mb-2">Content:</p>
+            <ul class="space-y-2 text-sm">
+              <li>• Views & shortlists count</li>
+              <li>• One improvement suggestion</li>
+              <li>• CTA: "Open Dashboard → Quiet Mode Settings"</li>
+            </ul>
+          </div>
+          <div class="bg-[#caff6a] border-2 border-black p-4">
+            <p class="font-bold">Impact: Converts silence into reassurance.</p>
+          </div>
+          <div class="mt-4 border-2 border-black bg-white p-3">
+            <p class="text-xs font-bold uppercase tracking-wider text-gray-600 mb-2">📸 Solution Design</p>
+            <div class="border-2 border-black overflow-hidden">
+              <img 
+                src="/src/assets/no-broker-teardown/nobroker-weekly-summary.png" 
+                alt="Weekly Digest showing summary message via WhatsApp/Email"
+                class="w-full h-auto object-contain max-h-[600px]"
+              />
+            </div>
+            <p class="text-xs text-gray-600 mt-2 italic">Weekly Digest (WhatsApp/Email)</p>
+          </div>
         </BrutalCard>
       </div>
     </section>
 
-    <section id="gtm" class="scroll-mt-24 mt-12 sm:mt-16">
-      <span class={`${pillClass("ecosystem")} inline-flex`}>🚀 GTM Strategy</span>
-      <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7 border-2 border-black shadow-[8px_8px_0_0_#000] rounded-2xl">
-        <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Go-to-Market (GTM) Strategy</h2>
-        <p class="text-base sm:text-lg leading-relaxed text-gray-900 mb-6">The launch will be phased to gather feedback and ensure a smooth rollout.</p>
-        <div class="space-y-4">
-          <BrutalCard color="#e0f2fe" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-            <h3 class="text-lg font-extrabold">Internal Readiness (Launch -2 weeks)</h3>
-            <ul class="mt-3 space-y-2 text-sm sm:text-base leading-relaxed">
-              <li>Train Customer Support and Sales teams on the feature, armed with FAQs and scripts.</li>
-              <li>Finalize analytics dashboards for monitoring.</li>
-            </ul>
-          </BrutalCard>
-          <BrutalCard color="#fef9c3" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-            <h3 class="text-lg font-extrabold">Beta Launch (Launch Day, 10% of new listings in BLR/Pune)</h3>
-            <ul class="mt-3 space-y-2 text-sm sm:text-base leading-relaxed">
-              <li>Launch to a limited cohort to monitor for bugs and gather initial qualitative feedback via user interviews and session recordings.</li>
-              <li>No external marketing communication.</li>
-            </ul>
-          </BrutalCard>
-          <BrutalCard color="#bbf7d0" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-            <h3 class="text-lg font-extrabold">Full Launch (Launch +2 weeks)</h3>
-            <ul class="mt-3 space-y-2 text-sm sm:text-base leading-relaxed">
-              <li>Roll out to 100% of active listings in launch cities.</li>
-              <li>In-app notification campaign to drive discovery for existing owners.</li>
-              <li>Email campaign to all owners announcing the new, free tool to help them get more leads.</li>
-              <li>(Optional) Blog post detailing our commitment to owner success.</li>
-            </ul>
-          </BrutalCard>
+    <section id="mvp-scope" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("mvp")} inline-flex`}>🛠️ MVP Scope</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-5">MVP Scope & Feasibility</h2>
+      
+      <div class="space-y-4">
+        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[4px_4px_0_0_#000]">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-3">
+              <div class="bg-[#caff6a] border-2 border-black px-3 py-1 font-black text-sm">1</div>
+              <h3 class="text-xl font-extrabold">Phase 1</h3>
+            </div>
+            <span class="text-2xl">🟢</span>
+          </div>
+          <div class="space-y-2 text-sm">
+            <div>
+              <p class="font-bold text-xs uppercase tracking-wider text-gray-600">Feature</p>
+              <p class="font-bold">Quiet Mode + Preference Modal</p>
+            </div>
+            <div>
+              <p class="font-bold text-xs uppercase tracking-wider text-gray-600">Implementation</p>
+              <p>UI + CRM flag; no infra changes</p>
+            </div>
+            <div class="bg-green-50 border-2 border-black p-2 mt-2">
+              <p class="font-bold text-xs">Complexity: Low</p>
+            </div>
+          </div>
+        </BrutalCard>
+
+        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[4px_4px_0_0_#000]">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-3">
+              <div class="bg-[#caff6a] border-2 border-black px-3 py-1 font-black text-sm">2</div>
+              <h3 class="text-xl font-extrabold">Phase 2</h3>
+            </div>
+            <span class="text-2xl">🟡</span>
+          </div>
+          <div class="space-y-2 text-sm">
+            <div>
+              <p class="font-bold text-xs uppercase tracking-wider text-gray-600">Feature</p>
+              <p class="font-bold">Verified Contact Card</p>
+            </div>
+            <div>
+              <p class="font-bold text-xs uppercase tracking-wider text-gray-600">Implementation</p>
+              <p>CRM sync → frontend render</p>
+            </div>
+            <div class="bg-yellow-50 border-2 border-black p-2 mt-2">
+              <p class="font-bold text-xs">Complexity: Medium</p>
+            </div>
+          </div>
+        </BrutalCard>
+
+        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[4px_4px_0_0_#000]">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-3">
+              <div class="bg-[#caff6a] border-2 border-black px-3 py-1 font-black text-sm">3</div>
+              <h3 class="text-xl font-extrabold">Phase 3</h3>
+            </div>
+            <span class="text-2xl">🟢</span>
+          </div>
+          <div class="space-y-2 text-sm">
+            <div>
+              <p class="font-bold text-xs uppercase tracking-wider text-gray-600">Feature</p>
+              <p class="font-bold">Weekly Digest</p>
+            </div>
+            <div>
+              <p class="font-bold text-xs uppercase tracking-wider text-gray-600">Implementation</p>
+              <p>Batch job + templated message</p>
+            </div>
+            <div class="bg-green-50 border-2 border-black p-2 mt-2">
+              <p class="font-bold text-xs">Complexity: Low</p>
+            </div>
+          </div>
+        </BrutalCard>
+      </div>
+
+      <div class="mt-6 grid sm:grid-cols-2 gap-4">
+        <div class="bg-green-50 border-2 border-black p-4 shadow-[3px_3px_0_0_#000]">
+          <p class="font-bold text-sm">✅ Works within existing architecture</p>
+          <p class="text-xs mt-1">No new microservices or backend rewrites</p>
         </div>
-      </BrutalCard>
-    </section>
-    <section id="risks" class="scroll-mt-24 mt-12 sm:mt-16">
-      <span class={`${pillClass("risk")} inline-flex`}>⚠ Risks</span>
-      <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-5">Risks & Mitigations</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-          <h3 class="text-lg font-bold text-gray-900">Wrong suggestions</h3>
-          <p class="mt-2 text-sm sm:text-base leading-relaxed">“Not relevant” feedback; tune thresholds weekly.</p>
-        </BrutalCard>
-        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-          <h3 class="text-lg font-bold text-gray-900">Overwhelm</h3>
-          <p class="mt-2 text-sm sm:text-base leading-relaxed">Cap to-dos at 3; “Quick wins” labeling.</p>
-        </BrutalCard>
-        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-          <h3 class="text-lg font-bold text-gray-900">Data sparsity</h3>
-          <p class="mt-2 text-sm sm:text-base leading-relaxed">Fallback radius; sample size badge.</p>
-        </BrutalCard>
-        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-          <h3 class="text-lg font-bold text-gray-900">Gaming “refresh”</h3>
-          <p class="mt-2 text-sm sm:text-base leading-relaxed">Rate-limit; ignore in ranking.</p>
-        </BrutalCard>
-        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-          <h3 class="text-lg font-bold text-gray-900">Support confusion</h3>
-          <p class="mt-2 text-sm sm:text-base leading-relaxed">Train scripts; tag tickets.</p>
-        </BrutalCard>
+        <div class="bg-green-50 border-2 border-black p-4 shadow-[3px_3px_0_0_#000]">
+          <p class="font-bold text-sm">✅ Supports product differentiation</p>
+          <p class="text-xs mt-1">NPS recovery for global user segments</p>
+        </div>
       </div>
     </section>
 
-    <section id="content-copy" class="scroll-mt-24 mt-12 sm:mt-16">
-      <span class={`${pillClass("voice")} inline-flex`}>💬 Content & Copy</span>
-      <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7 border-2 border-black shadow-[8px_8px_0_0_#000] rounded-2xl">
-        <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Content & Copy (Examples)</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-          <BrutalCard color="#f5ff85" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-            <h3 class="text-lg font-extrabold">Coach Header</h3>
-            <p class="mt-3 text-base sm:text-lg leading-relaxed">“Let’s get you more leads this week.”</p>
-          </BrutalCard>
-          <BrutalCard color="#fecdd3" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-            <h3 class="text-lg font-extrabold">Photo Tag</h3>
-            <p class="mt-3 text-base sm:text-lg leading-relaxed">“Too dark — rooms look brighter with daylight. Try reshooting or reorder.”</p>
-          </BrutalCard>
-          <BrutalCard color="#e0f2fe" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-            <h3 class="text-lg font-extrabold">Amenity Chip</h3>
-            <p class="mt-3 text-base sm:text-lg leading-relaxed">“Add: 600m to Indiranagar Metro”</p>
-          </BrutalCard>
-          <BrutalCard color="#bbf7d0" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
-            <h3 class="text-lg font-extrabold">Price Tip</h3>
-            <p class="mt-3 text-base sm:text-lg leading-relaxed">“Homes like yours close 17% faster at ₹26–27k.”</p>
-          </BrutalCard>
-          <BrutalCard color="#fef08a" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl" style="grid-column: span 2;">
-            <h3 class="text-lg font-extrabold">Progress Card</h3>
-            <p class="mt-3 text-base sm:text-lg leading-relaxed">“Nice! After your changes: +21% views / +3 inquiries.”</p>
-          </BrutalCard>
-        </div>
-        <p class="mt-6 text-sm sm:text-base text-gray-700 italic">Tone: helpful, non-judgmental, specific.</p>
-      </BrutalCard>
-    </section>
-    <section id="compliance" class="scroll-mt-24 mt-12 sm:mt-16">
-      <span class={`${pillClass("trust")} inline-flex`}>🔒 Compliance & Privacy</span>
-      <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7 border-2 border-black shadow-[8px_8px_0_0_#000] rounded-2xl">
-        <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Compliance & Privacy</h2>
-        <ul class="space-y-3 text-sm sm:text-base leading-relaxed">
-          <li>Owner-only scores & hints (never public).</li>
-          <li>Disclose benchmark logic (“based on similar nearby listings”).</li>
-          <li>Store deltas aggregated; purge diagnostics after 30 days.</li>
+    <section id="metrics" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("metric")} inline-flex`}>📊 Success Metrics</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-5">Success Metrics</h2>
+      
+      <div class="space-y-4">
+        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[4px_4px_0_0_#000]">
+          <h3 class="text-lg font-extrabold mb-3">NRI Spam Complaints</h3>
+          <div class="grid grid-cols-3 gap-3 text-sm">
+            <div>
+              <p class="font-bold text-xs uppercase tracking-wider text-gray-600 mb-1">Baseline</p>
+              <p class="text-2xl font-black">~15%</p>
+            </div>
+            <div>
+              <p class="font-bold text-xs uppercase tracking-wider text-gray-600 mb-1">Target</p>
+              <p class="text-2xl font-black text-green-600">< 5%</p>
+            </div>
+            <div>
+              <p class="font-bold text-xs uppercase tracking-wider text-gray-600 mb-1">Signal</p>
+              <p class="text-sm font-bold">Trust rebuild</p>
+            </div>
+          </div>
+        </BrutalCard>
+
+        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[4px_4px_0_0_#000]">
+          <h3 class="text-lg font-extrabold mb-3">D7 Retention (NRI Cohort)</h3>
+          <div class="grid grid-cols-3 gap-3 text-sm">
+            <div>
+              <p class="font-bold text-xs uppercase tracking-wider text-gray-600 mb-1">Baseline</p>
+              <p class="text-2xl font-black">55%</p>
+            </div>
+            <div>
+              <p class="font-bold text-xs uppercase tracking-wider text-gray-600 mb-1">Target</p>
+              <p class="text-2xl font-black text-green-600">≥ 70%</p>
+            </div>
+            <div>
+              <p class="font-bold text-xs uppercase tracking-wider text-gray-600 mb-1">Signal</p>
+              <p class="text-sm font-bold">Product stickiness</p>
+            </div>
+          </div>
+        </BrutalCard>
+
+        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[4px_4px_0_0_#000]">
+          <h3 class="text-lg font-extrabold mb-3">Quiet Mode Opt-in Rate</h3>
+          <div class="grid grid-cols-3 gap-3 text-sm">
+            <div>
+              <p class="font-bold text-xs uppercase tracking-wider text-gray-600 mb-1">Baseline</p>
+              <p class="text-2xl font-black">0%</p>
+            </div>
+            <div>
+              <p class="font-bold text-xs uppercase tracking-wider text-gray-600 mb-1">Target</p>
+              <p class="text-2xl font-black text-green-600">> 60%</p>
+            </div>
+            <div>
+              <p class="font-bold text-xs uppercase tracking-wider text-gray-600 mb-1">Signal</p>
+              <p class="text-sm font-bold">Preference adoption</p>
+            </div>
+          </div>
+        </BrutalCard>
+
+        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[4px_4px_0_0_#000]">
+          <h3 class="text-lg font-extrabold mb-3">Subscription Conversion Rate</h3>
+          <div class="grid grid-cols-3 gap-3 text-sm">
+            <div>
+              <p class="font-bold text-xs uppercase tracking-wider text-gray-600 mb-1">Baseline</p>
+              <p class="text-2xl font-black">2%</p>
+            </div>
+            <div>
+              <p class="font-bold text-xs uppercase tracking-wider text-gray-600 mb-1">Target</p>
+              <p class="text-2xl font-black text-green-600">≥ 3%</p>
+            </div>
+            <div>
+              <p class="font-bold text-xs uppercase tracking-wider text-gray-600 mb-1">Signal</p>
+              <p class="text-sm font-bold">Monetization proof</p>
+            </div>
+          </div>
+        </BrutalCard>
+
+        <BrutalCard color="#caff6a" class="p-5 border-2 border-black shadow-[4px_4px_0_0_#000]">
+          <h3 class="text-lg font-extrabold mb-3">NPS (NRI Owners)</h3>
+          <div class="grid grid-cols-3 gap-3 text-sm">
+            <div>
+              <p class="font-bold text-xs uppercase tracking-wider text-gray-900 mb-1">Baseline</p>
+              <p class="text-2xl font-black">25</p>
+            </div>
+            <div>
+              <p class="font-bold text-xs uppercase tracking-wider text-gray-900 mb-1">Target</p>
+              <p class="text-2xl font-black text-green-700">45+</p>
+            </div>
+            <div>
+              <p class="font-bold text-xs uppercase tracking-wider text-gray-900 mb-1">Signal</p>
+              <p class="text-sm font-bold">Brand uplift</p>
+            </div>
+          </div>
+        </BrutalCard>
+      </div>
+
+      <div class="mt-6 bg-black text-white border-2 border-black p-5 shadow-[4px_4px_0_0_#caff6a]">
+        <p class="font-bold text-lg mb-3">Estimated Incremental Impact:</p>
+        <ul class="space-y-2 text-sm">
+          <li>• Retention gain: +15–20 pts (= ~₹30–40 Cr annual revenue potential)</li>
+          <li>• Support cost reduction: –25% ("no leads" tickets)</li>
+          <li>• LTV improvement: +40% via re-engagement loops</li>
         </ul>
-      </BrutalCard>
+      </div>
     </section>
 
-    <section id="delivery" class="scroll-mt-24 mt-12 sm:mt-16">
-      <span class={`${pillClass("tech")} inline-flex`}>📅 Delivery Plan & Estimates</span>
-      <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7 border-2 border-black shadow-[8px_8px_0_0_#000] rounded-2xl">
-        <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Delivery Plan & Estimates (Rough)</h2>
-        <ul class="space-y-3 text-sm sm:text-base leading-relaxed">
-          <li><strong>Backend services (benchmarks, scoring, deltas):</strong> 2–3 sprints</li>
-          <li><strong>Frontend owner dashboard & modules A–C:</strong> 2 sprints</li>
-          <li><strong>Instrumentation & dashboards:</strong> 1 sprint (parallel)</li>
-          <li><strong>Phase-1 end-to-end (incl. QA/UAT):</strong> ~5–6 sprints</li>
-        </ul>
-        <p class="mt-4 text-xs italic text-gray-600">Assumes 1 FE, 1 BE, 1 full-stack, 1 QA, shared PM/Design.</p>
-      </BrutalCard>
-    </section>
-
-    <section id="acceptance" class="scroll-mt-24 mt-12 sm:mt-16">
-      <span class={`${pillClass("shield")} inline-flex`}>✅ Acceptance Criteria (End-to-End MVP)</span>
-      <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7 border-2 border-black shadow-[8px_8px_0_0_#000] rounded-2xl">
-        <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Acceptance Criteria (End-to-End MVP)</h2>
-        <div class="space-y-3 text-sm sm:text-base leading-relaxed">
-          <div class="flex items-start gap-3 rounded-2xl border-2 border-black bg-[#f8fafc] px-4 py-3 shadow-[3px_3px_0_0_#0ea5e9]">
-            <span class="mt-0.5 inline-flex min-w-[2.25rem] items-center justify-center rounded-full border border-black bg-white px-3 py-1 text-[10px] font-black uppercase tracking-[0.22em]">AC1</span>
-            <p class="text-gray-800 break-words">Owners in BLR/Pune with active listings see coach card within 48h of listing going live.</p>
-          </div>
-          <div class="flex items-start gap-3 rounded-2xl border-2 border-black bg-[#fef9c3] px-4 py-3 shadow-[3px_3px_0_0_#f59e0b]">
-            <span class="mt-0.5 inline-flex min-w-[2.25rem] items-center justify-center rounded-full border border-black bg-white px-3 py-1 text-[10px] font-black uppercase tracking-[0.22em]">AC2</span>
-            <p class="text-gray-800 break-words">Coach displays Health score and ≤3 top fixes.</p>
-          </div>
-          <div class="flex items-start gap-3 rounded-2xl border-2 border-black bg-[#fee2e2] px-4 py-3 shadow-[3px_3px_0_0_#b91c1c]">
-            <span class="mt-0.5 inline-flex min-w-[2.25rem] items-center justify-center rounded-full border border-black bg-white px-3 py-1 text-[10px] font-black uppercase tracking-[0.22em]">AC3</span>
-            <p class="text-gray-800 break-words">Photo module tags dark/duplicate/missing with ≤5% error (QA dataset).</p>
-          </div>
-          <div class="flex items-start gap-3 rounded-2xl border-2 border-black bg-[#dcfce7] px-4 py-3 shadow-[3px_3px_0_0_#15803d]">
-            <span class="mt-0.5 inline-flex min-w-[2.25rem] items-center justify-center rounded-full border border-black bg-white px-3 py-1 text-[10px] font-black uppercase tracking-[0.22em]">AC4</span>
-            <p class="text-gray-800 break-words">Amenity chips appear only when geo-proximity and catalog available.</p>
-          </div>
-          <div class="flex items-start gap-3 rounded-2xl border-2 border-black bg-[#c7d2fe] px-4 py-3 shadow-[3px_3px_0_0_#312e81]">
-            <span class="mt-0.5 inline-flex min-w-[2.25rem] items-center justify-center rounded-full border border-black bg-white px-3 py-1 text-[10px] font-black uppercase tracking-[0.22em]">AC5</span>
-            <p class="text-gray-800 break-words">Delta progress card appears within 24–48h after a fix; numbers match analytics backend within ±5%.</p>
-          </div>
-          <div class="flex items-start gap-3 rounded-2xl border-2 border-black bg-[#f1f5f9] px-4 py-3 shadow-[3px_3px_0_0_#1e293b]">
-            <span class="mt-0.5 inline-flex min-w-[2.25rem] items-center justify-center rounded-full border border-black bg-white px-3 py-1 text-[10px] font-black uppercase tracking-[0.22em]">AC6</span>
-            <p class="text-gray-800 break-words">Experiment data visible in dashboard, updated daily.</p>
-          </div>
+    <section id="reflection" class="scroll-mt-24 mt-12 sm:mt-16 mb-12">
+      <span class={`${pillClass("reflection")} inline-flex`}>💭 Reflection</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-5">From Noise to Nuance</h2>
+      <BrutalCard color="#ffffff" class="p-6 sm:p-7 border-2 border-black shadow-[6px_6px_0_0_#000]">
+        <p class="text-base sm:text-lg leading-relaxed text-gray-900 mb-4">
+          NoBroker's first-contact problem isn't rooted in bad intent. It's a product built for Indian immediacy now serving a global audience that values digital calm.
+        </p>
+        <p class="text-base sm:text-lg leading-relaxed text-gray-900 mb-4">
+          For local owners, quick calls feel like care. For NRIs, they feel like chaos. The same act carries a different emotional currency.
+        </p>
+        <div class="bg-[#caff6a] border-2 border-black p-5 shadow-[4px_4px_0_0_#000]">
+          <p class="text-lg font-bold text-gray-900">
+            Fixing this doesn't mean fewer touchpoints — it means smarter, contextual ones. When NoBroker learns to listen before speaking, help will finally feel like help again.
+          </p>
         </div>
       </BrutalCard>
-    </section>
 
-    <section id="open-questions" class="scroll-mt-24 mt-12 sm:mt-16">
-      <span class={`${pillClass("future")} block sm:inline-flex`}>❓ Open Questions (for design/eng/legal)</span>
-      <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7 border-2 border-black shadow-[8px_8px_0_0_#000] rounded-2xl">
-        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-4 break-words">Open Questions (for design/eng/legal)</h2>
-        <div class="grid gap-3 sm:grid-cols-2">
-          <div class="flex items-start gap-3 rounded-2xl border-2 border-black bg-[#e0f2fe] px-4 py-3 shadow-[3px_3px_0_0_#1d4ed8]">
-            <span class="mt-0.5 text-sm font-black uppercase tracking-[0.18em] text-gray-900">Q1</span>
-            <p class="text-xs sm:text-base leading-relaxed text-gray-800">Should we allow tenants to lightly rate listing accuracy post-visit (private signal only)?</p>
-          </div>
-          <div class="flex items-start gap-3 rounded-2xl border-2 border-black bg-[#fef9c3] px-4 py-3 shadow-[3px_3px_0_0_#f59e0b]">
-            <span class="mt-0.5 text-sm font-black uppercase tracking-[0.18em] text-gray-900">Q2</span>
-            <p class="text-xs sm:text-base leading-relaxed text-gray-800">Should we bundle an optional “photo day” (paid add-on) if photo quality remains poor after 2 nudges?</p>
-          </div>
-          <div class="flex items-start gap-3 rounded-2xl border-2 border-black bg-[#dcfce7] px-4 py-3 shadow-[3px_3px_0_0_#15803d]">
-            <span class="mt-0.5 text-sm font-black uppercase tracking-[0.18em] text-gray-900">Q3</span>
-            <p class="text-xs sm:text-base leading-relaxed text-gray-800">What is the minimum sample size to show “price suggestion” with confidence? (propose n≥30 comps).</p>
-          </div>
-          <div class="flex items-start gap-3 rounded-2xl border-2 border-black bg-[#fee2e2] px-4 py-3 shadow-[3px_3px_0_0_#b91c1c]">
-            <span class="mt-0.5 text-sm font-black uppercase tracking-[0.18em] text-gray-900">Q4</span>
-            <p class="text-xs sm:text-base leading-relaxed text-gray-800">Language localization scope for top 5 cities (EN + HI + local)?</p>
-          </div>
+      <div class="mt-8 border-2 border-black bg-white p-4 shadow-[4px_4px_0_0_#000]">
+        <p class="text-sm font-bold uppercase tracking-wider text-gray-600 mb-2">📸 Final Thoughts</p>
+        <div class="border-2 border-black overflow-hidden">
+          <img 
+            src="/src/assets/no-broker-teardown/nobroker-z-reflection-last.png" 
+            alt="Visual summary and reflection on the NoBroker teardown"
+            class="w-full h-auto object-contain max-h-[600px]"
+          />
         </div>
-      </BrutalCard>
-    </section>
-
-    <section id="sources" class="mt-16 sm:mt-24 pt-6 sm:pt-8 border-t-4 border-black scroll-mt-24">
-      <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
-        This JTBD-led, hypothesis-driven, experiment-ready PRD is detailed enough to implement without AI. Turn this into a polished Notion doc or wireframes for production-grade portfolio pieces.
-      </p>
+        <p class="text-xs text-gray-600 mt-2 italic">Visual summary of the teardown insights</p>
+      </div>
     </section>
   </main>
 </div>
+
