@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* NoBroker Brand Colors - HSL */
+    --background: 0 0% 95.7%; /* #F4F4F4 subtle gray */
+    --foreground: 0 0% 29%; /* #4A4A4A body text */
+
+    --card: 0 0% 100%; /* White cards */
+    --card-foreground: 0 0% 29%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 29%;
+
+    /* Primary = NoBroker Blue (header bar) */
+    --primary: 207 63% 31%; /* #1C4E80 */
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary = Teal (secondary actions) */
+    --secondary: 174 100% 27%; /* #00897B */
+    --secondary-foreground: 0 0% 100%;
+
+    /* Muted = Beige help strip */
+    --muted: 45 74% 91%; /* #F8EFD4 */
+    --muted-foreground: 0 0% 46%;
+
+    /* Accent = Red CTA */
+    --accent: 2 71% 56%; /* #E53935 */
+    --accent-foreground: 0 0% 100%;
+
+    /* Success = Verified green */
+    --success: 174 100% 37%; /* #00BFA5 */
+    --success-foreground: 0 0% 100%;
+
+    --destructive: 2 71% 56%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 207 63% 31%;
+
+    --radius: 0.5rem;
+
+    /* Metadata text */
+    --meta: 0 0% 46%; /* #757575 */
+
+    /* Quiet Mode calm blue-green */
+    --quiet-mode: 174 48% 86%;
+    --quiet-mode-foreground: 174 100% 20%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
