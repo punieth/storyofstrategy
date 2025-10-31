@@ -1,33 +1,71 @@
-import { Eye, Heart } from "lucide-react";
+import type { MouseEvent } from "react";
+import { Eye, Heart, X } from "lucide-react";
 import { Link } from "react-router-dom";
 
 interface WeeklyDigestCardProps {
   views: number;
   shortlists: number;
+  onDismiss?: () => void;
 }
 
-export const WeeklyDigestCard = ({ views, shortlists }: WeeklyDigestCardProps) => {
+export const WeeklyDigestCard = ({ views, shortlists, onDismiss }: WeeklyDigestCardProps) => {
+  const handleDismiss = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+    onDismiss?.();
+  };
+
   return (
-    <Link to="/digest">
-      <div className="bg-card border border-border rounded-lg p-4 mb-4 hover:shadow-md transition-shadow cursor-pointer">
-        <h4 className="font-semibold text-sm mb-3">Weekly Digest</h4>
-        <div className="flex gap-6">
-          <div className="flex items-center gap-2">
-            <Eye className="h-4 w-4 text-meta" />
-            <div>
-              <p className="text-xs text-meta">Views</p>
-              <p className="text-lg font-bold">{views}</p>
-            </div>
+    <Link to="/digest" className="block">
+      <article className="nb-weekly-card">
+        {onDismiss && (
+          <button
+            type="button"
+            aria-label="Dismiss weekly digest card"
+            className="nb-card-close"
+            onClick={handleDismiss}
+          >
+            <X className="h-4 w-4" />
+          </button>
+        )}
+
+        <header className="nb-weekly-card__header">
+          <div className="nb-weekly-card__title">
+            <span className="nb-weekly-card__label">
+              <Eye className="h-3.5 w-3.5" />
+              Weekly Digest
+            </span>
+            <h4>Your Whitefield 2BHK</h4>
+            <p>Last 7 days • Updated 2 hrs ago</p>
           </div>
-          <div className="flex items-center gap-2">
-            <Heart className="h-4 w-4 text-meta" />
+          <span className="nb-weekly-card__badge">Performance snapshot</span>
+        </header>
+
+        <section className="nb-weekly-card__metrics">
+          <div className="nb-weekly-card__metric nb-weekly-card__metric--views">
             <div>
-              <p className="text-xs text-meta">Shortlists</p>
-              <p className="text-lg font-bold">{shortlists > 0 ? shortlists : "—"}</p>
+              <p>Views</p>
+              <strong>{views}</strong>
             </div>
+            <span>
+              <Eye className="h-4 w-4" />
+            </span>
           </div>
-        </div>
-      </div>
+          <div className="nb-weekly-card__metric nb-weekly-card__metric--shortlists">
+            <div>
+              <p>Shortlists</p>
+              <strong>{shortlists}</strong>
+            </div>
+            <span>
+              <Heart className="h-4 w-4" />
+            </span>
+          </div>
+        </section>
+
+        <footer className="nb-weekly-card__footer">
+          <strong>Tip:</strong> Listings with refreshed photos get 2× more enquiries. Add a balcony photo now.
+        </footer>
+      </article>
     </Link>
   );
 };

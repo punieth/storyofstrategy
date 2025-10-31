@@ -1,23 +1,26 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { Screen } from "../components/Screen";
+import { Button } from "@components/razorpay/ui/button";
 
 const NotFound = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.error("404 Error: User attempted to access non-existent route:", location.pathname);
   }, [location.pathname]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">404</h1>
-        <p className="mb-4 text-xl text-gray-600">Oops! Page not found</p>
-        <a href="/" className="text-blue-500 underline hover:text-blue-700">
-          Return to Home
-        </a>
+    <Screen title="Page Not Found" hideBottomNav contentClassName="justify-center text-center gap-6">
+      <div className="flex flex-col items-center gap-3">
+        <span className="text-4xl font-bold text-accent">404</span>
+        <p className="text-meta">We couldn't find what you were looking for.</p>
+        <Button variant="cta" onClick={() => navigate("/")}>
+          Back to Home
+        </Button>
       </div>
-    </div>
+    </Screen>
   );
 };
 

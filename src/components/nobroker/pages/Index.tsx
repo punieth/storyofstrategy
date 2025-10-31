@@ -1,15 +1,13 @@
-import { Building2, Bell, Clock, MessageCircle, Users } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Bell, Building2, Clock, MessageCircle, Users } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@components/razorpay/ui/button";
-import { BottomNav } from "../components/BottomNav";
 import { ConsentModal } from "../components/ConsentModal";
-import { Header } from "../components/Header";
+import { Screen } from "../components/Screen";
 
 
 const Index = () => {
   const [showConsent, setShowConsent] = useState(false);
-  const navigate = useNavigate();
 
   const features = [
     {
@@ -39,10 +37,8 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background pb-20">
-      <Header title="For Property Owners" />
-      
-      <main className="pt-16 px-4 max-w-md mx-auto">
+    <>
+      <Screen title="For Property Owners">
         <div className="py-6">
           {/* Hero Section */}
           <div className="text-center mb-8">
@@ -90,16 +86,14 @@ const Index = () => {
             </Button>
           </div>
         </div>
-      </main>
+      </Screen>
 
-      <BottomNav />
-      
       <ConsentModal 
         isOpen={showConsent} 
         onClose={() => setShowConsent(false)}
         isNRI={true}
       />
-    </div>
+    </>
   );
 };
 

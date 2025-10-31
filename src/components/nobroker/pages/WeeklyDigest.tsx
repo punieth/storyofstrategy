@@ -1,26 +1,18 @@
-import { Eye, Heart, Lightbulb, ExternalLink, ImagePlus, Settings, ArrowLeft } from "lucide-react";
+import { Eye, Heart, Lightbulb, ExternalLink, ImagePlus, Settings } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { Header } from "../components/Header";
-import { BottomNav } from "../components/BottomNav";
 import { Button } from "@components/razorpay/ui/button";
+import { Screen } from "../components/Screen";
 
 const WeeklyDigest = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-background pb-20">
-      <Header title="Weekly Summary" />
-      
-      <main className="pt-16 px-4 max-w-md mx-auto">
-        <button 
-          onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-primary mb-4 mt-4"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          <span className="text-sm font-medium">Back</span>
-        </button>
-
-        <div className="py-4 space-y-4">
+    <Screen
+      title="Weekly Summary"
+      onBack={() => navigate(-1)}
+      contentClassName="pb-4"
+    >
+      <div className="space-y-4">
           {/* WhatsApp-style message card */}
           <div className="bg-success/10 rounded-lg p-4 border-l-4 border-success">
             <div className="flex items-center gap-2 mb-3">
@@ -141,11 +133,8 @@ const WeeklyDigest = () => {
               </li>
             </ul>
           </div>
-        </div>
-      </main>
-
-      <BottomNav />
-    </div>
+      </div>
+    </Screen>
   );
 };
 

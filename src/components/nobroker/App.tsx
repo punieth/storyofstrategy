@@ -1,6 +1,7 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "next-themes";
 import Index from "./pages/Index";
 import Listings from "./pages/Listings";
 import Preferences from "./pages/Preferences";
@@ -16,26 +17,32 @@ import { Toaster as Sonner } from "@components/razorpay/ui/sonnernobroker";
 
 const queryClient = new QueryClient();
 
-const App = () => (
+interface AppProps {
+  basename?: string;
+}
+
+const App = ({ basename = "/" }: AppProps) => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />``
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/listings" element={<Listings />} />
-          <Route path="/preferences" element={<Preferences />} />
-          <Route path="/digest" element={<WeeklyDigest />} />
-          <Route path="/handshake" element={<VerifiedHandshake />} />
-          <Route path="/property" element={<Property />} />
-          <Route path="/shortlist" element={<Shortlist />} />
-          <Route path="/plans" element={<Plans />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter basename={basename}>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/listings" element={<Listings />} />
+            <Route path="/preferences" element={<Preferences />} />
+            <Route path="/digest" element={<WeeklyDigest />} />
+            <Route path="/handshake" element={<VerifiedHandshake />} />
+            <Route path="/property" element={<Property />} />
+            <Route path="/shortlist" element={<Shortlist />} />
+            <Route path="/plans" element={<Plans />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { X, Check } from "lucide-react";
 import { Button } from "@components/razorpay/ui/button";
-import { RadioGroup, RadioGroupItem } from "@components/razorpay/ui/radio-group";
+import { RadioGroupNoBroker, RadioGroupItemNoBroker } from "@components/razorpay/ui/radio-group-nobroker";
 import { Label } from "@components/razorpay/ui/label";
 
 interface ConsentModalProps {
@@ -49,9 +49,9 @@ export const ConsentModal = ({ isOpen, onClose, isNRI = false }: ConsentModalPro
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-end sm:items-center justify-center">
-      <div className="bg-muted rounded-t-2xl sm:rounded-2xl w-full max-w-md max-h-[90vh] overflow-y-auto">
-        <div className="p-6">
+    <div className="nb-modal-overlay" role="dialog" aria-modal="true">
+      <div className="nb-modal">
+        <div className="nb-modal__content">
           <div className="flex items-start justify-between mb-4">
             <div>
               <h2 className="text-lg font-semibold mb-1">Choose how we contact you</h2>
@@ -61,7 +61,7 @@ export const ConsentModal = ({ isOpen, onClose, isNRI = false }: ConsentModalPro
                 </span>
               )}
             </div>
-            <button onClick={onClose} className="p-1 -mr-1">
+            <button onClick={onClose} className="p-1 -mr-1" aria-label="Close">
               <X className="h-5 w-5" />
             </button>
           </div>
@@ -70,14 +70,14 @@ export const ConsentModal = ({ isOpen, onClose, isNRI = false }: ConsentModalPro
             Your property is verified! Let us know your preferred way to stay updated.
           </p>
 
-          <RadioGroup value={selected} onValueChange={setSelected} className="space-y-3">
+          <RadioGroupNoBroker value={selected} onValueChange={setSelected} className="space-y-3">
             {contactOptions.map((option) => (
               <div
                 key={option.value}
                 className="flex items-start gap-3 p-4 rounded-lg border-2 border-border bg-card cursor-pointer hover:border-accent transition-colors"
                 onClick={() => setSelected(option.value)}
               >
-                <RadioGroupItem value={option.value} id={option.value} className="mt-1" />
+                <RadioGroupItemNoBroker value={option.value} id={option.value} className="mt-1" />
                 <div className="flex-1">
                   <Label htmlFor={option.value} className="flex items-center gap-2 cursor-pointer">
                     <span className="font-medium">{option.label}</span>
@@ -94,7 +94,7 @@ export const ConsentModal = ({ isOpen, onClose, isNRI = false }: ConsentModalPro
                 )}
               </div>
             ))}
-          </RadioGroup>
+          </RadioGroupNoBroker>
 
           <div className="mt-6 flex flex-col gap-3">
             <Button variant="cta" className="w-full" onClick={handleSave}>

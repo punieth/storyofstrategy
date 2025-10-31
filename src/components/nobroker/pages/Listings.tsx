@@ -1,18 +1,20 @@
 import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { Clock } from "lucide-react";
-import { Header } from "../components/Header";
-import { BottomNav } from "../components/BottomNav";
+import { Clock, X } from "lucide-react";
 import { ConsentModal } from "../components/ConsentModal";
 import { HelpStrip } from "../components/HelpStrip";
 import { PropertyCard } from "../components/PropertyCard";
 import { VerifiedHandshakeCard } from "../components/VerifiedHandshakeSheet";
 import { WeeklyDigestCard } from "../components/WeeklyDigestCard";
+import { Screen } from "../components/Screen";
 
 const Listings = () => {
   const [showConsent, setShowConsent] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
+  const [showQuietCard, setShowQuietCard] = useState(true);
+  const [showDigestCard, setShowDigestCard] = useState(true);
+  const [showGuideCard, setShowGuideCard] = useState(true);
   
   // Get state from URL params: quiet-on, quiet-ending-soon, quiet-off
   const state = searchParams.get('state') || 'quiet-on';
@@ -36,14 +38,31 @@ const Listings = () => {
   const isEndingSoon = state === 'quiet-ending-soon';
   const hoursLeft = isEndingSoon ? 8 : 72;
 
+  useEffect(() => {
+    if (isQuietMode) {
+      setShowQuietCard(true);
+      setShowGuideCard(true);
+    }
+  }, [isQuietMode]);
+
   return (
-    <div className="min-h-screen bg-background pb-20">
-      <Header title="My Listings" />
-      
-      <main className="pt-16 px-4 max-w-md mx-auto">
-        <div className="py-4">
-          {isQuietMode && (
-            <div className="bg-quiet-mode border border-quiet-mode-foreground/20 rounded-lg p-4 mb-4">
+    <>
+      <Screen
+        title="My Listings"
+        contentClassName="pb-4"
+        afterMain={<HelpStrip text="Get help with your property listing. Our team is available 24/7." />}
+      >
+        <div className="space-y-4">
+          {isQuietMode && showQuietCard && (
+            <div className="relative bg-quiet-mode border border-quiet-mode-foreground/20 rounded-lg p-4 pr-12">
+              <button
+                type="button"
+                className="nb-card-close"
+                aria-label="Dismiss quiet mode card"
+                onClick={() => setShowQuietCard(false)}
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
               <div className="flex items-start gap-3">
                 <div className="p-2 bg-quiet-mode-foreground/10 rounded-full">
                   <Clock className="h-5 w-5 text-quiet-mode-foreground" />
@@ -73,18 +92,23 @@ const Listings = () => {
             </div>
           )}
 
-          {!isQuietMode && (
-            <>
-              <VerifiedHandshakeCard
-                rmName="Priya Sharma"
-                rmImage="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&auto=format&fit=crop"
-                rmRole="Helps with listing verification"
-                status="pre-contact"
-              />
-            </>
+          {!isQuietMode && showGuideCard && (
+            <VerifiedHandshakeCard
+              rmName="Priya Sharma"
+              rmImage="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&auto=format&fit=crop"
+              rmRole="Helps with listing verification"
+              status="pre-contact"
+              onDismiss={() => setShowGuideCard(false)}
+            />
           )}
 
-          <WeeklyDigestCard views={isQuietMode ? 0 : 18} shortlists={isQuietMode ? 0 : 2} />
+          {showDigestCard && (
+            <WeeklyDigestCard
+              views={18}
+              shortlists={2}
+              onDismiss={() => setShowDigestCard(false)}
+            />
+          )}
 
           <div className="space-y-4">
             <PropertyCard
@@ -107,22 +131,19 @@ const Listings = () => {
 
           <button 
             onClick={() => setShowConsent(true)}
-            className="w-full mt-4 py-3 border-2 border-dashed border-border rounded-lg text-sm text-meta hover:border-accent hover:text-accent transition-colors"
+            className="w-full py-3 border-2 border-dashed border-border rounded-lg text-sm text-meta hover:border-accent hover:text-accent transition-colors"
           >
             + Add New Property
           </button>
         </div>
-      </main>
+      </Screen>
 
-      <HelpStrip text="Get help with your property listing. Our team is available 24/7." />
-      <BottomNav />
-      
       <ConsentModal 
         isOpen={showConsent} 
         onClose={() => setShowConsent(false)}
         isNRI={true}
       />
-    </div>
+    </>
   );
 };
 
