@@ -346,6 +346,128 @@
   margin-right: 0.25rem;
 }
 
+/* Utility bridges for Tailwind-esque classes within the NoBroker theme */
+.nb-theme .bg-card { background-color: hsl(var(--card)); }
+.nb-theme .bg-muted { background-color: hsl(var(--muted)); }
+.nb-theme .bg-primary { background-color: hsl(var(--primary)); }
+.nb-theme .bg-primary\/10 { background-color: color-mix(in srgb, hsl(var(--primary)) 10%, transparent); }
+.nb-theme .bg-secondary { background-color: hsl(var(--secondary)); }
+.nb-theme .bg-secondary\/10 { background-color: color-mix(in srgb, hsl(var(--secondary)) 10%, transparent); }
+.nb-theme .bg-success { background-color: hsl(var(--success)); }
+.nb-theme .bg-success\/10 { background-color: color-mix(in srgb, hsl(var(--success)) 10%, transparent); }
+.nb-theme .bg-accent { background-color: hsl(var(--accent)); }
+.nb-theme .bg-accent\/15 { background-color: color-mix(in srgb, hsl(var(--accent)) 15%, transparent); }
+.nb-theme .bg-success\/15 { background-color: color-mix(in srgb, hsl(var(--success)) 15%, transparent); }
+.nb-theme .bg-primary\/15 { background-color: color-mix(in srgb, hsl(var(--primary)) 15%, transparent); }
+.nb-theme .bg-secondary\/15 { background-color: color-mix(in srgb, hsl(var(--secondary)) 15%, transparent); }
+.nb-theme .bg-success\/20 { background-color: color-mix(in srgb, hsl(var(--success)) 20%, transparent); }
+.nb-theme .bg-accent\/20 { background-color: color-mix(in srgb, hsl(var(--accent)) 20%, transparent); }
+
+.nb-theme .text-foreground { color: hsl(var(--foreground)); }
+.nb-theme .text-primary { color: hsl(var(--primary)); }
+.nb-theme .text-primary-foreground { color: hsl(var(--primary-foreground)); }
+.nb-theme .text-secondary { color: hsl(var(--secondary)); }
+.nb-theme .text-secondary-foreground { color: hsl(var(--secondary-foreground)); }
+.nb-theme .text-muted-foreground { color: hsl(var(--muted-foreground)); }
+.nb-theme .text-meta { color: hsl(var(--meta)); }
+.nb-theme .text-accent { color: hsl(var(--accent)); }
+.nb-theme .text-accent-foreground { color: hsl(var(--accent-foreground)); }
+.nb-theme .text-success { color: hsl(var(--success)); }
+.nb-theme .text-success-foreground { color: hsl(var(--success-foreground)); }
+.nb-theme .text-destructive { color: hsl(var(--destructive)); }
+.nb-theme .text-destructive-foreground { color: hsl(var(--destructive-foreground)); }
+.nb-theme .text-muted-foreground\/80 {
+  color: color-mix(in srgb, hsl(var(--muted-foreground)) 80%, transparent);
+}
+
+.nb-theme .border-border { border-color: hsl(var(--border)); }
+.nb-theme .border-border\/70 { border-color: color-mix(in srgb, hsl(var(--border)) 70%, transparent); }
+.nb-theme .border-border\/40 { border-color: color-mix(in srgb, hsl(var(--border)) 40%, transparent); }
+.nb-theme .border-accent { border-color: hsl(var(--accent)); }
+.nb-theme .border-success { border-color: hsl(var(--success)); }
+.nb-theme .border-secondary\/20 {
+  border-color: color-mix(in srgb, hsl(var(--secondary)) 20%, transparent);
+}
+.nb-theme .border-secondary\/30 {
+  border-color: color-mix(in srgb, hsl(var(--secondary)) 30%, transparent);
+}
+.nb-theme .border-secondary\/40 {
+  border-color: color-mix(in srgb, hsl(var(--secondary)) 40%, transparent);
+}
+.nb-theme .border-input { border-color: hsl(var(--input)); }
+.nb-theme .border-ring { border-color: hsl(var(--ring)); }
+.nb-theme .hover\:border-accent:hover { border-color: hsl(var(--accent)); }
+.nb-theme .hover\:border-primary:hover { border-color: hsl(var(--primary)); }
+.nb-theme .hover\:border-secondary:hover { border-color: hsl(var(--secondary)); }
+
+.nb-theme .bg-quiet-mode {
+  background-color: hsl(var(--quiet-mode));
+}
+
+.nb-theme .bg-quiet-mode-foreground\/10 {
+  background-color: color-mix(in srgb, hsl(var(--quiet-mode-foreground)) 10%, transparent);
+}
+
+.nb-theme .border-quiet-mode-foreground\/20 {
+  border-color: color-mix(in srgb, hsl(var(--quiet-mode-foreground)) 20%, transparent);
+}
+
+.nb-theme .text-quiet-mode-foreground {
+  color: hsl(var(--quiet-mode-foreground));
+}
+
+.nb-theme .text-quiet-mode-foreground\/80 {
+  color: color-mix(in srgb, hsl(var(--quiet-mode-foreground)) 80%, transparent);
+}
+
+.nb-theme .hover\:bg-primary\/90:hover {
+  background-color: color-mix(in srgb, hsl(var(--primary)) 90%, black 10%);
+}
+
+.nb-theme .hover\:bg-secondary\/80:hover {
+  background-color: color-mix(in srgb, hsl(var(--secondary)) 80%, black 20%);
+}
+
+.nb-theme .hover\:bg-secondary\/90:hover {
+  background-color: color-mix(in srgb, hsl(var(--secondary)) 90%, black 10%);
+}
+
+.nb-theme .hover\:bg-accent:hover {
+  background-color: hsl(var(--accent));
+}
+
+.nb-theme .hover\:bg-accent\/90:hover {
+  background-color: color-mix(in srgb, hsl(var(--accent)) 90%, black 10%);
+}
+
+.nb-theme .hover\:bg-accent\/50:hover {
+  background-color: color-mix(in srgb, hsl(var(--accent)) 50%, transparent);
+}
+
+.nb-theme .hover\:text-accent-foreground:hover {
+  color: hsl(var(--accent-foreground));
+}
+
+.nb-theme .hover\:text-primary:hover {
+  color: hsl(var(--primary));
+}
+
+.nb-theme .focus-visible\:border-ring:focus-visible {
+  border-color: hsl(var(--ring));
+}
+
+.nb-theme .focus-visible\:ring-ring\/50:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in srgb, hsl(var(--ring)) 50%, transparent);
+}
+
+.nb-theme .focus-visible\:ring-destructive\/20:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in srgb, hsl(var(--destructive)) 20%, transparent);
+}
+
+.nb-theme .focus-visible\:ring-destructive\/40:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in srgb, hsl(var(--destructive)) 40%, transparent);
+}
+
 [data-slot="dialog-overlay"] {
   position: fixed;
   inset: 0;
