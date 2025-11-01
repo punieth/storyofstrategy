@@ -157,7 +157,7 @@ export const VerifiedHandshakeCard = ({
       </div>
 
       <DialogNoBroker open={showInfoModal} onOpenChange={setShowInfoModal}>
-        <DialogContentNoBroker className="max-w-sm rounded-2xl border-border/70 p-5">
+        <DialogContentNoBroker>
           <DialogHeaderNoBroker className="gap-3">
             <DialogTitleNoBroker className="flex items-center gap-2 text-base font-semibold">
               <ShieldCheck className="h-5 w-5 text-success" />

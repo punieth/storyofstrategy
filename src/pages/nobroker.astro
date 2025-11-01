@@ -3,8 +3,6 @@ import Layout from "@layouts/Default.astro";
 import NoBrokerApp from "@components/nobroker/App";
 import "@components/nobroker/index.css";
 import "@components/razorpay/styles/globals.css";
-
-const BASENAME = "/nobroker";
 ---
 
 <Layout
@@ -13,12 +11,26 @@ const BASENAME = "/nobroker";
   classList="bg-background text-foreground"
 >
   <main class="flex flex-1 items-center justify-center py-12 px-4 md:py-16">
-    <div class="nb-shell">
-      <div class="nb-shell-inner">
-        <div class="nb-theme w-full h-full rounded-3xl border border-border bg-background shadow-xl overflow-hidden" data-embedded="true">
-          <NoBrokerApp client:only="react" basename={BASENAME} />
+    <div class="w-full flex justify-center">
+      <div class="nb-shell nobroker-page-shell">
+        <div class="nb-shell-inner">
+          <div
+            class="nb-theme w-full h-full rounded-3xl border border-border bg-background shadow-xl overflow-hidden"
+            data-embedded="true"
+          >
+            <NoBrokerApp client:only="react" basename="/nobroker" />
+          </div>
         </div>
       </div>
     </div>
   </main>
+
+  <style>
+    .nobroker-page-shell {
+      --nb-scale-base: 1;
+      --nb-scale: 1;
+      width: var(--nb-shell-width);
+      max-width: var(--nb-shell-width);
+    }
+  </style>
 </Layout>

@@ -1,6 +1,5 @@
-
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, MemoryRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import Index from "./pages/Index";
 import Listings from "./pages/Listings";
@@ -19,31 +18,37 @@ const queryClient = new QueryClient();
 
 interface AppProps {
   basename?: string;
+  embedded?: boolean;
 }
 
-const App = ({ basename = "/" }: AppProps) => (
-  <QueryClientProvider client={queryClient}>
-    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter basename={basename}>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/listings" element={<Listings />} />
-            <Route path="/preferences" element={<Preferences />} />
-            <Route path="/digest" element={<WeeklyDigest />} />
-            <Route path="/handshake" element={<VerifiedHandshake />} />
-            <Route path="/property" element={<Property />} />
-            <Route path="/shortlist" element={<Shortlist />} />
-            <Route path="/plans" element={<Plans />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </ThemeProvider>
-  </QueryClientProvider>
-);
+const App = ({ basename = "/", embedded = false }: AppProps) => {
+  const Router = embedded ? MemoryRouter : BrowserRouter;
+  const routerProps: any = embedded ? { initialEntries: ['/'] } : { basename };
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <Router {...routerProps}>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/listings" element={<Listings />} />
+              <Route path="/preferences" element={<Preferences />} />
+              <Route path="/digest" element={<WeeklyDigest />} />
+              <Route path="/handshake" element={<VerifiedHandshake />} />
+              <Route path="/property" element={<Property />} />
+              <Route path="/shortlist" element={<Shortlist />} />
+              <Route path="/plans" element={<Plans />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Router>
+        </TooltipProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;

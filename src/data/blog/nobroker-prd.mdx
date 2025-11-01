@@ -10,6 +10,12 @@ layout: "../../layouts/NeobrutalBlogPost.astro"
 ---
 
 import StickyNav from "@components/blog/StickyNav.astro";
+import NoBrokerPrototypeShowcase from "@components/nobroker/PrototypeShowcase";
+import "@components/nobroker/index.css";
+import "@components/razorpay/styles/globals.css";
+import "../../styles/nobroker-prd.css";
+
+<div class="nobroker-prd">
 
 {/* Sticky Nav */}
 
@@ -241,20 +247,20 @@ import StickyNav from "@components/blog/StickyNav.astro";
 {/* --- Section: Objectives --- */}
 <div id="objectives" class="my-12 sm:my-16 scroll-mt-24">
     <h2 class="text-3xl font-extrabold mb-6">Objectives</h2>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="bg-white border-2 border-black rounded-2xl p-5 text-center shadow-[6px_6px_0_0_#000]">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="bg-white border-2 border-black rounded-2xl px-0 py-4 sm:p-5 text-center shadow-[6px_6px_0_0_#000]">
             <p class="text-2xl font-bold">Reduce early churn</p>
             <p class="text-lg text-gray-600 mt-2">-20% churn</p>
         </div>
-        <div class="bg-white border-2 border-black rounded-2xl p-5 text-center shadow-[6px_6px_0_0_#000]">
+        <div class="bg-white border-2 border-black rounded-2xl px-0 py-4 sm:p-5 text-center shadow-[6px_6px_0_0_#000]">
             <p class="text-2xl font-bold">Improve trust signals</p>
             <p class="text-lg text-gray-600 mt-2">+15 NPS</p>
         </div>
-        <div class="bg-white border-2 border-black rounded-2xl p-5 text-center shadow-[6px_6px_0_0_#000]">
+        <div class="bg-white border-2 border-black rounded-2xl px-0 py-4 sm:p-5 text-center shadow-[6px_6px_0_0_#000]">
             <p class="text-2xl font-bold">Modernize CRM outreach</p>
             <p class="text-lg text-gray-600 mt-2">60% Quiet Mode adoption</p>
         </div>
-        <div class="bg-white border-2 border-black rounded-2xl p-5 text-center shadow-[6px_6px_0_0_#000]">
+        <div class="bg-white border-2 border-black rounded-2xl px-0 py-4 sm:p-5 text-center shadow-[6px_6px_0_0_#000]">
             <p class="text-2xl font-bold">Reduce spam complaints</p>
             <p class="text-lg text-gray-600 mt-2">&lt;5% complaints</p>
         </div>
@@ -275,7 +281,7 @@ import StickyNav from "@components/blog/StickyNav.astro";
 <div id="personas" class="my-12 sm:my-16 scroll-mt-24">
     <h2 class="text-3xl font-extrabold mb-6">Personas</h2>
     <div class="grid sm:grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="bg-white border-2 border-black rounded-2xl p-6 shadow-[6px_6px_0_0_#000]">
+        <div class="bg-white border-2 border-black rounded-2xl p-4 sm:p-6 shadow-[6px_6px_0_0_#000]">
             <h3 class="font-bold text-xl mb-2">Rajesh – The Independent Owner</h3>
             <p class="text-sm text-gray-500 mb-4">Boston, USA</p>
             <ul class="list-disc list-inside space-y-2">
@@ -285,7 +291,7 @@ import StickyNav from "@components/blog/StickyNav.astro";
                 <li class="font-bold text-indigo-600">"Let me manage my home quietly and confidently."</li>
             </ul>
         </div>
-        <div class="bg-white border-2 border-black rounded-2xl p-6 shadow-[6px_6px_0_0_#000]">
+        <div class="bg-white border-2 border-black rounded-2xl p-4 sm:p-6 shadow-[6px_6px_0_0_#000]">
             <h3 class="font-bold text-xl mb-2">Meera – The Dependent Owner</h3>
             <p class="text-sm text-gray-500 mb-4">London, UK</p>
             <ul class="list-disc list-inside space-y-2">
@@ -294,7 +300,7 @@ import StickyNav from "@components/blog/StickyNav.astro";
                 <li class="font-bold text-indigo-600">"Make me feel safe — I'll reach out when I'm ready."</li>
             </ul>
         </div>
-        <div class="bg-white border-2 border-black rounded-2xl p-6 shadow-[6px_6px_0_0_#000]">
+        <div class="bg-white border-2 border-black rounded-2xl p-4 sm:p-6 shadow-[6px_6px_0_0_#000]">
             <h3 class="font-bold text-xl mb-2">Arjun – The Busy Investor</h3>
             <p class="text-sm text-gray-500 mb-4">Dubai, UAE</p>
             <ul class="list-disc list-inside space-y-2">
@@ -314,8 +320,13 @@ import StickyNav from "@components/blog/StickyNav.astro";
     <p class="text-lg leading-relaxed mb-6">
         Two simple interventions that transform pushy outreach into intentional care.
     </p>
+
+    <div class="my-6 nobroker-prototype">
+        <NoBrokerPrototypeShowcase client:visible />
+    </div>
+
     <div class="grid lg:grid-cols-2 gap-8">
-        <div class="bg-white border-2 border-black rounded-2xl p-6 border-t-8 border-green-500 shadow-[8px_8px_0_0_#000] relative overflow-hidden">
+                <div class="bg-white border-2 border-black rounded-2xl p-4 sm:p-6 border-t-8 border-green-500 shadow-[8px_8px_0_0_#000] relative overflow-hidden">
             <div class="absolute top-0 right-0 w-32 h-32 bg-green-100 rounded-full -mr-16 -mt-16 opacity-50"></div>
             <div class="relative z-10">
                 <div class="inline-flex items-center gap-2 bg-green-700 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mb-3">
@@ -331,7 +342,7 @@ import StickyNav from "@components/blog/StickyNav.astro";
                 </ul>
             </div>
         </div>
-        <div class="bg-white border-2 border-black rounded-2xl p-6 border-t-8 border-blue-500 shadow-[8px_8px_0_0_#000] relative overflow-hidden">
+        <div class="bg-white border-2 border-black rounded-2xl p-4 sm:p-6 border-t-8 border-blue-500 shadow-[8px_8px_0_0_#000] relative overflow-hidden">
             <div class="absolute top-0 right-0 w-32 h-32 bg-blue-100 rounded-full -mr-16 -mt-16 opacity-50"></div>
             <div class="relative z-10">
                 <div class="inline-flex items-center gap-2 bg-blue-700 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mb-3">
@@ -353,7 +364,7 @@ import StickyNav from "@components/blog/StickyNav.astro";
 {/* --- Section: Journey Map --- */}
 <div id="journey" class="my-12 sm:my-16 scroll-mt-24">
     <h2 class="text-3xl font-extrabold mb-6">The Journey: Chaos to Calm</h2>
-    <div class="bg-white border-2 border-black rounded-2xl p-6 sm:p-8 shadow-[8px_8px_0_0_#000]">
+    <div class="bg-white border-2 border-black rounded-2xl p-4 sm:p-6 shadow-[8px_8px_0_0_#000]">
         <div class="grid md:grid-cols-2 gap-8">
             {/* Current Journey */}
             <div>
@@ -599,4 +610,6 @@ import StickyNav from "@components/blog/StickyNav.astro";
     <p class="mt-6 text-lg leading-relaxed">
         For Indian users, speed means care. For NRIs, calm means care. Both can coexist if context is built into the system. "NoBroker shouldn't sound louder just because the owner is farther." Quiet Mode and Verified Handshake let NoBroker keep its promise — "No Brokerage" now truly means "No Pressure."
     </p>
+</div>
+
 </div>

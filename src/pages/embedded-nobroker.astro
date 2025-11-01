@@ -1,0 +1,55 @@
+---
+import Layout from "@layouts/Prototype.astro";
+import NoBrokerApp from "@components/nobroker/App";
+import "@components/nobroker/index.css";
+import "@components/razorpay/styles/globals.css";
+
+// This page is a clean host for the NoBrokerApp, intended for embedding in an iframe.
+// It removes all extra layout shells and padding.
+---
+
+<Layout
+  title="NoBroker Prototype"
+  description="Interactive prototype for embedding"
+  classList="bg-transparent"
+>
+  <div class="prototype-host">
+    <div class="nb-shell nb-shell-embedded">
+      <div class="nb-shell-inner">
+        <div
+          id="prototype-root"
+          class="nb-theme w-full h-full rounded-3xl border border-border bg-background shadow-xl overflow-hidden"
+          data-embedded="true"
+        >
+          <NoBrokerApp client:only="react" basename="/embedded-nobroker" />
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .prototype-host {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    box-sizing: border-box;
+    background: transparent;
+  }
+
+  @media (max-width: 640px) {
+    .prototype-host {
+      padding: 1rem 0;
+    }
+  }
+
+  .nb-shell-embedded {
+    --nb-scale-base: 1;
+    --nb-scale: 1;
+    width: var(--nb-shell-width);
+    max-width: var(--nb-shell-width);
+  }
+</style>
