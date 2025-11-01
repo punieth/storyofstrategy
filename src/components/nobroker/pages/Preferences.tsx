@@ -112,14 +112,14 @@ const Preferences = () => {
           </div>
         </div>
 
-        {/* Verified Caller Info */}
+        {/* Guide Identity Info */}
         <div className="bg-muted rounded-lg p-4">
           <div className="flex items-start gap-3">
             <ShieldCheck className="h-5 w-5 text-success flex-shrink-0 mt-0.5" />
             <div>
-              <h4 className="font-semibold text-sm mb-1">Verified Caller Information</h4>
+              <h4 className="font-semibold text-sm mb-1">Guide Identity Preview</h4>
               <p className="text-xs text-muted-foreground">
-                We only call from verified NoBroker numbers. You'll always see caller information before answering.
+                We only use verified NoBroker numbers. You’ll see your guide’s profile before any call or WhatsApp ping.
               </p>
             </div>
           </div>

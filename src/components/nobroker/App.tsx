@@ -5,7 +5,7 @@ import Index from "./pages/Index";
 import Listings from "./pages/Listings";
 import Preferences from "./pages/Preferences";
 import WeeklyDigest from "./pages/WeeklyDigest";
-import VerifiedHandshake from "./pages/VerifiedHandshake";
+import KnowYourGuide from "./pages/KnowYourGuide";
 import Property from "./pages/Property";
 import Shortlist from "./pages/Shortlist";
 import Plans from "./pages/Plans";
@@ -37,7 +37,8 @@ const App = ({ basename = "/", embedded = false }: AppProps) => {
               <Route path="/listings" element={<Listings />} />
               <Route path="/preferences" element={<Preferences />} />
               <Route path="/digest" element={<WeeklyDigest />} />
-              <Route path="/handshake" element={<VerifiedHandshake />} />
+              <Route path="/guide" element={<KnowYourGuide />} />
+              <Route path="/handshake" element={<KnowYourGuide />} />
               <Route path="/property" element={<Property />} />
               <Route path="/shortlist" element={<Shortlist />} />
               <Route path="/plans" element={<Plans />} />

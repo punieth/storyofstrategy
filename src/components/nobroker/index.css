@@ -50,14 +50,14 @@
 @media (max-width: 480px) {
   .nb-shell {
     --nb-scale: clamp(0.82, calc((100vw - 2rem) / 24.375rem), 1);
-    --nb-shell-height: min(820px, 96vh);
+    --nb-shell-height: min(750px, 96vh);
   }
 }
 
 @media (max-width: 360px) {
   .nb-shell {
     --nb-scale: clamp(0.78, calc((100vw - 1.5rem) / 24.375rem), 1);
-    --nb-shell-height: min(780px, 98vh);
+    --nb-shell-height: min(750px, 98vh);
   }
 }
 

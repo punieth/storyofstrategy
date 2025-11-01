@@ -1,6 +1,6 @@
 ---
 title: "Your Property, Your Peace"
-description: "How two small interventions—Quiet Mode and Verified Handshake—can restore trust for NoBroker's NRI homeowners."
+description: "How two small interventions—Quiet Mode and Know Your Guide—can restore trust for NoBroker's NRI homeowners."
 pubDate: "Oct 31 2025"
 author: "Punith R"
 tags: ["product management", "case study", "nobroker"]
@@ -80,7 +80,7 @@ import "../../styles/nobroker-prd.css";
         <span>The Bet</span>
       </div>
       <p class="text-base sm:text-lg leading-relaxed">
-        Giving NRIs control over communication ("Quiet Mode") and verifying RM identity upfront ("Verified Handshake") will build trust.
+        Giving NRIs control over communication ("Quiet Mode") and introducing their guide before any outreach ("Know Your Guide") will build trust.
       </p>
     </div>
     <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-4 sm:p-5 text-center">
@@ -225,7 +225,7 @@ import "../../styles/nobroker-prd.css";
                 </li>
                 <li class="flex items-start gap-2">
                     <span class="text-green-600 font-bold">•</span>
-                    <span>Verified RM card with photo & ID</span>
+                    <span>Know Your Guide profile with photo & ID</span>
                 </li>
                 <li class="flex items-start gap-2">
                     <span class="text-green-600 font-bold">•</span>
@@ -272,7 +272,7 @@ import "../../styles/nobroker-prd.css";
     <h2 class="text-3xl font-extrabold mb-2">Key Hypothesis</h2>
     <div class="bg-yellow-50 border-2 border-black rounded-2xl p-8">
         <p class="text-xl leading-relaxed text-center">
-            If NRI owners are given <span class="font-bold">calm control (Quiet Mode)</span> and <span class="font-bold">transparent identity (Verified Handshake)</span> before human outreach, they will feel safer, engage longer, and convert to paid services with higher intent and less cynicism.
+            If NRI owners are given <span class="font-bold">calm control (Quiet Mode)</span> and <span class="font-bold">transparent identity (Know Your Guide)</span> before human outreach, they will feel safer, engage longer, and convert to paid services with higher intent and less cynicism.
         </p>
     </div>
 </div>
@@ -349,12 +349,12 @@ import "../../styles/nobroker-prd.css";
                     <span>🛡️</span>
                     <span>Phase 2</span>
                 </div>
-                <h3 class="font-bold text-2xl text-blue-900 mb-3">Verified Handshake</h3>
+                <h3 class="font-bold text-2xl text-blue-900 mb-3">Know Your Guide</h3>
                 <p class="text-base leading-relaxed mb-4">Build trust before voice contact.</p>
                 <ul class="list-disc list-inside mt-4 space-y-2 bg-blue-50 p-4 rounded-lg">
-                    <li>Verified RM Card with photo, ID, and location sent via push notification</li>
-                    <li>Trusted Pathways via WhatsApp verified business chat or email</li>
-                    <li>No cold calls without digital verification</li>
+                    <li>Personalised guide profile with photo, badge, and location shared in-app</li>
+                    <li>Trusted pathways via WhatsApp Business chat or email launched from the profile</li>
+                    <li>No calls until the owner acknowledges the guide inside the app</li>
                 </ul>
             </div>
         </div>
@@ -364,59 +364,79 @@ import "../../styles/nobroker-prd.css";
 {/* --- Section: Journey Map --- */}
 <div id="journey" class="my-12 sm:my-16 scroll-mt-24">
     <h2 class="text-3xl font-extrabold mb-6">The Journey: Chaos to Calm</h2>
-    <div class="bg-white border-2 border-black rounded-2xl p-4 sm:p-6 shadow-[8px_8px_0_0_#000]">
-        <div class="grid md:grid-cols-2 gap-8">
-            {/* Current Journey */}
-            <div>
-                <h3 class="font-bold text-lg mb-4 text-red-600">Current Journey ❌</h3>
-                <ol class="relative border-l-4 border-red-300">
-                    <li class="mb-6 ml-6">
-                        <span class="absolute flex items-center justify-center w-8 h-8 bg-red-200 rounded-full -left-5 ring-4 ring-white">1</span>
-                        <p class="font-semibold">List Property</p>
-                        <p class="text-sm text-gray-600">Owner creates listing</p>
-                    </li>
-                    <li class="mb-6 ml-6">
-                        <span class="absolute flex items-center justify-center w-8 h-8 bg-red-200 rounded-full -left-5 ring-4 ring-white">2</span>
-                        <p class="font-semibold">Immediate Call</p>
-                        <p class="text-sm text-gray-600">Unknown number within 5 mins</p>
-                    </li>
-                    <li class="mb-6 ml-6">
-                        <span class="absolute flex items-center justify-center w-8 h-8 bg-red-200 rounded-full -left-5 ring-4 ring-white">3</span>
-                        <p class="font-semibold">Trust Anxiety</p>
-                        <p class="text-sm text-gray-600">Marked as spam, fear of scam</p>
-                    </li>
-                    <li class="ml-6">
-                        <span class="absolute flex items-center justify-center w-8 h-8 bg-red-300 text-red-800 rounded-full -left-5 ring-4 ring-white">✗</span>
-                        <p class="font-semibold text-red-600">High Churn</p>
-                        <p class="text-sm text-gray-600">72-hour abandonment spike</p>
-                    </li>
-                </ol>
+        <div class="space-y-6 md:space-y-0 md:grid md:grid-cols-2 md:gap-8">
+            <div class="border-2 border-black rounded-2xl p-4 shadow-[4px_4px_0_0_#000] md:shadow-[6px_6px_0_0_#000]">
+                <div class="inline-flex items-center gap-2 rounded-full bg-red-600 text-white px-3 py-1 text-xs font-bold uppercase tracking-[0.2em]">
+                    <span>❌</span>
+                    Current Journey
+                </div>
+                <div class="mt-4 space-y-3">
+                    <div class="flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-3 shadow-sm">
+                        <span class="flex h-8 w-8 items-center justify-center rounded-full bg-red-500 text-white font-semibold">1</span>
+                        <div>
+                            <p class="font-semibold">List Property</p>
+                            <p class="text-sm text-gray-600">Owner creates listing</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-3 shadow-sm">
+                        <span class="flex h-8 w-8 items-center justify-center rounded-full bg-red-500 text-white font-semibold">2</span>
+                        <div>
+                            <p class="font-semibold">Immediate Call</p>
+                            <p class="text-sm text-gray-600">Unknown number within 5 mins</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-3 shadow-sm">
+                        <span class="flex h-8 w-8 items-center justify-center rounded-full bg-red-500 text-white font-semibold">3</span>
+                        <div>
+                            <p class="font-semibold">Trust Anxiety</p>
+                            <p class="text-sm text-gray-600">Marked as spam, fear of scam</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-3 shadow-sm">
+                        <span class="flex h-8 w-8 items-center justify-center rounded-full bg-red-500 text-white font-semibold">✗</span>
+                        <div>
+                            <p class="font-semibold text-red-600">High Churn</p>
+                            <p class="text-sm text-gray-600">72-hour abandonment spike</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            {/* New Journey */}
-            <div>
-                <h3 class="font-bold text-lg mb-4 text-green-600">New Journey ✅</h3>
-                <ol class="relative border-l-4 border-green-300">
-                    <li class="mb-6 ml-6">
-                        <span class="absolute flex items-center justify-center w-8 h-8 bg-green-200 rounded-full -left-5 ring-4 ring-white">1</span>
-                        <p class="font-semibold">List Property</p>
-                        <p class="text-sm text-gray-600">Owner creates listing</p>
-                    </li>
-                    <li class="mb-6 ml-6">
-                        <span class="absolute flex items-center justify-center w-8 h-8 bg-green-200 rounded-full -left-5 ring-4 ring-white">2</span>
-                        <p class="font-semibold">Quiet Mode Prompt</p>
-                        <p class="text-sm text-gray-600">Choose communication preference</p>
-                    </li>
-                    <li class="mb-6 ml-6">
-                        <span class="absolute flex items-center justify-center w-8 h-8 bg-green-200 rounded-full -left-5 ring-4 ring-white">3</span>
-                        <p class="font-semibold">Verified Handshake</p>
-                        <p class="text-sm text-gray-600">RM card with verified badge</p>
-                    </li>
-                    <li class="ml-6">
-                        <span class="absolute flex items-center justify-center w-8 h-8 bg-green-300 text-green-800 rounded-full -left-5 ring-4 ring-white">✓</span>
-                        <p class="font-semibold text-green-600">Engaged Owner</p>
-                        <p class="text-sm text-gray-600">Higher trust, better conversion</p>
-                    </li>
-                </ol>
+
+            <div class="border-2 border-black rounded-2xl p-4 shadow-[4px_4px_0_0_#000] md:shadow-[6px_6px_0_0_#000]">
+                <div class="inline-flex items-center gap-2 rounded-full bg-green-600 text-white px-3 py-1 text-xs font-bold uppercase tracking-[0.2em]">
+                    <span>✅</span>
+                    New Journey
+                </div>
+                <div class="mt-4 space-y-3">
+                    <div class="flex items-start gap-3 rounded-xl border border-green-200 bg-green-50 p-3 shadow-sm">
+                        <span class="flex h-8 w-8 items-center justify-center rounded-full bg-green-500 text-white font-semibold">1</span>
+                        <div>
+                            <p class="font-semibold">List Property</p>
+                            <p class="text-sm text-gray-600">Owner creates listing</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 rounded-xl border border-green-200 bg-green-50 p-3 shadow-sm">
+                        <span class="flex h-8 w-8 items-center justify-center rounded-full bg-green-500 text-white font-semibold">2</span>
+                        <div>
+                            <p class="font-semibold">Quiet Mode Prompt</p>
+                            <p class="text-sm text-gray-600">Choose communication preference</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 rounded-xl border border-green-200 bg-green-50 p-3 shadow-sm">
+                        <span class="flex h-8 w-8 items-center justify-center rounded-full bg-green-500 text-white font-semibold">3</span>
+                        <div>
+                            <p class="font-semibold">Know Your Guide</p>
+                            <p class="text-sm text-gray-600">Owner checks guide profile before engaging</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 rounded-xl border border-green-200 bg-green-50 p-3 shadow-sm">
+                        <span class="flex h-8 w-8 items-center justify-center rounded-full bg-green-500 text-white font-semibold">✓</span>
+                        <div>
+                            <p class="font-semibold text-green-600">Engaged Owner</p>
+                            <p class="text-sm text-gray-600">Higher trust, better conversion</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -433,10 +453,10 @@ import "../../styles/nobroker-prd.css";
             <p><strong>Dashboard Status:</strong> "Quiet Mode Active" indicator.</p>
         </div>
         <div class="bg-white border-2 border-black rounded-2xl p-4 shadow-[6px_6px_0_0_#000]">
-            <h3 class="font-bold text-lg">Verified Handshake</h3>
-            <p><strong>RM Card:</strong> Verified badge + digital ID.</p>
-            <p><strong>CRM Sync:</strong> API to fetch RM metadata.</p>
-            <p><strong>WhatsApp Verified Chat:</strong> Integration with existing WA business profile.</p>
+            <h3 class="font-bold text-lg">Know Your Guide</h3>
+            <p><strong>Guide Profile:</strong> Photo, badge, trust score, and location previewed before any call.</p>
+            <p><strong>CRM Sync:</strong> API to fetch RM metadata + trust signals.</p>
+            <p><strong>Trusted Launchpads:</strong> Owner starts WhatsApp Business chat or email from the profile.</p>
         </div>
         <div class="bg-white border-2 border-black rounded-2xl p-4 shadow-[6px_6px_0_0_#000]">
             <h3 class="font-bold text-lg">Weekly Visibility Digest</h3>
@@ -496,7 +516,7 @@ import "../../styles/nobroker-prd.css";
                 <p>Minimal design; non-intrusive.</p>
             </div>
             <div>
-                <h4 class="font-bold text-lg">Verified Handshake Card</h4>
+                <h4 class="font-bold text-lg">Know Your Guide Card</h4>
                 <p>Strong visual proof (🛡️ icon, verified green).</p>
             </div>
             <div>
@@ -524,7 +544,7 @@ import "../../styles/nobroker-prd.css";
             <h3 class="font-bold text-lg mb-2 break-words hyphens-auto">Implementation Plan</h3>
             <ul class="list-disc list-inside space-y-2">
                 <li><strong>Phase 1 (2 weeks):</strong> Quiet Mode MVP</li>
-                <li><strong>Phase 2 (2 weeks):</strong> Verified Handshake rollout</li>
+                <li><strong>Phase 2 (2 weeks):</strong> Know Your Guide rollout</li>
                 <li><strong>Phase 3 (1 week):</strong> Weekly Digest</li>
             </ul>
         </div>
@@ -608,8 +628,6 @@ import "../../styles/nobroker-prd.css";
         "This initiative doesn't add features — it adds empathy. It reframes help from urgency to intentionality."
     </blockquote>
     <p class="mt-6 text-lg leading-relaxed">
-        For Indian users, speed means care. For NRIs, calm means care. Both can coexist if context is built into the system. "NoBroker shouldn't sound louder just because the owner is farther." Quiet Mode and Verified Handshake let NoBroker keep its promise — "No Brokerage" now truly means "No Pressure."
+        For Indian users, speed means care. For NRIs, calm means care. Both can coexist if context is built into the system. "NoBroker shouldn't sound louder just because the owner is farther." Quiet Mode and Know Your Guide let NoBroker keep its promise — "No Brokerage" now truly means "No Pressure."
     </p>
-</div>
-
 </div>

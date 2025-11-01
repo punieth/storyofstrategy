@@ -1,18 +1,18 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { VerifiedHandshakeCard } from "../components/VerifiedHandshakeSheet";
+import { KnowYourGuideCard } from "../components/KnowYourGuideCard";
 
 import { ShieldCheck } from "lucide-react";
 import { Button } from "@components/razorpay/ui/button";
 import { Screen } from "../components/Screen";
 
-const VerifiedHandshake = () => {
+const KnowYourGuide = () => {
   const [status, setStatus] = useState<"pre-contact" | "quiet-mode" | "post-contact">("pre-contact");
   const navigate = useNavigate();
 
   return (
     <Screen
-      title="Verified Handshake Demo"
+      title="Know Your Guide"
       onBack={() => navigate(-1)}
       contentClassName="pt-5 pb-3"
     >
@@ -20,14 +20,14 @@ const VerifiedHandshake = () => {
         <div className="text-center space-y-2">
           <ShieldCheck className="h-10 w-10 mx-auto text-success" />
           <h2 className="text-base font-semibold">
-            Trust-First Contact
+            Meet Your Guide Before the Call
           </h2>
           <p className="text-xs text-meta">
-            See who's assigned to your listing before they reach out
+            Preview who’s calling, why, and how to respond on your terms
           </p>
         </div>
 
-        <VerifiedHandshakeCard
+        <KnowYourGuideCard
           rmName="Priya Sharma"
           rmImage="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&auto=format&fit=crop"
           rmRole="Helps with listing verification"
@@ -67,4 +67,4 @@ const VerifiedHandshake = () => {
   );
 };
 
-export default VerifiedHandshake;
+export default KnowYourGuide;

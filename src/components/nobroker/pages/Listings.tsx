@@ -4,7 +4,7 @@ import { Clock, X } from "lucide-react";
 import { ConsentModal } from "../components/ConsentModal";
 import { HelpStrip } from "../components/HelpStrip";
 import { PropertyCard } from "../components/PropertyCard";
-import { VerifiedHandshakeCard } from "../components/VerifiedHandshakeSheet";
+import { KnowYourGuideCard } from "../components/KnowYourGuideCard";
 import { WeeklyDigestCard } from "../components/WeeklyDigestCard";
 import { Screen } from "../components/Screen";
 
@@ -93,7 +93,7 @@ const Listings = () => {
           )}
 
           {!isQuietMode && showGuideCard && (
-            <VerifiedHandshakeCard
+            <KnowYourGuideCard
               rmName="Priya Sharma"
               rmImage="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&auto=format&fit=crop"
               rmRole="Helps with listing verification"

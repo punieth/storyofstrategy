@@ -5,8 +5,7 @@ import { Button } from "@components/razorpay/ui/button";
 import { DialogNoBroker, DialogContentNoBroker, DialogHeaderNoBroker, DialogTitleNoBroker, DialogDescriptionNoBroker } from "@components/razorpay/ui/dialog-nobroker";
 import { cn } from "../lib/utils";
 
-
-interface VerifiedHandshakeCardProps {
+interface KnowYourGuideCardProps {
   rmName: string;
   rmImage?: string;
   rmRole: string;
@@ -15,14 +14,14 @@ interface VerifiedHandshakeCardProps {
   variant?: "default" | "compact";
 }
 
-export const VerifiedHandshakeCard = ({
+export const KnowYourGuideCard = ({
   rmName,
   rmImage,
   rmRole,
   status = "pre-contact",
   onDismiss,
   variant = "default",
-}: VerifiedHandshakeCardProps) => {
+}: KnowYourGuideCardProps) => {
   const [showInfoModal, setShowInfoModal] = useState(false);
 
   // Generate initials if no image
@@ -69,7 +68,7 @@ export const VerifiedHandshakeCard = ({
             className="inline-flex items-center gap-1 whitespace-nowrap rounded-full border border-secondary/40 px-2 py-1 text-[11px] font-semibold text-secondary hover:bg-secondary/10"
           >
             <Info className="h-3 w-3" />
-            What does Verified mean?
+            How we verify guides
           </button>
         </div>
 
@@ -97,7 +96,7 @@ export const VerifiedHandshakeCard = ({
             </div>
             <p className="text-sm text-meta mb-1">{rmRole}</p>
             <p className="text-xs text-muted-foreground">
-              Verified NoBroker Guide
+              NoBroker guide identity confirmed ahead of contact
             </p>
           </div>
         </div>
@@ -161,28 +160,26 @@ export const VerifiedHandshakeCard = ({
           <DialogHeaderNoBroker className="gap-3">
             <DialogTitleNoBroker className="flex items-center gap-2 text-base font-semibold">
               <ShieldCheck className="h-5 w-5 text-success" />
-              Verified NoBroker Guide
+              Know Your Guide
             </DialogTitleNoBroker>
             <DialogDescriptionNoBroker asChild>
               <div className="space-y-3 text-left text-sm text-muted-foreground">
                 <p>
-                  All NoBroker Guides go through a rigorous verification process to
-                  ensure your safety and trust.
+                  Every guide passes a verification checklist before they ever reach out. You decide how and when to engage.
                 </p>
                 <div>
                   <p className="font-semibold text-foreground text-sm">
-                    What makes them verified:
+                    What makes them trusted:
                   </p>
                   <ul className="mt-2 list-disc list-inside space-y-1.5 text-sm">
-                    <li>Background checked and ID verified</li>
-                    <li>Trained on NoBroker policies and ethics</li>
-                    <li>Official company contact numbers only</li>
-                    <li>Real-time performance monitoring</li>
+                    <li>ID and background check approved</li>
+                    <li>Trained on NoBroker policies and tone</li>
+                    <li>Only contacts you through official channels</li>
+                    <li>Performance and feedback tracked continuously</li>
                   </ul>
                 </div>
                 <p className="text-xs text-muted-foreground/90">
-                  You can always verify their identity before engaging. We never ask
-                  for sensitive information over unofficial channels.
+                  You control when the conversation moves to voice. We never ask for sensitive information over unofficial channels.
                 </p>
               </div>
             </DialogDescriptionNoBroker>

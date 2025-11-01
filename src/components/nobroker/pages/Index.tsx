@@ -18,9 +18,9 @@ const Index = () => {
     },
     {
       icon: Users,
-      title: "Verified Handshake",
-      description: "See who's calling before you answer - verified NoBroker team only",
-      link: "/handshake",
+      title: "Know Your Guide",
+      description: "Preview your guide's identity and choose how to connect",
+      link: "/guide",
     },
     {
       icon: MessageCircle,
