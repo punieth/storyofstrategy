@@ -1,0 +1,84 @@
+---
+interface Props {
+  title: string;
+  pubDate: Date;
+  author: string;
+}
+
+const { title, pubDate, author } = Astro.props;
+---
+
+<article class="prose-slate !max-w-none w-full fade-in-up">
+  <div class="relative">
+    <div class="relative z-0 border-2 border-black rounded-none bg-white p-6 sm:p-8">
+      <slot />
+    </div>
+  </div>
+</article>
+
+<style>
+  .prose-slate {
+    font-family: 'Space Mono', monospace;
+  }
+
+  .prose-slate :global(h1, h2, h3, h4, h5, h6) {
+    font-family: 'Press Start 2P', cursive;
+  }
+
+  .prose-slate :global(img) {
+    border: 2px solid black;
+    box-shadow: 4px 4px 0px 0px #000;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .prose-slate :global(img:hover) {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px 0px #000;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('article img') as NodeListOf<HTMLImageElement>;
+    
+    images.forEach((img: HTMLImageElement) => {
+      img.addEventListener('click', () => {
+        // Create overlay
+        const overlay = document.createElement('div');
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100vw';
+        overlay.style.height = '100vh';
+        overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+        overlay.style.display = 'flex';
+        overlay.style.alignItems = 'center';
+        overlay.style.justifyContent = 'center';
+        overlay.style.zIndex = '9999';
+        overlay.style.cursor = 'zoom-out';
+        
+        // Create full-size image
+        const fullImg = document.createElement('img');
+        fullImg.src = img.src;
+        fullImg.alt = img.alt;
+        fullImg.style.maxWidth = '90vw';
+        fullImg.style.maxHeight = '90vh';
+        fullImg.style.objectFit = 'contain';
+        
+        overlay.appendChild(fullImg);
+        document.body.appendChild(overlay);
+        
+        // Close on click or ESC
+        const close = () => {
+          document.body.removeChild(overlay);
+        };
+        
+        overlay.addEventListener('click', close);
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') close();
+        }, { once: true });
+      });
+    });
+  });
+</script>
