@@ -1,5 +1,5 @@
 ---
-import NeobrutalBlogPostLayout from '@components/blog/NeobrutalBlogPostLayout.astro';
+import NeobrutalBlogPostLayoutCompact from '@components/blog/NeobrutalBlogPostLayoutCompact.astro';
 
 interface Props {
   author: string;
@@ -33,10 +33,10 @@ const { author, pubDate, headings, description, title } = Astro.props;
   </style>
 </head>
 <body>
-  <main class="px-4 sm:px-6 pt-20 pb-10 sm:pt-24 sm:pb-12 md:pt-28 md:pb-16 mx-auto w-full max-w-[90rem]">
-    <NeobrutalBlogPostLayout {pubDate} {author} {title}>
+  <main class="px-0 sm:px-0 md:px-0 pt-0 pb-0 sm:pt-0 sm:pb-0 md:pt-0 md:pb-0 mx-auto w-full max-w-[90rem]">
+    <NeobrutalBlogPostLayoutCompact {pubDate} {author} {title}>
       <slot />
-    </NeobrutalBlogPostLayout>
+    </NeobrutalBlogPostLayoutCompact>
   </main>
 </body>
 </html>
