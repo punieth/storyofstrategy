@@ -101,7 +101,12 @@ const publishedOn = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
 }).format(post.data.pubDate);
 const category = enrichedFrontmatter.category ?? 'Product Strategy';
-const readTime = enrichedFrontmatter.readTime ?? '5 min read';
+
+const words = post.body.split(/\s+/).length;
+const wpm = 200;
+const timeToRead = Math.ceil(words / wpm);
+const readTime = `${timeToRead} min read`;
+
 const entryKey = post.id.split('/').pop() ?? post.id;
 const companyTheme = companyThemes[entryKey];
 const motifBase = motifPalette[tone];
