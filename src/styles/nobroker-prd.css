@@ -91,10 +91,26 @@
 }
 
 /* Keep prototype typography untouched */
+.nobroker-prototype .nb-theme {
+  font-size: 0.85rem;
+}
+
 .nobroker-prototype .nb-theme :is(h1, h2, h3, h4, h5, h6) {
   font-size: revert;
   line-height: revert;
   font-weight: revert;
+}
+
+@media (max-width: 1024px) {
+  .nobroker-prototype .nb-theme {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .nobroker-prototype .nb-theme {
+    font-size: 0.75rem;
+  }
 }
 
 @media (max-width: 640px) {
