@@ -69,7 +69,7 @@ export default function HistoryScreen({ onNavigate }: HistoryScreenProps) {
             key={prop}
             onClick={() => setSelectedProperty(prop)}
             className={`px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition ${
-              selectedProperty === prop ? "bg-purple-600 text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+              selectedProperty === prop ? "bg-black text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}
           >
             {prop}
@@ -79,9 +79,9 @@ export default function HistoryScreen({ onNavigate }: HistoryScreenProps) {
 
       {/* Metrics */}
       <div className="px-4 py-3 grid grid-cols-3 gap-2 border-b border-gray-200">
-        <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-2 text-center">
+        <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-2 text-center">
           <p className="text-xs text-gray-600">Avg Rating</p>
-          <p className="font-bold text-purple-900 text-sm">4.8 ⭐</p>
+          <p className="font-bold text-black text-sm">4.8 ⭐</p>
         </div>
         <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-lg p-2 text-center">
           <p className="text-xs text-gray-600">Total Spent</p>
@@ -105,7 +105,7 @@ export default function HistoryScreen({ onNavigate }: HistoryScreenProps) {
                   <p className="text-xs text-gray-500">{item.date}</p>
                 </div>
               </div>
-              <button className="text-purple-600 hover:text-purple-700">
+              <button className="text-black hover:text-gray-700">
                 <FileText size={16} />
               </button>
             </div>
@@ -120,7 +120,7 @@ export default function HistoryScreen({ onNavigate }: HistoryScreenProps) {
           </div>
         ))}
 
-        <button className="w-full border-2 border-dashed border-purple-300 rounded-lg p-3 text-purple-600 font-semibold text-sm hover:bg-purple-50 transition">
+        <button className="w-full border-2 border-dashed border-gray-300 rounded-lg p-3 text-black font-semibold text-sm hover:bg-gray-50 transition">
           Export All Reports as PDF
         </button>
       </div>
@@ -131,7 +131,7 @@ export default function HistoryScreen({ onNavigate }: HistoryScreenProps) {
           <Home size={20} />
           <span className="text-xs font-semibold">Home</span>
         </button>
-        <button className="flex flex-col items-center gap-1 p-2 text-purple-600" onClick={() => onNavigate("history")}>
+        <button className="flex flex-col items-center gap-1 p-2 text-black" onClick={() => onNavigate("history")}>
           <Calendar size={20} />
           <span className="text-xs font-semibold">Bookings</span>
         </button>

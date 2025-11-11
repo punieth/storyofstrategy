@@ -35,13 +35,13 @@ export default function TimelineScreen({ onNavigate }: TimelineScreenProps) {
         <div className="border-b border-gray-200 flex">
           <button
             onClick={() => setChatTab("household")}
-            className={`flex-1 py-3 text-sm font-semibold border-b-2 ${chatTab === "household" ? "border-purple-600 text-purple-600" : "border-transparent text-gray-600"}`}
+            className={`flex-1 py-3 text-sm font-semibold border-b-2 ${chatTab === "household" ? "border-black text-black" : "border-transparent text-gray-600"}`}
           >
             Household
           </button>
           <button
             onClick={() => setChatTab("technician")}
-            className={`flex-1 py-3 text-sm font-semibold border-b-2 ${chatTab === "technician" ? "border-purple-600 text-purple-600" : "border-transparent text-gray-600"}`}
+            className={`flex-1 py-3 text-sm font-semibold border-b-2 ${chatTab === "technician" ? "border-black text-black" : "border-transparent text-gray-600"}`}
           >
             Technician
           </button>
@@ -50,7 +50,7 @@ export default function TimelineScreen({ onNavigate }: TimelineScreenProps) {
         {/* Messages */}
         <div className="flex-1 overflow-y-auto p-4 space-y-3">
           <div className="flex justify-end">
-            <div className="bg-purple-600 text-white rounded-2xl rounded-tr-none px-4 py-2 max-w-xs text-sm">
+            <div className="bg-black text-white rounded-2xl rounded-tr-none px-4 py-2 max-w-xs text-sm">
               All set for tomorrow 9 AM?
             </div>
           </div>
@@ -68,7 +68,7 @@ export default function TimelineScreen({ onNavigate }: TimelineScreenProps) {
             placeholder="Type message..."
             className="flex-1 border border-gray-300 rounded-full px-3 py-2 text-sm"
           />
-          <button className="bg-purple-600 text-white rounded-full w-8 h-8 flex items-center justify-center">→</button>
+          <button className="bg-black text-white rounded-full w-8 h-8 flex items-center justify-center">→</button>
         </div>
 
         {/* Bottom Navigation */}
@@ -116,12 +116,12 @@ export default function TimelineScreen({ onNavigate }: TimelineScreenProps) {
             <div key={index} className="flex gap-4">
               <div className="flex flex-col items-center">
                 <div
-                  className={`w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold ${event.completed ? "bg-purple-600 text-white" : "bg-gray-200 text-gray-600"}`}
+                  className={`w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold ${event.completed ? "bg-black text-white" : "bg-gray-200 text-gray-600"}`}
                 >
                   {event.completed ? "✓" : index + 1}
                 </div>
                 {index < timelineEvents.length - 1 && (
-                  <div className={`w-0.5 h-8 ${event.completed ? "bg-purple-600" : "bg-gray-300"}`} />
+                  <div className={`w-0.5 h-8 ${event.completed ? "bg-black" : "bg-gray-300"}`} />
                 )}
               </div>
               <div className="flex-1 pt-1">
@@ -130,7 +130,7 @@ export default function TimelineScreen({ onNavigate }: TimelineScreenProps) {
                 </p>
                 <p className="text-xs text-gray-500 mt-1">{event.time}</p>
               </div>
-              {event.completed && <MessageCircle size={18} className="text-purple-600 mt-1" />}
+              {event.completed && <MessageCircle size={18} className="text-black mt-1" />}
             </div>
           ))}
         </div>
@@ -145,7 +145,7 @@ export default function TimelineScreen({ onNavigate }: TimelineScreenProps) {
         {/* Chat Button */}
         <button
           onClick={() => setShowChat(true)}
-          className="w-full border-2 border-purple-600 text-purple-600 font-semibold py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-purple-50 transition"
+          className="w-full border-2 border-black text-black font-semibold py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-50 transition"
         >
           <MessageCircle size={18} /> Open Chat
         </button>

@@ -10,7 +10,7 @@ export default function HomeScreen({ onNavigate }: HomeScreenProps) {
   return (
     <div className="h-full flex flex-col bg-white">
       {/* Header */}
-      <div className="bg-gradient-to-r from-purple-50 to-white border-b border-gray-100 p-4">
+      <div className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 p-4">
         <h1 className="text-xl font-bold text-gray-900">Good Evening, Punit 👋</h1>
         <p className="text-sm text-gray-500 mt-1">Your Homes in India</p>
       </div>
@@ -29,11 +29,11 @@ export default function HomeScreen({ onNavigate }: HomeScreenProps) {
                 <MapPin size={12} /> Indiranagar, Bangalore
               </p>
             </div>
-            <div className="bg-purple-100 text-purple-700 text-xs font-semibold px-2 py-1 rounded-full">2 Services</div>
+            <div className="bg-gray-100 text-gray-700 text-xs font-semibold px-2 py-1 rounded-full">2 Services</div>
           </div>
-          <div className="mt-3 bg-purple-50 border border-purple-200 rounded-lg p-2 text-xs">
-            <p className="text-purple-900 font-semibold">AC Service Tomorrow 9AM</p>
-            <p className="text-purple-700 mt-1">Technician: Rahul Kumar</p>
+          <div className="mt-3 bg-gray-50 border border-gray-200 rounded-lg p-2 text-xs">
+            <p className="text-gray-900 font-semibold">AC Service Tomorrow 9AM</p>
+            <p className="text-gray-700 mt-1">Technician: Rahul Kumar</p>
           </div>
         </button>
 
@@ -60,7 +60,7 @@ export default function HomeScreen({ onNavigate }: HomeScreenProps) {
         {/* CTA Button */}
         <button
           onClick={() => onNavigate("booking")}
-          className="w-full bg-gradient-to-r from-purple-600 to-purple-500 text-white font-semibold py-3 rounded-xl mt-4 shadow-md hover:shadow-lg transition"
+          className="w-full bg-black text-white font-semibold py-3 rounded-xl mt-4 shadow-md hover:shadow-lg transition"
         >
           Book a New Service
         </button>
@@ -68,7 +68,7 @@ export default function HomeScreen({ onNavigate }: HomeScreenProps) {
 
       {/* Bottom Navigation - Added with consistent styling */}
       <div className="border-t border-gray-200 bg-white px-2 py-2 flex items-center justify-around">
-        <button className="flex flex-col items-center gap-1 p-2 text-purple-600" onClick={() => onNavigate("home")}>
+        <button className="flex flex-col items-center gap-1 p-2 text-black" onClick={() => onNavigate("home")}>
           <Home size={20} />
           <span className="text-xs font-semibold">Home</span>
         </button>

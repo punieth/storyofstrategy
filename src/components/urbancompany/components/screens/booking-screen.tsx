@@ -42,7 +42,7 @@ export default function BookingScreen({ onNavigate, selectedProperty }: BookingS
                   setSelectedService(service.name)
                   setStep(selectedProperty ? 3 : 2)
                 }}
-                className="border-2 border-gray-200 rounded-xl p-4 text-center hover:border-purple-500 hover:bg-purple-50 transition"
+                className="border-2 border-gray-200 rounded-xl p-4 text-center hover:border-black hover:bg-gray-50 transition"
               >
                 <div className="text-3xl mb-2">{service.icon}</div>
                 <p className="text-sm font-semibold text-gray-900">{service.name}</p>
@@ -88,7 +88,7 @@ export default function BookingScreen({ onNavigate, selectedProperty }: BookingS
                 setSelectedPropertyState(prop)
                 setStep(3)
               }}
-              className={`w-full border-2 rounded-xl p-3 text-left transition ${selectedPropertyState === prop ? "border-purple-500 bg-purple-50" : "border-gray-200"}`}
+              className={`w-full border-2 rounded-xl p-3 text-left transition ${selectedPropertyState === prop ? "border-black bg-gray-50" : "border-gray-200"}`}
             >
               <p className="font-semibold text-gray-900 text-sm">
                 {prop} {prop === "Bengaluru" ? "Apartment" : "Villa"}
@@ -135,7 +135,7 @@ export default function BookingScreen({ onNavigate, selectedProperty }: BookingS
                 setSelectedDate(date)
                 setStep(4)
               }}
-              className={`w-full border-2 rounded-xl p-3 text-left font-semibold transition ${selectedDate === date ? "border-purple-500 bg-purple-50 text-purple-900" : "border-gray-200 text-gray-900"}`}
+              className={`w-full border-2 rounded-xl p-3 text-left font-semibold transition ${selectedDate === date ? "border-black bg-gray-50 text-black" : "border-gray-200 text-gray-900"}`}
             >
               {date}
             </button>
@@ -171,7 +171,7 @@ export default function BookingScreen({ onNavigate, selectedProperty }: BookingS
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
-        <div className="bg-purple-50 border border-purple-200 rounded-xl p-4 space-y-3">
+        <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 space-y-3">
           <div>
             <p className="text-xs text-gray-600 font-semibold">Service</p>
             <p className="text-sm font-bold text-gray-900">{selectedService}</p>
@@ -188,7 +188,7 @@ export default function BookingScreen({ onNavigate, selectedProperty }: BookingS
 
         <div className="border-t border-gray-200 pt-4 space-y-3">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center text-sm font-bold">
+            <div className="w-8 h-8 rounded-full bg-gray-100 text-black flex items-center justify-center text-sm font-bold">
               👤
             </div>
             <div className="flex-1">
@@ -218,7 +218,7 @@ export default function BookingScreen({ onNavigate, selectedProperty }: BookingS
 
         <button
           onClick={() => onNavigate("timeline")}
-          className="w-full bg-gradient-to-r from-purple-600 to-purple-500 text-white font-semibold py-3 rounded-lg flex items-center justify-center gap-2 hover:shadow-lg transition"
+          className="w-full bg-black text-white font-semibold py-3 rounded-lg flex items-center justify-center gap-2 hover:shadow-lg transition"
         >
           <Check size={18} /> Book & Notify Contact
         </button>

@@ -77,16 +77,16 @@ export default function PropertiesScreen({ onNavigate }: PropertiesScreenProps) 
 
           <div className="space-y-2">
             <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" defaultChecked className="w-4 h-4 rounded text-purple-600" />
+              <input type="checkbox" defaultChecked className="w-4 h-4 rounded text-black" />
               <span className="text-xs text-gray-700">Allow them to chat with partner</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" defaultChecked className="w-4 h-4 rounded text-purple-600" />
+              <input type="checkbox" defaultChecked className="w-4 h-4 rounded text-black" />
               <span className="text-xs text-gray-700">Allow them to reschedule</span>
             </label>
           </div>
 
-          <button className="w-full bg-gradient-to-r from-purple-600 to-purple-500 text-white font-semibold py-3 rounded-lg mt-4">
+          <button className="w-full bg-black text-white font-semibold py-3 rounded-lg mt-4">
             Save Property
           </button>
         </div>
@@ -102,7 +102,7 @@ export default function PropertiesScreen({ onNavigate }: PropertiesScreenProps) 
             <span className="text-xs font-semibold">Bookings</span>
           </button>
           <button
-            className="flex flex-col items-center gap-1 p-2 text-purple-600"
+            className="flex flex-col items-center gap-1 p-2 text-black"
             onClick={() => onNavigate("properties")}
           >
             <MapPinIcon size={20} />
@@ -161,7 +161,7 @@ export default function PropertiesScreen({ onNavigate }: PropertiesScreenProps) 
 
         <button
           onClick={() => setShowAddProperty(true)}
-          className="w-full border-2 border-dashed border-purple-300 rounded-xl p-4 text-purple-600 font-semibold text-sm flex items-center justify-center gap-2 hover:bg-purple-50 transition"
+          className="w-full border-2 border-dashed border-gray-300 rounded-xl p-4 text-black font-semibold text-sm flex items-center justify-center gap-2 hover:bg-gray-50 transition"
         >
           <Plus size={18} /> Add New Property
         </button>
@@ -178,7 +178,7 @@ export default function PropertiesScreen({ onNavigate }: PropertiesScreenProps) 
           <span className="text-xs font-semibold">Bookings</span>
         </button>
         <button
-          className="flex flex-col items-center gap-1 p-2 text-purple-600"
+          className="flex flex-col items-center gap-1 p-2 text-black"
           onClick={() => onNavigate("properties")}
         >
           <MapPinIcon size={20} />

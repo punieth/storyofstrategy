@@ -102,7 +102,7 @@ export default function CompletionScreen({ onNavigate }: CompletionScreenProps) 
         />
 
         {/* Share Button */}
-        <button className="w-full border-2 border-purple-600 text-purple-600 font-semibold py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-purple-50 transition">
+        <button className="w-full border-2 border-black text-black font-semibold py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-50 transition">
           <Share2 size={18} /> Share Report with Contact
         </button>
       </div>

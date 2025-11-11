@@ -19,7 +19,7 @@ export default function ProfileScreen({ onNavigate }: ProfileScreenProps) {
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {/* Profile Header */}
         <div className="text-center py-4">
-          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 to-purple-400 flex items-center justify-center text-white text-2xl font-bold mx-auto mb-3">
+          <div className="w-16 h-16 rounded-full bg-black flex items-center justify-center text-white text-2xl font-bold mx-auto mb-3">
             P
           </div>
           <h2 className="text-xl font-bold text-gray-900">Punit Singh</h2>
@@ -31,21 +31,21 @@ export default function ProfileScreen({ onNavigate }: ProfileScreenProps) {
         <div className="bg-gray-50 rounded-xl p-4 space-y-3">
           <h3 className="text-sm font-bold text-gray-900">Contact Information</h3>
           <div className="flex items-center gap-3">
-            <Mail size={18} className="text-purple-600" />
+            <Mail size={18} className="text-black" />
             <div>
               <p className="text-xs text-gray-600">Email</p>
               <p className="text-sm font-semibold text-gray-900">punit@example.com</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <Phone size={18} className="text-purple-600" />
+            <Phone size={18} className="text-black" />
             <div>
               <p className="text-xs text-gray-600">Phone</p>
               <p className="text-sm font-semibold text-gray-900">+91 98765 43210</p>
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <MapPin size={18} className="text-purple-600" />
+            <MapPin size={18} className="text-black" />
             <div>
               <p className="text-xs text-gray-600">Current Location</p>
               <p className="text-sm font-semibold text-gray-900">Dubai, UAE</p>
@@ -54,11 +54,11 @@ export default function ProfileScreen({ onNavigate }: ProfileScreenProps) {
         </div>
 
         {/* Subscription Status */}
-        <div className="bg-purple-50 border border-purple-200 rounded-xl p-4 space-y-2">
+        <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 space-y-2">
           <h3 className="text-sm font-bold text-gray-900">Subscription</h3>
           <div className="flex items-center justify-between">
             <span className="text-sm text-gray-600">Premium Plan</span>
-            <span className="text-xs font-bold bg-purple-600 text-white px-2 py-1 rounded-full">Active</span>
+            <span className="text-xs font-bold bg-black text-white px-2 py-1 rounded-full">Active</span>
           </div>
           <p className="text-xs text-gray-600">Renewal Date: Dec 31, 2025</p>
         </div>
@@ -115,7 +115,7 @@ export default function ProfileScreen({ onNavigate }: ProfileScreenProps) {
           <MapPinIcon size={20} />
           <span className="text-xs font-semibold">Properties</span>
         </button>
-        <button className="flex flex-col items-center gap-1 p-2 text-purple-600" onClick={() => onNavigate("profile")}>
+        <button className="flex flex-col items-center gap-1 p-2 text-black" onClick={() => onNavigate("profile")}>
           <User size={20} />
           <span className="text-xs font-semibold">Profile</span>
         </button>

@@ -1,41 +1,49 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Updated to Urban Company purple & white theme */
+  /* Updated to a black and white theme */
   --background: oklch(1 0 0);
   --foreground: oklch(0.15 0 0);
   --card: oklch(0.98 0 0);
   --card-foreground: oklch(0.15 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.15 0 0);
-  /* Urban Company purple */
-  --primary: oklch(0.48 0.147 292.88);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.15 0 0);
+  
+  /* Black and white theme */
+  --primary: #000000;
+  --primary-foreground: #ffffff;
+  --secondary: #404040;
+  --secondary-foreground: #ffffff;
+  
   --muted: oklch(0.94 0 0);
   --muted-foreground: oklch(0.5 0 0);
-  --accent: oklch(0.48 0.147 292.88);
-  --accent-foreground: oklch(1 0 0);
+  
+  --accent: #000000;
+  --accent-foreground: #ffffff;
+  
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
+  
   --border: oklch(0.92 0 0);
   --input: oklch(0.97 0 0);
-  --ring: oklch(0.48 0.147 292.88);
-  --chart-1: oklch(0.48 0.147 292.88);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
+  --ring: #000000;
+  
+  --chart-1: #000000;
+  --chart-2: #404040;
+  --chart-3: #808080;
+  --chart-4: #bfbfbf;
+  --chart-5: #e0e0e0;
+  
   --radius: 0.625rem;
+  
   --sidebar: oklch(1 0 0);
   --sidebar-foreground: oklch(0.15 0 0);
-  --sidebar-primary: oklch(0.48 0.147 292.88);
-  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-primary: #000000;
+  --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: oklch(0.97 0 0);
   --sidebar-accent-foreground: oklch(0.15 0 0);
   --sidebar-border: oklch(0.92 0 0);
-  --sidebar-ring: oklch(0.48 0.147 292.88);
+  --sidebar-ring: #000000;
 }
 
 .dark {
