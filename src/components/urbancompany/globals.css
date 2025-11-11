@@ -145,7 +145,7 @@
   align-items: flex-start;
   justify-content: center;
   overflow: hidden;
-  border: 1rem solid #111;
+  border: 0.5rem solid #111;
   border-radius: 2.5rem;
 }
 
