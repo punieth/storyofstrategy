@@ -1,0 +1,33 @@
+---
+import Layout from "../../layouts/Prototype.astro";
+import UrbanCompanyPrototypeShowcase from "../../components/urbancompany/UrbanCompanyPrototypeShowcase.tsx";
+import "../../components/urbancompany/globals.css";
+---
+
+<Layout
+  title="Urban Company Prototype"
+  description="Interactive prototype for embedding"
+  classList="bg-transparent"
+>
+  <div class="prototype-host">
+    <UrbanCompanyPrototypeShowcase client:visible />
+  </div>
+</Layout>
+
+<style>
+  .prototype-host {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    background: transparent;
+  }
+
+  @media (max-width: 640px) {
+    .prototype-host {
+      padding: 1rem 0;
+    }
+  }
+</style>
