@@ -1,0 +1,531 @@
+Good. Now we’re building something real, not just vibing.
+
+Here’s a full PRD you can:
+	•	read to internalize the mental model
+	•	paste into Cursor/Gemini/Codex as “source of truth”
+	•	use as a spec when you implement in Next.js/React
+
+I’ll keep it structured and explicit, not corporate-fluffy.
+
+⸻
+
+PRD: PAYFLOW – Payments Decision Lab (V1.1)
+
+0. One-line Summary
+
+A small interactive sandbox where a user toggles three payment design levers (capture mode, payout schedule, refund policy) and runs three scenarios, while seeing:
+	•	a simple flow
+	•	a detailed ledger view
+	•	a short impact summary
+
+for Customer, Gateway, Merchant.
+
+The goal: build intuition for how design choices change money flow, timing, and risk.
+
+⸻
+
+1. Background & Problem
+
+New PMs/engineers in payments usually learn from:
+	•	scattered docs
+	•	static diagrams
+	•	blog posts
+
+Those show “what happens” (Auth → Capture → Settlement → Payout → Refund), but not:
+	•	why systems are designed that way
+	•	how changing rules shifts risk, liquidity, and UX
+	•	who decides vs who bears cost
+
+There is no small, hands-on simulator where you can play with design levers and immediately see the financial consequences.
+
+⸻
+
+2. Goal & Non-goals
+
+2.1 Goal (V1.1)
+
+Build a single-page “Decision Lab” where a user can:
+	•	Choose a configuration:
+	•	Capture Mode (Auto/Manual)
+	•	Payout Schedule (T+2 / T+7 / Instant)
+	•	Refund Policy (Instant / After Payout)
+	•	Run scenarios:
+	•	Normal Payment
+	•	Refund
+	•	Auth Success / Capture Failed
+	•	See:
+	•	How money moves between Customer, Gateway, Merchant over time
+	•	How each actor’s ledger changes
+	•	A short summary of who holds cash, who holds risk, when
+
+This is a learning & decision support tool, not a live product.
+
+2.2 Non-goals (explicitly out of scope)
+	•	No UPI rail (cards only in V1.1)
+	•	No chargebacks/disputes
+	•	No interchange/network fee breakdown
+	•	No CSV uploads or real merchant data
+	•	No authentication / user accounts
+	•	No full-blown reconciliation engine
+	•	No fraud scoring
+	•	No multi-currency
+
+⸻
+
+3. Target User & JTBD
+
+3.1 Primary User
+
+New payments PM or engineer at a gateway / PSP / fintech (Stripe/Razorpay-like), OR someone interviewing for such roles.
+
+3.2 Job To Be Done
+
+“Help me build intuition for how a few key design levers in card payments (capture mode, payout speed, refund policy) affect who gets money when, who fronts money, and who bears risk — so I can reason about trade-offs like a payments PM.”
+
+⸻
+
+4. Core Concept
+
+4.1 Actors
+
+We model three entities:
+	1.	Customer (and Issuing Bank lumped in)
+	2.	Gateway (PSP/platform like Razorpay/Stripe)
+	3.	Merchant (and their acquiring bank lumped in)
+
+We do NOT model Visa/MasterCard/Issuer/Acquirer separately; they’re abstracted into “the system behind the scenes”.
+
+4.2 Levers (Design Decisions)
+
+Shown in left control panel:
+	1.	Capture Mode
+	•	Auto-capture
+	•	Manual-capture
+	2.	Payout Schedule (Gemini fix for “settlement delay”)
+	•	T+2 – merchant paid 2 days after successful payment
+	•	T+7 – merchant paid 7 days later (high-risk)
+	•	Instant – gateway pays merchant immediately, before its own settlement (gateway fronts cash)
+	3.	Refund Policy
+	•	Instant refund – refund processed as soon as requested; gateway may front cash
+	•	Refund after payout – refund executed only once merchant funds are available; lower risk for gateway, worse UX
+
+Each lever also shows:
+	•	Who decides (Merchant vs Gateway)
+	•	Who bears cost/impact (Merchant, Gateway, Customer)
+
+Example (microcopy):
+	•	Capture:
+“Decided by: Merchant · Risk on: Gateway / Customer UX”
+	•	Payout:
+“Decided by: Gateway · Impact: Merchant cashflow”
+	•	Refund:
+“Decided by: Gateway Product/Risk · Impact: Gateway float & Customer UX”
+
+4.3 Scenarios
+
+Buttons in left panel:
+	1.	Normal Payment
+	•	Customer pays ₹100
+	•	Gateway takes fee ₹3
+	•	Merchant net = ₹97
+	•	Behavior changes based on levers.
+	2.	Refund
+	•	Same base payment as above assumed successful.
+	•	User triggers refund.
+	•	Behavior depends heavily on Refund Policy and Payout Schedule.
+	3.	Auth Success / Capture Failed (Manual-capture risk)
+	•	Authorization succeeds (funds held).
+	•	Merchant never captures (or capture fails).
+	•	Eventually auth expires, hold released.
+	•	Merchant loses sale, gateway may eat some auth-related cost (can be simplified).
+
+4.4 Time Model
+
+We use a simple discrete time model, not actual clocks:
+	•	Day 0 – transaction initiated (auth, capture)
+	•	Day 0–1 – settlement happens behind the scenes (abstracted)
+	•	Day N – payout based on Payout Schedule lever:
+	•	T+2 → Day 2
+	•	T+7 → Day 7
+	•	Instant → Day 0 (immediately)
+
+Refund can be treated as:
+	•	Occurring on Day 1 or Day 2 depending on narrative (for simplicity, we can just call it “after payment, before or after payout” and show effect).
+
+⸻
+
+5. UX / UI Design
+
+5.1 Layout (Single-page App)
+
+Desktop-first design.
+
+Three main sections:
+	1.	Left: Control Panel (Levers + Scenario)
+	2.	Center: Visualization (Tabs: Flow / Ledger)
+	3.	Right: Explanations / Trade-offs
+
+5.1.1 Left Panel – Controls
+	•	Section: “Design Levers”
+	•	Capture Mode (radio or select)
+	•	Payout Schedule (radio or select)
+	•	Refund Policy (radio or select)
+	•	Under each lever:
+	•	“Decided by: …”
+	•	“Impact: …”
+	•	Section: “Scenarios”
+	•	Buttons:
+	•	Run Normal Payment
+	•	Run Refund
+	•	Run Auth Success / Capture Failed
+
+When you click a scenario:
+	•	It runs with the current lever settings.
+	•	Center + right panels update.
+
+5.1.2 Center Panel – Visualization Tabs
+Tabs:
+	•	Flow
+	•	Ledger
+
+Flow tab (React Flow or simple diagram):
+	•	Minimal nodes:
+	•	Customer
+	•	Gateway
+	•	Merchant
+	•	Arrows show:
+	•	Payment from Customer → Gateway
+	•	Payout from Gateway → Merchant
+	•	Refund from Gateway/Merchant → Customer (depending on policy)
+	•	Simple step-by-step highlighting (like a 3–6 step animation).
+	•	Don’t overfit. This is illustrative, not the source of truth.
+
+Ledger tab (core):
+	•	A table or grid showing per-step numbers.
+	•	Rows = Steps in the scenario (e.g., “Before payment”, “After Auth”, “After Settlement”, “After Payout”, “After Refund”).
+	•	Columns = balances per actor.
+
+Example structure:
+
+Step	Customer Cash	Customer Hold	Gateway Cash	Gateway Merchant Liability	Gateway Fees	Merchant Cash
+Before Payment	100	0	0	0	0	0
+After Auth	100	100	0	0	0	0
+After Capture	100	100	0	100	0	0
+After Settlement	100	0	100	100	0	0
+After Fee Recognition	100	0	100	97	3	0
+After Payout (T+2 etc.)	100	0	3	0	3	97
+
+(Exact logic defined in section 6.)
+
+Below or above this table: Impact Summary Card.
+
+5.1.3 Right Panel – Explanation / Trade-offs
+Dynamic text that changes with:
+	•	active scenario
+	•	lever configuration
+	•	current step (if you show steps)
+
+Two layers:
+	1.	Lever-level explanation (static per lever)
+	•	e.g. “Manual-capture lets merchant run extra checks before committing, but if they forget to capture before auth expiry, they lose the transaction.”
+	2.	Scenario-level explanation (specific to current scenario)
+	•	e.g., for Refund + Instant Policy:
+“Here, the gateway refunds the customer before it has recovered funds from the merchant. Gateway cash dips, merchant cash remains, gateway holds a receivable from merchant — increased working capital risk.”
+
+Keep explanations short, punchy, trade-off focused.
+
+⸻
+
+6. Functional Requirements
+
+6.1 Constants / Base Values (for simplicity)
+	•	PAYMENT_AMOUNT = 100 (₹100)
+	•	GATEWAY_FEE = 3 (₹3 flat for now; no complex percentages)
+	•	MERCHANT_NET = 97 (PAYMENT_AMOUNT – GATEWAY_FEE)
+
+You can parametrize later; V1.1 can hardcode.
+
+6.2 Data Model (internal)
+
+Define an internal state like:
+
+type ActorBalances = {
+  customerCash: number;
+  customerHold: number;
+  gatewayCash: number;
+  gatewayMerchantLiability: number; // amount owed to merchants (positive)
+  gatewayFees: number;
+  merchantCash: number;
+};
+
+type ScenarioStep = {
+  label: string;
+  day: number;          // 0, 2, 7, etc.
+  balances: ActorBalances;
+  explanation: string;  // optional; for right panel
+};
+
+The ledger tab will render a list of ScenarioStep objects.
+
+6.3 Scenarios – Logic & Ledger Evolution
+
+We’re not doing perfect double-entry accounting.
+We’re doing consistent, intuitive balances.
+
+6.3.1 Normal Payment scenario
+Given levers:
+	•	captureMode = auto | manual
+	•	payoutSchedule = T+2 | T+7 | Instant
+	•	Refund policy doesn’t matter here.
+
+We assume successful auth, capture, settlement, payout.
+
+Steps (conceptually):
+	1.	Before Payment (Day 0)
+	•	Customer Cash: 100
+	•	Customer Hold: 0
+	•	Gateway Cash: 0
+	•	Gateway Merchant Liability: 0
+	•	Gateway Fees: 0
+	•	Merchant Cash: 0
+	2.	After Authorization (Day 0)
+	•	Customer Cash: 100
+	•	Customer Hold: 100  (funds reserved)
+	•	Gateway Cash: 0
+	•	Gateway Merchant Liability: 0
+	•	Gateway Fees: 0
+	•	Merchant Cash: 0
+	3.	After Capture (Day 0)
+(For simplicity, treat auto & manual as same here if success; Scenario 3 will show risk difference.)
+	•	Customer Cash: 100
+	•	Customer Hold: 100 (still reserved until settlement)
+	•	Gateway Cash: 0
+	•	Gateway Merchant Liability: 100 (gateway now “owes” 100 to merchant once funds arrive)
+	•	Gateway Fees: 0
+	•	Merchant Cash: 0
+	4.	After Settlement (Day 1, behind scenes)
+Gateway receives 100 from networks. Customer hold is converted to actual debit.
+	•	Customer Cash: 0     (100 actually debited)
+	•	Customer Hold: 0     (hold released)
+	•	Gateway Cash: 100    (cash in)
+	•	Gateway Merchant Liability: 100
+	•	Gateway Fees: 0
+	•	Merchant Cash: 0
+	5.	After Fee Recognition (Day 1)
+Gateway takes 3 as revenue, keeps 3, owes 97 to merchant.
+	•	Customer Cash: 0
+	•	Customer Hold: 0
+	•	Gateway Cash: 100
+	•	Gateway Merchant Liability: 97
+	•	Gateway Fees: 3
+	•	Merchant Cash: 0
+	6.	After Payout (Day depends on Payout Schedule)
+
+	•	If payoutSchedule = T+2 → day = 2
+	•	If T+7 → day = 7
+	•	If Instant → treat as day = 0 (gateway pays out at time of purchase, before settlement; showing negative exposure until settlement arrives).
+
+Payout logic:
+	•	Gateway pays 97 to merchant:
+	•	GatewayCash -= 97
+	•	GatewayMerchantLiability = 0
+	•	MerchantCash += 97
+
+But we adjust GatewayCash differently for Instant:
+	•	For T+2/T+7:
+	•	After Settlement: GatewayCash = 100, then after payout:
+	•	GatewayCash = 3 (fee retained)
+	•	For Instant:
+	•	Gateway initially pays 97 from cash (goes negative until settlement arrives):
+	•	At Day 0:
+	•	GatewayCash = -97
+	•	GatewayMerchantLiability = 0
+	•	MerchantCash = 97
+	•	At Day 1 (settlement):
+	•	GatewayCash += 100 → 3
+	•	GatewayFees = 3
+
+You can either show this with two steps or compress into one row with explanation.
+
+Impact Summary (Normal Payment)
+
+Compute rough values:
+	•	merchantCashAvailableDay =
+	•	0 if Instant
+	•	2 if T+2
+	•	7 if T+7
+	•	gatewayMaxExposure (rough) =
+	•	For Instant payout: 97 (until settlement)
+	•	For T+2/T+7: 0 (no pre-funding in this simple model)
+
+Display:
+
+Merchant receives funds on Day X.
+Gateway maximum cash exposure under this config: ₹Y.
+
+⸻
+
+6.3.2 Refund scenario
+High-level story:
+	•	Base payment same as above (you can reuse final state from Normal Payment).
+	•	Then user triggers refund.
+	•	Behavior depends on Refund Policy & Payout Schedule.
+
+We keep it simple:
+	•	Assume refund happens after settlement, and:
+	•	If payout not yet done: gateway holds merchant money.
+	•	If payout done: merchant already got 97.
+
+Simplified flows:
+
+Case A: Refund Policy = “Refund after payout”
+	•	You only allow refund once merchant has been paid.
+	•	Merchant refunds customer from their own cash (or via gateway but backed by merchant funds).
+
+Implementation simplification:
+	•	CustomerCash: back to 100
+	•	GatewayCash: stays at 3 (keeps fee)
+	•	GatewayMerchantLiability: 0
+	•	GatewayFees: 3
+	•	MerchantCash: 0 (they send their 97 back through the system)
+
+Case B: Refund Policy = “Instant refund”
+	•	Gateway refunds customer immediately, possibly before merchant payout.
+
+Two subcases:
+	1.	Payout not done yet (T+2/T+7, refund triggered early):
+	•	Gateway uses the 100 it holds:
+	•	CustomerCash: 100
+	•	GatewayCash: 0
+	•	GatewayMerchantLiability: 0
+	•	GatewayFees: 3 maybe still kept or maybe lost (you choose; simplest: fees kept)
+	•	MerchantCash: 0
+Gateway effectively absorbs some timing risk but not huge new float.
+	2.	Payout already done / Instant Payout:
+	•	Merchant already has 97 in bank.
+	•	Gateway refunds 100 to customer from its cash, and marks merchant as owing it 97 (negative balance).
+
+Simplify as:
+	•	CustomerCash: 100
+	•	GatewayCash: 3 - 100 = -97
+	•	GatewayMerchantLiability: -97 (merchant owes gateway)
+	•	GatewayFees: 3
+	•	MerchantCash: 97
+
+Impact summary emphasizes:
+
+Instant refunds + instant payouts → gateway fronts refunds, merchant keeps cash, gateway stuck with negative cash + negative merchant balance → high working capital & credit risk.
+
+You don’t need perfect accounting; just consistent, believable flows and stories.
+
+⸻
+
+6.3.3 Auth Success / Capture Failed scenario
+This is specifically to show manual capture risk.
+
+We assume:
+	•	Authorization succeeds.
+	•	Customer funds are held for some auth validity period (~7 days, but we don’t model days precisely).
+	•	Merchant never sends Capture (ops failure, or deliberate).
+
+Steps:
+	1.	Before Payment
+	•	Same as Normal Payment.
+	2.	After Auth
+	•	CustomerCash: 100
+	•	CustomerHold: 100
+	•	GatewayCash: 0
+	•	GatewayMerchantLiability: 0
+	•	GatewayFees: 0
+	•	MerchantCash: 0
+	3.	No Capture Sent
+	•	Time passes beyond auth validity
+	•	Auth expires
+	•	Hold released
+
+Final state:
+	•	CustomerCash: 100
+	•	CustomerHold: 0
+	•	GatewayCash: 0
+	•	GatewayMerchantLiability: 0
+	•	GatewayFees: 0
+	•	MerchantCash: 0
+
+Impact explanation:
+	•	Merchant loses sale (no revenue).
+	•	Customer had funds “stuck” for few days (poor UX).
+	•	Gateway might pay small auth fee to network (you can skip showing this, or add tiny line “Gateway eats small network cost”).
+
+Tie explicitly to Capture Mode lever:
+	•	If Auto-capture:
+	•	This scenario is rare, flows auto.
+	•	If Manual-capture:
+	•	This scenario becomes common if merchants forget to capture promptly.
+
+⸻
+
+7. Non-functional Requirements
+	•	Performance:
+Instant updates on lever change and scenario click. No spinners.
+	•	Responsiveness:
+Should be usable on 13” laptop; mobile is nice-to-have but not required for V1.
+	•	Clarity over accuracy:
+The numbers must be internally consistent and directionally correct, but we are not implementing a real accounting engine.
+	•	Explainability:
+Every step in the ledger should be explainable in 1–2 sentences.
+
+⸻
+
+8. Tech / Implementation Notes (for Next.js + React Flow)
+	•	Framework: Next.js (app router or pages router, your choice).
+	•	Styling: Tailwind CSS.
+	•	Visualization:
+	•	React Flow for Flow tab (but minimal graph).
+	•	Simple table for Ledger tab.
+	•	State:
+	•	levers in React state: { captureMode, payoutSchedule, refundPolicy }.
+	•	currentScenario in React state.
+	•	A pure function simulateScenario(levers, scenario): ScenarioStep[] that returns ledger steps + explanations.
+	•	Impact summary:
+	•	Derived from the final ScenarioStep[] (look at max negative GatewayCash etc.).
+
+This separation (pure simulation function) makes it easy to test and easy to plug into AI tools.
+
+⸻
+
+9. Success Criteria (for you as PM, not “product metrics”)
+
+You know V1.1 is successful if:
+	1.	You can demo it in 5 minutes in an interview and:
+	•	change a lever
+	•	rerun a scenario
+	•	narrate what changed and why it matters.
+	2.	A payments PM watches it and says something like:
+	•	“This is exactly the kind of thinking we do internally.”
+	•	“This would have saved me weeks when I was onboarding.”
+	3.	You can write a clear case study explaining:
+	•	why you chose these 3 levers
+	•	why these 3 scenarios
+	•	how you simplified the ledger
+	•	what trade-offs you made in scope
+
+⸻
+
+10. Future Extensions (V2+ – for roadmap talk, not for now)
+	•	Add UPI rail with its own state machine and error codes.
+	•	Add chargeback / dispute lifecycle.
+	•	Add rolling reserve lever.
+	•	Add provider presets: “Stripe-like”, “Razorpay-like”.
+	•	Add URL sharable configs.
+	•	Add volume & probability → EV calculations.
+	•	Add timeline visualization with real hours/days.
+
+These are for interviews when they ask “what next”.
+
+⸻
+
+If you want, next step I can:
+	•	Turn simulateScenario() into a precise pseudo-code spec you can hand directly to Cursor/Gemini for implementation.
+	•	Or help you design the component structure (e.g. <LeversPanel />, <ScenarioRunner />, <FlowView />, <LedgerView />, <ImpactSummary />).
+
+But the PRD above is your “north star” doc.
