@@ -11,6 +11,7 @@ const PAYMENT_AMOUNT = 100;
 const GATEWAY_FEE = 3;
 
 const MERCHANT_NET = PAYMENT_AMOUNT - GATEWAY_FEE;
+const PARTIAL_REFUND_AMOUNT = 40;
 
 const CHARGEBACK_FEE = 15;
 
@@ -638,6 +639,50 @@ const simulateChargeback = (levers: Levers): ScenarioStep[] => {
 
 }
 
+const simulatePartialRefund = (levers: Levers): ScenarioStep[] => {
+    const paymentSteps = simulateNormalPayment(levers);
+    const lastPaymentStep = paymentSteps[paymentSteps.length - 1];
+    const refundDay = lastPaymentStep.day + 1;
+
+    const steps: ScenarioStep[] = [...paymentSteps];
+
+    // --- Partial Refund Process Starts ---
+
+    steps.push({
+        label: 'Partial Refund Initiated',
+        day: refundDay,
+        balances: lastPaymentStep.balances,
+        explanation: `The merchant initiates a partial refund for ${PARTIAL_REFUND_AMOUNT}. The original gateway fee of ${GATEWAY_FEE} is not returned.`,
+    });
+
+    // Gateway claws back the partial refund amount from the merchant
+    const clawbackBalances: ActorBalances = {
+        ...lastPaymentStep.balances,
+        // Gateway takes the money from the merchant to fund the refund.
+        // Note: merchant cash can go negative if they don't have enough funds.
+        merchantCash: lastPaymentStep.balances.merchantCash - PARTIAL_REFUND_AMOUNT,
+    };
+    steps.push({
+        label: 'Clawback from Merchant',
+        day: refundDay,
+        balances: clawbackBalances,
+        explanation: `The Gateway claws back the ${PARTIAL_REFUND_AMOUNT} from the merchant's balance to fund the refund.`,
+    });
+
+    // Gateway sends the partial refund to the customer
+    const refundSentBalances: ActorBalances = {
+        ...clawbackBalances,
+        customerCash: clawbackBalances.customerCash + PARTIAL_REFUND_AMOUNT,
+    };
+    steps.push({
+        label: 'Partial Refund Sent',
+        day: refundDay + 1,
+        balances: refundSentBalances,
+        explanation: `The Gateway sends the ${PARTIAL_REFUND_AMOUNT} to the customer. The merchant has lost ${PARTIAL_REFUND_AMOUNT} and the original ${GATEWAY_FEE} fee.`,
+    });
+
+    return steps;
+};
 
 
 const simulateChargebackWin = (levers: Levers): ScenarioStep[] => {
@@ -744,6 +789,9 @@ export const simulateScenario = (levers: Levers, scenarioType: ScenarioType): Sc
         case 'chargeback_loss':
 
             return simulateChargebackLoss(levers);
+        
+        case 'partial_refund':
+            return simulatePartialRefund(levers);
 
 
 
