@@ -35,7 +35,10 @@ import "../../styles/nobroker-prd.css";
     { href: "#edge-cases", label: "Edge Cases" },
     { href: "#ux", label: "UX" },
     { href: "#tech", label: "Tech" },
+    { href: "#readiness", label: "Readiness" },
     { href: "#rollout", label: "Rollout" },
+    { href: "#competitive", label: "Competitive" },
+    { href: "#future", label: "Future" },
     { href: "#metrics", label: "Metrics" },
     { href: "#reflection", label: "Reflection" },
   ]}
@@ -254,15 +257,15 @@ import "../../styles/nobroker-prd.css";
         </div>
         <div class="bg-white border-2 border-black rounded-2xl px-0 py-4 sm:p-5 text-center shadow-[6px_6px_0_0_#000]">
             <p class="text-xl sm:text-2xl font-bold">Improve trust signals</p>
-            <p class="text-base sm:text-lg text-gray-600 mt-2">+15 NPS</p>
+            <p class="text-base sm:text-lg text-gray-600 mt-2">+20 NPS</p>
         </div>
         <div class="bg-white border-2 border-black rounded-2xl px-0 py-4 sm:p-5 text-center shadow-[6px_6px_0_0_#000]">
             <p class="text-xl sm:text-2xl font-bold">Modernize CRM outreach</p>
             <p class="text-base sm:text-lg text-gray-600 mt-2">60% Quiet Mode adoption</p>
         </div>
         <div class="bg-white border-2 border-black rounded-2xl px-0 py-4 sm:p-5 text-center shadow-[6px_6px_0_0_#000]">
-            <p class="text-xl sm:text-2xl font-bold">Reduce spam complaints</p>
-            <p class="text-base sm:text-lg text-gray-600 mt-2">&lt;5% complaints</p>
+            <p class="text-xl sm:text-2xl font-bold">Boost Conversion</p>
+            <p class="text-base sm:text-lg text-gray-600 mt-2">+3% Premium Plan</p>
         </div>
     </div>
 </div>
@@ -448,19 +451,20 @@ import "../../styles/nobroker-prd.css";
         <div class="bg-white border-2 border-black rounded-2xl p-4 shadow-[6px_6px_0_0_#000]">
             <h3 class="font-bold text-base sm:text-lg">Quiet Mode</h3>
             <p class="text-base sm:text-lg"><strong>Consent Modal:</strong> UI prompt to select communication mode.</p>
-            <p class="text-base sm:text-lg"><strong>CRM Integration:</strong> Add contact delay flag for NRI users.</p>
-            <p class="text-base sm:text-lg"><strong>Dashboard Status:</strong> "Quiet Mode Active" indicator.</p>
+            <p class="text-base sm:text-lg"><strong>Preference Options:</strong> WhatsApp Digest, Email Only, Call Later, No Contact (3 Days).</p>
+            <p class="text-base sm:text-lg"><strong>Call Blocking:</strong> Automatic 72-hour block if Quiet Mode is ON.</p>
+            <p class="text-base sm:text-lg"><strong>Dashboard Status:</strong> "Quiet Mode ON - Next Summary: Mon 10 AM IST."</p>
         </div>
         <div class="bg-white border-2 border-black rounded-2xl p-4 shadow-[6px_6px_0_0_#000]">
             <h3 class="font-bold text-base sm:text-lg">Know Your Guide</h3>
-            <p class="text-base sm:text-lg"><strong>Guide Profile:</strong> Photo, badge, trust score, and location previewed before any call.</p>
-            <p class="text-base sm:text-lg"><strong>CRM Sync:</strong> API to fetch RM metadata + trust signals.</p>
-            <p class="text-base sm:text-lg"><strong>Trusted Launchpads:</strong> Owner starts WhatsApp Business chat or email from the profile.</p>
+            <p class="text-base sm:text-lg"><strong>Verified Handshake:</strong> Profile card with RM name, photo, badge, and role.</p>
+            <p class="text-base sm:text-lg"><strong>Mandatory Acknowledgment:</strong> Calls disabled until the user views the card.</p>
+            <p class="text-base sm:text-lg"><strong>Verified Communication:</strong> All outreach via verified channels (e.g., WhatsApp Business).</p>
         </div>
         <div class="bg-white border-2 border-black rounded-2xl p-4 shadow-[6px_6px_0_0_#000]">
             <h3 class="font-bold text-base sm:text-lg">Weekly Visibility Digest</h3>
-            <p class="text-base sm:text-lg"><strong>Email/WA Template:</strong> Weekly summary message.</p>
-            <p class="text-base sm:text-lg"><strong>Engagement Tracking:</strong> Digest open + CTR.</p>
+            <p class="text-base sm:text-lg"><strong>Delivery:</strong> Once a week via preferred channel (WhatsApp/Email).</p>
+            <p class="text-base sm:text-lg"><strong>Content:</strong> Views, shortlists, and actionable tips (e.g., "Add balcony photos").</p>
         </div>
     </div>
 </div>
@@ -492,6 +496,10 @@ import "../../styles/nobroker-prd.css";
         <div class="bg-white border-2 border-black rounded-2xl p-4 shadow-[6px_6px_0_0_#000]">
             <p class="font-bold text-base sm:text-lg">Owner disables all contact</p>
             <p class="text-sm">CRM label = Do Not Contact. In-app toggle to re-enable.</p>
+        </div>
+        <div class="bg-white border-2 border-black rounded-2xl p-4 shadow-[6px_6px_0_0_#000]">
+            <p class="font-bold text-base sm:text-lg">Owner has multiple listings</p>
+            <p class="text-sm">Assign one "Primary RM" visible across all listings.</p>
         </div>
     </div>
 </div>
@@ -550,6 +558,31 @@ import "../../styles/nobroker-prd.css";
     </div>
 </div>
 
+{/* --- Section: Release Readiness Criteria --- */}
+<div id="readiness" class="my-12 sm:my-16 scroll-mt-24">
+    <h2 class="text-2xl sm:text-3xl font-extrabold mb-4">Release Readiness Criteria</h2>
+    <div class="bg-white border-2 border-black rounded-2xl p-6 shadow-[6px_6px_0_0_#000]">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+                <h3 class="font-bold text-lg mb-2">Functionality</h3>
+                <ul class="list-disc list-inside text-base text-gray-700">
+                    <li>Auto NRI detection working.</li>
+                    <li>Consent capture stored correctly.</li>
+                    <li>Verified RM card displayed.</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="font-bold text-lg mb-2">Performance & Reliability</h3>
+                <ul class="list-disc list-inside text-base text-gray-700">
+                    <li>CRM sync delay &lt; 1 second.</li>
+                    <li>UI response time &lt; 200ms.</li>
+                    <li>Consistent mobile UI.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 {/* --- Section: Rollout Strategy --- */}
 <div id="rollout" class="my-12 sm:my-16 scroll-mt-24">
@@ -581,16 +614,72 @@ import "../../styles/nobroker-prd.css";
     </div>
 </div>
 
+{/* --- Section: Competitive Context --- */}
+<div id="competitive" class="my-12 sm:my-16 scroll-mt-24">
+    <h2 class="text-2xl sm:text-3xl font-extrabold mb-4">Competitive Context</h2>
+    <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse border-2 border-black bg-white shadow-[6px_6px_0_0_#000] rounded-2xl overflow-hidden">
+            <thead>
+                <tr class="bg-black text-white">
+                    <th class="p-4 border-b-2 border-black">Platform</th>
+                    <th class="p-4 border-b-2 border-black">Approach</th>
+                    <th class="p-4 border-b-2 border-black">Gap We Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border-b border-gray-300">
+                    <td class="p-4 font-bold">Zillow / Redfin (US)</td>
+                    <td class="p-4">Calm dashboard UX, minimal human contact.</td>
+                    <td class="p-4">Trustworthy but impersonal — we add a verified human layer.</td>
+                </tr>
+                <tr class="border-b border-gray-300">
+                    <td class="p-4 font-bold">MagicBricks / 99acres (IN)</td>
+                    <td class="p-4">Immediate calls and aggressive upsells.</td>
+                    <td class="p-4">Feels noisy and outdated — we introduce calm, timezone-aware communication.</td>
+                </tr>
+                <tr>
+                    <td class="p-4 font-bold">NoBroker (Current)</td>
+                    <td class="p-4">Hybrid model but lacks contextual empathy.</td>
+                    <td class="p-4">Needs global mindset — we tailor the experience for the NRI segment.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{/* --- Section: Future Opportunities --- */}
+<div id="future" class="my-12 sm:my-16 scroll-mt-24">
+    <h2 class="text-2xl sm:text-3xl font-extrabold mb-4">Future Opportunities</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="bg-white border-2 border-black rounded-2xl p-4 shadow-[4px_4px_0_0_#000]">
+            <h3 class="font-bold text-lg mb-2">Timezone-Smart CRM Routing</h3>
+            <p class="text-sm text-gray-700">Automatically assign RMs based on the user's local time.</p>
+        </div>
+        <div class="bg-white border-2 border-black rounded-2xl p-4 shadow-[4px_4px_0_0_#000]">
+            <h3 class="font-bold text-lg mb-2">RM Video Verification Badges</h3>
+            <p class="text-sm text-gray-700">Add another layer of trust with video validation.</p>
+        </div>
+        <div class="bg-white border-2 border-black rounded-2xl p-4 shadow-[4px_4px_0_0_#000]">
+            <h3 class="font-bold text-lg mb-2">AI-Driven Performance Insights</h3>
+            <p class="text-sm text-gray-700">Enhance the Weekly Digest with machine-learning-based tips.</p>
+        </div>
+        <div class="bg-white border-2 border-black rounded-2xl p-4 shadow-[4px_4px_0_0_#000]">
+            <h3 class="font-bold text-lg mb-2">Unified NRI Dashboard</h3>
+            <p class="text-sm text-gray-700">A consolidated view for multi-property owners.</p>
+        </div>
+    </div>
+</div>
+
 {/* --- Section: Success Metrics --- */}
 <div id="metrics" class="my-12 sm:my-16 scroll-mt-24">
     <h2 class="text-2xl sm:text-3xl font-extrabold mb-4">Success Metrics</h2>
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4 lg:gap-6">
         <div class="bg-white border-2 border-black rounded-2xl p-5 text-center shadow-[6px_6px_0_0_#000]">
-            <p class="text-xl sm:text-2xl font-bold text-rose-700 mb-2">15% → <span class="text-green-600">&lt;5%</span></p>
-            <p class="text-sm text-gray-600 mb-2">NRI spam complaints</p>
-            <div class="inline-flex items-center gap-1 bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-full">
-                <span>↓</span>
-                <span>67% reduction</span>
+            <p class="text-xl sm:text-2xl font-bold text-rose-700 mb-2">Conversion</p>
+            <p class="text-sm text-gray-600 mb-2">Premium Plan</p>
+            <div class="inline-flex items-center gap-1 bg-rose-100 text-rose-700 text-xs font-bold px-2 py-1 rounded-full">
+                <span>↑</span>
+                <span>+3% increase</span>
             </div>
         </div>
         <div class="bg-white border-2 border-black rounded-2xl p-5 text-center shadow-[6px_6px_0_0_#000]">

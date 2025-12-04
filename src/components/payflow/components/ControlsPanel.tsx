@@ -1,84 +1,141 @@
 import React from 'react';
-import type { Levers, ScenarioType } from '../lib/types';
+import type { CoreScenarioType, Levers } from '../lib/types';
 import { cn } from '../lib/utils';
 
 interface ControlsPanelProps {
     levers: Levers;
     onLeverChange: (levers: Partial<Levers>) => void;
-    onScenarioChange: (scenarioType: ScenarioType) => void;
-    activeScenario: ScenarioType;
+    onScenarioChange: (scenarioType: CoreScenarioType) => void;
+    activeScenario: CoreScenarioType;
+    scenarioLibrary: Record<
+        CoreScenarioType,
+        { title: string; summary: string; keyQuestion: string; insights: string[] }
+    >;
+    supportedScenarios: CoreScenarioType[];
+    leverDetails: Record<
+        keyof Levers,
+        { decidedBy: string; impact: string; description: string; title: string }
+    >;
 }
 
-const Section: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
-    <div className="mb-6">
-        <h3 className="text-lg font-semibold text-gray-800 mb-3">{title}</h3>
-        <div className="space-y-2">{children}</div>
-    </div>
-);
+type LeverConfig = {
+    key: keyof Levers;
+    title: string;
+    options: { value: Levers[keyof Levers]; label: string }[];
+};
 
-const RadioButton: React.FC<{ name: string; value: string; checked: boolean; onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; label: string }> = ({ name, value, checked, onChange, label }) => (
-    <label className="flex items-center space-x-2 cursor-pointer">
-        <input type="radio" name={name} value={value} checked={checked} onChange={onChange} className="form-radio text-blue-600" />
-        <span className="text-gray-700">{label}</span>
-    </label>
-);
+const leverConfigs: LeverConfig[] = [
+    {
+        key: 'captureMode',
+        title: 'Capture mode',
+        options: [
+            { value: 'auto', label: 'Auto capture' },
+            { value: 'manual', label: 'Manual capture' },
+        ],
+    },
+    {
+        key: 'payoutSchedule',
+        title: 'Payout schedule',
+        options: [
+            { value: 'instant', label: 'Instant' },
+            { value: 'T+2', label: 'T+2 days' },
+            { value: 'T+7', label: 'T+7 days' },
+        ],
+    },
+    {
+        key: 'refundPolicy',
+        title: 'Refund policy',
+        options: [
+            { value: 'instant', label: 'Instant refund' },
+            { value: 'after_payout', label: 'After payout' },
+        ],
+    },
+];
 
-const ScenarioButton: React.FC<{ onClick: () => void; children: React.ReactNode, isActive: boolean }> = ({ onClick, children, isActive }) => (
-    <button
-        onClick={onClick}
-        className={cn(
-            "w-full text-left px-4 py-2 rounded-md transition-colors",
-            {
-                "bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50": isActive,
-                "bg-gray-200 text-gray-800 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400": !isActive
-            }
-        )}
-    >
-        {children}
-    </button>
-);
-
-
-const ControlsPanel: React.FC<ControlsPanelProps> = ({ levers, onLeverChange, onScenarioChange, activeScenario }) => {
-    const handleRadioChange = (lever: keyof Levers) => (e: React.ChangeEvent<HTMLInputElement>) => {
-        onLeverChange({ [lever]: e.target.value });
+const ControlsPanel: React.FC<ControlsPanelProps> = ({
+    levers,
+    onLeverChange,
+    onScenarioChange,
+    activeScenario,
+    scenarioLibrary,
+    supportedScenarios,
+    leverDetails,
+}) => {
+    const handleLeverSelect = (key: keyof Levers, value: Levers[keyof Levers]) => {
+        onLeverChange({ [key]: value });
     };
 
     return (
-        <div>
-            <h2 className="text-2xl font-semibold mb-6 text-gray-700 border-b pb-2">Controls</h2>
-
-            <Section title="Design Levers">
-                <div className="space-y-4">
-                    <div>
-                        <h4 className="font-medium text-gray-600">Capture Mode</h4>
-                        <RadioButton name="captureMode" value="auto" checked={levers.captureMode === 'auto'} onChange={handleRadioChange('captureMode')} label="Auto-Capture" />
-                        <RadioButton name="captureMode" value="manual" checked={levers.captureMode === 'manual'} onChange={handleRadioChange('captureMode')} label="Manual-Capture" />
-                    </div>
-                    <div>
-                        <h4 className="font-medium text-gray-600">Payout Schedule</h4>
-                        <RadioButton name="payoutSchedule" value="instant" checked={levers.payoutSchedule === 'instant'} onChange={handleRadioChange('payoutSchedule')} label="Instant" />
-                        <RadioButton name="payoutSchedule" value="T+2" checked={levers.payoutSchedule === 'T+2'} onChange={handleRadioChange('payoutSchedule')} label="T+2 Days" />
-                        <RadioButton name="payoutSchedule" value="T+7" checked={levers.payoutSchedule === 'T+7'} onChange={handleRadioChange('payoutSchedule')} label="T+7 Days" />
-                    </div>
-                    <div>
-                        <h4 className="font-medium text-gray-600">Refund Policy</h4>
-                        <RadioButton name="refundPolicy" value="instant" checked={levers.refundPolicy === 'instant'} onChange={handleRadioChange('refundPolicy')} label="Instant Refund" />
-                        <RadioButton name="refundPolicy" value="after_payout" checked={levers.refundPolicy === 'after_payout'} onChange={handleRadioChange('refundPolicy')} label="Refund After Payout" />
-                    </div>
+        <div className="space-y-8 text-sm text-slate-700">
+            {/* Scenario Selector */}
+            <div className="space-y-3">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Select Scenario</p>
+                <div className="flex flex-col gap-2">
+                    {supportedScenarios.map(option => {
+                        const meta = scenarioLibrary[option];
+                        const isActive = option === activeScenario;
+                        return (
+                            <button
+                                key={option}
+                                type="button"
+                                onClick={() => onScenarioChange(option)}
+                                className={cn(
+                                    'group relative flex w-full items-center justify-between rounded-xl border px-4 py-3 text-left transition-all',
+                                    isActive
+                                        ? 'border-blue-600 bg-blue-50/50 shadow-sm'
+                                        : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50'
+                                )}
+                            >
+                                <span className={cn('font-medium', isActive ? 'text-blue-700' : 'text-slate-700')}>
+                                    {meta.title}
+                                </span>
+                                {isActive && <div className="h-2 w-2 rounded-full bg-blue-600" />}
+                            </button>
+                        );
+                    })}
                 </div>
-            </Section>
+            </div>
 
-            <Section title="Scenarios">
-                <div className="space-y-3">
-                    <ScenarioButton onClick={() => onScenarioChange('normal_payment')} isActive={activeScenario === 'normal_payment'}>Run Normal Payment</ScenarioButton>
-                    <ScenarioButton onClick={() => onScenarioChange('refund')} isActive={activeScenario === 'refund'}>Run Refund</ScenarioButton>
-                    <ScenarioButton onClick={() => onScenarioChange('auth_capture_fail')} isActive={activeScenario === 'auth_capture_fail'}>Run Auth/Capture Fail</ScenarioButton>
-                    <ScenarioButton onClick={() => onScenarioChange('chargeback')} isActive={activeScenario === 'chargeback'}>Run Chargeback</ScenarioButton>
-                    <ScenarioButton onClick={() => onScenarioChange('chargeback_win')} isActive={activeScenario === 'chargeback_win'}>Run Chargeback (Win)</ScenarioButton>
-                    <ScenarioButton onClick={() => onScenarioChange('chargeback_loss')} isActive={activeScenario === 'chargeback_loss'}>Run Chargeback (Loss)</ScenarioButton>
+            <div className="h-px w-full bg-slate-100" />
+
+            {/* Levers */}
+            <div className="space-y-6">
+                <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Configuration</p>
+                <div className="space-y-5">
+                    {leverConfigs.map(config => {
+                        const meta = leverDetails[config.key];
+                        return (
+                            <div key={config.key} className="space-y-2">
+                                <div className="flex items-center justify-between">
+                                    <span className="text-xs font-medium text-slate-700">{config.title}</span>
+                                    <span className="text-[10px] text-slate-400">{meta.decidedBy}</span>
+                                </div>
+                                <div className="flex rounded-lg bg-slate-100 p-1">
+                                    {config.options.map(option => {
+                                        const isSelected = levers[config.key] === option.value;
+                                        return (
+                                            <button
+                                                key={option.value as string}
+                                                type="button"
+                                                onClick={() => handleLeverSelect(config.key, option.value)}
+                                                className={cn(
+                                                    'flex-1 rounded-md py-1.5 text-[11px] font-medium transition-all',
+                                                    isSelected
+                                                        ? 'bg-white text-slate-900 shadow-sm'
+                                                        : 'text-slate-500 hover:text-slate-700'
+                                                )}
+                                            >
+                                                {option.label}
+                                            </button>
+                                        );
+                                    })}
+                                </div>
+                                <p className="text-[10px] leading-relaxed text-slate-500">{meta.description}</p>
+                            </div>
+                        );
+                    })}
                 </div>
-            </Section>
+            </div>
         </div>
     );
 };

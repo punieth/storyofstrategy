@@ -1,254 +1,398 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import ReactFlow, { Background } from 'reactflow';
+import 'reactflow/dist/style.css';
 import type { ScenarioStep } from '../lib/types';
 import { cn } from '../lib/utils';
-import FlowDiagram from './FlowDiagram';
-import { MarkerType } from 'reactflow';
 
 interface VisualizationPanelProps {
     steps: ScenarioStep[];
     currentStep: number;
     onStepChange: (step: number) => void;
+    scenarioMeta: { title: string; summary: string; keyQuestion: string; insights: string[] };
 }
 
-const generateFlowData = (currentStep: ScenarioStep, previousStep: ScenarioStep | null, allSteps: ScenarioStep[]) => {
-    if (!currentStep) return { nodes: [], edges: [] };
+type ActorKey = 'customer' | 'gateway' | 'merchant';
 
-    const { balances: curr, label } = currentStep;
-    const isAuthStep = label.includes('Auth');
-    const isCaptureStep = label.includes('Capture');
-    const isPayoutStep = label.includes('Payout');
-    const isSettlementStep = label.includes('Settlement');
-    const isRefundStep = label.includes('Refund');
-    const isChargebackStep = label.includes('Chargeback') || label.includes('Dispute');
+const formatCurrency = (value: number) => `₹${value.toLocaleString(undefined, { maximumFractionDigits: 0 })}`;
 
-    const customerActive = isAuthStep || isSettlementStep || isRefundStep || isChargebackStep;
-    const gatewayActive = isAuthStep || isCaptureStep || isPayoutStep || isSettlementStep || isRefundStep || isChargebackStep;
-    const merchantActive = isCaptureStep || isPayoutStep || isRefundStep || isChargebackStep;
-    const highlightStyle = (active: boolean) => (
-        active ? { borderColor: '#2563eb', borderWidth: 2, boxShadow: '0 0 10px #2563eb' } : {}
-    );
-
-    const nodes = [
-        {
-            id: 'customer',
-            type: 'default',
-            data: { label: (
-                <div className="text-center">
-                    <div className="font-bold mb-2">Customer</div>
-                    <div className="text-lg font-mono bg-white/50 rounded p-1">Cash: ${curr.customerCash}</div>
-                    {curr.customerHold > 0 && (
-                        <div className="mt-2 text-sm bg-orange-100 border border-orange-300 rounded p-1">
-                            🔒 Held: ${curr.customerHold}
-                        </div>
-                    )}
-                </div>
-            )},
-            position: { x: 50, y: 150 },
-            style: { width: 180, backgroundColor: '#e0f2fe', ...highlightStyle(customerActive), padding: 10 },
-        },
-        {
-            id: 'gateway',
-            type: 'default',
-            data: { label: (
-                <div className="text-center">
-                    <div className="font-bold mb-1">Gateway {isCaptureStep && curr.gatewayMerchantLiability > 0 && '🧾'}</div>
-                    <div className="text-lg font-mono bg-white/50 rounded p-1">Cash: ${curr.gatewayCash}</div>
-                    {curr.gatewayMerchantLiability > 0 && (
-                         <div className="mt-2 text-sm bg-purple-100 border border-purple-300 rounded p-1">
-                            🧾 Owed: ${curr.gatewayMerchantLiability}
-                        </div>
-                    )}
-                    {curr.gatewayFees > 0 && (
-                        <div className="mt-2 text-sm bg-green-200 border border-green-400 rounded p-1">
-                            💰 Fees: ${curr.gatewayFees}
-                        </div>
-                    )}
-                </div>
-            )},
-            position: { x: 350, y: 150 },
-            style: { width: 180, backgroundColor: '#d1fae5', ...highlightStyle(gatewayActive), padding: 10 },
-        },
-        {
-            id: 'merchant',
-            type: 'default',
-            data: { label: (
-                <div className="text-center">
-                    <div className="font-bold mb-1">Merchant</div>
-                    <div className="text-lg font-mono bg-white/50 rounded p-1">Cash: ${curr.merchantCash}</div>
-                </div>
-            )},
-            position: { x: 650, y: 150 },
-            style: { width: 180, backgroundColor: '#fee2e2', ...highlightStyle(merchantActive), padding: 10 },
-        },
-    ];
-
-    const edges = [];
-    if (!previousStep) return { nodes, edges };
-
-    const prev = previousStep.balances;
-
-    const defaultEdgeStyle = {
-        animated: true,
-        markerEnd: {
-            type: MarkerType.ArrowClosed,
-        },
-        style: { strokeWidth: 2 },
-    };
-
-    // Customer -> Gateway (Authorization)
-    if (isAuthStep && curr.customerHold > 0 && (prev.customerHold === 0 || !prev.customerHold)) {
-        edges.push({
-            id: 'c-g-auth',
-            source: 'customer',
-            target: 'gateway',
-            label: `Authorize: $${curr.customerHold.toFixed(0)}`,
-            ...defaultEdgeStyle,
-            style: { ...defaultEdgeStyle.style, strokeDasharray: '5 5', stroke: '#6b7280' },
-        });
-    }
-
-    // Customer -> Gateway (Settlement)
-    const customerToGatewayAmount = prev.customerCash - curr.customerCash;
-    if (customerToGatewayAmount > 0 && isSettlementStep) {
-        edges.push({ id: 'c-g', source: 'customer', target: 'gateway', label: `Settlement: $${customerToGatewayAmount.toFixed(0)}`, ...defaultEdgeStyle });
-    }
-
-    // Gateway -> Merchant (Payout)
-    const gatewayToMerchantAmount = curr.merchantCash - prev.merchantCash;
-    if (gatewayToMerchantAmount > 0 && isPayoutStep) {
-        edges.push({ id: 'g-m', source: 'gateway', target: 'merchant', label: `Payout: $${gatewayToMerchantAmount.toFixed(0)}`, ...defaultEdgeStyle });
-    }
-    
-    // Gateway -> Customer (Refund)
-    const gatewayToCustomerAmount = curr.customerCash - prev.customerCash;
-    if (gatewayToCustomerAmount > 0 && (isRefundStep || isChargebackStep)) {
-        const label = isChargebackStep ? 'Chargeback Reversal' : 'Refund';
-        edges.push({ id: 'g-c', source: 'gateway', target: 'customer', label: `${label}: $${gatewayToCustomerAmount.toFixed(0)}`, ...defaultEdgeStyle, style: { ...defaultEdgeStyle.style, stroke: '#ef4444' } });
-    }
-
-    // Merchant -> Gateway (Refund/Chargeback Clawback)
-    const merchantToGatewayAmount = prev.merchantCash - curr.merchantCash;
-    if (merchantToGatewayAmount > 0 && (isRefundStep || isChargebackStep)) {
-         edges.push({ id: 'm-g', source: 'merchant', target: 'gateway', label: `Clawback: $${merchantToGatewayAmount.toFixed(0)}`, ...defaultEdgeStyle, style: { ...defaultEdgeStyle.style, stroke: '#ef4444' } });
-    }
-
-    return { nodes, edges };
+const ACTOR_CONFIG: Record<
+    ActorKey,
+    { title: string; color: string; metrics: (keyof ScenarioStep['balances'])[] }
+> = {
+    customer: {
+        title: 'Customer',
+        color: '#0891b2',
+        metrics: ['customerCash', 'customerHold'],
+    },
+    gateway: {
+        title: 'Gateway',
+        color: '#0f172a',
+        metrics: ['gatewayCash', 'gatewayMerchantLiability', 'gatewayFees'],
+    },
+    merchant: {
+        title: 'Merchant',
+        color: '#0d9488',
+        metrics: ['merchantCash'],
+    },
 };
 
+const ACTOR_POSITIONS: Record<ActorKey, { x: number; y: number }> = {
+    customer: { x: 0, y: 0 },
+    gateway: { x: 350, y: 0 },
+    merchant: { x: 700, y: 0 },
+};
 
-const VisualizationPanel: React.FC<VisualizationPanelProps> = ({ steps, currentStep, onStepChange }) => {
-    const headers = [
-        'Step',
-        'Day',
-        'Cust. Cash',
-        'Cust. Hold',
-        'GW Cash',
-        'GW Liab.',
-        'GW Fees',
-        'Merch. Cash',
+const deriveMovements = (current: ScenarioStep, previous: ScenarioStep | null) => {
+    if (!previous) return [];
+
+    const curr = current.balances;
+    const prev = previous.balances;
+
+    const movements: Array<{
+        id: string;
+        from: ActorKey;
+        to: ActorKey;
+        amount: number;
+        label: string;
+        tone: 'positive' | 'negative' | 'neutral';
+    }> = [];
+
+    const pushMovement = (
+        from: ActorKey,
+        to: ActorKey,
+        amount: number,
+        label: string,
+        tone: 'positive' | 'negative' | 'neutral'
+    ) => {
+        if (amount <= 0) return;
+        movements.push({
+            id: `${from}-${to}-${label}-${current.day}`,
+            from,
+            to,
+            amount,
+            label,
+            tone,
+        });
+    };
+
+    const hold = curr.customerHold - prev.customerHold;
+    if (hold > 0) {
+        pushMovement('customer', 'gateway', hold, 'Auth hold', 'neutral');
+    }
+
+    const settlement = prev.customerCash - curr.customerCash;
+    if (settlement > 0) {
+        pushMovement('customer', 'gateway', settlement, 'Settlement', 'positive');
+    }
+
+    const refund = curr.customerCash - prev.customerCash;
+    if (refund > 0) {
+        pushMovement('gateway', 'customer', refund, 'Refund', 'negative');
+    }
+
+    const payout = curr.merchantCash - prev.merchantCash;
+    if (payout > 0) {
+        pushMovement('gateway', 'merchant', payout, 'Payout', 'positive');
+    }
+
+    const clawback = prev.merchantCash - curr.merchantCash;
+    if (clawback > 0) {
+        pushMovement('merchant', 'gateway', clawback, 'Clawback', 'negative');
+    }
+
+    return movements;
+};
+
+const computeImpactSummary = (steps: ScenarioStep[]) => {
+    if (steps.length === 0) return [];
+    const payoutStep = steps.find(step => step.label.toLowerCase().includes('payout')) ?? steps[steps.length - 1];
+    const merchantCashDay = payoutStep?.day ?? 0;
+    let minGatewayCash = steps[0]?.balances.gatewayCash ?? 0;
+    let holdStart: number | null = null;
+    let holdEnd: number | null = null;
+
+    steps.forEach(step => {
+        if (step.balances.gatewayCash < minGatewayCash) {
+            minGatewayCash = step.balances.gatewayCash;
+        }
+        const hold = step.balances.customerHold;
+        if (hold > 0 && holdStart === null) holdStart = step.day;
+        if (hold === 0 && holdStart !== null && holdEnd === null) holdEnd = step.day;
+    });
+
+    const holdDuration = holdStart !== null && holdEnd !== null ? holdEnd - holdStart : 0;
+
+    return [
+        {
+            label: 'Merchant cash available',
+            value: merchantCashDay === 0 ? 'Day 0' : `Day ${merchantCashDay}`,
+            helper: 'When the merchant actually receives funds.',
+        },
+        {
+            label: 'Gateway peak exposure',
+            value: minGatewayCash < 0 ? `₹${Math.abs(minGatewayCash)}` : '₹0',
+            helper: 'Max cash the gateway fronts before settlement.',
+        },
+        {
+            label: 'Customer hold duration',
+            value: holdDuration > 0 ? `${holdDuration} day(s)` : 'Same day release',
+            helper: 'How long the customer’s bank locks funds.',
+        },
     ];
+};
+
+const buildFlowNodes = (step: ScenarioStep) => {
+    return (Object.keys(ACTOR_CONFIG) as ActorKey[]).map(actor => {
+        const config = ACTOR_CONFIG[actor];
+        const metrics = config.metrics.map(metric => ({
+            label: metric,
+            value: step.balances[metric],
+        }));
+
+        return {
+            id: actor,
+            position: ACTOR_POSITIONS[actor],
+            data: {
+                label: (
+                    <div className="rounded-2xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+                        <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: config.color }}>
+                            {config.title}
+                        </p>
+                        <ul className="mt-2 space-y-1 text-[11px] font-mono text-slate-600">
+                            {metrics.map(metric => (
+                                <li key={metric.label} className="flex justify-between">
+                                    <span>{metric.label.replace(/([A-Z])/g, ' $1')}</span>
+                                    <span>{metric.label.includes('Fees') ? metric.value : formatCurrency(metric.value)}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                ),
+            },
+            draggable: false,
+            selectable: false,
+        };
+    });
+};
+
+const BASE_EDGES = [
+    { id: 'base-customer-gateway', source: 'customer', target: 'gateway' },
+    { id: 'base-gateway-merchant', source: 'gateway', target: 'merchant' },
+];
+
+const buildFlowEdges = (movements: ReturnType<typeof deriveMovements>) => {
+    // 1. Create base persistent edges (always visible)
+    const edges: any[] = BASE_EDGES.map(base => ({
+        id: base.id,
+        source: base.source,
+        target: base.target,
+        type: 'smoothstep',
+        animated: false,
+        style: { stroke: '#e2e8f0', strokeWidth: 2, strokeDasharray: '5,5' },
+        zIndex: 0,
+    }));
+
+    // 2. Add active movement edges on top
+    movements.forEach(movement => {
+        const toneColor =
+            movement.tone === 'positive'
+                ? '#0ea5e9'
+                : movement.tone === 'negative'
+                    ? '#ef4444'
+                    : '#94a3b8';
+
+        edges.push({
+            id: movement.id,
+            source: movement.from,
+            target: movement.to,
+            type: 'smoothstep',
+            animated: true,
+            label: `${movement.label} · ${formatCurrency(movement.amount)}`,
+            labelBgPadding: [8, 4],
+            labelBgBorderRadius: 12,
+            labelStyle: { fontSize: 11, fontWeight: 600, fill: toneColor },
+            style: { stroke: toneColor, strokeWidth: 3, strokeDasharray: '0' },
+            zIndex: 10,
+        });
+    });
+
+    return edges;
+};
+
+const StepRail: React.FC<{
+    steps: ScenarioStep[];
+    currentStep: number;
+    onStepChange: (step: number) => void;
+}> = ({ steps, currentStep, onStepChange }) => (
+    <div className="flex flex-wrap gap-2">
+        {steps.map((step, index) => (
+            <button
+                key={`${step.label}-${index}`}
+                type="button"
+                onClick={() => onStepChange(index)}
+                className={cn(
+                    'rounded-full border px-3 py-1 text-xs transition',
+                    index === currentStep ? 'border-slate-900 bg-slate-900 text-white' : 'border-slate-200 text-slate-600'
+                )}
+            >
+                Day {step.day}: {step.label}
+            </button>
+        ))}
+    </div>
+);
+
+const VisualizationPanel: React.FC<VisualizationPanelProps> = ({ steps, currentStep, onStepChange, scenarioMeta }) => {
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    useEffect(() => {
+        if (!isPlaying) return;
+        if (currentStep >= steps.length - 1) {
+            setIsPlaying(false);
+            return;
+        }
+        const handle = setTimeout(() => onStepChange(currentStep + 1), 2000);
+        return () => clearTimeout(handle);
+    }, [currentStep, isPlaying, onStepChange, steps.length]);
+
+    const handlePlayToggle = () => {
+        if (isPlaying) {
+            setIsPlaying(false);
+        } else {
+            if (currentStep >= steps.length - 1) {
+                onStepChange(0);
+            }
+            setIsPlaying(true);
+        }
+    };
+
+    const handleQuickAdvance = () => {
+        if (currentStep < steps.length - 1) {
+            onStepChange(currentStep + 1);
+        } else {
+            onStepChange(0);
+        }
+    };
+
+    const impactSummary = useMemo(() => computeImpactSummary(steps), [steps]);
 
     if (steps.length === 0) {
         return (
-            <div>
-                <h2 className="text-2xl font-semibold mb-4 text-gray-700">Visualization</h2>
-                <div className="text-center text-gray-500 p-8 border-2 border-dashed rounded-lg">
-                    <p>Run a scenario to see the results here.</p>
-                </div>
+            <div className="space-y-4 text-sm text-slate-600">
+                <h2 className="text-lg font-semibold">Visualization</h2>
+                <p>Select a scenario to light up the flow.</p>
             </div>
         );
     }
 
     const currentStepData = steps[currentStep];
-    const previousStepData = currentStep > 0 ? steps[currentStep - 1] : null;
-    const { nodes, edges } = generateFlowData(currentStepData, previousStepData, steps);
+    const previousStep = currentStep > 0 ? steps[currentStep - 1] : null;
+    const nodes = buildFlowNodes(currentStepData);
+    const edges = buildFlowEdges(deriveMovements(currentStepData, previousStep));
 
     return (
-        <div>
-            <div className="text-center mb-6">
-                <h2 className="text-2xl font-semibold mb-2 text-gray-700">Flow Diagram</h2>
-                <div className="inline-block bg-gray-800 text-white text-sm font-semibold px-4 py-1.5 rounded-full shadow-md">
-                    Status: <span className="font-bold">{currentStepData.label}</span>
+        <div className="space-y-8">
+            {/* Hero Section: Visualization & Controls */}
+            <div className="space-y-6">
+                <div className="overflow-hidden rounded-[28px] border border-slate-200 bg-slate-50 shadow-sm">
+                    <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4">
+                        <h2 className="font-semibold text-slate-900">Flow Visualization</h2>
+                        <div className="flex items-center gap-3 text-xs">
+                            <button
+                                type="button"
+                                onClick={handlePlayToggle}
+                                className="flex items-center gap-2 rounded-full bg-slate-900 px-4 py-1.5 font-medium text-white transition hover:bg-slate-800"
+                            >
+                                {isPlaying ? (
+                                    <>
+                                        <span className="block h-2 w-2 animate-pulse rounded-full bg-red-500" />
+                                        Pause
+                                    </>
+                                ) : (
+                                    'Play Scenario'
+                                )}
+                            </button>
+                            <button
+                                type="button"
+                                onClick={handleQuickAdvance}
+                                className="rounded-full border border-slate-200 px-4 py-1.5 font-medium text-slate-600 hover:bg-slate-100"
+                            >
+                                {currentStep < steps.length - 1 ? 'Next Step' : 'Replay'}
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="relative h-[500px] w-full bg-slate-50/50">
+                        <ReactFlow
+                            nodes={nodes}
+                            edges={edges}
+                            nodesDraggable={false}
+                            nodesConnectable={false}
+                            fitView
+                            fitViewOptions={{ padding: 0.2 }}
+                            zoomOnScroll={false}
+                            zoomOnPinch={false}
+                            panOnDrag={false}
+                            proOptions={{ hideAttribution: true }}
+                        >
+                            <Background gap={24} color="#cbd5e1" size={1} />
+                        </ReactFlow>
+
+                        <div className="absolute bottom-4 right-4 rounded-full bg-white/90 px-3 py-1 text-[10px] font-medium text-slate-500 shadow-sm backdrop-blur">
+                            Step {currentStep + 1} of {steps.length}
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div className="mb-8">
-                <FlowDiagram nodes={nodes} edges={edges} />
-            </div>
 
-            <h2 className="text-2xl font-semibold mb-4 text-gray-700">Ledger View</h2>
-
-            <div className="flex items-center justify-between mb-4">
-                <button
-                    onClick={() => onStepChange(currentStep - 1)}
-                    disabled={currentStep === 0}
-                    className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md disabled:opacity-50"
-                >
-                    Previous
-                </button>
-                <span className="text-sm font-medium text-gray-700">
-          Step {currentStep + 1} of {steps.length}
-        </span>
-                <button
-                    onClick={() => onStepChange(currentStep + 1)}
-                    disabled={currentStep === steps.length - 1}
-                    className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md disabled:opacity-50"
-                >
-                    Next
-                </button>
+                <StepRail steps={steps} currentStep={currentStep} onStepChange={onStepChange} />
             </div>
 
-            <div className="mb-4">
-                <input
-                    type="range"
-                    min="0"
-                    max={steps.length - 1}
-                    value={currentStep}
-                    onChange={(e) => onStepChange(Number(e.target.value))}
-                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                />
-            </div>
+            {/* Content Grid: Details & Metrics */}
+            <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+                {/* Left Column: Scenario & Insights */}
+                <div className="space-y-6 lg:col-span-2">
+                    <div className="space-y-3 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
+                        <div className="space-y-1">
+                            <p className="text-[10px] font-bold uppercase tracking-wider text-blue-600">Current Scenario</p>
+                            <h2 className="text-xl font-bold text-slate-900">{scenarioMeta.title}</h2>
+                        </div>
+                        <p className="text-sm leading-relaxed text-slate-600">{scenarioMeta.summary}</p>
+                        <div className="rounded-xl bg-slate-50 p-3 text-xs text-slate-600">
+                            <span className="font-semibold text-slate-900">Key Question: </span>
+                            {scenarioMeta.keyQuestion}
+                        </div>
+                    </div>
 
-            <div className="overflow-x-auto">
-                <table className="min-w-full text-sm text-left text-gray-700">
-                    <thead className="bg-gray-100 text-xs text-gray-700 uppercase">
-                    <tr>
-                        {headers.map(header => (
-                            <th key={header} scope="col" className="px-4 py-3">{header}</th>
+                    <div className="rounded-2xl bg-slate-900 p-6 text-white">
+                        <h3 className="mb-4 text-xs font-bold uppercase tracking-wider text-slate-400">Key Takeaways</h3>
+                        <ul className="space-y-3">
+                            {scenarioMeta.insights.map((lesson, i) => (
+                                <li key={lesson} className="flex gap-3 text-sm text-slate-300">
+                                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-slate-800 text-[10px] font-bold text-white">
+                                        {i + 1}
+                                    </span>
+                                    <span className="leading-relaxed">{lesson}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+
+                {/* Right Column: Impact Metrics */}
+                <div className="space-y-3 lg:col-span-1">
+                    <h3 className="px-1 text-xs font-semibold uppercase tracking-wider text-slate-500">Impact Analysis</h3>
+                    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+                        {impactSummary.map(item => (
+                            <div key={item.label} className="group relative overflow-hidden rounded-xl border border-slate-200 bg-white p-4 transition hover:border-blue-200 hover:shadow-sm">
+                                <div className="relative z-10">
+                                    <p className="text-[10px] font-medium uppercase text-slate-500">{item.label}</p>
+                                    <p className="mt-1 text-2xl font-bold tracking-tight text-slate-900">{item.value}</p>
+                                    <p className="mt-1 text-xs text-slate-400">{item.helper}</p>
+                                </div>
+                                <div className="absolute -right-4 -top-4 h-16 w-16 rounded-full bg-slate-50 transition-transform group-hover:scale-150 group-hover:bg-blue-50" />
+                            </div>
                         ))}
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {steps.map((step, index) => {
-                        const prevBalances = index > 0 ? steps[index - 1].balances : null;
-
-                        const getCellClass = (currentValue: number, previousValue: number | undefined | null) => {
-                            if (previousValue === null || previousValue === undefined || currentValue === previousValue) {
-                                return "px-4 py-3";
-                            }
-                            if (currentValue > previousValue) {
-                                return "px-4 py-3 bg-green-100 font-medium text-green-800"; // Increase
-                            }
-                            if (currentValue < previousValue) {
-                                return "px-4 py-3 bg-red-100 font-medium text-red-800"; // Decrease
-                            }
-                            return "px-4 py-3";
-                        };
-
-                        return (
-                            <tr key={index} className={cn("border-b cursor-pointer hover:bg-gray-50", { "bg-blue-100": index === currentStep, "bg-white": index !== currentStep })} onClick={() => onStepChange(index)}>
-                                <td className="px-4 py-3 font-medium text-gray-900">{step.label}</td>
-                                <td className="px-4 py-3">{step.day}</td>
-                                <td className={getCellClass(step.balances.customerCash, prevBalances?.customerCash)}>{step.balances.customerCash}</td>
-                                <td className={getCellClass(step.balances.customerHold, prevBalances?.customerHold)}>{step.balances.customerHold}</td>
-                                <td className={getCellClass(step.balances.gatewayCash, prevBalances?.gatewayCash)}>{step.balances.gatewayCash}</td>
-                                <td className={getCellClass(step.balances.gatewayMerchantLiability, prevBalances?.gatewayMerchantLiability)}>{step.balances.gatewayMerchantLiability}</td>
-                                <td className={getCellClass(step.balances.gatewayFees, prevBalances?.gatewayFees)}>{step.balances.gatewayFees}</td>
-                                <td className={getCellClass(step.balances.merchantCash, prevBalances?.merchantCash)}>{step.balances.merchantCash}</td>
-                            </tr>
-                        );
-                    })}
-                    </tbody>
-                </table>
+                    </div>
+                </div>
             </div>
         </div>
     );
