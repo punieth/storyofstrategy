@@ -1,6 +1,6 @@
 @custom-variant dark (&:is(.dark *));
 
-:root {
+.uc-theme {
   /* Updated to a black and white theme */
   --background: oklch(1 0 0);
   --foreground: oklch(0.15 0 0);
@@ -8,34 +8,34 @@
   --card-foreground: oklch(0.15 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.15 0 0);
-  
+
   /* Black and white theme */
   --primary: #000000;
   --primary-foreground: #ffffff;
   --secondary: #404040;
   --secondary-foreground: #ffffff;
-  
+
   --muted: oklch(0.94 0 0);
   --muted-foreground: oklch(0.5 0 0);
-  
+
   --accent: #000000;
   --accent-foreground: #ffffff;
-  
+
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
-  
+
   --border: oklch(0.92 0 0);
   --input: oklch(0.97 0 0);
   --ring: #000000;
-  
+
   --chart-1: #000000;
   --chart-2: #404040;
   --chart-3: #808080;
   --chart-4: #bfbfbf;
   --chart-5: #e0e0e0;
-  
+
   --radius: 0.625rem;
-  
+
   --sidebar: oklch(1 0 0);
   --sidebar-foreground: oklch(0.15 0 0);
   --sidebar-primary: #000000;
@@ -123,12 +123,48 @@
 }
 
 @layer base {
-  * {
+  .uc-theme * {
     @apply border-border outline-ring/50;
   }
-  body {
+  .uc-theme {
     @apply bg-background text-foreground;
   }
+}
+
+.uc-theme h1,
+.uc-theme h2,
+.uc-theme h3,
+.uc-theme h4,
+.uc-theme h5,
+.uc-theme h6 {
+  font-family: var(--font-sans) !important;
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.uc-theme button {
+  letter-spacing: normal;
+  text-transform: none;
+  font-family: var(--font-sans);
+}
+
+/* Reset scrollbar for prototype to be standard/hidden */
+.uc-theme ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.uc-theme ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.uc-theme ::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+.uc-theme ::-webkit-scrollbar-thumb:hover {
+  background: #999;
 }
 
 .uc-shell {
@@ -156,7 +192,9 @@
 
 .uc-shell-overlay {
   --uc-shell-width: 24.375rem;
-  --uc-shell-height: clamp(660px, 95vh, 52.75rem);
+  /* Reduced height to fit better on mobile screens without scrolling the overlay container */
+  /* 85vh accounts for the header bar and some padding */
+  --uc-shell-height: min(88vh, 52.75rem);
   width: min(100%, var(--uc-shell-width));
   max-width: min(100%, var(--uc-shell-width));
 }

@@ -11,7 +11,7 @@ export default function HomeScreen({ onNavigate }: HomeScreenProps) {
     <div className="h-full flex flex-col bg-white">
       {/* Header */}
       <div className="bg-gradient-to-r from-gray-50 to-white border-b border-gray-100 p-4">
-        <h1 className="text-xl font-bold text-gray-900">Good Evening, Punit 👋</h1>
+        <h1 className="text-xl font-bold text-gray-900">Good Evening, Kamal 👋</h1>
         <p className="text-sm text-gray-500 mt-1">Your Homes in India</p>
       </div>
 

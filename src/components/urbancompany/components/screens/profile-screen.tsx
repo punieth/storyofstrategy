@@ -22,7 +22,7 @@ export default function ProfileScreen({ onNavigate }: ProfileScreenProps) {
           <div className="w-16 h-16 rounded-full bg-black flex items-center justify-center text-white text-2xl font-bold mx-auto mb-3">
             P
           </div>
-          <h2 className="text-xl font-bold text-gray-900">Punit Singh</h2>
+          <h2 className="text-xl font-bold text-gray-900">Kamal Singh</h2>
           <p className="text-sm text-gray-500 mt-1">NRI Homeowner</p>
           <p className="text-xs text-gray-400 mt-1">Member since Nov 2022</p>
         </div>
@@ -34,7 +34,7 @@ export default function ProfileScreen({ onNavigate }: ProfileScreenProps) {
             <Mail size={18} className="text-black" />
             <div>
               <p className="text-xs text-gray-600">Email</p>
-              <p className="text-sm font-semibold text-gray-900">punit@example.com</p>
+              <p className="text-sm font-semibold text-gray-900">kamalsingh@gmail.com</p>
             </div>
           </div>
           <div className="flex items-center gap-3">

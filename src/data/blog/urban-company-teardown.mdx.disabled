@@ -1,0 +1,378 @@
+---
+title: 'Urban Company - Teardown'
+author: 'Punith Rathnakar'
+tags: ["teardown", "ux", "product", "urban company"]
+pubDate: '2025-12-04'
+description: 'A product teardown of Urban Company, focusing on the challenges faced by NRIs and remote homeowners managing services in India.'
+imgUrl: '../../assets/meesho.png' 
+---
+
+import StickyNav from "@components/blog/StickyNav.astro";
+import BrutalCard from "@components/layout/Brutalcard.astro";
+import UrbanCompanyPrototypeShowcase from "@components/urbancompany/UrbanCompanyPrototypeShowcase";
+
+export const pillBase =
+  "inline-flex items-center gap-[0.35rem] rounded-full border-2 border-black px-3 py-[0.4rem] text-[0.68rem] font-extrabold uppercase tracking-[0.18em] leading-none sm:px-4 sm:py-[0.45rem] sm:text-[0.72rem]";
+
+export const pillThemes = {
+  problem: "bg-[#fecdd3] text-black shadow-[4px_4px_0_0_#be123c]",
+  persona: "bg-[#e0f2fe] text-black shadow-[4px_4px_0_0_#1d4ed8]",
+  journey: "bg-[#ddd6fe] text-black shadow-[4px_4px_0_0_#5b21b6]",
+  pain: "bg-[#fef9c3] text-black shadow-[4px_4px_0_0_#78350f]",
+  solution: "bg-[#bbf7d0] text-black shadow-[4px_4px_0_0_#047857]",
+  mvp: "bg-[#fce7f3] text-black shadow-[4px_4px_0_0_#9d174d]",
+  metrics: "bg-[#d1fae5] text-black shadow-[4px_4px_0_0_#0f766e]",
+  gtm: "bg-[#f5d0fe] text-black shadow-[4px_4px_0_0_#7e22ce]",
+};
+
+export const pillClass = (theme) => `${pillBase} ${pillThemes[theme] ?? ""}`;
+
+<div class="bg-[#f7f7f3] font-mono">
+  <div class="mx-auto max-w-5xl px-4 sm:px-6 md:px-8 pt-6">
+    <StickyNav
+      items={[
+        { href: "#problem", label: "Problem" },
+        { href: "#personas", label: "Personas" },
+        { href: "#journey", label: "Journey" },
+        { href: "#pain-points", label: "Pain Points" },
+        { href: "#solutions", label: "Solutions" },
+        { href: "#mvp", label: "MVP" },
+        { href: "#metrics", label: "Metrics" },
+        { href: "#gtm", label: "GTM" },
+      ]}
+      label="Navigate"
+    />
+  </div>
+  <main class="mx-auto max-w-5xl px-4 sm:px-6 md:px-8 py-10 sm:py-12">
+    <header class="text-center">
+       <span class="inline-flex items-center gap-2 px-3 py-1 text-[11px] sm:text-xs font-black uppercase tracking-[0.2em] text-black bg-[#fde68a] border border-black/70 sm:border-2 shadow-[3px_3px_0_0_#00000055] sm:shadow-[4px_4px_0_0_#000] rounded-full sm:rounded-lg">
+        <span class="block h-1.5 w-1.5 rounded-full bg-black"></span>
+        Product Teardown
+      </span>
+      <h1 class="mt-4 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
+        URBAN COMPANY - Teardown
+      </h1>
+      <p class="mt-4 text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+        "I can’t orchestrate, monitor, and audit home services remotely when multiple people are involved."
+      </p>
+    </header>
+
+    {/* 1. Problem Statement */}
+    <section id="problem" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("problem")} inline-flex`}>🧩 Problem Statement</span>
+      <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7 shadow-[8px_8px_0_0_#000] border-2 border-black rounded-2xl">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-4">The Orchestration Gap</h2>
+        <p class="text-base sm:text-lg leading-relaxed text-gray-900">
+          Urban Company makes it extremely easy to book a service - but surprisingly hard to orchestrate that service when the homeowner is remote and multiple people are involved (parents, tenants, neighbours, staff).
+        </p>
+        <p class="mt-4 text-base sm:text-lg leading-relaxed text-gray-900">
+          For NRIs and remote owners, the real problem isn’t “I don’t trust the cleaner.” The real problem is:
+        </p>
+        <div class="mt-6 bg-[#fee2e2] border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl px-5 py-6 text-center">
+          <p class="text-xl sm:text-2xl font-black tracking-tight text-gray-900">
+            “I can’t orchestrate, monitor, and audit home services remotely when multiple people are involved.”
+          </p>
+        </div>
+        <p class="mt-4 text-base sm:text-lg leading-relaxed text-gray-900">
+          This is fundamentally different from NoBroker’s “trusting strangers” problem. Urban Company’s gap is workflow, not supply quality.
+        </p>
+      </BrutalCard>
+    </section>
+
+    {/* 2. User Personas */}
+    <section id="personas" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("persona")} inline-flex`}>🧑‍🤝‍🧑 User Personas</span>
+      <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7 border-2 border-black shadow-[8px_8px_0_0_#000] rounded-2xl">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Who are we solving for?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+           <article class="border-2 border-black rounded-2xl bg-[#e0f2fe] shadow-[6px_6px_0_0_#000] p-5 relative overflow-hidden">
+            <div class="relative z-10">
+                <h3 class="text-lg font-extrabold uppercase tracking-[0.14em] text-gray-900">Remote Homeowner / NRI (Primary)</h3>
+                <p class="text-xs font-bold mt-1 text-blue-800">Age 28–45, living in US/UK/ME</p>
+                <div class="mt-4 space-y-2 text-sm sm:text-base text-gray-900 leading-relaxed">
+                    <p><strong>Goal:</strong> Maintain property remotely. Fix issues without burdening parents. Avoid emergencies.</p>
+                    <p><strong>Pain:</strong> Relies on parents/tenants for access + supervision. Lacks visibility into work done. Zero audit trail.</p>
+                </div>
+            </div>
+          </article>
+          <article class="border-2 border-black rounded-2xl bg-white shadow-[6px_6px_0_0_#000] p-5">
+            <h3 class="text-lg font-extrabold uppercase tracking-[0.14em] text-gray-900">Joint Family Household Manager</h3>
+            <p class="text-xs font-bold mt-1 text-gray-600">Age 30–50</p>
+            <p class="mt-2 text-sm sm:text-base text-gray-800 leading-relaxed">
+              <strong>Goal:</strong> Recurring predictable services. Coordinating spouse, kids, elders.
+            </p>
+          </article>
+          <article class="border-2 border-black rounded-2xl bg-white shadow-[6px_6px_0_0_#000] p-5">
+            <h3 class="text-lg font-extrabold uppercase tracking-[0.14em] text-gray-900">Tenant / Paying Guest</h3>
+            <p class="mt-2 text-sm sm:text-base text-gray-800 leading-relaxed">
+              <strong>Pain:</strong> Approval confusion, awkward payment splits.
+            </p>
+          </article>
+           <article class="border-2 border-black rounded-2xl bg-white shadow-[6px_6px_0_0_#000] p-5">
+            <h3 class="text-lg font-extrabold uppercase tracking-[0.14em] text-gray-900">Service Professional</h3>
+             <p class="mt-2 text-sm sm:text-base text-gray-800 leading-relaxed">
+              <strong>Pain:</strong> Customer unavailable, miscommunication.
+            </p>
+          </article>
+        </div>
+        <div class="mt-6 p-4 bg-yellow-50 border-2 border-black rounded-xl">
+            <h4 class="font-bold text-sm uppercase tracking-wide">Why Prioritize the Remote Homeowner?</h4>
+            <ul class="list-disc list-inside mt-2 text-sm text-gray-800 space-y-1">
+                <li>A single bad job → real financial + emotional damage.</li>
+                <li>Willing to pay for reliability and orchestration.</li>
+                <li>Multiple stakeholders = higher friction.</li>
+                <li>Differentiates portfolio from PMs who only design for Indian users.</li>
+            </ul>
+        </div>
+      </BrutalCard>
+    </section>
+
+    {/* 4. User Journey */}
+    <section id="journey" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("journey")} inline-flex`}>� Detailed User Journey</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-5">NRI → Parents/Tenants → UC Partner</h2>
+      <div class="space-y-4">
+        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+            <h3 class="font-bold text-lg mb-2">Stage 1: Trigger & Need Recognition</h3>
+            <p class="text-sm text-gray-800">Issue discovered by parent ("AC not cooling") → Passed to NRI via WhatsApp.</p>
+            <p class="mt-2 text-sm font-semibold text-red-600">Pain: Fragmented, emotional, unclear info. No system of record.</p>
+        </BrutalCard>
+         <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+            <h3 class="font-bold text-lg mb-2">Stage 2: Decision to Use UC</h3>
+            <p class="text-sm text-gray-800">NRI books from abroad OR Parent books from India OR Avoid UC entirely.</p>
+            <p class="mt-2 text-sm font-semibold text-red-600">Pain: No clarity on who owns the booking. Roles undefined (payer vs on-site).</p>
+        </BrutalCard>
+         <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+            <h3 class="font-bold text-lg mb-2">Stage 3: Booking & Time Coordination</h3>
+            <p class="text-sm text-gray-800">NRI selects time in IST. Must coordinate with parents' schedule.</p>
+            <p class="mt-2 text-sm font-semibold text-red-600">Pain: Timezone complexity. Frequent rescheduling. If cancelled, NRI hears after failure.</p>
+        </BrutalCard>
+         <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+            <h3 class="font-bold text-lg mb-2">Stage 4: Service Execution</h3>
+            <p class="text-sm text-gray-800">Partner talks to whoever opens door. Partner calls NRI (wrong timezone).</p>
+            <p class="mt-2 text-sm font-semibold text-red-600">Pain: Broken communication triangle. Decisions forced on parents with no context.</p>
+        </BrutalCard>
+         <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+            <h3 class="font-bold text-lg mb-2">Stage 5: Payment & Documentation</h3>
+            <p class="text-sm text-gray-800">Payment split (NRI online vs Parents cash). Ratings skewed ("polite 5-stars").</p>
+            <p class="mt-2 text-sm font-semibold text-red-600">Pain: Financial opacity. No audit trail. Missing checklist/parts history.</p>
+        </BrutalCard>
+         <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+            <h3 class="font-bold text-lg mb-2">Stage 6: Post-Service Issues</h3>
+            <p class="text-sm text-gray-800">Recurrence of problem. Entire coordination loop restarts.</p>
+            <p class="mt-2 text-sm font-semibold text-red-600">Pain: Accountability blur. No long-term property history. NRIs lose trust.</p>
+        </BrutalCard>
+      </div>
+    </section>
+
+    {/* 5. Consolidated Pain Points */}
+    <section id="pain-points" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("pain")} inline-flex`}>🤕 Consolidated Pain Points</span>
+      <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7 border-2 border-black shadow-[8px_8px_0_0_#000] rounded-2xl">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-6">The "Big 3" Pains</h2>
+        <div class="space-y-6">
+          <article class="border-2 border-black rounded-2xl bg-[#fff1f2] shadow-[4px_4px_0_0_#000] p-5">
+            <div class="flex items-center gap-3 mb-2">
+                <span class="bg-black text-white px-2 py-1 text-xs font-bold rounded">P1</span>
+                <h3 class="text-lg font-bold text-gray-900">No Role-Based Access or Shared Ownership</h3>
+            </div>
+            <p class="text-sm sm:text-base text-gray-800 leading-relaxed">
+                System assumes a single user; reality = owner + on-site contact + sometimes tenant. Roles (payer, scheduler, approver, reviewer) are not modeled.
+            </p>
+          </article>
+          <article class="border-2 border-black rounded-2xl bg-[#fff1f2] shadow-[4px_4px_0_0_#000] p-5">
+             <div class="flex items-center gap-3 mb-2">
+                <span class="bg-black text-white px-2 py-1 text-xs font-bold rounded">P2</span>
+                <h3 class="text-lg font-bold text-gray-900">Fragmented Communication Across Apps</h3>
+            </div>
+            <p class="text-sm sm:text-base text-gray-800 leading-relaxed">
+                WhatsApp for context + UC for booking + calls/SMS for partner → no single timeline. Owner can’t reconstruct “what actually happened”.
+            </p>
+          </article>
+          <article class="border-2 border-black rounded-2xl bg-[#fff1f2] shadow-[4px_4px_0_0_#000] p-5">
+             <div class="flex items-center gap-3 mb-2">
+                <span class="bg-black text-white px-2 py-1 text-xs font-bold rounded">P3</span>
+                <h3 class="text-lg font-bold text-gray-900">Low Transparency During Execution</h3>
+            </div>
+            <p class="text-sm sm:text-base text-gray-800 leading-relaxed">
+                No structured “live” view for remote owner: technician arrival, progress, issues needing approval. Crucial decisions made via ad-hoc calls.
+            </p>
+          </article>
+        </div>
+        <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+             <div class="p-4 border-2 border-black rounded-xl bg-gray-50">
+                <h4 class="font-bold text-sm">P4: Poor Post-Service Audit</h4>
+                <p class="text-xs mt-1 text-gray-600">Lack of checklists and parts history. Hard to track warranty.</p>
+             </div>
+             <div class="p-4 border-2 border-black rounded-xl bg-gray-50">
+                <h4 class="font-bold text-sm">P5: Not Property-Centric</h4>
+                <p class="text-xs mt-1 text-gray-600">History is user-account-centric. Knowledge doesn't "live with the house."</p>
+             </div>
+        </div>
+      </BrutalCard>
+    </section>
+
+    {/* 7. Solutions */}
+    <section id="solutions" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("solution")} inline-flex`}>💡 Solutions</span>
+      <h2 class="text-3xl md:text-4xl font-extrabold mt-6 mb-5">Solving the Multi-Actor Gap</h2>
+      
+      <div class="my-8 sm:my-10 flex justify-center">
+        <UrbanCompanyPrototypeShowcase client:visible />
+      </div>
+
+      <div class="space-y-8">
+        {/* Solution 1 */}
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div class="lg:col-span-1">
+                <h3 class="text-xl font-black uppercase leading-tight">P1: Shared Ownership</h3>
+                <p class="text-sm text-gray-600 mt-2">Urban Company supports only a basic “share booking” link.</p>
+            </div>
+            <div class="lg:col-span-2 space-y-4">
+                <BrutalCard color="#ffffff" class="p-4 border-2 border-black shadow-[4px_4px_0_0_#000] rounded-xl">
+                    <span class="text-xs font-bold bg-blue-100 px-2 py-1 rounded border border-blue-200">OK Solution</span>
+                    <h4 class="font-bold mt-2">Add “On-Site Contact” To Bookings</h4>
+                    <p class="text-sm mt-1">Owner selects property → Chooses on-site contact (parent/tenant) → Both receive notifications.</p>
+                </BrutalCard>
+                 <BrutalCard color="#dcfce7" class="p-4 border-2 border-black shadow-[4px_4px_0_0_#000] rounded-xl">
+                    <span class="text-xs font-bold bg-green-100 px-2 py-1 rounded border border-green-200">Good Solution</span>
+                    <h4 class="font-bold mt-2">Household Roles with Permissions</h4>
+                    <p class="text-sm mt-1"><strong>Owner:</strong> Full control + approvals. <strong>On-Site Contact:</strong> Status only. <strong>Tenant:</strong> Request services.</p>
+                </BrutalCard>
+                 <BrutalCard color="#f3e8ff" class="p-4 border-2 border-black shadow-[4px_4px_0_0_#000] rounded-xl">
+                    <span class="text-xs font-bold bg-purple-100 px-2 py-1 rounded border border-purple-200">Moonshot</span>
+                    <h4 class="font-bold mt-2">Shared Property Workspace</h4>
+                    <p class="text-sm mt-1">Collaborative hub with shared calendar, role-based approvals, and activity feed.</p>
+                </BrutalCard>
+            </div>
+        </div>
+
+        {/* Solution 2 */}
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 border-t-2 border-dashed border-gray-300 pt-8">
+            <div class="lg:col-span-1">
+                <h3 class="text-xl font-black uppercase leading-tight">P2: Fragmented Communication</h3>
+                <p class="text-sm text-gray-600 mt-2">Splitting chat into Technician vs Household channels reduces noise.</p>
+            </div>
+            <div class="lg:col-span-2 space-y-4">
+                <BrutalCard color="#ffffff" class="p-4 border-2 border-black shadow-[4px_4px_0_0_#000] rounded-xl">
+                    <span class="text-xs font-bold bg-blue-100 px-2 py-1 rounded border border-blue-200">OK Solution</span>
+                    <h4 class="font-bold mt-2">Unified Notes Field</h4>
+                    <p class="text-sm mt-1">Separate notes for Technician vs. Household (internal coordination).</p>
+                </BrutalCard>
+                 <BrutalCard color="#dcfce7" class="p-4 border-2 border-black shadow-[4px_4px_0_0_#000] rounded-xl">
+                    <span class="text-xs font-bold bg-green-100 px-2 py-1 rounded border border-green-200">Good Solution</span>
+                    <h4 class="font-bold mt-2">Universal Service Timeline</h4>
+                    <p class="text-sm mt-1">Structured log: Booked → Assigned → En route → Started → Approval Pending → Completed.</p>
+                </BrutalCard>
+                 <BrutalCard color="#f3e8ff" class="p-4 border-2 border-black shadow-[4px_4px_0_0_#000] rounded-xl">
+                    <span class="text-xs font-bold bg-purple-100 px-2 py-1 rounded border border-purple-200">Moonshot</span>
+                    <h4 class="font-bold mt-2">Property “Activity Feed”</h4>
+                    <p class="text-sm mt-1">Slack for your home. Every event logged, persistent multi-user audit trail.</p>
+                </BrutalCard>
+            </div>
+        </div>
+
+        {/* Solution 3 */}
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 border-t-2 border-dashed border-gray-300 pt-8">
+            <div class="lg:col-span-1">
+                <h3 class="text-xl font-black uppercase leading-tight">P3: Low Transparency</h3>
+                <p class="text-sm text-gray-600 mt-2">Owners abroad have no way to verify what happened inside the home.</p>
+            </div>
+            <div class="lg:col-span-2 space-y-4">
+                <BrutalCard color="#ffffff" class="p-4 border-2 border-black shadow-[4px_4px_0_0_#000] rounded-xl">
+                    <span class="text-xs font-bold bg-blue-100 px-2 py-1 rounded border border-blue-200">OK Solution</span>
+                    <h4 class="font-bold mt-2">Visible Before/After Proof</h4>
+                    <p class="text-sm mt-1">Expose existing partner workflow: Photos + Checklist visible to Owner.</p>
+                </BrutalCard>
+                 <BrutalCard color="#dcfce7" class="p-4 border-2 border-black shadow-[4px_4px_0_0_#000] rounded-xl">
+                    <span class="text-xs font-bold bg-green-100 px-2 py-1 rounded border border-green-200">Good Solution</span>
+                    <h4 class="font-bold mt-2">Live Remote Status</h4>
+                    <p class="text-sm mt-1">Push notifications for: Arrived, Started, Extra work recommended, Completed.</p>
+                </BrutalCard>
+                 <BrutalCard color="#f3e8ff" class="p-4 border-2 border-black shadow-[4px_4px_0_0_#000] rounded-xl">
+                    <span class="text-xs font-bold bg-purple-100 px-2 py-1 rounded border border-purple-200">Moonshot</span>
+                    <h4 class="font-bold mt-2">Remote Approval Flow</h4>
+                    <p class="text-sm mt-1">Technician uploads photo + cost → Owner gets approval request → On-site person doesn't need to negotiate.</p>
+                </BrutalCard>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    {/* 8. MVP Direction */}
+    <section id="mvp" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("mvp")} inline-flex`}>� MVP Direction</span>
+      <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7 border-2 border-black shadow-[8px_8px_0_0_#000] rounded-2xl">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Multi-Actor Job Flow</h2>
+        <p class="text-lg font-medium text-gray-900">
+            Launch a lightweight multi-actor booking and tracking flow that lets an NRI owner assign an on-site contact, share a unified timeline, and receive structured proof of work.
+        </p>
+        <div class="mt-6 bg-black text-white p-5 rounded-xl shadow-[4px_4px_0_0_#888]">
+            <h3 class="text-lg font-bold uppercase tracking-widest mb-3">The MVP Bundle</h3>
+            <ul class="space-y-3 text-sm sm:text-base">
+                <li class="flex items-start gap-2">
+                    <span class="text-green-400 font-bold">✓</span>
+                    <span><strong>Add Roles at Booking:</strong> Owner can add On-Site Contact with phone + relationship.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-green-400 font-bold">✓</span>
+                    <span><strong>Shared Status Timeline:</strong> Both see: Booked → Partner Assigned → En Route → On-site → Completed.</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-green-400 font-bold">✓</span>
+                    <span><strong>Mandatory Before/After Evidence:</strong> Photo + checklist attached at completion, visible to both.</span>
+                </li>
+            </ul>
+        </div>
+      </BrutalCard>
+    </section>
+
+    {/* 9. Success Metrics */}
+    <section id="metrics" class="scroll-mt-24 mt-12 sm:mt-16">
+      <span class={`${pillClass("metrics")} inline-flex`}>� Success Metrics</span>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-6">
+        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+            <h3 class="font-bold text-lg">Adoption</h3>
+            <p class="text-3xl font-black mt-2">% Bookings</p>
+            <p class="text-sm text-gray-600 mt-1">with Multi-Actor Setup (additional contact added).</p>
+        </BrutalCard>
+        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+            <h3 class="font-bold text-lg">Efficiency</h3>
+            <p class="text-3xl font-black mt-2">Drop in Cancellations</p>
+            <p class="text-sm text-gray-600 mt-1">"Customer Not Available" cases should fall.</p>
+        </BrutalCard>
+        <BrutalCard color="#ffffff" class="p-5 border-2 border-black shadow-[6px_6px_0_0_#000] rounded-2xl">
+            <h3 class="font-bold text-lg">Retention</h3>
+            <p class="text-3xl font-black mt-2">Repeat Rate</p>
+            <p class="text-sm text-gray-600 mt-1">From identified NRI accounts / remote properties.</p>
+        </BrutalCard>
+      </div>
+    </section>
+
+    {/* 10. GTM */}
+    <section id="gtm" class="scroll-mt-24 mt-12 sm:mt-16 mb-12">
+      <span class={`${pillClass("gtm")} inline-flex`}>📣 Go-To-Market</span>
+      <BrutalCard color="#ffffff" class="mt-6 p-6 sm:p-7 border-2 border-black shadow-[8px_8px_0_0_#000] rounded-2xl">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-6">Launch Strategy</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+                <h3 class="font-bold uppercase tracking-wide border-b-2 border-black pb-2 mb-3">Initial Users</h3>
+                <ul class="list-disc list-inside text-sm space-y-2">
+                    <li>Users with foreign phone numbers (+1, +44) but Indian addresses.</li>
+                    <li>Power users managing multiple addresses.</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="font-bold uppercase tracking-wide border-b-2 border-black pb-2 mb-3">Channels</h3>
+                <ul class="list-disc list-inside text-sm space-y-2">
+                    <li><strong>Booking Screen:</strong> Nudge to "Add on-site contact".</li>
+                    <li><strong>Post-Booking:</strong> "Share this booking" CTA.</li>
+                    <li><strong>Lifecycle:</strong> Email to multi-property users: "Manage everything from one view."</li>
+                </ul>
+            </div>
+        </div>
+      </BrutalCard>
+    </section>
+
+  </main>
+</div>
