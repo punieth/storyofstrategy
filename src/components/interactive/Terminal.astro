@@ -1,0 +1,147 @@
+---
+
+---
+
+<div id="terminal-container" class="fixed bottom-4 left-4 z-50 font-mono">
+  <!-- Trigger: blinking cursor -->
+  <button
+    id="terminal-trigger"
+    class="bg-black text-[#0f0] px-3 py-2 rounded shadow-lg border-2 border-[#1f1720] hover:scale-110 transition-transform cursor-pointer"
+    aria-label="Open Terminal"
+  >
+    <span class="animate-blink">_</span>
+  </button>
+
+  <!-- Terminal Window -->
+  <div
+    id="terminal-window"
+    class="hidden absolute bottom-12 left-0 w-80 md:w-96 bg-black text-[#0f0] border-2 border-[#0f0] rounded p-4 shadow-2xl flex-col gap-2 max-h-[80vh] overflow-y-auto"
+  >
+    <div
+      class="flex justify-between items-center border-b border-[#0f0] pb-2 mb-2"
+    >
+      <span class="text-xs uppercase tracking-widest">term.exe</span>
+      <button
+        id="terminal-close"
+        class="text-xs hover:bg-[#0f0] hover:text-black px-1">[x]</button
+      >
+    </div>
+
+    <div id="terminal-output" class="text-sm space-y-1 mb-2">
+      <p>Welcome to Punith's Terminal.</p>
+      <p>Type <span class="text-white">help</span> to see commands.</p>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <span class="text-[#0f0]">$</span>
+      <input
+        type="text"
+        id="terminal-input"
+        class="bg-transparent border-none outline-none text-[#0f0] w-full text-sm font-mono focus:ring-0"
+        autocomplete="off"
+        autofocus
+      />
+    </div>
+  </div>
+</div>
+
+<script>
+  const container = document.getElementById("terminal-container");
+  const trigger = document.getElementById("terminal-trigger")!;
+  const terminalWindow = document.getElementById("terminal-window")!;
+  const closeBtn = document.getElementById("terminal-close")!;
+  const input = document.getElementById("terminal-input") as HTMLInputElement;
+  const output = document.getElementById("terminal-output")!;
+
+  let isOpen = false;
+
+  type CommandType =
+    | "help"
+    | "email"
+    | "linkedin"
+    | "twitter"
+    | "about"
+    | "clear"
+    | "exit";
+
+  const commands: Record<string, string | null> = {
+    help: "Available commands: email, linkedin, twitter, about, clear, exit",
+    email: "theproductpunith@gmail.com",
+    linkedin: "Opening LinkedIn...",
+    twitter: "Opening Twitter...",
+    about: "Operator: Punith Rathnakar. System: NeoBrutal Portfolio v1.0",
+    clear: null,
+    exit: null,
+  };
+
+  const links: Record<string, string> = {
+    linkedin: "https://www.linkedin.com/in/punithrathnakar/",
+    twitter: "https://twitter.com/punithrathnakar", // Replace with actual
+  };
+
+  function toggleTerminal() {
+    isOpen = !isOpen;
+    if (isOpen) {
+      terminalWindow.classList.remove("hidden");
+      terminalWindow.classList.add("flex");
+      trigger.classList.add("hidden");
+      input.focus();
+    } else {
+      terminalWindow.classList.add("hidden");
+      terminalWindow.classList.remove("flex");
+      trigger.classList.remove("hidden");
+    }
+  }
+
+  function printLine(text: string, isCommand = false) {
+    const p = document.createElement("p");
+    if (isCommand) {
+      p.innerHTML = `<span class="text-[#0f0]">$</span> <span class="text-white">${text}</span>`;
+    } else {
+      p.innerHTML = text; // innerHTML to support links if needed
+    }
+    output.appendChild(p);
+    // Auto scroll to bottom
+    terminalWindow.scrollTop = terminalWindow.scrollHeight;
+  }
+
+  trigger.addEventListener("click", toggleTerminal);
+  closeBtn.addEventListener("click", toggleTerminal);
+
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      const cmd = input.value.trim().toLowerCase();
+      printLine(cmd, true);
+
+      if (cmd in commands) {
+        if (cmd === "clear") {
+          output.innerHTML = "";
+        } else if (cmd === "exit") {
+          toggleTerminal();
+        } else if (cmd === "linkedin" || cmd === "twitter") {
+          const response = commands[cmd];
+          if (response) printLine(response);
+          // Add slight delay for effect
+          setTimeout(() => {
+            window.open(links[cmd], "_blank");
+          }, 500);
+        } else {
+          const response = commands[cmd];
+          if (response) printLine(response);
+        }
+      } else if (cmd !== "") {
+        printLine(`Command not found: ${cmd}. Type 'help' for options.`);
+      }
+
+      input.value = "";
+    }
+  });
+</script>
+
+<style>
+  /* Local scoped styles just in case, though we rely on Tailwind mostly */
+  #terminal-window {
+    box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.5);
+    background-color: #0d0d0d;
+  }
+</style>

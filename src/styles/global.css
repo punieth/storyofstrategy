@@ -4,11 +4,14 @@
 
 .card-shadow {
   filter: drop-shadow(4px 4px 0 var(--frame-border));
-  transition: filter .15s ease, transform .15s ease;
+  transition:
+    filter 0.15s ease,
+    transform 0.15s ease;
   transform: translateY(0);
 }
 
-.card-shadow:hover, .card-shadow:active {
+.card-shadow:hover,
+.card-shadow:active {
   filter: drop-shadow(2px 2px 0 var(--frame-border));
   transform: translateY(-3px);
 }
@@ -211,8 +214,8 @@ body {
 .inline-chip {
   background: var(--frame-border);
   color: var(--surface-raised);
-  padding-inline: .25rem;
-  border-radius: .125rem;
+  padding-inline: 0.25rem;
+  border-radius: 0.125rem;
 }
 
 .btn {
@@ -223,11 +226,15 @@ body {
   letter-spacing: 0.14em;
   text-align: center;
   border: 3px solid var(--frame-border);
-  padding: .6rem 1.25rem;
+  padding: 0.6rem 1.25rem;
   background: var(--accent-cta);
   box-shadow: 4px 4px 0 var(--frame-border);
   color: var(--surface-raised);
-  transition: background-color .15s ease, color .15s ease, box-shadow .15s ease, transform .15s ease;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
   transform: translateY(0);
 }
 
@@ -301,11 +308,11 @@ body {
 .kicker {
   position: absolute;
   left: 1rem;
-  top: -.6rem;
+  top: -0.6rem;
   background: var(--badge-bg);
   color: var(--badge-text);
   padding: 2px 7px;
-  font-size: .68rem;
+  font-size: 0.68rem;
   text-transform: uppercase;
   font-family: "Outfit", sans-serif;
   font-weight: 700;
@@ -324,10 +331,28 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: linear-gradient(45deg, var(--secondary) 25%, transparent 25%, transparent 75%, var(--secondary) 75%, var(--secondary)), linear-gradient(45deg, var(--secondary) 25%, transparent 25%, transparent 75%, var(--secondary) 75%, var(--secondary));
+  background:
+    linear-gradient(
+      45deg,
+      var(--secondary) 25%,
+      transparent 25%,
+      transparent 75%,
+      var(--secondary) 75%,
+      var(--secondary)
+    ),
+    linear-gradient(
+      45deg,
+      var(--secondary) 25%,
+      transparent 25%,
+      transparent 75%,
+      var(--secondary) 75%,
+      var(--secondary)
+    );
   background-color: var(--surface-canvas);
   background-size: 4px 4px;
-  background-position: 0 0, 2px 2px;
+  background-position:
+    0 0,
+    2px 2px;
   width: 10px;
   border-left: 3px solid var(--secondary);
 }
@@ -393,17 +418,34 @@ body {
   height: 23.38px;
 }
 
-
 .window-pane::-webkit-scrollbar {
   width: 22px;
   background-color: var(--primary);
 }
 
 .window-pane::-webkit-scrollbar-track {
-  background: linear-gradient(45deg, var(--secondary) 25%, transparent 25%, transparent 75%, var(--secondary) 75%, var(--secondary)), linear-gradient(45deg, var(--secondary) 25%, transparent 25%, transparent 75%, var(--secondary) 75%, var(--secondary));
+  background:
+    linear-gradient(
+      45deg,
+      var(--secondary) 25%,
+      transparent 25%,
+      transparent 75%,
+      var(--secondary) 75%,
+      var(--secondary)
+    ),
+    linear-gradient(
+      45deg,
+      var(--secondary) 25%,
+      transparent 25%,
+      transparent 75%,
+      var(--secondary) 75%,
+      var(--secondary)
+    );
   background-color: var(--primary);
   background-size: 4px 4px;
-  background-position: 0 0, 2px 2px;
+  background-position:
+    0 0,
+    2px 2px;
   width: 10px;
   border-left: 4px solid var(--secondary);
 }
@@ -443,10 +485,13 @@ body {
   .card-shadow {
     filter: none !important;
     box-shadow: 4px 4px 0 var(--frame-border) !important;
-    transition: box-shadow .1s ease, transform .1s ease !important;
+    transition:
+      box-shadow 0.1s ease,
+      transform 0.1s ease !important;
   }
-  
-  .card-shadow:hover, .card-shadow:active {
+
+  .card-shadow:hover,
+  .card-shadow:active {
     filter: none !important;
     box-shadow: 2px 2px 0 var(--frame-border) !important;
     transform: translateY(-3px) !important;
@@ -459,12 +504,12 @@ body {
     position: relative !important;
     top: auto !important;
   }
-  
+
   /* Remove any body padding that was added for sticky header */
   body {
     padding-top: 0 !important;
   }
-  
+
   /* Ensure smooth scrolling on mobile */
   html {
     scroll-behavior: auto;
@@ -480,7 +525,7 @@ body {
     left: 0 !important;
     right: 0 !important;
     z-index: 100 !important;
-    
+
     /* Remove all conflicting styles */
     transform: none !important;
     -webkit-transform: none !important;
@@ -488,8 +533,27 @@ body {
     -webkit-backface-visibility: visible !important;
     backface-visibility: visible !important;
   }
-  
+
   body {
     padding-top: 80px !important; /* Adjust based on header height */
   }
+}
+
+/* Terminal Animations */
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+.font-mono {
+  font-family: "Courier New", Courier, monospace;
 }
