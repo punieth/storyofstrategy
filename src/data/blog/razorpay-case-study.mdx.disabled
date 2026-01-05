@@ -185,7 +185,7 @@ export const pillClass = (theme) => `${pillBase} ${pillThemes[theme] ?? ""}`;
 
   <BrutalCard color="#fef3c7" class="mt-6 p-4 sm:p-5 text-xs sm:text-sm text-gray-800 leading-relaxed">
     <p>
-      Across 40+ public comments, the pattern isn’t distrust of <i>Razorpay’s tech</i>. It’s distrust of the <b>silence</b>. Employees don’t panic when there’s a deduction or delay; they panic when there’s no clarity on <i>what’s next</i>.
+      Across 40+ public comments, the pattern reveals distrust not of <i>Razorpay’s tech</i>, but of the <b>silence</b>. Employees don’t panic when there’s a deduction or delay; they panic when there’s no clarity on <i>what’s next</i>.
     </p>
   </BrutalCard>
 </section>

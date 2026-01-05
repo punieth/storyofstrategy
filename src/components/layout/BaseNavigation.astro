@@ -32,18 +32,37 @@ const filteredNavigationItems = navigationItems.filter((item) => {
 });
 ---
 
-<header data-site-header class='bg-[#f5ff85] border-4 border-black shadow-[2px_2px_0_2px_#000] md:shadow-[4px_4px_0_4px_#000] sticky top-0 z-50 transition-transform duration-200 will-change-transform'>
+<header
+  data-site-header
+  class="bg-[#f5ff85] border-4 border-black shadow-[2px_2px_0_2px_#000] md:shadow-[4px_4px_0_4px_#000] sticky top-0 z-50 transition-transform duration-200 will-change-transform"
+>
   {pageTitle && <h1 class="hidden">{pageTitle}</h1>}
 
   {/* Desktop Layout */}
   <div class="hidden md:flex justify-between p-6 items-center">
     <div class="flex flex-col items-start gap-1">
-      <span class="inline-flex items-center gap-2 px-3 py-1 text-xs font-black uppercase tracking-[0.2em] text-black bg-[#00ff88] border-2 border-black shadow-[4px_4px_0_0_#000]">
+      <span
+        class="inline-flex items-center gap-2 px-3 py-1 text-xs font-black uppercase tracking-[0.2em] text-black bg-[#00ff88] border-2 border-black shadow-[4px_4px_0_0_#000]"
+      >
         <span class="block h-1.5 w-1.5 rounded-full bg-black"></span>
         Think → Build
       </span>
-      <a href="/" title="Back to Home" class="hover:underline">
-        <p class="righteous text-5xl text-black">Story of Strategy</p>
+      <a
+        href="/"
+        title="Back to Home"
+        class="group flex flex-col items-start hover:-translate-y-0.5 transition-transform duration-200"
+      >
+        <span
+          class="font-mono text-sm font-bold uppercase tracking-[0.4em] bg-white px-1 border-2 border-black shadow-[2px_2px_0_0_#000] mb-1"
+        >
+          Story of
+        </span>
+        <span
+          class="righteous text-6xl text-black uppercase tracking-tighter leading-[0.85] drop-shadow-[4px_4px_0_rgba(255,255,255,1)]"
+          style="-webkit-text-stroke: 1.5px black;"
+        >
+          Strategy
+        </span>
       </a>
     </div>
     <nav>
@@ -79,12 +98,28 @@ const filteredNavigationItems = navigationItems.filter((item) => {
   {/* Mobile Layout */}
   <nav class="md:hidden flex justify-between items-center p-4">
     <div class="flex flex-col items-start gap-1 flex-1 min-w-0">
-      <span class="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-black uppercase tracking-[0.15em] text-black bg-[#00ff88] border border-black shadow-[2px_2px_0_0_#000]">
+      <span
+        class="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-black uppercase tracking-[0.15em] text-black bg-[#00ff88] border border-black shadow-[2px_2px_0_0_#000]"
+      >
         <span class="block h-1 w-1 rounded-full bg-black"></span>
         Think → Build
       </span>
-      <a href="/" title="Back to Home" class="hover:underline">
-        <p class="righteous text-2xl text-black truncate">Story of Strategy</p>
+      <a
+        href="/"
+        title="Back to Home"
+        class="group flex items-baseline gap-1.5 pt-1"
+      >
+        <span
+          class="righteous text-xl text-[#f5ff85] bg-black border border-black px-1.5 py-0.5 -rotate-2 shadow-[2px_2px_0_0_#fff]"
+        >
+          Story
+        </span>
+        <span class="font-serif italic text-lg text-black"> of</span>
+        <span
+          class="righteous text-xl text-black border-b-[3px] border-black rotate-1"
+        >
+          Strategy
+        </span>
       </a>
     </div>
     <ul class="flex gap-2 items-center poppins flex-shrink-0">
@@ -166,7 +201,9 @@ const filteredNavigationItems = navigationItems.filter((item) => {
     };
 
     if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", initHeaderScroll, { once: true });
+      document.addEventListener("DOMContentLoaded", initHeaderScroll, {
+        once: true,
+      });
     } else {
       initHeaderScroll();
     }

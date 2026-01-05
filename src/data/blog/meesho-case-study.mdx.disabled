@@ -40,7 +40,7 @@ import StickyNav from "@components/blog/StickyNav.astro";
     The ₹500 Question
   </h1>
   <p class="mt-4 sm:mt-6 text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-    Millions ask the same ₹500 question. The answer can unlock Meesho’s next
+    Millions ask the same ₹500 question. The answer can earn Meesho’s next
     wave of trust.
   </p>
 </div>
@@ -243,7 +243,7 @@ import StickyNav from "@components/blog/StickyNav.astro";
       Multiply Priya by millions, and you see why ₹500 isn’t a small number — it’s a systemic trust issue.
     </p>
     <p class="text-xs sm:text-sm text-gray-600 mt-2 sm:mt-3 italic">
-      This isn’t a “high ticket volume” problem; it’s a human trust problem.
+      This goes beyond a "high ticket volume" problem; it is fundamentally a human trust problem.
     </p>
   </div>
 </div>
