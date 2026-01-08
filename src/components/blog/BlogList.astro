@@ -1,29 +1,30 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import BlogSummaryCard from './BlogSummaryCard.astro';
+import type { CollectionEntry } from "astro:content";
+import BlogSummaryCard from "./BlogSummaryCard.astro";
 
 interface Props {
-  posts: CollectionEntry<'blog'>[];
+  posts: CollectionEntry<"blog">[];
 }
 
 const { posts } = Astro.props;
-const toneCycle: Array<'yellow' | 'orange' | 'blue' | 'red'> = [
-  'yellow',
-  'orange',
-  'blue',
-  'red',
+const toneCycle: Array<"yellow" | "orange" | "blue" | "red"> = [
+  "yellow",
+  "orange",
+  "blue",
+  "red",
 ];
 ---
+
 <style>
   .gray-shadow {
-    filter: drop-shadow(10px 10px 0 rgba(17,24,39,0.45));
+    filter: drop-shadow(10px 10px 0 rgba(17, 24, 39, 0.45));
   }
   @media (min-width: 640px) {
     .gray-shadow {
-      filter: drop-shadow(22px 22px 0 rgba(17,24,39,0.45));
+      filter: drop-shadow(22px 22px 0 rgba(17, 24, 39, 0.45));
     }
   }
-  
+
   .lab-badge {
     display: inline-flex;
     align-items: center;
@@ -32,7 +33,7 @@ const toneCycle: Array<'yellow' | 'orange' | 'blue' | 'red'> = [
     border: 2px solid #111827;
     background: #ffe977;
     box-shadow: 4px 4px 0 rgba(17, 24, 39, 0.3);
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 0.65rem;
     font-weight: 700;
     letter-spacing: 0.12em;
@@ -40,7 +41,7 @@ const toneCycle: Array<'yellow' | 'orange' | 'blue' | 'red'> = [
     color: #111827;
     transform: rotate(-1deg);
   }
-  
+
   @media (min-width: 640px) {
     .lab-badge {
       gap: 0.5rem;
@@ -51,19 +52,19 @@ const toneCycle: Array<'yellow' | 'orange' | 'blue' | 'red'> = [
       letter-spacing: 0.18em;
     }
   }
-  
+
   .lab-badge::before {
-    content: '◆';
+    content: "◆";
     font-size: 0.55rem;
     color: #111827;
   }
-  
+
   @media (min-width: 640px) {
     .lab-badge::before {
       font-size: 0.65rem;
     }
   }
-  
+
   .experiment-counter {
     display: inline-flex;
     align-items: center;
@@ -72,11 +73,11 @@ const toneCycle: Array<'yellow' | 'orange' | 'blue' | 'red'> = [
     border: 2px solid #111827;
     background: #a7f0ff;
     box-shadow: 4px 4px 0 rgba(17, 24, 39, 0.35);
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-weight: 800;
     color: #111827;
   }
-  
+
   @media (min-width: 640px) {
     .experiment-counter {
       gap: 0.75rem;
@@ -85,33 +86,33 @@ const toneCycle: Array<'yellow' | 'orange' | 'blue' | 'red'> = [
       box-shadow: 8px 8px 0 rgba(17, 24, 39, 0.35);
     }
   }
-  
+
   .experiment-counter__label {
     font-size: 0.6rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     opacity: 0.75;
   }
-  
+
   @media (min-width: 640px) {
     .experiment-counter__label {
       font-size: 0.7rem;
       letter-spacing: 0.15em;
     }
   }
-  
+
   .experiment-counter__value {
     font-size: 1.4rem;
     letter-spacing: 0.05em;
     line-height: 1;
   }
-  
+
   @media (min-width: 640px) {
     .experiment-counter__value {
       font-size: 1.8rem;
     }
   }
-  
+
   .lab-callout {
     position: relative;
     display: inline-block;
@@ -120,12 +121,12 @@ const toneCycle: Array<'yellow' | 'orange' | 'blue' | 'red'> = [
     background: #fbfaf5;
     border: 3px solid #111827;
     box-shadow: 6px 6px 0 rgba(17, 24, 39, 0.35);
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 0.82rem;
     line-height: 1.55;
     color: rgba(17, 24, 39, 0.85);
   }
-  
+
   @media (min-width: 640px) {
     .lab-callout {
       max-width: 34rem;
@@ -135,10 +136,10 @@ const toneCycle: Array<'yellow' | 'orange' | 'blue' | 'red'> = [
       box-shadow: 8px 8px 0 rgba(17, 24, 39, 0.35);
     }
   }
-  
+
   /* Top accent stripe */
   .lab-callout::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -153,16 +154,16 @@ const toneCycle: Array<'yellow' | 'orange' | 'blue' | 'red'> = [
     );
     border-bottom: 3px solid #111827;
   }
-  
+
   @media (min-width: 640px) {
     .lab-callout::before {
       height: 10px;
     }
   }
-  
+
   /* Side badge */
   .lab-callout::after {
-    content: '!';
+    content: "!";
     position: absolute;
     top: -8px;
     right: 1rem;
@@ -180,7 +181,7 @@ const toneCycle: Array<'yellow' | 'orange' | 'blue' | 'red'> = [
     color: #fbfaf5;
     line-height: 1;
   }
-  
+
   @media (min-width: 640px) {
     .lab-callout::after {
       top: -10px;
@@ -190,12 +191,12 @@ const toneCycle: Array<'yellow' | 'orange' | 'blue' | 'red'> = [
       font-size: 1.4rem;
     }
   }
-  
+
   .lab-callout strong {
     font-weight: 800;
     color: #111827;
   }
-  
+
   .grid-marker {
     position: relative;
     width: 100%;
@@ -207,7 +208,7 @@ const toneCycle: Array<'yellow' | 'orange' | 'blue' | 'red'> = [
     );
     margin: 1.5rem 0;
   }
-  
+
   @media (min-width: 640px) {
     .grid-marker {
       background: repeating-linear-gradient(
@@ -218,10 +219,10 @@ const toneCycle: Array<'yellow' | 'orange' | 'blue' | 'red'> = [
       margin: 2rem 0;
     }
   }
-  
+
   .grid-marker::before,
   .grid-marker::after {
-    content: '';
+    content: "";
     position: absolute;
     width: 10px;
     height: 10px;
@@ -230,7 +231,7 @@ const toneCycle: Array<'yellow' | 'orange' | 'blue' | 'red'> = [
     top: 50%;
     transform: translateY(-50%) rotate(45deg);
   }
-  
+
   @media (min-width: 640px) {
     .grid-marker::before,
     .grid-marker::after {
@@ -239,93 +240,129 @@ const toneCycle: Array<'yellow' | 'orange' | 'blue' | 'red'> = [
       border-width: 3px;
     }
   }
-  
+
   .grid-marker::before {
     left: 0;
   }
-  
+
   .grid-marker::after {
     right: 0;
     background: #a7f0ff;
   }
-  
+
   /* iOS fallback */
   @supports (-webkit-touch-callout: none) {
     .gray-shadow {
       filter: none;
-      box-shadow: 10px 10px 0 rgba(17,24,39,0.45);
+      box-shadow: 10px 10px 0 rgba(17, 24, 39, 0.45);
     }
     @media (min-width: 640px) {
       .gray-shadow {
-        box-shadow: 22px 22px 0 rgba(17,24,39,0.45);
+        box-shadow: 22px 22px 0 rgba(17, 24, 39, 0.45);
       }
     }
   }
 </style>
-<section class='blog-feed-shell relative mx-auto w-full max-w-[92rem] px-0 pt-9 pb-14 sm:px-6 sm:pt-12 sm:pb-20 lg:px-10'>
-  <div class='gray-shadow relative rounded-xl border-[4px] border-[#111827] bg-[#fbfaf5]'>
-    <div class='relative z-10 space-y-10 px-4 py-10 sm:space-y-12 sm:px-10 sm:py-14 lg:px-16 lg:py-20'>
-      
+<section
+  class="blog-feed-shell relative mx-auto w-full max-w-[92rem] px-0 pt-9 pb-14 sm:px-6 sm:pt-12 sm:pb-20 lg:px-10"
+>
+  <div
+    class="gray-shadow relative rounded-xl border-[4px] border-[#111827] bg-[#fbfaf5]"
+  >
+    <div
+      class="relative z-10 space-y-10 px-4 py-10 sm:space-y-12 sm:px-10 sm:py-14 lg:px-16 lg:py-20"
+    >
       <!-- Header Section -->
-      <div class='flex flex-col gap-6 sm:gap-8 lg:gap-10'>
+      <div class="flex flex-col gap-6 sm:gap-8 lg:gap-10">
         <!-- Mobile: Creative Stacked Layout -->
-        <div class='flex flex-col gap-4 sm:hidden'>
-          <div class='flex items-start justify-between'>
-            <span class='lab-badge'>
-              The Lab
-            </span>
-            <div class='experiment-counter'>
-              <span class='experiment-counter__label'>Exp</span>
-              <span class='experiment-counter__value'>{posts.length.toString().padStart(2, '0')}</span>
+        <div class="flex flex-col gap-4 sm:hidden">
+          <div class="flex items-start justify-between">
+            <span class="lab-badge"> The Lab</span>
+            <div class="experiment-counter">
+              <span class="experiment-counter__label">Exp</span>
+              <span class="experiment-counter__value"
+                >{posts.length.toString().padStart(2, "0")}</span
+              >
             </div>
           </div>
-          
-          <div class='space-y-6'>
-            <h1 class='dm-serif text-[2.4rem] font-black uppercase leading-[0.95] tracking-[0.08em] text-[#111827] max-w-[18rem]'>
+
+          <div class="space-y-6">
+            <h1
+              class="dm-serif text-[2.4rem] font-black uppercase leading-[0.95] tracking-[0.08em] text-[#111827] max-w-[18rem]"
+            >
               Product<br />Experiments
             </h1>
-            
-            <div class='lab-callout'>
-              <strong>Real problems. Real solutions.</strong> Each case study documents how products evolve through experimentation—the hypotheses tested, the data gathered, and the decisions made.
+
+            <div class="lab-callout">
+              <strong>Real problems. Real solutions.</strong> Each case study documents
+              how products evolve through experimentation—the hypotheses tested,
+              the data gathered, and the decisions made.
             </div>
           </div>
         </div>
-        
+
         <!-- Desktop: Original Layout -->
-        <div class='hidden sm:flex sm:flex-col sm:gap-8 lg:gap-10'>
-          <div class='flex flex-row items-center justify-between gap-6'>
-            <span class='lab-badge'>
-              The Lab
-            </span>
-            <div class='experiment-counter'>
-              <span class='experiment-counter__label'>Experiments</span>
-              <span class='experiment-counter__value'>{posts.length.toString().padStart(2, '0')}</span>
+        <div class="hidden sm:flex sm:flex-col sm:gap-8 lg:gap-10">
+          <div class="flex flex-row items-center justify-between gap-6">
+            <span class="lab-badge"> The Lab</span>
+            <div class="experiment-counter">
+              <span class="experiment-counter__label">Experiments</span>
+              <span class="experiment-counter__value"
+                >{posts.length.toString().padStart(2, "0")}</span
+              >
             </div>
           </div>
-          
-          <div class='space-y-8'>
-            <h1 class='dm-serif text-[4.2rem] font-black uppercase leading-[0.92] tracking-[0.14em] text-[#111827] lg:text-[5.2rem]'>
+
+          <div class="space-y-8">
+            <h1
+              class="dm-serif text-[4.2rem] font-black uppercase leading-[0.92] tracking-[0.14em] text-[#111827] lg:text-[5.2rem]"
+            >
               Product<br />Experiments
             </h1>
-            
-            <div class='lab-callout'>
-              <strong>Real problems. Real solutions.</strong> Each document breaks down the thinking, the trade-offs, and the path from insight to impact.
+
+            <div class="lab-callout">
+              <strong>Real problems. Real solutions.</strong> Each document breaks
+              down the thinking, the trade-offs, and the path from insight to impact.
             </div>
           </div>
         </div>
       </div>
 
       <!-- Grid Marker Separator -->
-      <div class='grid-marker' role='presentation' aria-hidden='true'></div>
+      <div class="grid-marker" role="presentation" aria-hidden="true"></div>
 
       <!-- Blog Posts Grid -->
-      <div class='sm:p-0'>
-        <ul class='flex flex-col gap-8 md:grid md:auto-rows-fr md:grid-cols-2 md:gap-10 md:justify-items-stretch'>
+      <div class="sm:p-0">
+        <ul
+          class="flex flex-col gap-8 md:grid md:auto-rows-fr md:grid-cols-2 md:gap-10 md:justify-items-stretch"
+        >
+          {/* Payflow Experiment Item */}
+          <li class="list-none w-full">
+            <BlogSummaryCard
+              post={{
+                id: "payflow-experiment",
+                slug: "payflow-experiment",
+                collection: "blog",
+                data: {
+                  title: "System Dynamics: Payflow",
+                  description:
+                    "An interactive infographic exploring infinite scrolling payment cycles, risk models, and settlement orchestration.",
+                  pubDate: new Date("2024-01-08"),
+                  category: "Product Experiment",
+                  tags: ["Prototype", "System Dynamics"],
+                },
+                body: "Interactive prototype visualization of payment systems.",
+              } as any}
+              tone="blue"
+              href="/prototypes/payflow"
+            />
+          </li>
+
           {
             posts.map((post, index) => {
               const tone = toneCycle[index % toneCycle.length];
               return (
-                <li class='list-none w-full'>
+                <li class="list-none w-full">
                   <BlogSummaryCard post={post} tone={tone} />
                 </li>
               );
