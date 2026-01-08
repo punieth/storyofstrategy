@@ -210,7 +210,7 @@ const VisualizationFlow = ({
             
             // If no active movement, show default view (Show all 3 ideally)
             if (activeNodeIds.size === 0) {
-                 setCenter(150, 220, { zoom: 0.85, duration: 1200 }); // Center on Gateway
+                 setCenter(110, 400, { zoom: 0.85, duration: 1200 }); // Center on Gateway
                  return;
             }
 
@@ -234,7 +234,7 @@ const VisualizationFlow = ({
             
             // Adjust Offset: aim camera below content to shift content UP slightly to clear the card
             // Smoother duration (1500ms)
-            setCenter(130, trueCenterY + 100, { zoom: 0.85, duration: 1500 });
+            setCenter(110, trueCenterY + 220, { zoom: 0.85, duration: 1500 });
 
         } else {
              fitView({ duration: 800, padding: 0.15 });
@@ -310,38 +310,38 @@ const VisualizationPanel: React.FC<VisualizationPanelProps> = ({
                  />
             </ReactFlowProvider>
 
-            {/* Conclusion Overlay */}
+            {/* Conclusion Overlay - Now a slide-up card that doesn't fully block the diagram */}
             <div 
-                onClick={onConclusionDismiss}
                 className={cn(
-                    "absolute inset-0 z-50 flex items-center justify-center p-8 transition-all duration-500 cursor-pointer",
-                    isConclusion ? "bg-slate-900/40 backdrop-blur-[2px] opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+                    "absolute inset-x-0 bottom-0 z-50 p-4 transition-all duration-500",
+                    isConclusion ? "translate-y-0 opacity-100" : "translate-y-full opacity-0 pointer-events-none"
                 )}
             >
                 <div 
-                    onClick={(e) => e.stopPropagation()}
-                    className={cn(
-                        "max-w-md w-full bg-white rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-500 cursor-default",
-                        isConclusion ? "scale-100 translate-y-0" : "scale-95 translate-y-8"
-                    )}
+                    className="max-w-lg mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden border border-slate-200"
                 >
-                    <div className="bg-emerald-500 px-6 py-4 flex items-center justify-between">
-                         <h3 className="text-white font-bold text-lg tracking-tight">Scenario Complete</h3>
-                         <div className="h-8 w-8 rounded-full bg-white/20 flex items-center justify-center text-white">✓</div>
+                    <div className="bg-emerald-500 px-5 py-3 flex items-center justify-between">
+                         <div className="flex items-center gap-2">
+                             <div className="h-6 w-6 rounded-full bg-white/20 flex items-center justify-center text-white text-sm">✓</div>
+                             <h3 className="text-white font-bold text-sm tracking-tight">Scenario Complete</h3>
+                         </div>
+                         <button 
+                            onClick={onConclusionDismiss}
+                            className="p-1 rounded-full hover:bg-white/20 transition-colors text-white"
+                         >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                         </button>
                     </div>
-                    <div className="p-6 space-y-4">
-                        <div className="space-y-1">
-                            <p className="text-xs uppercase tracking-widest text-slate-400 font-bold">Outcome Analysis</p>
-                            <p className="text-slate-900 font-medium leading-relaxed">
-                                {scenarioMeta.summary}
-                            </p>
-                        </div>
+                    <div className="p-4 space-y-3">
+                        <p className="text-slate-900 text-sm font-medium leading-relaxed">
+                            {scenarioMeta.summary}
+                        </p>
                         
-                        <div className="rounded-xl bg-slate-50 p-4 border border-slate-100 space-y-3">
+                        <div className="rounded-lg bg-slate-50 p-3 border border-slate-100 space-y-2">
                              {scenarioMeta.insights.slice(0, 2).map((insight, idx) => (
-                                 <div key={idx} className="flex gap-3 items-start">
+                                 <div key={idx} className="flex gap-2 items-start">
                                      <span className="shrink-0 flex h-4 w-4 items-center justify-center rounded-full bg-blue-100 text-blue-600 text-[10px] font-bold mt-0.5">i</span>
-                                     <p className="text-sm text-slate-600 leading-snug">{insight}</p>
+                                     <p className="text-xs text-slate-600 leading-snug">{insight}</p>
                                  </div>
                              ))}
                         </div>

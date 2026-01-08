@@ -1,5 +1,6 @@
 ---
-import BaseHead from '../components/layout/BaseHead.astro';
+import BaseHead from "../components/layout/BaseHead.astro";
+import "../styles/global.css";
 
 interface Props {
   title: string;
@@ -11,19 +12,18 @@ interface Props {
 const { title, description, classList, ogImage } = Astro.props;
 ---
 
-<html lang='en' class='h-full'>
+<html lang="en" class="h-full">
   <BaseHead ogImage={ogImage} title={title} description={description} />
 
-  <body class:list={['flex flex-col min-h-screen', classList]}>
+  <body class:list={["flex flex-col min-h-screen", classList]}>
     <slot />
+    <style>
+      :global(html, body) {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background-color: #020617;
+      }
+    </style>
   </body>
-
-  <style>
-    :global(html, body) {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      background-color: transparent;
-    }
-  </style>
 </html>

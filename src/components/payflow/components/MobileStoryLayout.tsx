@@ -90,8 +90,7 @@ const MobileStoryLayout: React.FC<MobileStoryLayoutProps> = ({
                              leverDetails={leverDetails}
                              trigger={
                                  <button className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-bold uppercase tracking-wider text-white active:bg-white/20 transition-all">
-                                     <span>Tune</span>
-                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.09a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
                                  </button>
                              }
                         />
@@ -121,13 +120,23 @@ const MobileStoryLayout: React.FC<MobileStoryLayoutProps> = ({
                 </div>
             </div>
 
-            {/* Layer 4: Gesture Types (Invisible) */}
+            {/* Layer 4: Gesture Areas with Visual Hints */}
             <div className="absolute inset-0 z-10 flex">
-                <div className="w-1/3 h-full" onClick={onPrev} />
-                <div className="w-1/3 h-full flex items-center justify-center" onClick={onTogglePlay}>
-                    {/* Play Pause Icon Flash can go here */}
+                <div className="w-1/3 h-full flex items-center justify-start pl-2 group" onClick={onPrev}>
+                    {currentStep > 0 && (
+                        <div className="opacity-30 group-active:opacity-60 transition-opacity">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                        </div>
+                    )}
                 </div>
-                <div className="w-1/3 h-full" onClick={onNext} />
+                <div className="w-1/3 h-full flex items-center justify-center" onClick={onTogglePlay} />
+                <div className="w-1/3 h-full flex items-center justify-end pr-2 group" onClick={onNext}>
+                    {currentStep < totalSteps - 1 && (
+                        <div className="opacity-30 group-active:opacity-60 transition-opacity">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );

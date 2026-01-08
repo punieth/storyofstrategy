@@ -15,8 +15,10 @@ interface MobileControlsProps {
 }
 
 const MobileControls: React.FC<MobileControlsProps> = ({ trigger, ...props }) => {
+    const [open, setOpen] = React.useState(false);
+    
     return (
-        <Drawer.Root>
+        <Drawer.Root open={open} onOpenChange={setOpen}>
             <Drawer.Trigger asChild>
                 {trigger ? (
                     trigger
@@ -28,13 +30,30 @@ const MobileControls: React.FC<MobileControlsProps> = ({ trigger, ...props }) =>
             </Drawer.Trigger>
             <Drawer.Portal>
                 <Drawer.Overlay className="fixed inset-0 bg-black/40 z-50 backdrop-blur-sm" />
-                <Drawer.Content className="bg-white flex flex-col rounded-t-[10px] h-[85vh] fixed bottom-0 left-0 right-0 z-50 outline-none">
-                    <div className="p-4 bg-white rounded-t-[10px] flex-1 overflow-y-auto">
-                        <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-slate-300 mb-6" />
+                <Drawer.Content className="bg-white flex flex-col rounded-t-[20px] h-[70vh] fixed bottom-0 left-0 right-0 z-50 outline-none">
+                    <div className="p-4 bg-white rounded-t-[20px] flex-1 overflow-y-auto pb-24">
+                        <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-slate-300 mb-4" />
                         <div className="max-w-md mx-auto">
-                            <h2 className="text-xl font-bold mb-6">Configuration</h2>
+                            <div className="flex items-center justify-between mb-6">
+                                <h2 className="text-lg font-bold">Configure Simulation</h2>
+                                <button 
+                                    onClick={() => setOpen(false)}
+                                    className="p-2 rounded-full hover:bg-slate-100 transition-colors"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                </button>
+                            </div>
                             <ControlsPanel {...props} />
                         </div>
+                    </div>
+                    {/* Fixed Apply Button */}
+                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-white border-t border-slate-200">
+                        <button 
+                            onClick={() => setOpen(false)}
+                            className="w-full py-3 bg-slate-900 text-white font-bold rounded-xl active:bg-slate-800 transition-colors"
+                        >
+                            Apply Changes
+                        </button>
                     </div>
                 </Drawer.Content>
             </Drawer.Portal>

@@ -32,12 +32,12 @@ const Timeline: React.FC<TimelineProps> = ({ steps, currentStep, onStepChange })
                             <button
                                 key={`${step.label}-${index}`}
                                 onClick={() => onStepChange(index)}
-                                className="group relative flex flex-col items-center focus:outline-none"
+                                className="group relative flex flex-col items-center focus:outline-none p-2 -m-2"
                             >
-                                {/* Dot */}
+                                {/* Dot - larger for better tap targets */}
                                 <div
                                     className={cn(
-                                        "h-4 w-4 rounded-full border-2 transition-all duration-300 z-10",
+                                        "h-5 w-5 rounded-full border-2 transition-all duration-300 z-10",
                                         isActive
                                             ? "border-blue-600 bg-white scale-125 shadow-md"
                                             : isPast
