@@ -17,7 +17,7 @@ const formatCurrency = (value: number) => `₹${value.toLocaleString(undefined, 
 const EntityNode = memo(({ data }: EntityNodeProps) => {
     return (
         <div className={cn(
-            "relative min-w-[200px] overflow-hidden rounded-2xl border-2 bg-white shadow-lg transition-all duration-300",
+            "relative w-[220px] md:w-auto md:min-w-[200px] overflow-hidden rounded-2xl border-2 bg-white shadow-lg transition-all duration-300",
             data.isSource && "border-rose-400 ring-4 ring-rose-100",
             data.isTarget && "border-emerald-400 ring-4 ring-emerald-100",
             !data.isSource && !data.isTarget && "border-slate-200"

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import ReactFlow, { Background, type NodeTypes, type EdgeTypes, useReactFlow, ReactFlowProvider } from 'reactflow';
 import 'reactflow/dist/style.css';
 import type { ScenarioStep } from '../lib/types';
@@ -56,9 +56,11 @@ const ACTOR_POSITIONS_HORIZONTAL: Record<ActorKey, { x: number; y: number }> = {
 
 const ACTOR_POSITIONS_VERTICAL: Record<ActorKey, { x: number; y: number }> = {
     customer: { x: 0, y: 0 },
-    gateway: { x: 0, y: 400 }, // Spaced out more for vertical scroll feel
-    merchant: { x: 0, y: 800 },
+    gateway: { x: 0, y: 280 }, 
+    merchant: { x: 0, y: 560 },
 };
+
+// ... (ACTOR_POSITIONS_VERTICAL end)
 
 const deriveMovements = (current: ScenarioStep, previous: ScenarioStep | null) => {
     if (!previous) return [];
@@ -205,14 +207,13 @@ const VisualizationFlow = ({
 
     useEffect(() => {
         if (orientation === 'vertical') {
-            // Auto-Focus Logic for Mobile Stories
-            // 1. Identify active nodes
+            // Auto-Focus Logic for Mobile "Story" Mode
             const activeNodeIds = new Set(movements.flatMap(m => [m.from, m.to]));
             
-            // If no active movement (start state or rest), focus on Gateway (Middle) or fit all
+            // If no active movement, show default view
             if (activeNodeIds.size === 0) {
-                fitView({ duration: 800, padding: 0.2 });
-                return;
+                 setCenter(150, 400, { zoom: 0.85, duration: 800 });
+                 return;
             }
 
             // Calculate center of active nodes
@@ -221,19 +222,22 @@ const VisualizationFlow = ({
             let count = 0;
 
             activeNodeIds.forEach(id => {
-                if (positions[id as ActorKey]) {
-                    totalY += positions[id as ActorKey].y;
+                const pos = positions[id as ActorKey];
+                if (pos) {
+                    totalY += pos.y;
                     count++;
                 }
             });
 
-            const centerY = totalY / count;
+            if (count === 0) return; // Safety check
+
+            // "True" center of the active nodes
+            const trueCenterY = totalY / count;
             
-            // Pan to center (x=150 for node width center approx, y=centerY)
-            setCenter(150, centerY + 100, { zoom: 0.85, duration: 1000 });
+            // Adjust Offset: aim camera below content to shift content UP
+            setCenter(130, trueCenterY + 120, { zoom: 0.8, duration: 1000 });
 
         } else {
-             // Desktop: Just fit view smoothly
              fitView({ duration: 800, padding: 0.15 });
         }
     }, [movements, orientation, setCenter, fitView]);
@@ -246,7 +250,7 @@ const VisualizationFlow = ({
             edgeTypes={edgeTypes}
             nodesDraggable={false}
             nodesConnectable={false}
-            fitView
+            fitView={orientation === 'horizontal'}
             fitViewOptions={{ padding: 0.15 }}
             zoomOnScroll={false}
             zoomOnPinch={false}
@@ -267,19 +271,31 @@ const VisualizationPanel: React.FC<VisualizationPanelProps> = ({
     orientation = 'horizontal' 
 }) => {
     
-    if (steps.length === 0) {
+    // Memoize derived data to prevent infinite loops / unstable renders
+    const currentStepData = useMemo(() => steps[currentStep], [steps, currentStep]);
+    const previousStep = useMemo(() => currentStep > 0 ? steps[currentStep - 1] : null, [steps, currentStep]);
+    
+    const movements = useMemo(() => {
+         if (!currentStepData) return [];
+         return isConclusion ? [] : deriveMovements(currentStepData, previousStep);
+    }, [currentStepData, previousStep, isConclusion]);
+
+    const nodes = useMemo(() => {
+        if (!currentStepData) return [];
+        return buildFlowNodes(currentStepData, movements, orientation);
+    }, [currentStepData, movements, orientation]);
+
+    const edges = useMemo(() => {
+        return buildFlowEdges(movements);
+    }, [movements]);
+
+    if (steps.length === 0 || !currentStepData) {
         return (
              <div className="flex h-full items-center justify-center rounded-[28px] border border-slate-200 bg-slate-50 p-8 text-sm text-slate-400">
                 <p>Select a scenario to visualize the flow.</p>
             </div>
         );
     }
-
-    const currentStepData = steps[currentStep];
-    const previousStep = currentStep > 0 ? steps[currentStep - 1] : null;
-    const movements = isConclusion ? [] : deriveMovements(currentStepData, previousStep);
-    const nodes = buildFlowNodes(currentStepData, movements, orientation);
-    const edges = buildFlowEdges(movements);
 
     return (
         <div className={cn(
