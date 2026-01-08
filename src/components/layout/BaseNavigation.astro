@@ -41,41 +41,23 @@ const filteredNavigationItems = navigationItems.filter((item) => {
   {/* Desktop Layout */}
   <div class="hidden md:flex justify-between p-6 items-center">
     <div class="flex flex-col items-start gap-1">
-      <span class="inline-flex items-center gap-1">
-        <span
-          class="inline-flex items-center gap-1 px-2 py-1 text-xs font-black uppercase tracking-wider text-black bg-[#ffd93d] border-2 border-black shadow-[3px_3px_0_0_#000] rotate-[-2deg]"
-        >
-          <span class="block h-2 w-2 rounded-full bg-[#ff3366] animate-pulse"
-          ></span>
-          Think
-        </span>
-        <span class="text-2xl font-black">→</span>
-        <span
-          class="inline-flex items-center px-2 py-1 text-xs font-black uppercase tracking-wider text-white bg-[#6c5ce7] border-2 border-black shadow-[3px_3px_0_0_#000] rotate-[2deg]"
-        >
-          Build
-        </span>
+      <span
+        class="inline-flex items-center gap-2 px-3 py-1 text-xs font-black uppercase tracking-[0.2em] text-black bg-[#00ff88] border-2 border-black shadow-[4px_4px_0_0_#000]"
+      >
+        <span class="block h-1.5 w-1.5 rounded-full bg-black"></span>
+        Think → Build
       </span>
       <a
         href="/"
         title="Back to Home"
-        class="group inline-flex items-center gap-1"
+        class="hover:opacity-80 transition-opacity"
       >
-        <span
-          class="inline-block bg-white px-2 py-1 border-4 border-black shadow-[4px_4px_0_0_#000] group-hover:shadow-[2px_2px_0_0_#000] group-hover:translate-x-[2px] group-hover:translate-y-[2px] transition-all duration-150"
+        <p
+          class="righteous text-5xl text-black"
+          style="-webkit-text-stroke: 3px black; paint-order: stroke fill;"
         >
-          <span class="righteous text-4xl text-black">Story</span>
-        </span>
-        <span
-          class="inline-block bg-[#ff6b6b] px-2 py-1 border-4 border-black shadow-[4px_4px_0_0_#000] group-hover:shadow-[2px_2px_0_0_#000] group-hover:translate-x-[2px] group-hover:translate-y-[2px] transition-all duration-150"
-        >
-          <span class="righteous text-4xl text-black">of</span>
-        </span>
-        <span
-          class="inline-block bg-[#4ecdc4] px-2 py-1 border-4 border-black shadow-[4px_4px_0_0_#000] group-hover:shadow-[2px_2px_0_0_#000] group-hover:translate-x-[2px] group-hover:translate-y-[2px] transition-all duration-150"
-        >
-          <span class="righteous text-4xl text-black">Strategy</span>
-        </span>
+          Story of Strategy
+        </p>
       </a>
     </div>
     <nav>
@@ -111,42 +93,23 @@ const filteredNavigationItems = navigationItems.filter((item) => {
   {/* Mobile Layout */}
   <nav class="md:hidden flex justify-between items-center p-4">
     <div class="flex flex-col items-start gap-1 flex-1 min-w-0">
-      <span class="inline-flex items-center gap-0.5">
-        <span
-          class="inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[9px] font-black uppercase tracking-wider text-black bg-[#ffd93d] border border-black shadow-[2px_2px_0_0_#000] rotate-[-2deg]"
-        >
-          <span
-            class="block h-1.5 w-1.5 rounded-full bg-[#ff3366] animate-pulse"
-          ></span>
-          Think
-        </span>
-        <span class="text-sm font-black">→</span>
-        <span
-          class="inline-flex items-center px-1.5 py-0.5 text-[9px] font-black uppercase tracking-wider text-white bg-[#6c5ce7] border border-black shadow-[2px_2px_0_0_#000] rotate-[2deg]"
-        >
-          Build
-        </span>
+      <span
+        class="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-black uppercase tracking-[0.15em] text-black bg-[#00ff88] border border-black shadow-[2px_2px_0_0_#000]"
+      >
+        <span class="block h-1 w-1 rounded-full bg-black"></span>
+        Think → Build
       </span>
       <a
         href="/"
         title="Back to Home"
-        class="group inline-flex items-center gap-0.5"
+        class="hover:opacity-80 transition-opacity"
       >
-        <span
-          class="inline-block bg-white px-1 py-0.5 border-2 border-black shadow-[2px_2px_0_0_#000] group-active:shadow-none group-active:translate-x-[2px] group-active:translate-y-[2px] transition-all duration-150"
+        <p
+          class="righteous text-2xl text-black truncate"
+          style="-webkit-text-stroke: 1px black;"
         >
-          <span class="righteous text-base text-black">Story</span>
-        </span>
-        <span
-          class="inline-block bg-[#ff6b6b] px-1 py-0.5 border-2 border-black shadow-[2px_2px_0_0_#000] group-active:shadow-none group-active:translate-x-[2px] group-active:translate-y-[2px] transition-all duration-150"
-        >
-          <span class="righteous text-base text-black">of</span>
-        </span>
-        <span
-          class="inline-block bg-[#4ecdc4] px-1 py-0.5 border-2 border-black shadow-[2px_2px_0_0_#000] group-active:shadow-none group-active:translate-x-[2px] group-active:translate-y-[2px] transition-all duration-150"
-        >
-          <span class="righteous text-base text-black">Strategy</span>
-        </span>
+          Story of Strategy
+        </p>
       </a>
     </div>
     <ul class="flex gap-2 items-center poppins flex-shrink-0">
