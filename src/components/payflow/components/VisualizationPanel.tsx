@@ -56,11 +56,9 @@ const ACTOR_POSITIONS_HORIZONTAL: Record<ActorKey, { x: number; y: number }> = {
 
 const ACTOR_POSITIONS_VERTICAL: Record<ActorKey, { x: number; y: number }> = {
     customer: { x: 0, y: 0 },
-    gateway: { x: 0, y: 280 }, 
-    merchant: { x: 0, y: 560 },
+    gateway: { x: 0, y: 220 }, // Tighter spacing to reduce camera travel
+    merchant: { x: 0, y: 440 },
 };
-
-// ... (ACTOR_POSITIONS_VERTICAL end)
 
 const deriveMovements = (current: ScenarioStep, previous: ScenarioStep | null) => {
     if (!previous) return [];
@@ -210,9 +208,9 @@ const VisualizationFlow = ({
             // Auto-Focus Logic for Mobile "Story" Mode
             const activeNodeIds = new Set(movements.flatMap(m => [m.from, m.to]));
             
-            // If no active movement, show default view
+            // If no active movement, show default view (Show all 3 ideally)
             if (activeNodeIds.size === 0) {
-                 setCenter(150, 400, { zoom: 0.85, duration: 800 });
+                 setCenter(150, 220, { zoom: 0.85, duration: 1200 }); // Center on Gateway
                  return;
             }
 
@@ -234,8 +232,9 @@ const VisualizationFlow = ({
             // "True" center of the active nodes
             const trueCenterY = totalY / count;
             
-            // Adjust Offset: aim camera below content to shift content UP
-            setCenter(130, trueCenterY + 120, { zoom: 0.8, duration: 1000 });
+            // Adjust Offset: aim camera below content to shift content UP slightly to clear the card
+            // Smoother duration (1500ms)
+            setCenter(130, trueCenterY + 100, { zoom: 0.85, duration: 1500 });
 
         } else {
              fitView({ duration: 800, padding: 0.15 });

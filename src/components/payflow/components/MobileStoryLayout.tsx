@@ -101,7 +101,7 @@ const MobileStoryLayout: React.FC<MobileStoryLayoutProps> = ({
 
             {/* Layer 3: Narrative Overlay */}
             <div className="absolute bottom-0 left-0 right-0 z-20 p-6 pb-12 bg-gradient-to-t from-black/90 via-black/50 to-transparent">
-                <div className="backdrop-blur-md bg-white/10 border border-white/10 rounded-2xl p-5 shadow-2xl">
+                <div className="backdrop-blur-md bg-white/10 border border-white/10 rounded-2xl p-5 shadow-2xl min-h-[140px] flex flex-col justify-center transition-all duration-300">
                     <div className="flex items-center justify-between mb-2">
                         <span className="text-[10px] font-bold uppercase tracking-widest text-blue-300">
                             Day {stepData.day}
@@ -114,7 +114,7 @@ const MobileStoryLayout: React.FC<MobileStoryLayoutProps> = ({
                         </div>
                     </div>
                     <div className="prose prose-invert prose-sm">
-                        <p className="text-sm leading-snug font-medium text-slate-100">
+                        <p className="text-sm leading-relaxed font-medium text-slate-100 line-clamp-3">
                             {stepData.explanation}
                         </p>
                     </div>
