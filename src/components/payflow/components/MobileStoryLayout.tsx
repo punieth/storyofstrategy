@@ -41,7 +41,7 @@ const MobileStoryLayout: React.FC<MobileStoryLayoutProps> = ({
     leverDetails,
 }) => {
     return (
-        <div className="relative h-screen w-full overflow-hidden bg-slate-950 text-white">
+        <div className="relative flex-1 w-full overflow-hidden bg-slate-950 text-white min-h-[500px]">
             {/* Layer 1: The Stage (Visualization) */}
             <div className="absolute inset-0 z-0">
                 {children}

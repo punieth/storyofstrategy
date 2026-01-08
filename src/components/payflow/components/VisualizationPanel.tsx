@@ -56,8 +56,8 @@ const ACTOR_POSITIONS_HORIZONTAL: Record<ActorKey, { x: number; y: number }> = {
 
 const ACTOR_POSITIONS_VERTICAL: Record<ActorKey, { x: number; y: number }> = {
     customer: { x: 0, y: 0 },
-    gateway: { x: 0, y: 220 }, // Tighter spacing to reduce camera travel
-    merchant: { x: 0, y: 440 },
+    gateway: { x: 0, y: 250 }, // More breathing room for vertical flow
+    merchant: { x: 0, y: 500 },
 };
 
 const deriveMovements = (current: ScenarioStep, previous: ScenarioStep | null) => {
@@ -147,6 +147,7 @@ const buildFlowNodes = (
                 metrics: metrics,
                 isSource: activeSources.has(actor),
                 isTarget: activeTargets.has(actor),
+                orientation, // Pass orientation to node
             },
             draggable: false,
             selectable: false,
@@ -159,22 +160,43 @@ const BASE_EDGES = [
     { id: 'base-gateway-merchant', source: 'gateway', target: 'merchant' },
 ];
 
-const buildFlowEdges = (movements: ReturnType<typeof deriveMovements>) => {
-    const edges: any[] = BASE_EDGES.map(base => ({
-        id: base.id,
-        source: base.source,
-        target: base.target,
-        type: 'smoothstep',
-        animated: false,
-        style: { stroke: '#e2e8f0', strokeWidth: 2, strokeDasharray: '5,5' },
-        zIndex: 0,
-    }));
+const buildFlowEdges = (movements: ReturnType<typeof deriveMovements>, orientation: 'horizontal' | 'vertical') => {
+    const isVertical = orientation === 'vertical';
+    const edges: any[] = BASE_EDGES.map(base => {
+        // Core Logic: Zig-Zag Routing for Vertical (Mobile)
+        // Customer -> Gateway: uses Right side
+        // Gateway -> Merchant: uses Left side
+        const sourceHandle = !isVertical ? undefined : 
+            base.id === 'base-customer-gateway' ? 'r' : 'sl';
+        const targetHandle = !isVertical ? undefined : 
+            base.id === 'base-customer-gateway' ? 'tr' : 'l';
+
+        return {
+            id: base.id,
+            source: base.source,
+            target: base.target,
+            sourceHandle,
+            targetHandle,
+            type: 'smoothstep', // Revert to smooth curves
+            animated: false,
+            style: { stroke: '#e2e8f0', strokeWidth: 2, strokeDasharray: '5,5' },
+            zIndex: 0,
+        };
+    });
 
     movements.forEach(movement => {
+        const edgeId = `${movement.from}-${movement.to}`;
+        const sourceHandle = !isVertical ? undefined : 
+            movement.from === 'customer' ? 'r' : 'sl';
+        const targetHandle = !isVertical ? undefined : 
+            movement.to === 'gateway' ? 'tr' : 'l';
+
         edges.push({
             id: movement.id,
             source: movement.from,
             target: movement.to,
+            sourceHandle,
+            targetHandle,
             type: 'transaction',
             animated: true,
             data: {
@@ -210,7 +232,7 @@ const VisualizationFlow = ({
             
             // If no active movement, show default view (Show all 3 ideally)
             if (activeNodeIds.size === 0) {
-                 setCenter(110, 400, { zoom: 0.85, duration: 1200 }); // Center on Gateway
+                 setCenter(110, 320, { zoom: 0.7, duration: 1200 }); // Center on Gateway
                  return;
             }
 
@@ -232,9 +254,9 @@ const VisualizationFlow = ({
             // "True" center of the active nodes
             const trueCenterY = totalY / count;
             
-            // Adjust Offset: aim camera below content to shift content UP slightly to clear the card
-            // Smoother duration (1500ms)
-            setCenter(110, trueCenterY + 220, { zoom: 0.85, duration: 1500 });
+            // Adjust Offset: aim camera below content to shift content UP to clear bottom overlay
+            // Standardized zoom for stability
+            setCenter(110, trueCenterY + 100, { zoom: 0.7, duration: 1500 });
 
         } else {
              fitView({ duration: 800, padding: 0.15 });
@@ -285,8 +307,8 @@ const VisualizationPanel: React.FC<VisualizationPanelProps> = ({
     }, [currentStepData, movements, orientation]);
 
     const edges = useMemo(() => {
-        return buildFlowEdges(movements);
-    }, [movements]);
+        return buildFlowEdges(movements, orientation);
+    }, [movements, orientation]);
 
     if (steps.length === 0 || !currentStepData) {
         return (
@@ -310,13 +332,14 @@ const VisualizationPanel: React.FC<VisualizationPanelProps> = ({
                  />
             </ReactFlowProvider>
 
-            {/* Conclusion Overlay - Now a slide-up card that doesn't fully block the diagram */}
-            <div 
-                className={cn(
-                    "absolute inset-x-0 bottom-0 z-50 p-4 transition-all duration-500",
-                    isConclusion ? "translate-y-0 opacity-100" : "translate-y-full opacity-0 pointer-events-none"
-                )}
-            >
+            {/* Conclusion Overlay - Hidden on Mobile to streamline story flow */}
+            {orientation === 'horizontal' && (
+                <div 
+                    className={cn(
+                        "absolute inset-x-0 bottom-0 z-50 p-4 transition-all duration-500",
+                        isConclusion ? "translate-y-0 opacity-100" : "translate-y-full opacity-0 pointer-events-none"
+                    )}
+                >
                 <div 
                     className="max-w-lg mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden border border-slate-200"
                 >
@@ -348,6 +371,7 @@ const VisualizationPanel: React.FC<VisualizationPanelProps> = ({
                     </div>
                 </div>
             </div>
+            )}
         </div>
     );
 };

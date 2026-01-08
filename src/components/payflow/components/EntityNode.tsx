@@ -9,6 +9,7 @@ interface EntityNodeProps {
         metrics: { label: string; value: number }[];
         isSource?: boolean;
         isTarget?: boolean;
+        orientation?: 'horizontal' | 'vertical';
     };
 }
 
@@ -46,9 +47,13 @@ const EntityNode = memo(({ data }: EntityNodeProps) => {
                 ))}
             </div>
 
-            {/* Connection Handles (Invisible but necessary for ReactFlow) */}
-            <Handle type="target" position={Position.Left} className="!bg-transparent !border-none" />
-            <Handle type="source" position={Position.Right} className="!bg-transparent !border-none" />
+            {/* Multi-Handle Support for Zig-Zag Flows */}
+            <Handle type="target" position={Position.Top} id="t" className="!opacity-0" />
+            <Handle type="source" position={Position.Bottom} id="b" className="!opacity-0" />
+            <Handle type="target" position={Position.Left} id="l" className="!opacity-0" />
+            <Handle type="source" position={Position.Right} id="r" className="!opacity-0" />
+            <Handle type="target" position={Position.Right} id="tr" className="!opacity-0" />
+            <Handle type="source" position={Position.Left} id="sl" className="!opacity-0" />
         </div>
     );
 });
