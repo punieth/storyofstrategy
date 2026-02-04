@@ -18,6 +18,9 @@ export default defineConfig({
   trailingSlash: "ignore",
   integrations: [sitemap(), UnoCSS({ injectReset: true }), mdx(), react()],
   vite: {
+    ssr: {
+      external: ['@resvg/resvg-js'],
+    },
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"],
     },
