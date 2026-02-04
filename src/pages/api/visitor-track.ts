@@ -12,6 +12,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
   const apiKey = env.RESEND_API_KEY;
 
   if (!apiKey) {
+    console.error("Missing RESEND_API_KEY");
     return new Response(JSON.stringify({ error: "Missing RESEND_API_KEY" }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
