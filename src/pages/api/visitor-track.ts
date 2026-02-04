@@ -12,8 +12,15 @@ export const POST: APIRoute = async ({ request, locals }) => {
   const apiKey = env.RESEND_API_KEY;
 
   if (!apiKey) {
-    console.error("Missing RESEND_API_KEY");
-    return new Response(JSON.stringify({ error: "Missing RESEND_API_KEY" }), {
+    return new Response(JSON.stringify({ 
+      error: "Missing RESEND_API_KEY",
+      debug: {
+        hasLocals: !!locals,
+        hasRuntime: !!(locals as any)?.runtime,
+        envKeys: Object.keys(env || {}),
+        isCloudflare: !!(locals as any)?.runtime?.env
+      }
+    }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
     });
@@ -43,7 +50,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
     });
 
     if (error) {
-      console.error("Resend Error:", error);
+
       return new Response(JSON.stringify({ error: error.message }), {
         status: 500,
         headers: { "Content-Type": "application/json" },
@@ -55,7 +62,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
       headers: { "Content-Type": "application/json" },
     });
   } catch (e) {
-    console.error("Tracking Error:", e);
+
     return new Response(JSON.stringify({ error: "Internal Server Error" }), {
       status: 500,
       headers: { "Content-Type": "application/json" },

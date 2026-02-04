@@ -7,6 +7,7 @@ import react from "@astrojs/react";
 import cloudflare from "@astrojs/cloudflare";
 
 export default defineConfig({
+  output: "server",
   adapter: cloudflare(),
   // used to generate images
   site:
