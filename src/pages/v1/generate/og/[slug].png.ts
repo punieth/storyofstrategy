@@ -1,4 +1,4 @@
-import { Resvg, type ResvgRenderOptions } from '@resvg/resvg-js';
+import type { ResvgRenderOptions } from '@resvg/resvg-js';
 
 export const prerender = true;
 import type { APIRoute } from 'astro';
@@ -63,6 +63,9 @@ export const GET: APIRoute = async ({ params, props }) => {
       value: width,
     },
   };
+    },
+  };
+  const { Resvg } = await import('@resvg/resvg-js');
   const resvg = new Resvg(svg, opts);
   const pngData = resvg.render();
   const pngBuffer = pngData.asPng();
