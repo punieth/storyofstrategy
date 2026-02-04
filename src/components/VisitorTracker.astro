@@ -1,12 +1,11 @@
 <script>
   async function trackVisitor() {
     // Prevent duplicate tracking per session
-    // if (sessionStorage.getItem("visitor_tracked")) {
-    //   return;
-    // }
+    if (sessionStorage.getItem("visitor_tracked")) {
+      return;
+    }
 
     try {
-      console.log("Starting visitor tracking...");
       // Fetch Geo Location (using ipapi.co as a free source)
       const geoResponse = await fetch("https://ipapi.co/json/");
       if (!geoResponse.ok) throw new Error("Geo fetch failed");
@@ -48,9 +47,10 @@
         return;
       }
 
-      console.log("Visitor tracked successfully");
+      // Mark as tracked
+      sessionStorage.setItem("visitor_tracked", "true");
     } catch (err) {
-      console.error("Visitor tracking failed:", err);
+      // Silent catch
     }
   }
 

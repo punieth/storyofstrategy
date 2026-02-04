@@ -11,31 +11,11 @@ export const POST: APIRoute = async ({ request, locals }) => {
   const apiKey = env.RESEND_API_KEY;
 
   if (!apiKey) {
-    console.error("DEBUG: RESEND_API_KEY is missing!");
-    console.log("DEBUG: locals exists:", !!locals);
-    // @ts-ignore
-    console.log("DEBUG: locals.runtime exists:", !!locals?.runtime);
-    // @ts-ignore
-    console.log("DEBUG: locals.runtime.env exists:", !!locals?.runtime?.env);
-    console.log("DEBUG: Env keys:", Object.keys(env || {}));
-
-    return new Response(JSON.stringify({ 
-      error: "Missing RESEND_API_KEY",
-      debug: {
-        hasLocals: !!locals,
-        hasRuntime: !!(locals as any)?.runtime,
-        envKeys: Object.keys(env || {}),
-        isCloudflare: !!(locals as any)?.runtime?.env
-      }
-    }), {
+    return new Response(JSON.stringify({ error: "Missing RESEND_API_KEY" }), {
       status: 500,
       headers: { "Content-Type": "application/json" },
     });
   }
-  
-  console.log("DEBUG: RESEND_API_KEY found (length):", apiKey.length);
-  console.log("DEBUG: EMAIL_FROM:", env.EMAIL_FROM);
-  console.log("DEBUG: EMAIL_TO:", env.EMAIL_TO);
 
   try {
     const body = await request.json();
