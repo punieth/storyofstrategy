@@ -1,4 +1,6 @@
 import { Resvg, type ResvgRenderOptions } from '@resvg/resvg-js';
+
+export const prerender = true;
 import type { APIRoute } from 'astro';
 import satori from 'satori';
 import { html as toReactElement } from 'satori-html';

@@ -1,4 +1,6 @@
 import { Resvg, type ResvgRenderOptions } from '@resvg/resvg-js';
+
+export const prerender = true;
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 import satori from 'satori';
