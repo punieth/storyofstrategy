@@ -30,7 +30,7 @@
           : "Desktop";
 
       // Send to API
-      await fetch("/api/visitor-track", {
+      const response = await fetch("/api/visitor-track", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -42,11 +42,15 @@
         }),
       });
 
+      if (!response.ok) {
+        // Silently fail or log only in dev if needed
+        return;
+      }
+
       // Mark as tracked
       sessionStorage.setItem("visitor_tracked", "true");
-      console.log("Visitor tracked successfully");
     } catch (err) {
-      console.warn("Visitor tracking failed:", err);
+      // Silent catch
     }
   }
 

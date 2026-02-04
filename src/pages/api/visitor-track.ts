@@ -3,8 +3,13 @@ export const prerender = false;
 import type { APIRoute } from "astro";
 import { Resend } from "resend";
 
-export const POST: APIRoute = async ({ request }) => {
-  const apiKey = import.meta.env.RESEND_API_KEY;
+// @ts-ignore
+export const POST: APIRoute = async ({ request, locals }) => {
+  // Access environment variables from Cloudflare context (runtime)
+  // or fallback to import.meta.env (dev/build)
+  const runtimeEnv = (locals as any)?.runtime?.env;
+  const env = runtimeEnv || import.meta.env;
+  const apiKey = env.RESEND_API_KEY;
 
   if (!apiKey) {
     return new Response(JSON.stringify({ error: "Missing RESEND_API_KEY" }), {
@@ -19,8 +24,8 @@ export const POST: APIRoute = async ({ request }) => {
     const body = await request.json();
     const { city, country, browser, device, ip } = body;
 
-    const fromEmail = import.meta.env.EMAIL_FROM || "onboarding@resend.dev";
-    const toEmail = import.meta.env.EMAIL_TO || "delivered@resend.dev";
+    const fromEmail = env.EMAIL_FROM || "onboarding@resend.dev";
+    const toEmail = env.EMAIL_TO || "delivered@resend.dev";
 
     const { data, error } = await resend.emails.send({
       from: fromEmail,
