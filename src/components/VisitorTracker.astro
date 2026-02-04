@@ -1,0 +1,57 @@
+<script>
+  async function trackVisitor() {
+    // Prevent duplicate tracking per session
+    if (sessionStorage.getItem("visitor_tracked")) {
+      return;
+    }
+
+    try {
+      // Fetch Geo Location (using ipapi.co as a free source)
+      const geoResponse = await fetch("https://ipapi.co/json/");
+      if (!geoResponse.ok) throw new Error("Geo fetch failed");
+      const geoData = await geoResponse.json();
+
+      // Determine Browser & Device
+      const ua = navigator.userAgent;
+      let browser = "Unknown";
+      if (ua.includes("Firefox")) browser = "Firefox";
+      else if (ua.includes("SamsungBrowser")) browser = "Samsung Internet";
+      else if (ua.includes("Opera") || ua.includes("OPR")) browser = "Opera";
+      else if (ua.includes("Trident")) browser = "Internet Explorer";
+      else if (ua.includes("Edge")) browser = "Edge";
+      else if (ua.includes("Chrome")) browser = "Chrome";
+      else if (ua.includes("Safari")) browser = "Safari";
+
+      const device =
+        /Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(
+          ua,
+        )
+          ? "Mobile"
+          : "Desktop";
+
+      // Send to API
+      await fetch("/api/visitor-track", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          city: geoData.city,
+          country: geoData.country_name,
+          ip: geoData.ip,
+          browser: browser,
+          device: device,
+        }),
+      });
+
+      // Mark as tracked
+      sessionStorage.setItem("visitor_tracked", "true");
+      console.log("Visitor tracked successfully");
+    } catch (err) {
+      console.warn("Visitor tracking failed:", err);
+    }
+  }
+
+  // Execute after page load
+  if (typeof window !== "undefined") {
+    requestAnimationFrame(() => setTimeout(trackVisitor, 2000));
+  }
+</script>
