@@ -1,212 +1,200 @@
 ---
 import Layout from "@layouts/Default.astro";
 import BrutalCard from "@components/layout/Brutalcard.astro";
-
-const featured = {
-  title: "Refund Transparency @ Meesho",
-  href: "/blog/blogpost-1/",
-};
 ---
 
 <Layout
-  title="Story Of Strategy | Home"
-  description="Portfolio of an engineer-turned-product-builder focused on clarity, first principles, and India’s next wave."
+  title="Punith R"
+  description="Software engineer. 8 years shipping software. Now exploring product ideas, automations, and whatever I find interesting."
 >
-  <main
-    class="page-surface flex-grow border-b-[12px] border-frame px-5 pt-12 pb-10 md:px-10 md:pt-16 md:pb-14"
-  >
-    {/* Accessibility+SEO: put a real H1 once per page */}
-    <h1 class="sr-only">
-      Story Of Strategy — Product thinking by an engineer moving into PM
-    </h1>
+  <main class="page-surface flex-grow border-b-[12px] border-frame">
+    <h1 class="sr-only">Punith R — Software Engineer exploring Product</h1>
 
-    <div class="mx-auto flex w-full max-w-6xl flex-col gap-12">
-      <section
-        id="about"
-        class="grid gap-6 items-stretch md:grid-cols-8 md:gap-8"
-      >
-        {/* Card 1 — Hero */}
-        <div class="col-span-5 flex">
-          <BrutalCard tone="hero" class="h-full">
-            <div class="flex h-full flex-col justify-between gap-5">
-              <blockquote
-                class="brutal-headline-strong text-2xl leading-tight md:text-5xl lg:text-6xl"
-              >
-                “Making a <span class="inline-chip">simple</span>
-                thing is never simple.”
-              </blockquote>
+    {/* ── HERO — full width, big statement ── */}
+    <div class="px-5 pt-14 pb-10 md:px-10 md:pt-20 md:pb-14">
+      <div class="mx-auto w-full max-w-6xl">
+        <section id="hero">
+          <BrutalCard tone="hero">
+            <div class="flex flex-col gap-5 md:gap-6">
               <p
-                class="brutal-headline text-xl md:text-3xl lg:text-4xl leading-tight"
+                class="brutal-headline-strong text-4xl leading-[1.05] md:text-6xl lg:text-7xl"
               >
-                I build systems that make sense.
+                I'm Punith.
               </p>
-              <a href="/blog/" class="btn btn--sun">Check out the posts →</a>
-            </div>
-          </BrutalCard>
-        </div>
-
-        {/* Card 2 — About (transition) */}
-        <div class="col-span-3 flex">
-          <BrutalCard tone="bridge" class="flex h-full flex-col">
-            <h2 class="brutal-headline text-2xl md:text-4xl lg:text-5xl">
-              Engineering is leverage. Product is direction.
-            </h2>
-            <p class="brutal-body mt-4 text-base md:text-lg">
-              I spent 8 years building systems. Now I focus on what makes them
-              worth building. I use technical depth to validate product value.
-            </p>
-          </BrutalCard>
-        </div>
-
-        {/* Card 3 — Philosophy */}
-        <div class="col-span-3 flex">
-          <BrutalCard tone="principles" class="flex h-full flex-col">
-            <h2 class="brutal-headline text-2xl md:text-4xl lg:text-5xl">
-              Outcome over Output.
-            </h2>
-            <p class="brutal-body mt-4 text-base md:text-lg">
-              Code is expensive. Building the wrong thing is even more
-              expensive. My goal is to maximize impact with minimum waste.
-            </p>
-          </BrutalCard>
-        </div>
-
-        {/* Card 4 — Vision */}
-        <div class="col-span-5 flex">
-          <BrutalCard tone="vision" class="flex h-full flex-col">
-            <h2 class="brutal-title md:text-4xl lg:text-5xl">
-              Why I'm coming home.
-            </h2>
-            <p class="brutal-body mt-4 text-base md:text-lg">
-              I moved to the US at 23. It reshaped my worldview entirely. But
-              the most exciting problems aren't here anymore. They are in India.
-              I'm returning to solve them.
-            </p>
-          </BrutalCard>
-        </div>
-      </section>
-
-      {/* Featured Case Study — adds substance above the fold */}
-      <section id="featured" class="space-y-6">
-        <BrutalCard tone="case">
-          <div class="grid items-start gap-6 md:grid-cols-8">
-            <div class="space-y-4 md:col-span-5">
-              <h2
-                class="brutal-label brutal-label--light text-xs md:text-sm tracking-[0.24em]"
+              <p
+                class="brutal-headline text-xl leading-tight md:text-3xl lg:text-4xl"
               >
-                Featured case study
-              </h2>
-              <h3
-                class="brutal-headline-strong text-2xl leading-tight md:text-4xl"
+                8 years shipping software.<br />
+                Now figuring out
+                <span class="inline-chip">what</span> to build next.
+              </p>
+              <p class="brutal-body text-base md:text-lg max-w-2xl">
+                I automate things that annoy me, think about how products
+                should work, and keep building whatever I'm excited about.
+                Moving back to India soon. This is where I put all of it.
+              </p>
+              <a href="#stuff" class="btn btn--sun w-fit"
+                >See what I'm up to ↓</a
               >
-                Your Property, Your Peace - NoBroker
-              </h3>
-
-              <div class="grid gap-4 md:grid-cols-3">
-                <BrutalCard
-                  tone="case-note"
-                  class="is-subtle flex h-full flex-col"
-                >
-                  <div
-                    class="brutal-label brutal-label--ink text-sm tracking-[0.16em]"
-                  >
-                    Problem
-                  </div>
-                  <p
-                    class="brutal-body brutal-body--ink mt-2 text-sm leading-snug"
-                  >
-                    NRI owners feel spammed by immediate, unverified calls,
-                    leading to high churn.
-                  </p>
-                </BrutalCard>
-                <BrutalCard
-                  tone="case-note"
-                  class="is-subtle flex h-full flex-col"
-                >
-                  <div
-                    class="brutal-label brutal-label--ink text-sm tracking-[0.16em]"
-                  >
-                    Approach
-                  </div>
-                  <p
-                    class="brutal-body brutal-body--ink mt-2 text-sm leading-snug"
-                  >
-                    "Quiet Mode" for control and "Know Your Guide" for verified
-                    identity.
-                  </p>
-                </BrutalCard>
-                <BrutalCard
-                  tone="case-note"
-                  class="is-subtle flex h-full flex-col"
-                >
-                  <div
-                    class="brutal-label brutal-label--ink text-sm tracking-[0.16em]"
-                  >
-                    Potential impact
-                  </div>
-                  <p
-                    class="brutal-body brutal-body--ink mt-2 text-sm leading-snug"
-                  >
-                    -20% churn for NRI owners in first 72 hours.
-                  </p>
-                </BrutalCard>
-              </div>
             </div>
+          </BrutalCard>
+        </section>
+      </div>
+    </div>
 
-            <div class="md:col-span-3 flex md:justify-end">
-              <div class="flex w-full flex-col gap-3 md:w-auto">
-                <a href="/blog/nobroker-prd/" class="btn btn--sun"
-                  >Read the case study →</a
-                >
-                <a href="/blog/" class="btn btn--ghost">Browse all posts →</a>
-              </div>
-            </div>
-          </div>
-        </BrutalCard>
-      </section>
-
-      <section id="about-me" class="space-y-6">
-        <BrutalCard tone="profile">
-          <h2 class="brutal-headline-strong text-2xl md:text-4xl mb-6">
-            About Me
+    {/* ── BENTO GRID ── */}
+    <div class="px-5 pb-10 md:px-10 md:pb-14">
+      <div class="mx-auto w-full max-w-6xl">
+        <section id="stuff">
+          <h2
+            class="brutal-label text-xs md:text-sm tracking-[0.24em] mb-6"
+          >
+            Things I've been up to
           </h2>
-          <div class="grid gap-4 md:grid-cols-3">
-            <BrutalCard
-              tone="profile-engineer"
-              class="is-subtle flex h-full flex-col"
-            >
-              <div class="kicker kicker-invert">Engineer</div>
-              <p class="brutal-body text-base leading-relaxed">
-                8 years as a full-stack builder. Shipped trading apps in 3
-                months (3× faster). Built UI libraries now powering 300+
-                developers.
-              </p>
-            </BrutalCard>
 
-            <BrutalCard
-              tone="profile-builder"
-              class="is-subtle flex h-full flex-col"
-            >
-              <div class="kicker kicker-invert">Builder</div>
-              <p class="brutal-body text-base leading-relaxed">
-                I question defaults and strip waste. Small focused teams beat
-                large bureaucratic ones.
-              </p>
-            </BrutalCard>
+          <div class="bento-grid">
+            <div class="bento-cell bento-cell--warm bento-span-2 animate-in">
+              <span class="bento-label">Automations</span>
+              <h3 class="bento-title">
+                Things that run while I sleep
+              </h3>
+              <div class="bento-flows">
+                <p class="bento-flow">
+                  Reddit r/productmanagement
+                  <span class="bento-flow-arrow">→</span>
+                  AI summary
+                  <span class="bento-flow-arrow">→</span>
+                  LinkedIn post, daily
+                </p>
+                <p class="bento-flow">
+                  Gmail newsletters
+                  <span class="bento-flow-arrow">→</span>
+                  AI digest
+                  <span class="bento-flow-arrow">→</span>
+                  Discord channel
+                </p>
+              </div>
+              <span class="bento-tech">n8n · ai · runs daily</span>
+            </div>
 
-            <BrutalCard
-              tone="profile-next"
-              class="is-subtle flex h-full flex-col"
-            >
-              <div class="kicker kicker-invert">Next Wave</div>
-              <p class="brutal-body text-base leading-relaxed">
-                Bringing engineering reality to product strategy. Building for
-                India’s next generation.
+            <div class="bento-cell bento-cell--cool animate-in">
+              <span class="bento-label">Prototype</span>
+              <h3 class="bento-title">
+                Urban Company Reimagined
+              </h3>
+              <p class="bento-desc">
+                How should a remote homeowner manage home services from
+                another country? Multi-actor orchestration with SMS webhooks.
               </p>
-            </BrutalCard>
+              <span class="bento-tech">n8n · webhooks · mobile</span>
+            </div>
+
+            <div class="bento-cell bento-cell--dark animate-in">
+              <span class="bento-label">Meta</span>
+              <h3 class="bento-title bento-title--light">
+                This website
+              </h3>
+              <p class="bento-desc bento-desc--light">
+                The thing you're looking at. Custom neo-brutalist design
+                system, visitor tracking, interactive terminal
+                (<kbd class="bento-kbd">Ctrl+K</kbd>).
+              </p>
+              <span class="bento-tech bento-tech--light">Astro · UnoCSS · Cloudflare</span>
+            </div>
+
+            <div class="bento-cell bento-cell--muted bento-span-2 animate-in">
+              <span class="bento-label">Ideas</span>
+              <h3 class="bento-title">
+                Things I haven't built yet
+              </h3>
+              <div class="bento-ideas">
+                <div class="bento-idea">
+                  <strong>RoastMyLinkedIn</strong>
+                  <span>AI roasts your LinkedIn profile. Fun, shareable, one-page app.</span>
+                </div>
+                <div class="bento-idea">
+                  <strong>Philosophy × Building</strong>
+                  <span>Curated wisdom for people who think too much and build too little.</span>
+                </div>
+                <div class="bento-idea bento-idea--faded">
+                  <strong>+ more</strong>
+                  <span>Half-baked things sitting in my notes app.</span>
+                </div>
+              </div>
+            </div>
           </div>
-        </BrutalCard>
+        </section>
+      </div>
+    </div>
+
+    {/* ── PULL QUOTE ── */}
+    <div class="px-5 py-10 md:px-10 md:py-14">
+      <section class="pull-quote-section animate-in" aria-label="Personal statement">
+        <p class="pull-quote">
+          I don't have it all figured out.<br />
+          But I'm
+          <span class="pull-quote-highlight">building</span> while I figure it out.
+        </p>
       </section>
     </div>
+
+    {/* ── THE LAB ── */}
+    <div class="px-5 pb-10 md:px-10 md:pb-14">
+      <div class="mx-auto w-full max-w-4xl">
+        <section class="lab-cta animate-in">
+          <div class="lab-cta-content">
+            <h2 class="brutal-headline-strong text-xl md:text-3xl leading-tight">
+              I also think about products
+            </h2>
+            <p class="brutal-body text-sm md:text-base mt-2 max-w-lg">
+              Teardowns of Indian tech products, case studies, and product
+              thinking I'm developing. Not polished — just practice.
+            </p>
+          </div>
+          <a href="/blog/" class="btn btn--sun">Enter The Lab →</a>
+        </section>
+      </div>
+    </div>
+
+    {/* ── BACKSTORY ── */}
+    <div class="px-5 pb-14 md:px-10 md:pb-20">
+      <div class="mx-auto w-full max-w-4xl">
+        <section id="backstory" class="backstory-card animate-in">
+          <div class="backstory-inner">
+            <span class="backstory-emoji" aria-hidden="true">✈️</span>
+            <h2 class="bento-title">The Backstory</h2>
+            <p class="bento-desc">
+              Moved to the US at 23. Built trading apps, shipped UI libraries
+              used by 300+ developers. Learned how systems work and how teams
+              don't.
+            </p>
+            <p class="bento-desc" style="margin-top:0.5rem;">
+              Now I'm coming home. Not because the US didn't work out — it did.
+              But the most interesting problems are in India, and I want to be
+              close to them.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+
   </main>
 </Layout>
+
+<script>
+  // Scroll-triggered fade-in animations
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+  );
+
+  document.querySelectorAll(".animate-in").forEach((el) => {
+    observer.observe(el);
+  });
+</script>
