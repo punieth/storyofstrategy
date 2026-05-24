@@ -56,6 +56,18 @@
 
   // Execute after page load
   if (typeof window !== "undefined") {
-    requestAnimationFrame(() => setTimeout(trackVisitor, 2000));
+    const hostname = window.location.hostname;
+    const isLocal =
+      hostname === "localhost" ||
+      hostname === "127.0.0.1" ||
+      hostname.startsWith("192.168.") ||
+      hostname.startsWith("10.") ||
+      hostname.endsWith(".local");
+
+    if (isLocal) {
+      console.log("Visitor tracking disabled in local environment:", hostname);
+    } else {
+      requestAnimationFrame(() => setTimeout(trackVisitor, 2000));
+    }
   }
 </script>
