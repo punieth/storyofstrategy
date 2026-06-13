@@ -264,7 +264,7 @@ const toneCycle: Array<"yellow" | "orange" | "blue" | "red"> = [
   }
 </style>
 <section
-  class="blog-feed-shell relative mx-auto w-full max-w-[92rem] px-0 pt-9 pb-14 sm:px-6 sm:pt-12 sm:pb-20 lg:px-10"
+  class="blog-feed-shell relative mx-auto w-full max-w-6xl px-0 pt-9 pb-14 sm:px-6 sm:pt-12 sm:pb-20 lg:px-10"
 >
   <div
     class="gray-shadow relative rounded-xl border-[4px] border-[#111827] bg-[#fbfaf5]"
@@ -315,7 +315,7 @@ const toneCycle: Array<"yellow" | "orange" | "blue" | "red"> = [
 
           <div class="space-y-8">
             <h1
-              class="dm-serif text-[4.2rem] font-black uppercase leading-[0.92] tracking-[0.14em] text-[#111827] lg:text-[5.2rem]"
+              class="dm-serif text-4xl md:text-5xl lg:text-6xl font-black uppercase leading-[0.92] tracking-[0.14em] text-[#111827]"
             >
               Product<br />Experiments
             </h1>
@@ -336,7 +336,7 @@ const toneCycle: Array<"yellow" | "orange" | "blue" | "red"> = [
         <ul
           class="flex flex-col gap-8 md:grid md:auto-rows-fr md:grid-cols-2 md:gap-10 md:justify-items-stretch"
         >
-          {/* Payflow Experiment Item */}
+          {/* Payflow Experiment Item — disabled
           <li class="list-none w-full">
             <BlogSummaryCard
               post={{
@@ -357,6 +357,7 @@ const toneCycle: Array<"yellow" | "orange" | "blue" | "red"> = [
               href="/prototypes/payflow"
             />
           </li>
+          */}
 
           {
             posts.map((post, index) => {
