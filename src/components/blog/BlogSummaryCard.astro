@@ -3,283 +3,94 @@ import type { CollectionEntry } from "astro:content";
 
 interface Props {
   post: CollectionEntry<"blog">;
-  tone?: "red" | "orange" | "yellow" | "blue";
+  index: number;
   href?: string;
 }
 
-const { post, tone = "yellow", href } = Astro.props;
-const enrichedFrontmatter = post.data as typeof post.data & {
-  category?: string;
-  readTime?: string;
-  tags?: string[];
-};
-interface MotifColors {
-  base: string;
-  highlight: string;
-  accent: string;
-  border?: string;
-  stripe?: string;
-}
-const motifPalette: Record<NonNullable<Props["tone"]>, MotifColors> = {
-  yellow: {
-    base: "#fff7d6",
-    highlight: "#ffe9a8",
-    accent: "#facc15",
-  },
-  orange: {
-    base: "#ffe6d4",
-    highlight: "#ffcba0",
-    accent: "#f97316",
-  },
-  blue: {
-    base: "#e1edff",
-    highlight: "#c7ddff",
-    accent: "#2563eb",
-  },
-  red: {
-    base: "#ffe0e0",
-    highlight: "#ffbcbc",
-    accent: "#ef4444",
-  },
-};
-const companyThemes: Record<
-  string,
-  {
-    name: string;
-    tagline: string;
-    palette?: Partial<MotifColors>;
-  }
-> = {
-  "meesho-case-study": {
-    name: "Meesho",
-    tagline: "Social Commerce Trust Loop",
-    palette: {
-      base: "#fff0f8",
-      highlight: "#ffd4ec",
-      accent: "#f43397",
-      border: "#9f1f68",
-      stripe: "#d946ef",
-    },
-  },
-  "razorpay-case-study": {
-    name: "Razorpay",
-    tagline: "Checkout Confidence Systems",
-    palette: {
-      base: "#e7f1ff",
-      highlight: "#cfe2ff",
-      accent: "#2b84ea",
-      border: "#0b1f4b",
-      stripe: "#0bc3e8",
-    },
-  },
-  "notebooklm-case-study": {
-    name: "NotebookLM",
-    tagline: "AI Research Companion",
-    palette: {
-      base: "#f0f5ff",
-      highlight: "#dfe6ff",
-      accent: "#7c3aed",
-      border: "#1e1b4b",
-      stripe: "#38bdf8",
-    },
-  },
-  "nobroker-prd": {
-    name: "NoBroker",
-    tagline: "Owner Performance Coach",
-    palette: {
-      base: "#fff5f2",
-      highlight: "#ffd9cf",
-      accent: "#f04438",
-      border: "#9f1a11",
-      stripe: "#fb923c",
-    },
-  },
-  "proofit-prd": {
-    name: "ProofIt",
-    tagline: "Vendor Trust Platform",
-    palette: {
-      base: "#e1edff",
-      highlight: "#c7ddff",
-      accent: "#2563eb",
-      border: "#1e3a8a",
-      stripe: "#60a5fa",
-    },
-  },
-};
+const { post, index, href } = Astro.props;
+
+// Format date
 const publishedOn = new Intl.DateTimeFormat("en-US", {
   month: "short",
-  day: "numeric",
   year: "numeric",
 }).format(post.data.pubDate);
-const category = enrichedFrontmatter.category ?? "Product Strategy";
 
+// Read time calculation
 const words = (post.body ?? "").split(/\s+/).length;
 const wpm = 200;
 const timeToRead = Math.ceil(words / wpm);
 const readTime = `${timeToRead} min read`;
 
-const entryKey = post.id.split("/").pop() ?? post.id;
-const companyTheme = companyThemes[entryKey];
-const motifBase = motifPalette[tone];
-const motif: MotifColors = {
-  ...motifBase,
-  ...(companyTheme?.palette ?? {}),
+const slug = post.id.split("/").pop() ?? post.id;
+
+// Unique hover styles for each case study matching their company themes
+const hoverClasses: Record<string, string> = {
+  "proofit-prd": "hover:bg-[#f0f7ff] hover:border-black hover:shadow-[4px_4px_0_0_#111827]",
+  "urban-company-teardown": "hover:bg-[#fffbeb] hover:border-black hover:shadow-[4px_4px_0_0_#111827]",
 };
-const companyName = companyTheme?.name ?? category;
-const heroWord = companyName.toUpperCase();
-const accentColor = motif.accent ?? "#111827";
-const borderColor = "#111827";
-const baseTint = motif.base ?? "#ffffff";
-const headerPattern =
-  motif.stripe ??
-  `repeating-linear-gradient(135deg, transparent 0 10px, ${accentColor} 10px 20px)`;
+
+const hoverStyle = hoverClasses[slug] || "hover:bg-gray-50 hover:border-black hover:shadow-[4px_4px_0_0_#111827]";
 ---
 
-<style>
-  .dynamic-shadow {
-    filter: drop-shadow(4px 4px 0 #111827);
-    transition:
-      filter 0.2s ease-out,
-      transform 0.2s ease-out;
-  }
-  .dynamic-shadow:hover {
-    filter: drop-shadow(2px 2px 0 #111827);
-    transform: translateY(-2px);
-  }
-
-  /* iOS fallback */
-  @supports (-webkit-touch-callout: none) {
-    .dynamic-shadow {
-      filter: none;
-      box-shadow: 4px 4px 0 #111827;
-      transition:
-        box-shadow 0.2s ease-out,
-        transform 0.2s ease-out;
-    }
-    .dynamic-shadow:hover {
-      filter: none;
-      box-shadow: 2px 2px 0 #111827;
-    }
-  }
-
-  @media (min-width: 640px) {
-    .dynamic-shadow {
-      filter: drop-shadow(8px 8px 0 #111827);
-    }
-    .dynamic-shadow:hover {
-      filter: drop-shadow(4px 4px 0 #111827);
-      transform: translateY(-4px);
-    }
-
-    /* iOS fallback */
-    @supports (-webkit-touch-callout: none) {
-      .dynamic-shadow {
-        box-shadow: 8px 8px 0 #111827;
-      }
-      .dynamic-shadow:hover {
-        box-shadow: 4px 4px 0 #111827;
-      }
-    }
-  }
-</style>
-
-<div
-  class="dynamic-shadow flex h-full flex-col justify-between gap-4 rounded-xl border border-[#111827]/25 bg-white p-3 text-[#111827] sm:border-[3px] sm:border-[#111827] sm:bg-cream sm:p-6"
-  style={`border-color: ${borderColor};`}
+<a
+  href={href ?? `/blog/${post.id}/`}
+  class={`block w-full border-[1.5px] border-transparent bg-transparent rounded-xl p-4 sm:p-5 md:p-6 transition-all duration-200 group text-left ${hoverStyle}`}
 >
-  <header
-    class="relative flex flex-row items-center justify-between gap-4 border-b border-[#111827]/20 py-3 sm:border-b-[3px] sm:flex-row sm:items-center sm:justify-between"
-    style={`border-color: ${borderColor};`}
-  >
-    <div
-      class="flex flex-row items-center gap-2 sm:flex-row sm:items-center sm:gap-3"
-    >
-      <span
-        class="hidden sm:grid h-10 w-10 place-items-center rounded-lg border border-[#111827]/30 bg-white text-xs font-bold uppercase tracking-[0.3em] sm:rounded-none sm:border-[3px]"
-        style={`background: ${baseTint}; border-color: ${borderColor};`}
+  <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between md:gap-8">
+    
+    {/* Left Column: Numbering & Title & Desc */}
+    <div class="flex items-start gap-4 md:gap-6 flex-1 min-w-0">
+      
+      {/* Index Number */}
+      <span 
+        class="text-sm font-black tracking-tight text-gray-300 group-hover:text-[#111827] transition-colors leading-none pt-1" 
+        style="font-family: 'Space Mono', monospace;"
       >
-        ∎
+        {index.toString().padStart(2, "0")}.
       </span>
-      <span
-        class="dm-serif max-w-full text-balance font-black uppercase leading-[0.92] tracking-[0.16em] text-center sm:text-left"
-        style={`font-size: clamp(1.4rem, 3.2vw, 2.1rem); word-break: break-word; overflow-wrap: anywhere;`}
-      >
-        {heroWord}
-      </span>
+      
+      {/* Article Content */}
+      <div class="space-y-1 min-w-0">
+        <h3 
+          class="text-lg sm:text-xl font-bold tracking-tight text-gray-900 group-hover:text-black transition-colors"
+          style="font-family: 'Outfit', sans-serif;"
+        >
+          {post.data.title}
+        </h3>
+        <p class="text-xs sm:text-sm text-gray-500 group-hover:text-gray-700 transition-colors leading-relaxed line-clamp-2">
+          {post.data.description}
+        </p>
+      </div>
+      
     </div>
-    <div
-      class="h-6 sm:h-8 w-full flex-1 rounded-sm border border-[#111827]/25 sm:border-[3px]"
-      style={`background: ${headerPattern}; border-color: ${borderColor};`}
-      aria-hidden="true"
-    >
-    </div>
-  </header>
 
-  <div class="space-y-4">
-    <h3
-      class="dm-serif text-[1.55rem] font-black leading-[1.05] sm:text-[1.8rem]"
-    >
-      {post.data.title}
-    </h3>
-    <p
-      class="poppins text-sm leading-relaxed text-[#111827]/80 md:text-[0.92rem]"
-    >
-      {post.data.description}
-    </p>
-  </div>
+    {/* Right Column: Metadata & Badges */}
+    <div class="flex flex-wrap items-center justify-between gap-4 md:flex-nowrap md:justify-end md:gap-6 flex-shrink-0 pt-2 md:pt-0 border-t border-black/5 md:border-t-0">
+      
+      {/* Date & Reading Time */}
+      <div class="flex items-center gap-3 text-[11px] font-bold text-gray-400 group-hover:text-gray-500 transition-colors" style="font-family: 'Space Mono', monospace;">
+        <span>{publishedOn}</span>
+        <span class="opacity-30">•</span>
+        <span>{readTime}</span>
+      </div>
 
-  <div
-    class="flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-[#111827]/20 pt-3 text-[0.8rem] font-medium text-[#111827]/80 sm:border-t-0 sm:pt-0"
-  >
-    <span class="inline-flex items-center gap-1.5">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-4 w-4"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        stroke-width="2"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-        ></path>
-      </svg>
-      <span>{publishedOn}</span>
-    </span>
-    <span class="hidden sm:inline-block">·</span>
-    <span class="inline-flex items-center gap-1.5">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-4 w-4"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        stroke-width="2"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-      </svg>
-      <span>{readTime}</span>
-    </span>
-  </div>
+      {/* Primary Category Tags */}
+      {post.data.tags && post.data.tags.length > 0 && (
+        <div class="flex items-center gap-1.5">
+          {post.data.tags.slice(0, 2).map((tag) => (
+            <span class="text-[9px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded border border-gray-200 group-hover:border-black/20 bg-gray-50/50 group-hover:bg-white text-gray-500 group-hover:text-black transition-all">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
 
-  <div class="flex justify-end">
-    <a
-      class="flex w-fit items-center justify-between gap-3 rounded-md bg-[#111827] px-3 py-1.5 text-[0.65rem] font-black uppercase tracking-[0.2em] text-white shadow-[4px_4px_0_rgba(17,24,39,0.28)] transition-transform duration-150 ease-out hover:-translate-y-[2px] hover:shadow-[6px_6px_0_rgba(17,24,39,0.26)] sm:w-auto sm:flex-nowrap sm:self-start sm:rounded-none sm:px-4 sm:py-2 sm:text-[0.72rem] sm:tracking-[0.22em] sm:shadow-[9px_9px_0_rgba(17,24,39,0.38)] sm:hover:shadow-[12px_12px_0_rgba(17,24,39,0.3)]"
-      href={href ?? `/blog/${post.id}/`}
-    >
-      <span>Open Case Study</span>
-      <span
-        class="grid h-5 w-5 shrink-0 place-items-center text-xs font-semibold text-[#111827] shadow-[3px_3px_0_rgba(17,24,39,0.35)] sm:h-6 sm:w-6 sm:text-sm sm:shadow-[4px_4px_0_rgba(17,24,39,0.35)]"
-        style={`background-color: ${accentColor};`}
-        aria-hidden="true"
-      >
-        ↗
+      {/* Action Arrow indicator */}
+      <span class="hidden md:inline-block text-gray-300 group-hover:text-black group-hover:translate-x-1 transition-all text-sm font-black pl-2 select-none">
+        →
       </span>
-    </a>
+
+    </div>
+
   </div>
-</div>
+</a>

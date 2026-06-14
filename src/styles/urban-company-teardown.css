@@ -1,20 +1,19 @@
 /* ══════════════════════════════════════════════════════════════════════════
-   URBAN COMPANY TEARDOWN — Premium Neo-Brutalist Typography & Layout System
+   URBAN COMPANY TEARDOWN — Premium Editorial Brutalist Layout System
    ══════════════════════════════════════════════════════════════════════════ */
 
 .urban-company-prd {
-  --uc-card-pad: clamp(1.25rem, 2vw + 0.75rem, 1.75rem);
-  --uc-h1: clamp(2.25rem, 4vw + 1rem, 3.5rem);
-  --uc-h2: clamp(1.5rem, 2.5vw + 0.5rem, 2.15rem);
-  --uc-h3: clamp(1.15rem, 1.5vw + 0.25rem, 1.4rem);
-  --uc-h4: clamp(1rem, 1vw + 0.15rem, 1.2rem);
-  --uc-body: clamp(0.95rem, 0.25vw + 0.78rem, 1.06rem);
-  --uc-small: clamp(0.82rem, 0.2vw + 0.7rem, 0.94rem);
+  --uc-card-pad: clamp(1rem, 1.5vw + 0.5rem, 1.35rem);
+  --uc-body: clamp(0.95rem, 0.15vw + 0.88rem, 1.0rem); /* 15.2px - 16px */
+  --uc-h1: clamp(1.85rem, 3vw + 1rem, 2.4rem); /* 29.6px - 38.4px */
+  --uc-h2: clamp(1.35rem, 2vw + 0.75rem, 1.65rem); /* 21.6px - 26.4px */
+  --uc-h3: clamp(1.1rem, 1.2vw + 0.65rem, 1.25rem); /* 17.6px - 20px */
+  --uc-h4: clamp(0.98rem, 0.8vw + 0.6rem, 1.12rem);
+  --uc-small: clamp(0.82rem, 0.1vw + 0.75rem, 0.88rem);
+  
   width: 100%;
-  max-width: 72rem;
   margin: 0 auto;
-  font-family: 'Poppins', sans-serif;
-  color: #1f2937; /* Premium charcoal dark body text for optimal reading comfort */
+  color: #1f2937;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -25,80 +24,105 @@
   box-sizing: border-box;
 }
 
-/* Beautiful structural section dividers */
+/* ── TYPOGRAPHY ── */
+.urban-company-prd h1,
+.urban-company-prd h2,
+.urban-company-prd h3,
+.urban-company-prd h4 {
+  font-family: 'Outfit', sans-serif;
+  color: #111827;
+  letter-spacing: -0.02em;
+}
+
+.urban-company-prd h1 {
+  font-size: var(--uc-h1);
+  line-height: 1.2 !important;
+  font-weight: 850 !important;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.urban-company-prd h2 {
+  font-size: var(--uc-h2);
+  line-height: 1.25;
+  font-weight: 800;
+  margin-top: 2.25rem;
+  margin-bottom: 1rem;
+  scroll-margin-top: 7rem;
+}
+
+.urban-company-prd h3 {
+  font-size: var(--uc-h3);
+  line-height: 1.3;
+  font-weight: 750;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.urban-company-prd h4 {
+  font-size: var(--uc-h4);
+  line-height: 1.35;
+  font-weight: 700;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.urban-company-prd p,
+.urban-company-prd li {
+  font-size: var(--uc-body);
+  line-height: 1.68;
+  color: #374151;
+}
+
+.urban-company-prd p {
+  margin-top: 0.75rem;
+  margin-bottom: 0;
+}
+
+.urban-company-prd strong {
+  color: #111827;
+  font-weight: 650;
+}
+
+/* ── LISTS ── */
+.urban-company-prd ul,
+.urban-company-prd ol {
+  margin-top: 0.6rem;
+  margin-bottom: 0;
+  padding-left: 1.5rem;
+}
+
+.urban-company-prd li {
+  margin-top: 0.4rem;
+}
+
+.urban-company-prd ul {
+  list-style-type: disc;
+}
+
+.urban-company-prd ol {
+  list-style-type: decimal;
+}
+
+/* ── STRUCTURAL SECTIONS ── */
 .urban-company-prd section {
-  margin-top: clamp(3.5rem, 7vw, 5.5rem) !important;
-  border-bottom: 2px dashed rgba(17, 24, 39, 0.08);
-  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  margin-top: clamp(2rem, 4vw, 3.25rem) !important;
+  border-bottom: 1.5px dashed rgba(17, 24, 39, 0.08);
+  padding-bottom: clamp(1.5rem, 3vw, 2.25rem);
 }
 
 .urban-company-prd section:last-of-type {
   border-bottom: none;
 }
 
-.urban-company-prd :is(h1, h2, h3, h4, h5, h6, blockquote) {
-  text-wrap: balance;
-  overflow-wrap: anywhere;
-  hyphens: auto;
-}
-
-/* ── TYPOGRAPHY ── */
-.urban-company-prd h2,
-.urban-company-prd h3,
-.urban-company-prd h4 {
-  font-family: 'Outfit', sans-serif;
-  color: #111827; /* Rich black headings */
-  letter-spacing: -0.02em;
-}
-
-.urban-company-prd h1 {
-  line-height: 1.2 !important;
-  font-weight: 850 !important;
-  letter-spacing: normal !important;
-}
-
-.urban-company-prd h2 {
-  font-size: var(--uc-h2);
-  line-height: 1.2;
-  font-weight: 850;
-  margin-top: 1.5rem;
-  margin-bottom: 1.25rem;
-}
-
-.urban-company-prd h3 {
-  font-size: var(--uc-h3);
-  line-height: 1.25;
-  font-weight: 800;
-  margin-bottom: 0.5rem;
-}
-
-.urban-company-prd h4 {
-  font-size: var(--uc-h4);
-  line-height: 1.3;
-  font-weight: 750;
-}
-
-.urban-company-prd p,
-.urban-company-prd li {
-  font-size: var(--uc-body);
-  line-height: 1.75;
-  color: #374151; /* Calmer, high-trust graphite gray */
-}
-
-.urban-company-prd p {
-  margin-top: 0.85rem;
-  margin-bottom: 0;
-}
-
 /* ── PREMIUM CARDS OVERRIDES ── */
-/* Standardizing all card styles across MDX to look elegant, consistent, and highly polished */
 .urban-company-prd article,
 .urban-company-prd .brutal-card,
-.urban-company-prd div[class*="border-2"][class*="rounded-2xl"] {
-  border: 1.5px solid #111827 !important; /* Sleeker 1.5px border instead of generic heavy 2px */
-  box-shadow: 4px 4px 0 0 #111827 !important; /* Sharp, crisp brutalist offset */
-  filter: none !important; /* Eliminates filter flickering/clipping on Safari/Chrome */
-  border-radius: 14px !important; /* Premium modern corner radius */
+.urban-company-prd div[class*="border-2"][class*="rounded-2xl"],
+.urban-company-prd div[class*="border-2"][class*="rounded-xl"] {
+  border: 1.5px solid #111827 !important;
+  box-shadow: 3px 3px 0 0 #111827 !important;
+  border-radius: 10px !important;
   padding: var(--uc-card-pad) !important;
   transition: transform 0.15s ease, box-shadow 0.15s ease !important;
   transform: translateY(0);
@@ -107,10 +131,10 @@
 .urban-company-prd article:hover,
 .urban-company-prd .brutal-card:hover {
   transform: translate(-1px, -1px) !important;
-  box-shadow: 5px 5px 0 0 #111827 !important;
+  box-shadow: 4px 4px 0 0 #111827 !important;
 }
 
-/* Reset inner card text sizes for optimal scannability */
+/* Card inner texts scale & color calibration */
 .urban-company-prd article p,
 .urban-company-prd article li,
 .urban-company-prd .brutal-card p,
@@ -120,7 +144,7 @@
 .urban-company-prd .card-content {
   font-size: var(--uc-small) !important;
   line-height: 1.6;
-  color: #4b5563 !important; /* Slightly softer text color for card sub-info */
+  color: #4b5563 !important;
 }
 
 .urban-company-prd article strong,
@@ -129,69 +153,54 @@
   color: #111827 !important;
 }
 
-/* ── PREMIUM COLOR CALIBRATION ── */
-/* Softening the neon primary colors into premium, high-trust architectural pastels */
-
-/* Sky Blue variants (e.g., Persona 1 & functional specs) */
+/* ── COLOR CALIBRATIONS (SOFT architectural pastels) ── */
 .urban-company-prd .bg-\[\#e0f2fe\],
 .urban-company-prd article[class*="bg-[#e0f2fe]"] {
-  background-color: #f0f7ff !important; /* Stunning soft sky blue */
+  background-color: #f0f7ff !important;
 }
 
-/* Warm Yellow variants (e.g., Persona 2, Key Principles & Edge Cases) */
 .urban-company-prd .bg-\[\#fef9c3\],
 .urban-company-prd .bg-yellow-50,
 .urban-company-prd article[class*="bg-[#fef9c3]"] {
-  background-color: #fffbeb !important; /* Soft, warm golden ivory */
+  background-color: #fffbeb !important;
 }
 
-/* Pink/Rose variants (e.g., Persona 3 & GTM details) */
 .urban-company-prd .bg-\[\#fce7f3\],
 .urban-company-prd article[class*="bg-[#fce7f3]"] {
-  background-color: #fdf2f8 !important; /* Elegant rose pastel */
+  background-color: #fdf2f8 !important;
 }
 
-/* Green variants (e.g., Solution Specs & metrics cards) */
 .urban-company-prd .bg-\[\#dcfce7\],
 .urban-company-prd .bg-\[\#bbf7d0\] {
-  background-color: #f0fdf4 !important; /* High-trust soft emerald */
+  background-color: #f0dfd4 !important;
 }
 
-/* Error/Alert soft red (e.g., Problem highlight block) */
 .urban-company-prd .bg-\[\#fee2e2\] {
-  background-color: #fff1f2 !important; /* Sophisticated coral blush */
+  background-color: #fff1f2 !important;
 }
 
-/* Default stone/neutral cards */
 .urban-company-prd .bg-gray-50,
 .urban-company-prd div[class*="bg-gray-50"],
 .urban-company-prd div[color*="#f5f5f4"] {
-  background-color: #fafaf9 !important; /* Pristine stone off-white */
+  background-color: #fafaf9 !important;
 }
 
-/* White background cards */
 .urban-company-prd .bg-white,
 .urban-company-prd article[class*="bg-white"] {
   background-color: #ffffff !important;
 }
 
-/* ── ULTRA-CLEAN SECTION PILLS ── */
-/* Standardizing the brutalist badges to look cohesive and extremely sharp */
+/* ── Badge styling overrides ── */
 .urban-company-prd span[class*="inline-flex"][class*="rounded-full"][class*="border-2"],
 .urban-company-prd span[class*="inline-flex"][class*="rounded-full"][class*="border"] {
   border: 1.5px solid #111827 !important;
   box-shadow: 2px 2px 0 0 #111827 !important;
-  border-radius: 8px !important; /* Custom modern capsule instead of standard generic pill */
-  font-family: 'Outfit', sans-serif;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  padding: 0.4rem 0.85rem !important;
+  border-radius: 6px !important;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 0.35rem 0.75rem !important;
   text-transform: uppercase;
-  font-size: 0.72rem !important;
+  font-size: 0.68rem !important;
   color: #111827 !important;
-}
-
-/* Live sandbox heading spacing calibration */
-.urban-company-prd #solutions h2 {
-  margin-top: 1rem !important;
 }

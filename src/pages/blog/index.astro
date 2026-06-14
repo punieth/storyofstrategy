@@ -9,11 +9,11 @@ const posts = await getCollection("blog").then((collection) =>
 ---
 
 <Layout
-  title="Blog"
-  description="Brutal Blog | On this page you can find a collection of blogposts"
-  pageTitle="Brutal Blog"
+  title="Product Experiments"
+  description="A curated index of strategic product teardowns, requirements documents, and functional prototypes."
+  pageTitle="Experiments"
 >
-  <main class="flex-grow bg-[#fffaf0] px-6 py-10 md:px-10">
+  <main class="page-surface flex-grow border-b-[12px] border-frame px-4 py-10 sm:px-6 sm:py-16 md:px-8 md:py-20" style="background-color: #faf9f6;">
     <BlogList posts={posts} />
   </main>
 </Layout>

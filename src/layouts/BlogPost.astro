@@ -7,18 +7,236 @@ const ogImage = new URL(`/v1/generate/og/${Astro.params.slug}.png`, Astro.url);
 interface Props {
   author: string;
   pubDate: Date;
-  headings: unknown;
+  headings: Array<{ depth: number; slug: string; text: string }>;
   description: string;
   title: string;
 }
 
-const { author, pubDate, headings, description, title } = Astro.props;
+const { author, pubDate, headings = [], description, title } = Astro.props;
+
+// Filter to keep only second-level headings for our Table of Contents
+const tocItems = headings.filter((heading) => heading.depth === 2);
+
+const slug = Astro.params.slug || "";
+
+// Robust static fallback map of headings in case MDX files write headings as HTML tags
+const hardcodedTocs: Record<string, Array<{ depth: number; slug: string; text: string }>> = {
+  "proofit-prd": [
+    { depth: 2, slug: "tldr", text: "TL;DR" },
+    { depth: 2, slug: "problem", text: "1. The Problem" },
+    { depth: 2, slug: "personas", text: "2. User Personas" },
+    { depth: 2, slug: "prototype", text: "3. Interactive Flow" },
+    { depth: 2, slug: "product", text: "4. How it Works" },
+    { depth: 2, slug: "vouch", text: "5. Vouch System" },
+    { depth: 2, slug: "features", text: "6. Features" },
+    { depth: 2, slug: "gogo", text: "7. GTM & Growth" },
+    { depth: 2, slug: "metrics", text: "8. Success Metrics" },
+    { depth: 2, slug: "unresolved", text: "9. Open Questions" },
+  ],
+  "urban-company-teardown": [
+    { depth: 2, slug: "problem", text: "Problem" },
+    { depth: 2, slug: "personas", text: "Personas" },
+    { depth: 2, slug: "journey", text: "Journey" },
+    { depth: 2, slug: "pain-points", text: "Pain Points" },
+    { depth: 2, slug: "solutions", text: "Solutions" },
+    { depth: 2, slug: "mvp", text: "MVP" },
+    { depth: 2, slug: "metrics", text: "Metrics" },
+    { depth: 2, slug: "gtm", text: "GTM" },
+  ]
+};
+
+const activeTocs = tocItems.length > 0 ? tocItems : (hardcodedTocs[slug] || []);
+const hasToc = activeTocs.length > 0;
 ---
 
-<Layout title={title} description={description} ogImage={ogImage} classList="bg-[#f4ffe6] blog-post-layout">
-  <main class="px-4 sm:px-6 pt-20 pb-10 sm:pt-24 sm:pb-12 md:pt-28 md:pb-16 mx-auto w-full max-w-6xl">
-    <BlogPostLayout {pubDate} {author} {title}>
-      <slot />
-    </BlogPostLayout>
+<Layout title={title} description={description} ogImage={ogImage} classList="bg-[#faf9f6] blog-post-layout">
+  <main class="mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 pt-20 pb-10 sm:pt-24 sm:pb-12 md:pt-28 md:pb-16">
+    <div class:list={[
+      "items-start",
+      { "lg:grid lg:grid-cols-[220px_1fr] lg:gap-12 xl:gap-16": hasToc }
+    ]}>
+      
+      {/* ── DESKTOP STICKY SIDEBAR TABLE OF CONTENTS ── */}
+      {hasToc && (
+        <aside class="hidden lg:block w-[220px] sticky top-28 self-start">
+          <div class="max-h-[calc(100vh-8rem)] overflow-y-auto pr-4 select-none">
+            <h2 class="text-[10px] font-black uppercase tracking-[0.2em] text-[#111827] mb-4 opacity-40">
+              On This Page
+            </h2>
+            <nav class="flex flex-col gap-1.5" id="toc-nav">
+              {activeTocs.map((item) => (
+                <a
+                  href={`#${item.slug}`}
+                  class="toc-link border-l-2 border-transparent pl-3 text-[13px] font-bold text-gray-400 hover:text-black hover:border-gray-300 transition-all leading-snug py-1"
+                >
+                  {item.text}
+                </a>
+              ))}
+            </nav>
+          </div>
+        </aside>
+      )}
+
+      {/* ── MAIN ARTICLE COLUMN ── */}
+      <div class="min-w-0 w-full max-w-[45rem] mx-auto lg:mx-0">
+        <BlogPostLayout {pubDate} {author} {title}>
+          <slot />
+        </BlogPostLayout>
+      </div>
+
+    </div>
+
+    {/* ── MOBILE FLOATING NAVIGATION TRIGGER ── */}
+    {hasToc && (
+      <div class="lg:hidden fixed bottom-6 right-6 z-50 select-none">
+        <button
+          id="mobile-toc-btn"
+          aria-expanded="false"
+          aria-controls="mobile-toc-panel"
+          class="flex h-12 w-12 items-center justify-center rounded-full border-2 border-black bg-[#ffe977] text-lg shadow-[3px_3px_0_0_#000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-[1.5px_1.5px_0_0_#000] focus:outline-none transition-all"
+        >
+          🗺️
+        </button>
+      </div>
+    )}
+
+    {/* ── MOBILE SLIDE-UP BOTTOM SHEET (TOC) ── */}
+    {hasToc && (
+      <>
+        {/* Backdrop overlay */}
+        <div
+          id="mobile-toc-backdrop"
+          class="lg:hidden fixed inset-0 bg-black/40 backdrop-blur-xs z-40 transition-opacity duration-300 opacity-0 hidden"
+          aria-hidden="true"
+        ></div>
+
+        {/* Bottom Sheet Panel */}
+        <div
+          id="mobile-toc-panel"
+          role="dialog"
+          aria-modal="true"
+          class="lg:hidden fixed bottom-0 left-0 right-0 w-full max-h-[75vh] bg-white border-t-[3px] border-black rounded-t-3xl p-6 shadow-[0_-8px_30px_rgba(0,0,0,0.15)] z-50 flex flex-col gap-4 transition-transform duration-300 translate-y-full hidden"
+        >
+          {/* Header */}
+          <div class="flex items-center justify-between pb-3 border-b border-gray-100 flex-shrink-0">
+            <h3 class="text-[10px] font-black uppercase tracking-[0.2em] text-[#111827] opacity-50">
+              Navigate Document
+            </h3>
+            <button
+              id="mobile-toc-close"
+              class="h-6 w-6 flex items-center justify-center text-sm font-black text-gray-400 hover:text-black border border-gray-200 rounded-full"
+              aria-label="Close menu"
+            >
+              ✕
+            </button>
+          </div>
+
+          {/* Scrolling Links List */}
+          <div class="overflow-y-auto flex flex-col gap-3 py-1 pr-1" style="-webkit-overflow-scrolling: touch;">
+            {activeTocs.map((item) => (
+              <a
+                href={`#${item.slug}`}
+                class="mobile-toc-link text-[15px] font-bold text-gray-700 hover:text-black py-2 px-3 hover:bg-gray-50 active:bg-gray-100 rounded-lg transition-all"
+              >
+                {item.text}
+              </a>
+            ))}
+          </div>
+        </div>
+      </>
+    )}
   </main>
+
+  {/* ── TOC INTERACTION SCRIPT ── */}
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Intersection Observer for Desktop Sidebar Highlights
+      const links = document.querySelectorAll('.toc-link');
+      if (links.length > 0) {
+        const sections = Array.from(links)
+          .map((link) => {
+            const href = link.getAttribute('href');
+            return href ? document.querySelector(href) : null;
+          })
+          .filter(Boolean);
+
+        const observerOptions = {
+          root: null,
+          rootMargin: '-15% 0px -70% 0px',
+          threshold: 0,
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const id = entry.target.getAttribute('id');
+              links.forEach((link) => {
+                if (link.getAttribute('href') === `#${id}`) {
+                  link.classList.add('text-black', 'border-black');
+                  link.classList.remove('text-gray-400', 'border-transparent');
+                } else {
+                  link.classList.remove('text-black', 'border-black');
+                  link.classList.add('text-gray-400', 'border-transparent');
+                }
+              });
+            }
+          });
+        }, observerOptions);
+
+        sections.forEach((section) => section && observer.observe(section));
+      }
+
+      // 2. Mobile Bottom Sheet Panel Animations
+      const tocBtn = document.getElementById('mobile-toc-btn');
+      const tocClose = document.getElementById('mobile-toc-close');
+      const tocBackdrop = document.getElementById('mobile-toc-backdrop');
+      const tocPanel = document.getElementById('mobile-toc-panel');
+
+      if (tocBtn && tocPanel && tocBackdrop && tocClose) {
+        const openSheet = () => {
+          tocBackdrop.classList.remove('hidden');
+          tocPanel.classList.remove('hidden');
+          document.body.style.overflow = 'hidden'; // Lock background scroll
+          
+          // Force layout repaint to trigger CSS transitions
+          tocPanel.offsetHeight; 
+          
+          tocBackdrop.classList.add('opacity-100');
+          tocBackdrop.classList.remove('opacity-0');
+          tocPanel.classList.add('translate-y-0');
+          tocPanel.classList.remove('translate-y-full');
+          tocBtn.setAttribute('aria-expanded', 'true');
+        };
+
+        const closeSheet = () => {
+          tocBackdrop.classList.add('opacity-0');
+          tocBackdrop.classList.remove('opacity-100');
+          tocPanel.classList.add('translate-y-full');
+          tocPanel.classList.remove('translate-y-0');
+          document.body.style.overflow = ''; // Unlock scroll
+          tocBtn.setAttribute('aria-expanded', 'false');
+
+          // Hide elements from DOM after transition completes (300ms)
+          setTimeout(() => {
+            // Check if user didn't reopen during transition
+            if (tocPanel.classList.contains('translate-y-full')) {
+              tocBackdrop.classList.add('hidden');
+              tocPanel.classList.add('hidden');
+            }
+          }, 300);
+        };
+
+        tocBtn.addEventListener('click', openSheet);
+        tocClose.addEventListener('click', closeSheet);
+        tocBackdrop.addEventListener('click', closeSheet);
+
+        const mobileLinks = document.querySelectorAll('.mobile-toc-link');
+        mobileLinks.forEach((link) => {
+          link.addEventListener('click', () => {
+            closeSheet();
+          });
+        });
+      }
+    });
+  </script>
 </Layout>

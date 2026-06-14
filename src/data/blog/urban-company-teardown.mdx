@@ -7,7 +7,6 @@ description: 'A professional Product Requirements Document detailing the SMS Bri
 imgUrl: '../../assets/meesho.png' 
 ---
 
-import StickyNav from "@components/blog/StickyNav.astro";
 import BrutalCard from "@components/layout/Brutalcard.astro";
 import UrbanCompanyPrototypeShowcase from "@components/urbancompany/UrbanCompanyPrototypeShowcase";
 import "../../styles/urban-company-teardown.css";
@@ -29,21 +28,6 @@ export const pillThemes = {
 export const pillClass = (theme) => `${pillBase} ${pillThemes[theme] ?? ""}`;
 
 <div class="bg-[#f7f7f3] font-sans urban-company-prd">
-  <div class="mx-auto max-w-5xl px-0.5 sm:px-4 md:px-6 pt-6">
-    <StickyNav
-      items={[
-        { href: "#problem", label: "Problem" },
-        { href: "#personas", label: "Personas" },
-        { href: "#journey", label: "Journey" },
-        { href: "#pain-points", label: "Pain Points" },
-        { href: "#solutions", label: "Solutions" },
-        { href: "#mvp", label: "MVP" },
-        { href: "#metrics", label: "Metrics" },
-        { href: "#gtm", label: "GTM" },
-      ]}
-      label="Navigate"
-    />
-  </div>
   <main class="mx-auto max-w-5xl px-4 sm:px-6 md:px-8 py-10 sm:py-12">
     <header class="text-center">
        <span class="inline-flex items-center gap-2 px-3 py-1.5 text-[10px] sm:text-xs font-black uppercase tracking-[0.2em] text-black bg-[#ffe977] border-2 border-black shadow-[3px_3px_0_0_#111827] rounded-lg">
