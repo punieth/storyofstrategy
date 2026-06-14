@@ -1762,12 +1762,57 @@ body {
   gap: 0.8rem;
 }
 
+@media (min-width: 641px) {
+  .home-lab__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 .home-lab-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   border: 3px solid var(--home-ink);
   border-radius: 20px;
   box-shadow: 4px 4px 0 var(--home-ink);
-  padding: 1rem;
+  padding: 1.5rem;
   transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+.home-lab-card__status {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  display: flex;
+  align-items: center;
+  font-size: 0.6rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--home-ink);
+  opacity: 0.8;
+  animation: breathing-text 3s ease-in-out infinite;
+}
+
+.home-lab-card--black .home-lab-card__status {
+  color: var(--home-paper);
+}
+
+@keyframes breathing-text {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Remove dot styles as they are no longer used */
+.home-lab-card__dot {
+  display: none;
 }
 
 .home-lab-card:hover {
@@ -1811,6 +1856,12 @@ body {
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.55), transparent 45%),
     var(--home-green);
+}
+
+.home-lab-card--lavender {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.55), transparent 45%),
+    #e0e5ff;
 }
 
 .home-lab-card--black {

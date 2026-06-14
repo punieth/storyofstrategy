@@ -1,5 +1,6 @@
 ---
 import Layout from "@layouts/Default.astro";
+import labData from "../data/lab-automations.json";
 ---
 
 <Layout
@@ -20,7 +21,6 @@ import Layout from "@layouts/Default.astro";
           I spent 8 years shipping software. Now I’m using that engineering muscle to explore AI workflows, product strategy, and practical ideas for Indian markets.
         </p>
       </div>
-
     </section>
 
     <section class="home-section home-section--cases" id="work">
@@ -39,11 +39,6 @@ import Layout from "@layouts/Default.astro";
           <p>
             SMS bridge, smart repair buffer, and fail-safe approval loops for NRIs and remote property owners.
           </p>
-          <!-- <div class="home-case__tags">
-            <span>Product</span>
-            <span>Service ops</span>
-            <span>Prototype</span>
-          </div> -->
         </a>
 
         <a href="/blog/proofit-prd/" class="home-case home-case--proofit">
@@ -55,11 +50,6 @@ import Layout from "@layouts/Default.astro";
           <p>
             A profile, vouch, and verification loop for micro businesses that close deals through WhatsApp.
           </p>
-          <!-- <div class="home-case__tags">
-            <span>B2B</span>
-            <span>Trust</span>
-            <span>India</span>
-          </div> -->
         </a>
       </div>
     </section>
@@ -71,17 +61,31 @@ import Layout from "@layouts/Default.astro";
       </div>
 
       <div class="home-lab__grid">
-        <article class="home-lab-card home-lab-card--yellow">
+        <a href="/lab/linkedin-drafts/" class="home-lab-card home-lab-card--yellow block no-underline">
+          <div class="home-lab-card__status">
+            Active • {labData["linkedin-drafts"].lastRun}
+          </div>
           <span>Automation</span>
           <h3>Reddit → AI summary → LinkedIn</h3>
           <p>Daily product-management signals turned into a draftable post.</p>
-        </article>
-        <article class="home-lab-card home-lab-card--mint">
+        </a>
+        <a href="/lab/newsletter-digest/" class="home-lab-card home-lab-card--mint block no-underline">
+          <div class="home-lab-card__status">
+            Active • {labData["newsletter-digest"].lastRun}
+          </div>
           <span>Automation</span>
           <h3>Newsletters → AI digest → Discord</h3>
           <p>A low-friction way to keep up without pretending inbox zero is real.</p>
-        </article>
-        <article id="this-website-card" class="home-lab-card home-lab-card--black cursor-pointer">
+        </a>
+        <a href="/lab/youtube-summaries/" class="home-lab-card home-lab-card--lavender block no-underline">
+          <div class="home-lab-card__status">
+            Active • {labData["youtube-summaries"].lastRun}
+          </div>
+          <span>Automation</span>
+          <h3>YouTube → Deep Summary → Notion</h3>
+          <p>Turning hour-long engineering podcasts into actionable intel.</p>
+        </a>
+        <article id="this-website-card" class="home-lab-card home-lab-card--black cursor-pointer md:col-span-1 lg:col-span-1">
           <span>This site</span>
           <h3>Neo-brutal shell, calmer inner rooms</h3>
           <p>Visitor logging, terminal shell, custom PRD layouts, and a design system slowly finding its spine.</p>

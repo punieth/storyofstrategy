@@ -1,0 +1,194 @@
+---
+import Layout from "@layouts/Default.astro";
+import localLabData from "../../data/lab-automations.json";
+
+export function getStaticPaths() {
+  return [
+    { params: { slug: 'newsletter-digest' } },
+    { params: { slug: 'linkedin-drafts' } },
+    { params: { slug: 'youtube-summaries' } },
+  ];
+}
+
+const { slug } = Astro.params;
+
+// 1. Attempt to fetch live data from Cloudflare KV
+let data = (localLabData as any)[slug as string];
+const runtime = (Astro.locals as any).runtime;
+
+if (runtime && runtime.env && runtime.env.LAB_STORE) {
+  const kvData = await runtime.env.LAB_STORE.get(`lab:${slug}`);
+  if (kvData) {
+    data = JSON.parse(kvData);
+  }
+}
+
+if (!data) {
+  return Astro.redirect('/404');
+}
+
+interface ContentItem {
+  title: string;
+  source: string;
+  summary: string;
+  key_insights?: string[];
+}
+---
+
+<Layout title={`${data.title} | Lab`} description={data.description}>
+  <main class="lab-page page-surface min-h-screen">
+    <div class="lab-container max-w-6xl mx-auto px-4 py-12">
+      
+      <!-- Breadcrumb & Header -->
+      <nav class="mb-12 flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground/60">
+        <a href="/" class="hover:text-foreground transition-colors">Home</a>
+        <span class="opacity-30">/</span>
+        <span class="text-foreground">The Lab</span>
+        <span class="opacity-30">/</span>
+        <span class="text-foreground">{data.title}</span>
+      </nav>
+
+      <header class="mb-16">
+        <div class="flex flex-wrap items-center gap-4 mb-8">
+           <div class="status-indicator-breathing px-4 py-1.5 border-2 border-black bg-white rounded-full flex items-center gap-2">
+             <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+             <span class="text-[10px] font-black uppercase tracking-widest">{data.status}</span>
+           </div>
+           <span class="text-[10px] font-black text-muted-foreground uppercase tracking-widest border-l-2 border-black/10 pl-4">Engineered Workflow • Last Run: {data.lastRun}</span>
+        </div>
+        
+        <h1 class="text-6xl md:text-8xl font-black tracking-tighter mb-8 leading-[0.85]">{data.title}</h1>
+        <p class="text-xl md:text-2xl text-muted-foreground max-w-2xl leading-tight font-bold opacity-80">
+          {data.description}
+        </p>
+      </header>
+
+      <!-- Pipeline Visualization (Responsive Size) -->
+      <section class="mb-16">
+        <div class="p-4 md:p-10 border-2 md:border-4 border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] rounded-2xl md:rounded-3xl overflow-x-auto no-scrollbar">
+          <div class="flex items-center justify-center gap-2 md:gap-8 min-w-max mx-auto">
+            {data.pipeline.map((step, i) => (
+              <div class="flex items-center gap-2 md:gap-8">
+                {/* Node */}
+                <div class="flex flex-col items-center gap-1 md:gap-3">
+                  <div class="w-10 h-10 md:w-20 md:h-20 shrink-0 rounded-full border-2 md:border-4 border-black bg-cream flex items-center justify-center font-black text-xs md:text-2xl shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                    {step[0]}
+                  </div>
+                  <span class="text-[8px] md:text-[10px] font-black uppercase tracking-tighter md:tracking-widest opacity-60 md:opacity-100 whitespace-nowrap">{step}</span>
+                </div>
+
+                {/* Arrow */}
+                {i < data.pipeline.length - 1 && (
+                  <span class="text-black/20 font-black text-sm md:text-3xl">→</span>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+        <!-- Main Content (The Digest) -->
+        <div class="lg:col-span-8">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12 pb-6 border-b-4 border-black">
+             <h2 class="text-3xl md:text-4xl font-black tracking-tight uppercase">Intelligence Feed</h2>
+             <div class="flex gap-2">
+               <button class="px-5 py-2 border-2 border-black bg-black text-white text-[10px] font-black uppercase tracking-widest hover:translate-x-0.5 hover:-translate-y-0.5 transition-transform shadow-[3px_3px_0px_0px_rgba(36,87,255,1)]">Today</button>
+               <button class="px-5 py-2 border-2 border-black bg-white hover:bg-black hover:text-white text-[10px] font-black uppercase tracking-widest transition-all">Yesterday</button>
+             </div>
+          </div>
+
+          <div class="space-y-32">
+            {(data.content as ContentItem[]).map((item) => (
+              <article class="relative">
+                <div class="flex items-center gap-3 mb-8">
+                  <span class="w-12 h-px bg-primary"></span>
+                  <span class="text-[10px] font-black uppercase tracking-[0.2em] text-primary">{item.source}</span>
+                </div>
+                
+                <h3 class="text-4xl md:text-6xl font-black tracking-tight mb-12 leading-[0.9]">{item.title}</h3>
+                
+                <div class="prose-digest">
+                  <div class="text-xl md:text-2xl text-muted-foreground leading-relaxed font-medium space-y-8">
+                    {item.summary.split('\n\n').map(p => (
+                      <p>{p}</p>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <!-- Sidebar Meta -->
+        <aside class="lg:col-span-4 space-y-10">
+          <div class="sticky top-12">
+            <div class="p-8 border-2 border-black bg-white rounded-2xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+              <h3 class="text-xs font-black uppercase tracking-widest mb-8 border-b-2 border-black/5 pb-4">Execution Metadata</h3>
+              <div class="space-y-6">
+                <div class="group">
+                  <span class="text-[10px] font-black text-muted-foreground uppercase tracking-widest block mb-1">Items Processed</span>
+                  <span class="text-3xl font-black">{data.stats.processed}</span>
+                </div>
+                <div class="group">
+                  <span class="text-[10px] font-black text-muted-foreground uppercase tracking-widest block mb-1">Context Window</span>
+                  <span class="text-3xl font-black">{data.stats.tokens} <small class="text-sm opacity-40">tokens</small></span>
+                </div>
+                <div class="group">
+                  <span class="text-[10px] font-black text-muted-foreground uppercase tracking-widest block mb-1">Model Architecture</span>
+                  <span class="text-xl font-black block mt-1 px-3 py-2 border-2 border-black bg-primary/5 rounded-lg">{data.stats.model}</span>
+                </div>
+              </div>
+
+              <div class="mt-12 pt-8 border-t-2 border-black/5">
+                <p class="text-[10px] font-black uppercase tracking-widest mb-4 opacity-40">Current Pipeline Status</p>
+                <div class="flex items-center gap-2 text-xs font-bold text-green-600">
+                  <span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></span>
+                  Systems Operational
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8 p-8 border-2 border-black bg-primary text-primary-foreground rounded-2xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+               <h3 class="text-lg font-black tracking-tight mb-4 leading-tight">This is an automated workflow.</h3>
+               <p class="text-sm font-bold opacity-80 leading-relaxed mb-8">
+                 The summaries above are generated daily by the Hermes Agent. I use this to maintain high-signal awareness without the inbox fatigue.
+               </p>
+               <button class="w-full py-4 bg-black text-white font-black uppercase tracking-[0.2em] text-[10px] border-2 border-black hover:translate-x-1 hover:-translate-y-1 transition-all shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]">
+                 Build one for your team
+               </button>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .lab-page {
+    background: 
+      radial-gradient(circle at 100% 0%, rgba(36, 87, 255, 0.03), transparent 40%),
+      radial-gradient(circle at 0% 100%, rgba(0, 255, 136, 0.03), transparent 40%),
+      #fbfaf6;
+  }
+
+  .prose-digest p {
+    margin-bottom: 1.5rem;
+    max-width: 65ch;
+  }
+
+  /* Custom scrollbar for the long feed */
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #fbfaf6;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #000;
+    border: 3px solid #fbfaf6;
+    border-radius: 10px;
+  }
+</style>

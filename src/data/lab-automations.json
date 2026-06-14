@@ -1,0 +1,59 @@
+{
+  "newsletter-digest": {
+    "title": "Newsletter Digest",
+    "description": "Daily intelligence gathered from 20+ product and engineering newsletters.",
+    "status": "Active",
+    "lastRun": "2h ago",
+    "pipeline": ["Gmail", "Make.com", "Hermes Agent", "Together AI", "Discord"],
+    "stats": {
+      "processed": 14,
+      "tokens": "12.8k",
+      "model": "Llama 3.1 70B"
+    },
+    "content": [
+      {
+        "title": "The 2026 Intelligence Report: Agents, Infrastructure, and the Death of SaaS",
+        "source": "Aggregated Hermes Feed",
+        "summary": "We are witnessing a fundamental shift in how we interact with LLMs. For the past two years, the industry was obsessed with the 'Chat' interface—a simple request-response cycle. However, the data from leading AI labs suggests that the real value lies in 'Agentic Orchestration' where the LLM is not the product, but the controller of a multi-step workflow. This transition requires a complete rethink of our technical stack. Traditional vector databases are being augmented with 'Knowledge Graphs' to provide agents with relational context that simple similarity search lacks. Furthermore, the concept of 'State' is becoming paramount. An agent needs to remember not just what was said, but what its *intent* was three steps ago. For product engineers, this means moving away from prompt engineering and towards 'Workflow Engineering'. The complexity isn't in what the LLM says, but in how it handles tool failures, rate limits, and conflicting instructions across a 10-minute execution window.\n\nThe first wave of GenAI was dominated by horizontal tools—writing assistants, image generators, and coding companions. While these were impressive, they are rapidly becoming features of the OS or the browser. The next massive opportunity lies in 'Vertical SaaS' where the AI is deeply integrated into a specific industry's messy reality. Consider the Indian SME market. A horizontal tool like ChatGPT is only 20% of the solution. The remaining 80% is the 'Last Mile'—connecting to government portals, managing local tax nuances, and handling multilingual voice-to-text for field agents. Companies that build these 'Agentic Workflows' for specific verticals will create much deeper moats than those building yet another LLM wrapper.\n\nArchitecturally, this means the 'System Prompt' is no longer a static string. It's a dynamic assembly of industry-specific rules, local constraints, and real-time API feedback. The winning stack will be one that can ingest 'Messy Data' (scanned invoices, WhatsApp voice notes, handwritten ledgers) and turn it into 'Structured Action'. This level of integration requires agents that don't just 'think' but 'act' within a sandbox of predefined tools. Memory management is the new bottleneck in long-running agent sessions. Standard RAG is failing for complex reasoning; 'Agentic RAG' with self-correction is the new standard. The 'Human-in-the-loop' is moving from a safety feature to a core training signal. As we move into the second half of 2026, the focus will shift from the sheer intelligence of the model to the reliability and observability of the orchestrator.\n\nFurthermore, the hardware layer is beginning to dictate software architecture. With the rise of local inference on mobile devices and laptops, the 'Cloud-First' mantra is being challenged. We are seeing a split: 'Heavy Reasoning' happens in the cloud (Llama 4, GPT-5), while 'Reactive Execution' happens on the edge. This hybrid approach reduces latency and improves privacy, but it introduces a new layer of complexity: 'State Synchronization'. How do you keep the edge agent and the cloud agent aligned on the user's current task? This is the problem that the next generation of 'Agent Operating Systems' will solve.\n\nFinally, we must address the economic impact. As the cost of intelligence continues to drop, the 'Value of Work' is being redefined. In a world where an agent can handle 80% of a Junior Associate's task load, the premium shifts to 'Curation' and 'Critical Thinking'. The product managers who thrive will be those who can design systems that steer these agents toward high-leverage outcomes. The goal is no longer to 'ship features', but to 'design autonomous systems that solve problems'. The era of the 'Passive User' is ending; the era of the 'Agentic Director' has begun."
+      }
+    ]
+  },
+  "linkedin-drafts": {
+    "title": "LinkedIn Intel",
+    "description": "Scoping high-signal product management discussions from Reddit and drafting them for LinkedIn.",
+    "status": "Active",
+    "lastRun": "5h ago",
+    "pipeline": ["Reddit API", "Python Scraper", "Hermes Agent", "GPT-4o", "Google Docs"],
+    "stats": {
+      "processed": 5,
+      "tokens": "12k",
+      "model": "GPT-4o"
+    },
+    "content": [
+      {
+        "title": "The 'Product Engineer' is the new 10x developer",
+        "source": "r/ProductManagement",
+        "summary": "Draft focusing on the convergence of engineering and product roles in startups. Engineering muscle + Product intuition = Speed."
+      }
+    ]
+  },
+  "youtube-summaries": {
+    "title": "YouTube Intel",
+    "description": "Extracting core insights from 1-hour engineering podcasts into 5-minute actionable summaries.",
+    "status": "Active",
+    "lastRun": "Yesterday",
+    "pipeline": ["YT Transcript", "Whisper v3", "Hermes Agent", "Claude 3.5 Sonnet", "Notion"],
+    "stats": {
+      "processed": 3,
+      "tokens": "45k",
+      "model": "Claude 3.5 Sonnet"
+    },
+    "content": [
+      {
+        "title": "How Vercel builds their Design System",
+        "source": "Front-end Horse",
+        "summary": "Key takeaway: Components are built for 'flexibility at the edges' rather than rigid consistency. Shared state management is the bottleneck."
+      }
+    ]
+  }
+}

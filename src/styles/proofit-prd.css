@@ -187,9 +187,9 @@
   margin-bottom: 1rem;
 }
 
-.proof-lede {
+.proofit-prd .proof-lede {
   max-width: 42rem;
-  margin-top: 1.4rem;
+  margin-top: 2rem;
   color: #44506a;
   font-size: clamp(1.14rem, 0.7vw + 1rem, 1.55rem);
   line-height: 1.45;
