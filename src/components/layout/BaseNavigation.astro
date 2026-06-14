@@ -6,7 +6,6 @@ interface Props {
 
 const navigationItems = [
   { name: "Home", url: "/" },
-  { name: "The Lab", url: "/blog/" },
 ];
 
 const socialIcons = [
@@ -113,13 +112,6 @@ const filteredNavigationItems = navigationItems.filter((item) => {
       </a>
     </div>
     <ul class="flex gap-2 items-center poppins flex-shrink-0">
-      <li
-        class="bg-white text-green border-black border-2 card-shadow hover:bg-light-green active:bg-light-green transition-all duration-200"
-      >
-        <a href="/blog/" class="p-1 px-2 block text-xs" title="Go to The Lab"
-          >The Lab</a
-        >
-      </li>
       {
         socialIcons.map((item) => (
           <li class="bg-white text-green border-black border-2 card-shadow hover:bg-light-green active:bg-light-green transition-all duration-200">

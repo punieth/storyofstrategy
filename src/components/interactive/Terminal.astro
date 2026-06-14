@@ -52,9 +52,10 @@
   const closeBtn = document.getElementById("terminal-close")!;
   const input = document.getElementById("terminal-input") as HTMLInputElement;
   const output = document.getElementById("terminal-output")!;
-
+  const websiteCard = document.getElementById("this-website-card");
+ 
   let isOpen = false;
-
+ 
   type CommandType =
     | "help"
     | "email"
@@ -63,7 +64,7 @@
     | "about"
     | "clear"
     | "exit";
-
+ 
   const commands: Record<string, string | null> = {
     help: "Available commands: email, linkedin, twitter, about, clear, exit",
     email: "theproductpunith@gmail.com",
@@ -73,12 +74,12 @@
     clear: null,
     exit: null,
   };
-
+ 
   const links: Record<string, string> = {
-    linkedin: "https://www.linkedin.com/in/punithrathnakar/",
-    twitter: "https://twitter.com/punithrathnakar", // Replace with actual
+    linkedin: "https://www.linkedin.com/in/punith-rathnakar/",
+    twitter: "https://twitter.com/xPunith",
   };
-
+ 
   function toggleTerminal() {
     isOpen = !isOpen;
     if (isOpen) {
@@ -95,7 +96,7 @@
       trigger.classList.remove("hidden");
     }
   }
-
+ 
   function printLine(text: string, isCommand = false) {
     const p = document.createElement("p");
     if (isCommand) {
@@ -107,15 +108,30 @@
     // Auto scroll to bottom
     terminalWindow.scrollTop = terminalWindow.scrollHeight;
   }
-
+ 
   trigger.addEventListener("click", toggleTerminal);
   closeBtn.addEventListener("click", toggleTerminal);
-
+ 
+  if (websiteCard) {
+    websiteCard.addEventListener("click", () => {
+      if (!isOpen) {
+        toggleTerminal();
+      }
+    });
+  }
+ 
+  window.addEventListener("keydown", (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+      e.preventDefault();
+      toggleTerminal();
+    }
+  });
+ 
   input.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       const cmd = input.value.trim().toLowerCase();
       printLine(cmd, true);
-
+ 
       if (cmd in commands) {
         if (cmd === "clear") {
           output.innerHTML = "";
@@ -135,7 +151,7 @@
       } else if (cmd !== "") {
         printLine(`Command not found: ${cmd}. Type 'help' for options.`);
       }
-
+ 
       input.value = "";
     }
   });

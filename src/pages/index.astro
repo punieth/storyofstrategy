@@ -14,7 +14,7 @@ import BrutalCard from "@components/layout/Brutalcard.astro";
     <div class="px-5 pt-8 pb-6 md:px-10 md:pt-12 md:pb-8">
       <div class="mx-auto w-full max-w-6xl">
         <section id="hero">
-          <BrutalCard tone="hero">
+          <BrutalCard tone="hero" class="min-h-[280px] sm:min-h-[340px] flex flex-col justify-center">
             <div class="flex flex-col gap-5 md:gap-6">
               <p
                 class="brutal-headline-strong text-3xl leading-[1.05] md:text-5xl lg:text-6xl"
@@ -29,9 +29,9 @@ import BrutalCard from "@components/layout/Brutalcard.astro";
                 Lately I've been building AI workflows, thinking about products,
                 and working on a few side projects.
               </p>
-              <a href="#stuff" class="btn btn--sun w-fit"
-                >See what I'm up to ↓</a
-              >
+              <p class="text-xs md:text-sm font-black tracking-wide mt-4 select-none italic text-black/60">
+                “Making a simple thing is never simple.”
+              </p>
             </div>
           </BrutalCard>
         </section>
@@ -45,11 +45,10 @@ import BrutalCard from "@components/layout/Brutalcard.astro";
           <h2 class="brutal-label text-xs md:text-sm tracking-[0.24em] mb-6">
             Things I've been up to
           </h2>
-
+ 
           <div class="bento-grid">
             <div class="bento-cell bento-cell--warm bento-span-2 animate-in">
-              <span class="bento-label">Automations</span>
-              <h3 class="bento-title">Things that run while I sleep</h3>
+              <h3 class="bento-title">Automations</h3>
               <div class="bento-flows">
                 <p class="bento-flow">
                   Reddit r/productmanagement
@@ -66,58 +65,41 @@ import BrutalCard from "@components/layout/Brutalcard.astro";
                   Discord channel
                 </p>
               </div>
-              <span class="bento-tech">n8n · ai · runs daily</span>
             </div>
 
-            <div class="bento-cell bento-cell--cool animate-in">
-              <span class="bento-label">Product exploration</span>
-
-<h3 class="bento-title">
-Remote Home Management
-</h3>
-
-<p class="bento-desc">
-How do you manage a home from another country? An idea using service
-providers, messaging, and automation.
-</p>
-              <span class="bento-tech">n8n · webhooks · mobile</span>
-            </div>
-
-            <div class="bento-cell bento-cell--dark animate-in">
-              <span class="bento-label">Meta</span>
-              <h3 class="bento-title bento-title--light">This website</h3>
+            <div id="this-website-card" class="bento-cell bento-cell--dark animate-in cursor-pointer group">
+              <h3 class="bento-title bento-title--light group-hover:underline">This website</h3>
               <p class="bento-desc bento-desc--light">
-                The thing you're looking at. Custom neo-brutalist design system,
-                visitor tracking, interactive terminal (<kbd class="bento-kbd"
+                Custom neo-brutalist setup, visitor logging, and an interactive terminal shell (<kbd class="bento-kbd"
                   >Ctrl+K</kbd
                 >).
               </p>
-              <span class="bento-tech bento-tech--light"
-                >Astro · UnoCSS · Cloudflare</span
-              >
             </div>
 
-            <div class="bento-cell bento-cell--muted bento-span-2 animate-in">
-              <span class="bento-label">Ideas</span>
-              <h3 class="bento-title">Things I haven't built yet</h3>
+            <a href="/blog/urban-company-teardown/" class="bento-cell bento-cell--cool animate-in block hover:no-underline cursor-pointer group" style="background-color: #ff8a3d;">
+              <h3 class="bento-title group-hover:underline">Urban Company</h3>
+              <p class="bento-desc">
+                Product requirements document (PRD) detailing the SMS Bridge and Smart Buffer MVP designed to solve multi-actor home service coordination for NRIs.
+              </p>
+            </a>
+
+            <a href="/blog/proofit-prd/" class="bento-cell bento-cell--muted animate-in block hover:no-underline cursor-pointer group" style="background-color: #60a5fa;">
+              <h3 class="bento-title group-hover:underline">ProofIt</h3>
+              <p class="bento-desc">
+                Product requirements document (PRD) detailing the trust utility and verification loop built for Bangalore's nano-vendors.
+              </p>
+            </a>
+
+            <div class="bento-cell bento-cell--muted animate-in" style="background-color: #e2e8f0;">
+              <h3 class="bento-title">Future projects</h3>
               <div class="bento-ideas">
                 <div class="bento-idea">
                   <strong>RoastMyLinkedIn</strong>
-                  <span
-                    >AI roasts your LinkedIn profile. Fun, shareable, one-page
-                    app.</span
-                  >
+                  <span>AI LinkedIn profile roaster.</span>
                 </div>
                 <div class="bento-idea">
-                  <strong>Philosophy × Building</strong>
-                  <span
-                    >Curated wisdom for people who think too much and build too
-                    little.</span
-                  >
-                </div>
-                <div class="bento-idea bento-idea--faded">
-                  <strong>+ more</strong>
-                  <span>Half-baked things sitting in my notes app.</span>
+                  <strong>BharatBuilt</strong>
+                  <span>Breaking down how Indian products get made.</span>
                 </div>
               </div>
             </div>
@@ -140,30 +122,11 @@ providers, messaging, and automation.
       </section>
     </div>
 
-    {/* ── THE LAB ── */}
-    <div class="px-5 pb-8 md:px-10 md:pb-10">
-      <div class="mx-auto w-full max-w-4xl">
-        <section class="lab-cta animate-in">
-          <div class="lab-cta-content">
-            <h2
-              class="brutal-headline-strong text-xl md:text-3xl leading-tight"
-            >
-            Product notes
-            </h2>
-            <p class="brutal-body text-sm md:text-base mt-2 max-w-lg">
-              PRDs, product ideas, and things I'm trying to understand.
-            </p>
-          </div>
-          <a href="/blog/" class="btn btn--sun">Enter The Lab →</a>
-        </section>
-      </div>
-    </div>
-
     {/* ── BACKSTORY ── */}
     <div class="px-5 pb-10 md:px-10 md:pb-14">
       <div class="mx-auto w-full max-w-4xl">
         <section id="backstory" class="backstory-section animate-in">
-          <h2 class="brutal-title text-lg md:text-2xl mb-4">The Backstory</h2>
+          <h2 class="righteous text-2xl md:text-4xl mb-4 text-black" style="-webkit-text-stroke: 1.5px black; paint-order: stroke fill;">The Backstory</h2>
           <p class="brutal-body text-base md:text-lg">
             I've spent the last 8 years building software, from trading platforms to UI systems used across engineering teams.
           </p>
