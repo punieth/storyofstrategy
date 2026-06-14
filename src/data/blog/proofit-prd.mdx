@@ -1,6 +1,6 @@
 ---
 title: "ProofIt — Trust & Credibility for Micro-Businesses"
-description: "A professional Product Requirements Document detailing the trust engine and verification loop built for Bangalore's nano B2B vendors."
+description: "A portfolio-grade Product Requirements Document for a trust profile, vouch, and verification loop built for Bangalore's nano B2B vendors."
 pubDate: "May 12 2025"
 author: "Punith Rathnakar"
 tags: ["product management", "case study", "proofit", "b2b"]
@@ -12,446 +12,239 @@ import ProofItPrototypeShowcase from "@components/proofit/ProofItPrototypeShowca
 import "../../styles/proofit-prd.css";
 
 <div class="proofit-prd">
-
-{/* Page Header */}
-
-<div class="my-12 sm:my-16 scroll-mt-24 text-center">
-  <h1 class="text-3xl sm:text-4xl font-extrabold mb-4 break-words hyphens-auto">ProofIt: Real Work. Real Proof.</h1>
-  <p class="text-base sm:text-lg leading-relaxed max-w-3xl mx-auto font-semibold">
-    A trust and credibility utility for micro-vendors and B2B buyers in Bangalore.
-  </p>
-</div>
-
-{/* --- Section: TL;DR --- */}
-
-<div
-  id="tldr"
-  class="bg-blue-50 border-2 border-black rounded-2xl p-4 sm:p-6 md:p-8 shadow-[8px_8px_0_0_#2563eb] mt-8 sm:mt-16 mb-12 sm:mb-16 scroll-mt-24"
->
-  <h2 class="text-2xl sm:text-3xl font-extrabold mb-6 sm:mb-8 text-center !mt-0">TL;DR</h2>
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-    <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-4 sm:p-5 text-center">
-      <div class="inline-flex items-center gap-2 bg-blue-600 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mb-3">
-        <span>🚨</span>
-        <span>The Friction</span>
+  <header class="proof-hero">
+    <div class="proof-hero__mark">ProofIt</div>
+    <div class="proof-hero__grid">
+      <div>
+        <p class="proof-kicker">Bangalore / Micro B2B / Trust Infrastructure</p>
+        <h1>Real work needs portable proof.</h1>
+        <p class="proof-lede">{"A single shareable profile that helps nano-vendors prove GST status, past work, client trust, and quote readiness when a buyer asks: “Can you send company details?”"}</p>
       </div>
-      <p class="text-base leading-relaxed">
-        Nano B2B businesses lose deals at the critical "send company details" stage. They lack the website or documentation to quickly prove legitimacy to procurement managers.
-      </p>
+      <aside class="proof-brief" aria-label="ProofIt brief">
+        <div>
+          <span>Critical moment</span>
+          <strong>Buyer asks for proof before approving a vendor.</strong>
+        </div>
+        <div>
+          <span>Core bet</span>
+          <strong>Credibility should be easier to send than a PDF.</strong>
+        </div>
+        <div>
+          <span>North star</span>
+          <strong>300 self-reported deal closes / month by M6.</strong>
+        </div>
+      </aside>
     </div>
-    <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-4 sm:p-5 text-center">
-      <div class="inline-flex items-center gap-2 bg-indigo-700 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mb-3">
-        <span>💡</span>
-        <span>The Solution</span>
+  </header>
+
+  <section class="proof-section proof-section--problem" id="problem">
+    <div class="proof-section-heading">
+      <p class="proof-label">01 / Problem</p>
+      <h2>The deal does not die at discovery. It dies at verification.</h2>
+    </div>
+    <div class="proof-story-card">
+      <div>
+        <h3>The moment</h3>
+        <p>{"A procurement manager finds a reliable print shop through a colleague. The price works. The owner sounds experienced. Then she needs to share vendor details with her manager."}</p>
       </div>
-      <p class="text-base leading-relaxed">
-        A single, shareable URL featuring live government GST check, a simple catalog of past work, and verified client "vouches" that cannot be cherry-picked or gamed.
-      </p>
-    </div>
-    <div class="bg-white border-2 border-black rounded-2xl shadow-[6px_6px_0_0_#000] p-4 sm:p-5 text-center">
-      <div class="inline-flex items-center gap-2 bg-emerald-700 text-white text-xs font-bold uppercase px-2.5 py-1 rounded-full mb-3">
-        <span>🎯</span>
-        <span>North Star KPI</span>
+      <blockquote>
+        <span>“Can you send me your company details?”</span>
+      </blockquote>
+      <div>
+        <h3>The failure</h3>
+        <p>{"The vendor sends a Canva flyer, raw work photos, and a UPI QR. The buyer chooses the larger supplier with a website, invoice template, and obvious legitimacy."}</p>
       </div>
-      <p class="text-3xl sm:text-4xl font-bold">300</p>
-      <p class="text-sm text-gray-600">self-reported deal closes per month by Month 6.</p>
     </div>
-  </div>
-</div>
-
-{/* --- Section: The Problem --- */}
-<div id="problem" class="my-12 sm:my-16 scroll-mt-24">
-    <h2 class="text-2xl sm:text-3xl font-extrabold mb-4">1. The Problem</h2>
-    <h3 class="text-xl font-bold mb-2">1.1 How Small Businesses Lose Deals Today</h3>
-    <p class="text-base sm:text-lg leading-relaxed mb-4">
-        A procurement manager at a 50-person company in Bangalore needs a vendor to print 2,000 branded folders for an office event. She asks a colleague, gets a WhatsApp number for a print shop in Rajajinagar, and messages them.
-    </p>
-    <p class="text-base sm:text-lg leading-relaxed mb-4">
-        The conversation goes well. The print shop owner seems experienced. The price is right. Then she asks: <strong>"Can you send me your company details? I need to share it with my manager before we confirm."</strong>
-    </p>
-    <p class="text-base sm:text-lg leading-relaxed mb-4">
-        The print shop owner sends a Canva-made flyer, a Google Photos link with some work samples, and his UPI QR code. She looks at it, feels unsure, and calls the larger print company she used last time — the one that costs 30% more but has a proper website and a GST invoice template ready.
-    </p>
-    <p class="text-base sm:text-lg leading-relaxed mb-4">
-        The small print shop lost the deal. Not because their work was bad. Because they could not present themselves credibly in that one moment.
-    </p>
-
-    <div class="bg-amber-50 border-2 border-amber-500 rounded-2xl p-6 my-6 shadow-[4px_4px_0_0_#d97706]">
-        <h4 class="font-bold text-amber-800 text-lg uppercase tracking-wider mb-2">The Core Problem</h4>
-        <p class="text-base leading-relaxed text-amber-950">
-            Micro and nano businesses in Bangalore do good work and have real clients who trust them. But the moment a new buyer asks for proof — company details, past work, GST, client references — they have nothing organised to show. They lose deals not because of capability but because of credibility.
-        </p>
+    <div class="proof-pullout">
+      <p><strong>Core insight:</strong> Small vendors often lose because their proof is scattered, not because their work is weak.</p>
     </div>
+  </section>
 
-    <h3 class="text-xl font-bold mb-2">1.2 The Moment the Deal Dies</h3>
-    <p class="text-base sm:text-lg leading-relaxed mb-4">
-        This is not a discovery problem. Buyers already find small vendors through colleague referrals, WhatsApp groups, and Justdial. The deal does not die at discovery.
-    </p>
-    <p class="text-base sm:text-lg leading-relaxed mb-6">
-        It dies at one specific moment — when the buyer asks "send me your company details" and the vendor scrambles. ProofIt is built entirely around that moment. We give vendors a single link they can send in under 10 seconds that answers every question a buyer has before committing to an order.
-    </p>
-
-    <h3 class="text-xl font-bold mb-2">1.3 Why Existing Tools Do Not Solve This</h3>
-    
-    <div class="overflow-x-auto my-6 border-2 border-black rounded-none">
-        <table>
-            <thead>
-                <tr>
-                    <th>Tool</th>
-                    <th>Why it fails at the critical moment</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Google Maps</strong></td>
-                    <td>Built for consumers finding local shops. Does not show GST status, work samples for B2B orders, or client references from other businesses.</td>
-                </tr>
-                <tr>
-                    <td><strong>Justdial / IndiaMART</strong></td>
-                    <td>Paid listing directories. The trust signal is a paid badge — not real client proof. Buyers know this and discount it.</td>
-                </tr>
-                <tr>
-                    <td><strong>Instagram / Facebook</strong></td>
-                    <td>Good for showing photos. But no GST verification, no vouch system, no quote tool. Buyers in a procurement flow do not trust social media as a reference.</td>
-                </tr>
-                <tr>
-                    <td><strong>Canva / Websites</strong></td>
-                    <td>Creates a look but not trust. No client verification. Expensive to maintain. Most small vendors set it up once and never update it.</td>
-                </tr>
-                <tr>
-                    <td><strong>WhatsApp Business</strong></td>
-                    <td>Good for communication. Zero credibility layer. Sending a catalogue on WhatsApp does not answer "are you GST registered" or "have other companies worked with you."</td>
-                </tr>
-            </tbody>
-        </table>
+  <section class="proof-section" id="personas">
+    <div class="proof-section-heading">
+      <p class="proof-label">02 / Actors</p>
+      <h2>ProofIt serves both sides of the trust gap.</h2>
     </div>
-</div>
-
-{/* --- Section: User Personas --- */}
-<div id="personas" class="my-12 sm:my-16 scroll-mt-24">
-    <h2 class="text-2xl sm:text-3xl font-extrabold mb-4">2. Who We Are Building For</h2>
-    <p class="text-base sm:text-lg leading-relaxed mb-6">
-        ProofIt has two core user personas: the B2B vendor trying to prove their capability, and the procurement buyer attempting to establish credibility quickly.
-    </p>
-    
-    <h3 class="text-xl font-bold mb-4">2.1 The Vendors — Micro & Nano Business Owners</h3>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-        <div class="bg-white border-2 border-black p-5 shadow-[4px_4px_0_0_#000] rounded-xl">
-            <h4 class="font-extrabold text-blue-600 text-lg mb-1">Suresh — Offset Print Shop</h4>
-            <span class="text-xs text-gray-500 font-bold block mb-3">Rajajinagar, Bangalore • 3 Employees</span>
-            <p class="text-sm leading-relaxed">
-                Runs his print shop for 11 years. Wants to land corporate clients (IT companies, D2C brands) but the deal always stalls when they ask for "company details". He has a GST number but has no professional website or organized portfolio. He loses 2 to 3 large orders every month because he looks less organised.
-            </p>
-        </div>
-        <div class="bg-white border-2 border-black p-5 shadow-[4px_4px_0_0_#000] rounded-xl">
-            <h4 class="font-extrabold text-blue-600 text-lg mb-1">Anita — Catering Operations</h4>
-            <span class="text-xs text-gray-500 font-bold block mb-3">Koramangala, Bangalore • 2 Helpers</span>
-            <p class="text-sm leading-relaxed">
-                Renders catering services from home. Has 30 regular clients who love her food but cannot land corporate contracts. When HR asks for references, she sends hand-typed Word docs and raw mobile photos. Anita loses contracts to catering companies who submit structured PDF proposals with GST details.
-            </p>
-        </div>
-        <div class="bg-white border-2 border-black p-5 shadow-[4px_4px_0_0_#000] rounded-xl">
-            <h4 class="font-extrabold text-blue-600 text-lg mb-1">Ravi — Packaging Supplier</h4>
-            <span class="text-xs text-gray-500 font-bold block mb-3">Peenya Industrial Area • ₹15L Annual Sales</span>
-            <p class="text-sm leading-relaxed">
-                Supplies boxes and bubble wrap. He is GST registered but D2C brands don't know how to evaluate if he can handle scale. Ravi has no way to prove credibility except telling new clients to call his old clients, which buyers hate doing.
-            </p>
-        </div>
-        <div class="bg-white border-2 border-black p-5 shadow-[4px_4px_0_0_#000] rounded-xl">
-            <h4 class="font-extrabold text-blue-600 text-lg mb-1">Deepa — Flex & Digital Print</h4>
-            <span class="text-xs text-gray-500 font-bold block mb-3">Indiranagar, Bangalore • 2 Staff Members</span>
-            <p class="text-sm leading-relaxed">
-                Runs a seasonal design studio. Wants to get on approved vendor lists for event companies to stabilize recurring volume, but does not have a formal business profile packet to submit for corporate vendor empanelment.
-            </p>
-        </div>
+    <div class="proof-actor-grid">
+      <article class="proof-card">
+        <p class="proof-card-label">Vendor</p>
+        <h3>Suresh, print shop owner</h3>
+        <p>Has real clients, GST, and 11 years of work, but no clean way to package credibility for corporate buyers.</p>
+      </article>
+      <article class="proof-card">
+        <p class="proof-card-label">Vendor</p>
+        <h3>Anita, caterer</h3>
+        <p>Has happy repeat customers, but loses office contracts when HR asks for references and a professional profile.</p>
+      </article>
+      <article class="proof-card">
+        <p class="proof-card-label">Buyer</p>
+        <h3>Priya, ops manager</h3>
+        <p>Finds vendors through referrals, but still needs GST, work samples, and references before she can approve.</p>
+      </article>
     </div>
+  </section>
 
-    <h3 class="text-xl font-bold mb-4">2.2 The Buyers — People Who Need to Trust Quickly</h3>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="bg-white border-2 border-black p-5 shadow-[4px_4px_0_0_#2563eb] rounded-xl">
-            <h4 class="font-extrabold text-indigo-700 text-lg mb-1">Priya — Operations Manager</h4>
-            <span class="text-xs text-gray-500 font-bold block mb-3">D2C Brand • HSR Layout</span>
-            <p class="text-sm leading-relaxed">
-                Sources packaging and stationery. Gets numbers from colleague references but has to manually verify GST compliance, check past works, and call references. She needs to shortlist and approve vendors in 2-3 days and cannot waste hours on calls.
-            </p>
-        </div>
-        <div class="bg-white border-2 border-black p-5 shadow-[4px_4px_0_0_#2563eb] rounded-xl">
-            <h4 class="font-extrabold text-indigo-700 text-lg mb-1">Kiran — Office Admin</h4>
-            <span class="text-xs text-gray-500 font-bold block mb-3">IT Company • Whitefield</span>
-            <p class="text-sm leading-relaxed">
-                Manages office procurement. Has a personal WhatsApp roster of "trusted vendors" built over 5 years. When he changes jobs or goes on leave, the business loses the list. He has no way to add new vendors without trial-and-error risk.
-            </p>
-        </div>
+  <section class="proof-section proof-prototype-section" id="prototype">
+    <div class="proof-section-heading">
+      <p class="proof-label">03 / Prototype</p>
+      <h2>The idea is easiest to judge as a buyer flow.</h2>
+      <p>{"The live prototype shows how a vendor profile, client vouch, and quote-ready trust deck could work in the moment a buyer needs confidence."}</p>
     </div>
-</div>
-
-{/* --- Section: Interactive Showcase --- */}
-<div id="prototype" class="my-12 sm:my-16 scroll-mt-24">
-    <h2 class="text-2xl sm:text-3xl font-extrabold mb-4">3. Interactive Prototype</h2>
-    <p class="text-base sm:text-lg leading-relaxed mb-6">
-        Below is the live ProofIt prototype. Play around with it to see how Suresh, Anita, and Ravi can present their credentials, generate client vouches, and provide a single clean trust deck to buyers in under 30 seconds.
-    </p>
-    
-    <ProofItPrototypeShowcase client:visible />
-</div>
-
-{/* --- Section: How it Works --- */}
-<div id="product" class="my-12 sm:my-16 scroll-mt-24">
-    <h2 class="text-2xl sm:text-3xl font-extrabold mb-4">4. What ProofIt Does</h2>
-    <p class="text-base sm:text-lg leading-relaxed mb-4">
-        ProofIt gives micro and nano business owners a single link they can share in any WhatsApp conversation when a buyer asks for company details.
-    </p>
-    <p class="text-base sm:text-lg leading-relaxed mb-4">
-        That link opens a clean, mobile-friendly business profile that shows everything a buyer needs to decide: GST verification, past work photos, client vouches, what kind of orders they handle, and a quote they can download and share with their manager.
-    </p>
-    
-    <blockquote class="my-6 p-4 border-l-4 bg-blue-50 text-blue-900 border-blue-600 quote text-lg font-bold">
-        "No app download for buyers. No complex booking platform. No commission on deals. Just proof — sent in one tap, viewed in 30 seconds."
-    </blockquote>
-
-    <h3 class="text-xl font-bold mb-2">4.1 The Incentive Loop — Why Vendors Will Use It</h3>
-    <p class="text-base sm:text-lg leading-relaxed mb-4">
-        A vendor will not use ProofIt because it is a nice idea. They will use it because it directly helps them close a deal they would otherwise lose.
-    </p>
-    <p class="text-base sm:text-lg leading-relaxed mb-4">
-        <strong>The Loop:</strong> A vendor is already negotiating a deal on WhatsApp. The buyer asks for company details. Instead of scrambling, the vendor sends their ProofIt link. The buyer checks it, gets confident, and confirms the order. The vendor just closed a deal they would have lost. That is the incentive.
-    </p>
-
-    <h3 class="text-xl font-bold mb-2">4.2 What ProofIt is Not</h3>
-    <ul class="list-disc list-inside space-y-2 text-base sm:text-lg my-4">
-        <li><strong>Not a booking platform:</strong> Vendors do not get leads through ProofIt.</li>
-        <li><strong>Not commission-based:</strong> We are not in the transaction flow.</li>
-        <li><strong>Not competing with Urban Company:</strong> UC is for consumer home services. ProofIt is for B2B contracts negotiated between businesses.</li>
-        <li><strong>Not a directory:</strong> Discovery happens through referrals, as it always has. ProofIt only solves what happens <em>after</em> discovery.</li>
-    </ul>
-</div>
-
-{/* --- Section: Vouch System --- */}
-<div id="vouch" class="my-12 sm:my-16 scroll-mt-24">
-    <h2 class="text-2xl sm:text-3xl font-extrabold mb-4">5. The Vouch System</h2>
-    <p class="text-base sm:text-lg leading-relaxed mb-4">
-        The vouch system is the trust engine inside ProofIt. It is how a vendor's reputation — which currently lives only inside personal relationships — becomes visible and portable.
-    </p>
-
-    <h3 class="text-xl font-bold mb-2">5.1 How a Vouch Works</h3>
-    <ol class="list-decimal list-inside space-y-2 text-base sm:text-lg my-4">
-        <li>Vendor completes a job and receives payment.</li>
-        <li>ProofIt sends the vendor a ready-made WhatsApp message to forward to their client: <em>"Hi, it was great working with you. Would you mind sharing a quick review? Takes 30 seconds — [link]"</em></li>
-        <li>Client opens the link on their phone. No app download. One question: <em>"Would you work with this vendor again?"</em> — Yes / Maybe / No.</li>
-        <li>Optional second screen: <em>"What would you tell a colleague about this vendor?"</em> Free text, capped at 100 characters.</li>
-        <li>The vendor's profile updates in real time. Vouch count goes up.</li>
-    </ol>
-
-    <h3 class="text-xl font-bold mb-2">5.2 Why We Show Numbers, Not Stars</h3>
-    <p class="text-base sm:text-lg leading-relaxed mb-4">
-        ProofIt does not show a star rating. Stars are easy to fake, easy to misread, and tell you nothing about volume. Instead we show: <strong>"27 of 31 clients would work with this vendor again."</strong>
-    </p>
-    <p class="text-base sm:text-lg leading-relaxed mb-4">
-        This is harder to game. It shows both satisfaction and volume. A buyer reading this knows that 31 real clients have worked with this vendor — that is meaningful social proof on its own, before they even read the percentage.
-    </p>
-
-    <h3 class="text-xl font-bold mb-2">5.3 Keeping Vouches Honest</h3>
-    <ul class="list-disc list-inside space-y-2 text-base sm:text-lg my-4">
-        <li><strong>Single-use links:</strong> Vouch links cannot be reused or forwarded.</li>
-        <li><strong>Cold-start protections:</strong> Profiles with fewer than 8 vouches show an "Early Profile" label instead of a vouch score. This prevents vendors from sending links to only 3 handpicked clients and showing a perfect score.</li>
-        <li><strong>Client-initiated vouches:</strong> Clients can leave a vouch directly from the public profile even without a link from the vendor. This gives unhappy clients a voice.</li>
-        <li><strong>Automatic triggers (Phase 2):</strong> Vouch links are triggered automatically after a confirmed UPI payment, removing the cherry-picking problem entirely.</li>
-    </ul>
-</div>
-
-{/* --- Section: Features --- */}
-<div id="features" class="my-12 sm:my-16 scroll-mt-24">
-    <h2 class="text-2xl sm:text-3xl font-extrabold mb-4">6. Product Features</h2>
-    
-    <div class="overflow-x-auto my-6 border-2 border-black rounded-none">
-        <table>
-            <thead>
-                <tr>
-                    <th>Feature</th>
-                    <th>What it does</th>
-                    <th>Priority</th>
-                    <th>In MVP?</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Business profile page</strong></td>
-                    <td>Public URL at proofit.in/businessname — mobile-friendly, shareable link</td>
-                    <td>P0</td>
-                    <td>Yes</td>
-                </tr>
-                <tr>
-                    <td><strong>GST verification badge</strong></td>
-                    <td>Live check via GST API — green badge if registered, clearly labelled if not</td>
-                    <td>P0</td>
-                    <td>Yes</td>
-                </tr>
-                <tr>
-                    <td><strong>Work photo gallery</strong></td>
-                    <td>Up to 20 photos from phone camera roll, with captions</td>
-                    <td>P0</td>
-                    <td>Yes</td>
-                </tr>
-                <tr>
-                    <td><strong>Vouch collection</strong></td>
-                    <td>WhatsApp link to client — 2-screen form — live profile update</td>
-                    <td>P0</td>
-                    <td>Yes</td>
-                </tr>
-                <tr>
-                    <td><strong>Shareable link and QR</strong></td>
-                    <td>One link to paste in WhatsApp, QR code to print on visiting card</td>
-                    <td>P0</td>
-                    <td>Yes</td>
-                </tr>
-                <tr>
-                    <td><strong>Business details</strong></td>
-                    <td>Order range, turnaround time, areas served, languages</td>
-                    <td>P0</td>
-                    <td>Yes</td>
-                </tr>
-                <tr>
-                    <td><strong>Quote builder</strong></td>
-                    <td>Line-item form — generates branded PDF quote with profile link attached</td>
-                    <td>P1</td>
-                    <td>Yes</td>
-                </tr>
-                <tr>
-                    <td><strong>PDF company profile</strong></td>
-                    <td>1-page export of the full profile — for email or printing</td>
-                    <td>P1</td>
-                    <td>Yes</td>
-                </tr>
-                <tr>
-                    <td><strong>Vendor analytics</strong></td>
-                    <td>Profile views, vouch conversion rate, quote opens per week</td>
-                    <td>P1</td>
-                    <td>No</td>
-                </tr>
-                <tr>
-                    <td><strong>Buyer search</strong></td>
-                    <td>Search verified vendors by category and Bangalore neighbourhood</td>
-                    <td>P1</td>
-                    <td>No</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="proof-prototype-shell">
+      <ProofItPrototypeShowcase client:load />
     </div>
-</div>
+  </section>
 
-{/* --- Section: GTM & Growth --- */}
-<div id="gogo" class="my-12 sm:my-16 scroll-mt-24">
-    <h2 class="text-2xl sm:text-3xl font-extrabold mb-4">7. Go-To-Market & Pricing</h2>
-    <h3 class="text-xl font-bold mb-2">7.1 Go Where Vendors Gather</h3>
-    <p class="text-base sm:text-lg leading-relaxed mb-4">
-        We do not launch with digital ads. We go directly to where micro B2B vendors are located in Bangalore:
-    </p>
-    <ul class="list-disc list-inside space-y-2 text-base sm:text-lg my-4">
-        <li><strong>Print shops:</strong> Rajajinagar and Yeshwanthpur (high density, 40-60 shops within walking distance).</li>
-        <li><strong>Packaging suppliers:</strong> Peenya Industrial Area.</li>
-        <li><strong>Caterers & Tiffins:</strong> Koramangala, JP Nagar, and Jayanagar.</li>
-        <li><strong>Flex & Digital Studios:</strong> Indiranagar, Marathahalli, and Whitefield.</li>
-    </ul>
-
-    <h3 class="text-xl font-bold mb-2">7.2 The Referral Flywheel</h3>
-    <p class="text-base sm:text-lg leading-relaxed mb-6">
-        Every vendor who sends a ProofIt link to a buyer is also showing that buyer that ProofIt exists. Buyers who see a profile will search for other vendors on ProofIt the next time they need to evaluate someone. This is how supply creates demand without paid marketing.
-    </p>
-
-    <h3 class="text-xl font-bold mb-2">7.3 Pricing Strategy</h3>
-    
-    <div class="overflow-x-auto my-6 border-2 border-black rounded-none">
-        <table>
-            <thead>
-                <tr>
-                    <th>Plan</th>
-                    <th>Cost</th>
-                    <th>What you get</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Free — always</strong></td>
-                    <td>₹0</td>
-                    <td>Profile page, GST badge, up to 30 vouches, 20 photos, shareable link and QR, PDF company profile. The core value is free. Forever.</td>
-                </tr>
-                <tr>
-                    <td><strong>ProofIt Pro</strong></td>
-                    <td>₹249 / mo</td>
-                    <td>Unlimited vouches, quote builder, vendor analytics dashboard, priority placement in buyer search, Pro badge on profile.</td>
-                </tr>
-                <tr>
-                    <td><strong>ProofIt Business</strong></td>
-                    <td>₹499 / mo</td>
-                    <td>Everything in Pro plus GST invoice generation, 2 team members on one profile, featured vendor status in category search.</td>
-                </tr>
-            </tbody>
-        </table>
+  <section class="proof-section" id="product">
+    <div class="proof-section-heading">
+      <p class="proof-label">04 / Product</p>
+      <h2>A credibility link for the exact WhatsApp moment.</h2>
     </div>
-</div>
-
-{/* --- Section: Success Metrics --- */}
-<div id="metrics" class="my-12 sm:my-16 scroll-mt-24">
-    <h2 class="text-2xl sm:text-3xl font-extrabold mb-4">8. How We Know It Is Working</h2>
-    <p class="text-base sm:text-lg leading-relaxed mb-4">
-        We measure our success by how much business is actually closed through the credibility link.
-    </p>
-
-    <div class="overflow-x-auto my-6 border-2 border-black rounded-none">
-        <table>
-            <thead>
-                <tr>
-                    <th>Metric</th>
-                    <th>Target (6 months)</th>
-                    <th>How we measure it</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Vendor profiles created</strong></td>
-                    <td>500 Bangalore profiles by Month 3</td>
-                    <td>Profile creation database logs</td>
-                </tr>
-                <tr>
-                    <td><strong>Profile completion rate</strong></td>
-                    <td>More than 60% with GST badge, 5+ photos, 3 vouches</td>
-                    <td>Onboarding funnel analytics</td>
-                </tr>
-                <tr>
-                    <td><strong>Vouch response rate</strong></td>
-                    <td>More than 30% of vouch links sent get completed</td>
-                    <td>Vouch system event log</td>
-                </tr>
-                <tr>
-                    <td><strong>Vendor retention at Month 2</strong></td>
-                    <td>More than 40% of Month 1 signups still active</td>
-                    <td>Cohort retention analysis</td>
-                </tr>
-                <tr>
-                    <td><strong>Quote PDF downloads</strong></td>
-                    <td>More than 300 quotes downloaded per month by Month 4</td>
-                    <td>Quote builder click events</td>
-                </tr>
-                <tr>
-                    <td><strong>Pro plan conversion</strong></td>
-                    <td>More than 6% of active vendors on Pro within 6 months</td>
-                    <td>Stripe / payment gateway events</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="proof-loop">
+      <article>
+        <span>1</span>
+        <h3>Vendor builds profile</h3>
+        <p>GST, order range, photos, areas served, languages, and business details live in one public URL.</p>
+      </article>
+      <article>
+        <span>2</span>
+        <h3>Buyer asks for details</h3>
+        <p>The vendor sends one ProofIt link instead of assembling photos, PDFs, references, and GST screenshots.</p>
+      </article>
+      <article>
+        <span>3</span>
+        <h3>Buyer gets confidence</h3>
+        <p>The profile answers “is this real?”, “have others used them?”, and “can I forward this internally?”</p>
+      </article>
+      <article>
+        <span>4</span>
+        <h3>Vendor captures proof</h3>
+        <p>After work is completed, the vendor asks the client for a vouch that updates the profile.</p>
+      </article>
     </div>
-</div>
-
-{/* --- Section: Open Questions --- */}
-<div id="unresolved" class="my-12 sm:my-16 scroll-mt-24">
-    <h2 class="text-2xl sm:text-3xl font-extrabold mb-4">9. Questions We Have Not Answered Yet</h2>
-    <div class="bg-rose-50 border-2 border-rose-500 rounded-2xl p-6 my-6 shadow-[4px_4px_0_0_#e11d48]">
-        <ul class="list-disc list-inside space-y-2 text-rose-950 text-base">
-            <li><strong>Public Vouch Details:</strong> Should individual client vouch notes be public on the profile or kept private with only the aggregate score shown?</li>
-            <li><strong>DPDP Act Compliance:</strong> Client vouch data is personal data under India's DPDP Act 2023. We need a clear data retention policy.</li>
-            <li><strong>Vouch Dispute Management:</strong> Do we let vendors flag a vouch they believe is fake or malicious?</li>
-        </ul>
+    <div class="proof-not-box">
+      <h3>What ProofIt is not</h3>
+      <ul>
+        <li>Not a lead marketplace.</li>
+        <li>Not a booking platform.</li>
+        <li>Not a paid listing badge pretending to be trust.</li>
+        <li>Not a website builder. It is proof packaged for procurement.</li>
+      </ul>
     </div>
-</div>
+  </section>
 
+  <section class="proof-section" id="vouch">
+    <div class="proof-section-heading">
+      <p class="proof-label">05 / Trust Engine</p>
+      <h2>Vouches convert private reputation into portable signal.</h2>
+    </div>
+    <div class="proof-vouch-grid">
+      <article class="proof-card proof-card--dark">
+        <p class="proof-card-label">Signal design</p>
+        <h3>Numbers, not stars</h3>
+        <p>“27 of 31 clients would work with this vendor again” is harder to fake and more useful than a 4.8 rating.</p>
+      </article>
+      <article class="proof-card">
+        <p class="proof-card-label">Integrity</p>
+        <h3>Single-use links</h3>
+        <p>Each vouch request is tied to a completed job context, reducing reused or forwarded testimonial links.</p>
+      </article>
+      <article class="proof-card">
+        <p class="proof-card-label">Cold start</p>
+        <h3>Early Profile mode</h3>
+        <p>Profiles with fewer than 8 vouches show an early-stage label instead of overclaiming credibility.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="proof-section" id="features">
+    <div class="proof-section-heading">
+      <p class="proof-label">06 / MVP Scope</p>
+      <h2>Ship the smallest trust packet that can close a deal.</h2>
+    </div>
+    <div class="proof-feature-stack">
+      <article>
+        <span>P0</span>
+        <h3>Public business profile</h3>
+        <p>Mobile-friendly URL with GST badge, photos, business details, share link, and QR.</p>
+      </article>
+      <article>
+        <span>P0</span>
+        <h3>Vouch collection</h3>
+        <p>WhatsApp-friendly client request flow with real-time profile update.</p>
+      </article>
+      <article>
+        <span>P1</span>
+        <h3>Quote builder</h3>
+        <p>Line-item quote export that attaches the ProofIt profile as trust context.</p>
+      </article>
+      <article>
+        <span>Later</span>
+        <h3>Buyer search</h3>
+        <p>Search verified vendors by category and Bangalore neighborhood after supply quality is proven.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="proof-section" id="gogo">
+    <div class="proof-section-heading">
+      <p class="proof-label">07 / GTM</p>
+      <h2>Start where vendors already cluster and trust already travels.</h2>
+    </div>
+    <div class="proof-gtm-grid">
+      <article class="proof-card">
+        <h3>Beachhead categories</h3>
+        <p>Print shops in Rajajinagar, packaging suppliers in Peenya, caterers in Koramangala, and flex studios around Indiranagar.</p>
+      </article>
+      <article class="proof-card">
+        <h3>Referral flywheel</h3>
+        <p>Every vendor sending a ProofIt link introduces buyers to ProofIt. Supply creates future demand without starting as a directory.</p>
+      </article>
+      <article class="proof-card">
+        <h3>Pricing wedge</h3>
+        <p>Free core profile forever. Pro unlocks unlimited vouches, quote builder, analytics, and priority buyer-facing features.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="proof-section" id="metrics">
+    <div class="proof-section-heading">
+      <p class="proof-label">08 / Metrics</p>
+      <h2>The product wins only if credibility turns into closed work.</h2>
+    </div>
+    <div class="proof-metrics">
+      <article>
+        <span>500</span>
+        <h3>Profiles by M3</h3>
+        <p>Bangalore vendor profiles created.</p>
+      </article>
+      <article>
+        <span>60%</span>
+        <h3>Profile quality</h3>
+        <p>Profiles with GST, 5+ photos, and 3+ vouches.</p>
+      </article>
+      <article>
+        <span>30%</span>
+        <h3>Vouch response</h3>
+        <p>Client vouch request completion rate.</p>
+      </article>
+      <article>
+        <span>300</span>
+        <h3>Deal closes</h3>
+        <p>Self-reported closed deals per month by Month 6.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="proof-section" id="unresolved">
+    <div class="proof-section-heading">
+      <p class="proof-label">09 / Open Questions</p>
+      <h2>The hard parts are governance and trust abuse.</h2>
+    </div>
+    <div class="proof-question-list">
+      <p><strong>Public vouch details:</strong> Should buyer notes be public, private, or summarized?</p>
+      <p><strong>DPDP compliance:</strong> How long should client vouch data be retained?</p>
+      <p><strong>Disputes:</strong> What happens when a vendor flags a vouch as fake or malicious?</p>
+    </div>
+  </section>
 </div>

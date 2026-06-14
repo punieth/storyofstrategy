@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 
 export default function UrbanCompanyPrototypeShowcase() {
   const [isLoading, setIsLoading] = useState(true);
+  const [loadTimedOut, setLoadTimedOut] = useState(false);
   const [iframeKey, setIframeKey] = useState(0);
   const [isMounted, setIsMounted] = useState(false);
   
@@ -29,10 +30,68 @@ export default function UrbanCompanyPrototypeShowcase() {
     return () => resizeObserver.disconnect();
   }, [isMounted]);
 
+  useEffect(() => {
+    if (!isLoading) return;
+
+    const timeout = window.setTimeout(() => {
+      setLoadTimedOut(true);
+    }, 10000);
+
+    return () => window.clearTimeout(timeout);
+  }, [isLoading, iframeKey]);
+
   const handleRefresh = () => {
     setIsLoading(true);
+    setLoadTimedOut(false);
     setIframeKey((prev) => prev + 1);
   };
+
+  const handleFrameLoad = () => {
+    setIsLoading(false);
+    setLoadTimedOut(false);
+  };
+
+  const LoadingOverlay = ({ compact = false }: { compact?: boolean }) => (
+    <div className="absolute inset-0 bg-[#0f172a] flex flex-col items-center justify-center p-4 sm:p-6 z-30 text-center">
+      {loadTimedOut ? (
+        <div className="max-w-sm rounded-2xl border-2 border-white/15 bg-white/10 p-4 text-white shadow-[0_18px_50px_rgba(0,0,0,0.22)]">
+          <p className={`${compact ? "text-[10px]" : "text-xs"} font-black uppercase tracking-wider text-amber-300`}>
+            Embed is taking longer than usual
+          </p>
+          <p className={`${compact ? "mt-2 text-[11px]" : "mt-3 text-sm"} leading-relaxed text-white/80`}>
+            The live prototype is hosted externally, so it may be blocked or slow inside an iframe.
+          </p>
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+            <button
+              type="button"
+              onClick={handleRefresh}
+              className="rounded-lg border border-white/20 bg-white px-3 py-1.5 text-[10px] font-black uppercase tracking-wider text-slate-950"
+            >
+              Retry
+            </button>
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-lg border border-black bg-[#fbbf24] px-3 py-1.5 text-[10px] font-black uppercase tracking-wider text-black"
+            >
+              Open Live
+            </a>
+          </div>
+        </div>
+      ) : (
+        <div className="flex flex-col items-center gap-3 sm:gap-4">
+          <div className={`${compact ? "w-10 h-10" : "w-12 h-12"} relative`}>
+            <div className="absolute inset-0 rounded-full border-4 border-amber-500/20 animate-pulse"></div>
+            <div className="absolute inset-0 rounded-full border-4 border-t-amber-500 animate-spin"></div>
+          </div>
+          <p className={`${compact ? "text-[10px]" : "text-sm"} font-black uppercase tracking-wider text-white`}>
+            Launching Home Flow App
+          </p>
+        </div>
+      )}
+    </div>
+  );
 
   if (!isMounted) {
     return (
@@ -107,15 +166,7 @@ export default function UrbanCompanyPrototypeShowcase() {
             style={{ height: `${scaledHeight}px` }}
           >
             {isLoading && (
-              <div className="absolute inset-0 bg-[#0f172a] flex flex-col items-center justify-center p-4 z-30">
-                <div className="flex flex-col items-center gap-3">
-                  <div className="relative w-10 h-10">
-                    <div className="absolute inset-0 rounded-full border-4 border-amber-500/20 animate-pulse"></div>
-                    <div className="absolute inset-0 rounded-full border-4 border-t-amber-500 animate-spin"></div>
-                  </div>
-                  <p className="text-[10px] font-black uppercase tracking-wider text-white">Launching App</p>
-                </div>
-              </div>
+              <LoadingOverlay compact />
             )}
 
             {/* Scaled Iframe Container */}
@@ -133,7 +184,8 @@ export default function UrbanCompanyPrototypeShowcase() {
                 src={url}
                 title="Urban Company Interactive Flow (Mobile)"
                 className="w-full h-full border-none select-text"
-                onLoad={() => setIsLoading(false)}
+                loading="eager"
+                onLoad={handleFrameLoad}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               />
             </div>
@@ -207,15 +259,7 @@ export default function UrbanCompanyPrototypeShowcase() {
           {/* Desktop Iframe container */}
           <div className="relative w-full h-[820px] bg-[#0f172a]">
             {isLoading && (
-              <div className="absolute inset-0 bg-[#0f172a] flex flex-col items-center justify-center p-6 z-30">
-                <div className="flex flex-col items-center gap-4">
-                  <div className="relative w-12 h-12">
-                    <div className="absolute inset-0 rounded-full border-4 border-amber-500/20 animate-pulse"></div>
-                    <div className="absolute inset-0 rounded-full border-4 border-t-amber-500 animate-spin"></div>
-                  </div>
-                  <p className="text-sm font-black uppercase tracking-wider text-white">Launching Home Flow App</p>
-                </div>
-              </div>
+              <LoadingOverlay />
             )}
 
             <iframe
@@ -223,7 +267,8 @@ export default function UrbanCompanyPrototypeShowcase() {
               src={url}
               title="Urban Company Interactive Flow (Desktop)"
               className="w-full h-full border-none select-text"
-              onLoad={() => setIsLoading(false)}
+              loading="eager"
+              onLoad={handleFrameLoad}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             />
           </div>

@@ -3,12 +3,16 @@ interface Props {
   title: string;
   pubDate: Date;
   author: string;
+  articleClass?: string;
 }
 
-const { title, pubDate, author } = Astro.props;
+const { title, pubDate, author, articleClass = "" } = Astro.props;
 ---
 
-<article class="w-full max-w-[45rem] mx-auto fade-in-up" style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+<article
+  class:list={["w-full max-w-[45rem] mx-auto fade-in-up", articleClass]}
+  style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;"
+>
   <slot />
 </article>
 

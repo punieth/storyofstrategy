@@ -1,160 +1,134 @@
 ---
 import Layout from "@layouts/Default.astro";
-import BrutalCard from "@components/layout/Brutalcard.astro";
 ---
 
 <Layout
   title="Punith R"
   description="Software engineer. 8 years shipping software. Now exploring product ideas, automations, and whatever I find interesting."
 >
-  <main class="page-surface flex-grow border-b-[12px] border-frame">
+  <main class="home-redesign page-surface flex-grow border-b-[12px] border-frame">
     <h1 class="sr-only">Punith R — Software Engineer exploring Product</h1>
 
-    {/* ── HERO — full width, big statement ── */}
-    <div class="px-5 pt-8 pb-6 md:px-10 md:pt-12 md:pb-8">
-      <div class="mx-auto w-full max-w-6xl">
-        <section id="hero">
-          <BrutalCard tone="hero" class="min-h-[280px] sm:min-h-[340px] flex flex-col justify-center">
-            <div class="flex flex-col gap-5 md:gap-6">
-              <p
-                class="brutal-headline-strong text-3xl leading-[1.05] md:text-5xl lg:text-6xl"
-              >
-                I'm Punith.
-              </p>
-              <p class="brutal-headline text-lg leading-tight md:text-2xl lg:text-3xl">
-                Software engineer for 8 years.
-              </p>
-              
-              <p class="brutal-body text-base md:text-lg max-w-2xl">
-                Lately I've been building AI workflows, thinking about products,
-                and working on a few side projects.
-              </p>
-              <p class="text-xs md:text-sm font-black tracking-wide mt-4 select-none italic text-black/60">
-                “Making a simple thing is never simple.”
-              </p>
-            </div>
-          </BrutalCard>
-        </section>
-      </div>
-    </div>
-
-    {/* ── BENTO GRID ── */}
-    <div class="px-5 pb-8 md:px-10 md:pb-10">
-      <div class="mx-auto w-full max-w-6xl">
-        <section id="stuff">
-          <h2 class="brutal-label text-xs md:text-sm tracking-[0.24em] mb-6">
-            Things I've been up to
-          </h2>
- 
-          <div class="bento-grid">
-            <div class="bento-cell bento-cell--warm bento-span-2 animate-in">
-              <h3 class="bento-title">Automations</h3>
-              <div class="bento-flows">
-                <p class="bento-flow">
-                  Reddit r/productmanagement
-                  <span class="bento-flow-arrow">→</span>
-                  AI summary
-                  <span class="bento-flow-arrow">→</span>
-                  LinkedIn post, daily
-                </p>
-                <p class="bento-flow">
-                  Gmail newsletters
-                  <span class="bento-flow-arrow">→</span>
-                  AI digest
-                  <span class="bento-flow-arrow">→</span>
-                  Discord channel
-                </p>
-              </div>
-            </div>
-
-            <div id="this-website-card" class="bento-cell bento-cell--dark animate-in cursor-pointer group">
-              <h3 class="bento-title bento-title--light group-hover:underline">This website</h3>
-              <p class="bento-desc bento-desc--light">
-                Custom neo-brutalist setup, visitor logging, and an interactive terminal shell (<kbd class="bento-kbd"
-                  >Ctrl+K</kbd
-                >).
-              </p>
-            </div>
-
-            <a href="/blog/urban-company-teardown/" class="bento-cell bento-cell--cool animate-in block hover:no-underline cursor-pointer group" style="background-color: #ff8a3d;">
-              <h3 class="bento-title group-hover:underline">Urban Company</h3>
-              <p class="bento-desc">
-                Product requirements document (PRD) detailing the SMS Bridge and Smart Buffer MVP designed to solve multi-actor home service coordination for NRIs.
-              </p>
-            </a>
-
-            <a href="/blog/proofit-prd/" class="bento-cell bento-cell--muted animate-in block hover:no-underline cursor-pointer group" style="background-color: #60a5fa;">
-              <h3 class="bento-title group-hover:underline">ProofIt</h3>
-              <p class="bento-desc">
-                Product requirements document (PRD) detailing the trust utility and verification loop built for Bangalore's nano-vendors.
-              </p>
-            </a>
-
-            <div class="bento-cell bento-cell--muted animate-in" style="background-color: #e2e8f0;">
-              <h3 class="bento-title">Future projects</h3>
-              <div class="bento-ideas">
-                <div class="bento-idea">
-                  <strong>RoastMyLinkedIn</strong>
-                  <span>AI LinkedIn profile roaster.</span>
-                </div>
-                <div class="bento-idea">
-                  <strong>BharatBuilt</strong>
-                  <span>Breaking down how Indian products get made.</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-    </div>
-
-    {/* ── PULL QUOTE ── */}
-    <div class="px-5 py-6 md:px-10 md:py-8">
-      <section
-        class="pull-quote-section animate-in"
-        aria-label="Personal statement"
-      >
-        <p class="pull-quote">
-          I don't have it all figured out.<br />
-          But I'm
-          <span class="pull-quote-highlight">building</span> while I figure it out.
+    <section class="home-hero" id="hero">
+      <div class="home-hero__copy">
+        <p class="home-kicker">Software engineer / product tinkerer / India</p>
+        <h2>
+          I build strange little systems until they start making sense.
+        </h2>
+        <p class="home-hero__lede">
+          I spent 8 years shipping software. Now I’m using that engineering muscle to explore AI workflows, product strategy, and practical ideas for Indian markets.
         </p>
-      </section>
-    </div>
-
-    {/* ── BACKSTORY ── */}
-    <div class="px-5 pb-10 md:px-10 md:pb-14">
-      <div class="mx-auto w-full max-w-4xl">
-        <section id="backstory" class="backstory-section animate-in">
-          <h2 class="righteous text-2xl md:text-4xl mb-4 text-black" style="-webkit-text-stroke: 1.5px black; paint-order: stroke fill;">The Backstory</h2>
-          <p class="brutal-body text-base md:text-lg">
-            I've spent the last 8 years building software, from trading platforms to UI systems used across engineering teams.
-          </p>
-          <p class="brutal-body text-base md:text-lg mt-3">
-            After several years in the US, I moved back to India. I'm interested
-            in AI, products, and the kinds of problems that affect millions of
-            people here.
-          </p>
-        </section>
+        <div class="home-hero__actions">
+          <a href="/blog/urban-company-teardown/" class="home-button home-button--primary">Read Urban Company PRD</a>
+          <a href="/blog/proofit-prd/" class="home-button home-button--secondary">Open ProofIt</a>
+        </div>
       </div>
-    </div>
+
+      <aside class="home-hero__panel" aria-label="Current operating mode">
+        <div class="home-panel-head">
+          <span>Operating mode</span>
+          <strong>Think → Build</strong>
+        </div>
+        <div class="home-panel-stack">
+          <div class="home-panel-card">
+            <span>Mode</span>
+            <strong>Building in public, but with better taste now.</strong>
+          </div>
+          <div class="home-panel-card home-panel-card--dark">
+            <span>Current loop</span>
+            <strong>Problem → PRD → Prototype → Sharpen the story</strong>
+          </div>
+        </div>
+        <p class="home-quote">“Making a simple thing is never simple.”</p>
+      </aside>
+    </section>
+
+    <section class="home-section home-section--cases" id="work">
+      <div class="home-section__heading">
+        <p class="home-section-label">Case files</p>
+        <h2>Product notes that look calmer because the thinking is louder.</h2>
+      </div>
+
+      <div class="home-case-grid">
+        <a href="/blog/urban-company-teardown/" class="home-case home-case--urban">
+          <div class="home-case__meta">
+            <span>PRD / Live prototype</span>
+            <span>Urban Company</span>
+          </div>
+          <h3>Multi-actor orchestration for remote home services</h3>
+          <p>
+            SMS bridge, smart repair buffer, and fail-safe approval loops for NRIs and remote property owners.
+          </p>
+          <div class="home-case__tags">
+            <span>Product</span>
+            <span>Service ops</span>
+            <span>Prototype</span>
+          </div>
+        </a>
+
+        <a href="/blog/proofit-prd/" class="home-case home-case--proofit">
+          <div class="home-case__meta">
+            <span>PRD / Trust utility</span>
+            <span>ProofIt</span>
+          </div>
+          <h3>A credibility layer for Bangalore’s nano-vendors</h3>
+          <p>
+            A profile, vouch, and verification loop for micro businesses that close deals through WhatsApp.
+          </p>
+          <div class="home-case__tags">
+            <span>B2B</span>
+            <span>Trust</span>
+            <span>India</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="home-section home-lab" id="lab">
+      <div class="home-lab__main">
+        <p class="home-section-label">What I’m up to</p>
+        <h2>Small automations, useful prototypes, and ideas that refuse to stay in Notes.app.</h2>
+      </div>
+
+      <div class="home-lab__grid">
+        <article class="home-lab-card home-lab-card--yellow">
+          <span>Automation</span>
+          <h3>Reddit → AI summary → LinkedIn</h3>
+          <p>Daily product-management signals turned into a draftable post.</p>
+        </article>
+        <article class="home-lab-card home-lab-card--mint">
+          <span>Automation</span>
+          <h3>Newsletters → AI digest → Discord</h3>
+          <p>A low-friction way to keep up without pretending inbox zero is real.</p>
+        </article>
+        <article class="home-lab-card home-lab-card--black">
+          <span>This site</span>
+          <h3>Neo-brutal shell, calmer inner rooms</h3>
+          <p>Visitor logging, terminal shell, custom PRD layouts, and a design system slowly finding its spine.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="home-manifesto" aria-label="Personal statement">
+      <p>
+        I don’t have it all figured out.
+        <span>But I’m building while I figure it out.</span>
+      </p>
+    </section>
+
+    <section class="home-backstory" id="backstory">
+      <div>
+        <p class="home-section-label">Backstory</p>
+        <h2>Engineer first. Product brain, increasingly unavoidable.</h2>
+      </div>
+      <div class="home-backstory__body">
+        <p>
+          I’ve spent the last 8 years building software, from trading platforms to UI systems used across engineering teams.
+        </p>
+        <p>
+          After several years in the US, I moved back to India. I’m interested in AI, products, and the messy, high-leverage problems that affect millions of people here.
+        </p>
+      </div>
+    </section>
   </main>
 </Layout>
-
-<script>
-  // Scroll-triggered fade-in animations
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-        }
-      });
-    },
-    { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
-  );
-
-  document.querySelectorAll(".animate-in").forEach((el) => {
-    observer.observe(el);
-  });
-</script>
