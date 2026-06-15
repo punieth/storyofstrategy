@@ -1778,6 +1778,8 @@ body {
   box-shadow: 4px 4px 0 var(--home-ink);
   padding: 1.5rem;
   transition: transform 0.16s ease, box-shadow 0.16s ease;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .home-lab-card__status {
@@ -1801,12 +1803,10 @@ body {
 
 @keyframes breathing-text {
   0%, 100% {
-    opacity: 0.5;
-    transform: scale(0.98);
+    opacity: 0.4;
   }
   50% {
     opacity: 1;
-    transform: scale(1);
   }
 }
 
