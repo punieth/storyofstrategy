@@ -1,5 +1,6 @@
 ---
 import LocalFont from '../generic/LocalFont.astro';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
   title: string;
@@ -47,6 +48,8 @@ const { title, description, ogImage } = Astro.props;
   <link rel='icon' type='image/svg' href='/favicon.svg' />
 
   <title>Story Of Strategy</title>
+
+  <ClientRouter />
 
   <slot />
 </head>
