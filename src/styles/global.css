@@ -1448,7 +1448,7 @@ html {
   border-radius: 30px;
   background:
     radial-gradient(circle at 82% 18%, rgba(255, 255, 255, 0.44), transparent 16rem),
-    linear-gradient(135deg, var(--home-orange), #ff8a3d 52%, #ffd049 100%);
+    linear-gradient(35deg, var(--home-orange), #ff8a3d 52%, #ffd049 100%);
   position: relative;
 }
 
@@ -1726,15 +1726,16 @@ html {
 }
 
 .home-case--urban {
-  background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.66), transparent 42%),
-    #ff8a3d;
+    background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.62), transparent 42%),
+    #60a5fa;
 }
 
 .home-case--proofit {
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.62), transparent 42%),
-    #60a5fa;
+    linear-gradient(135deg, rgba(255, 255, 255, 0.66), transparent 42%),
+    /* #FFD049 */
+    rgb(243, 200, 61);
 }
 
 .home-case__meta {
@@ -1926,7 +1927,7 @@ html {
 }
 
 .home-lab__console-footer {
-  padding: 0.5rem clamp(1.25rem, 3vw, 2.2rem) clamp(1.15rem, 2.2vw, 1.6rem);
+  padding: 0.3rem clamp(1.25rem, 3vw, 2.2rem) 0.45rem;
   background: #0d0c0f;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
