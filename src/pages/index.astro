@@ -16,10 +16,12 @@ import myImage from "../assets/myimage-jpeg.jpg";
       <div class="home-hero__copy">
         <Image 
           src={myImage} 
-          alt="Punith" 
+          alt="" 
           class="home-hero__avatar" 
           width={400} 
           height={400}
+          loading="eager"
+          fetchpriority="high"
         />
         <div class="home-hero__text">
           <p class="home-kicker">Software engineer / product tinkerer / India</p>
