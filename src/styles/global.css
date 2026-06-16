@@ -1679,8 +1679,7 @@ html {
 
 .home-section--cases {
   background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  /* Removed backdrop-filter to prevent scroll flickering */
 }
 
 .home-section__heading {
@@ -1794,8 +1793,7 @@ html {
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.75), transparent 45%),
     rgba(31, 23, 32, 0.05);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  /* Removed backdrop-filter to prevent scroll flickering */
 }
 
 .home-lab__main {
@@ -1825,8 +1823,14 @@ html {
   box-shadow: 4px 4px 0 var(--home-ink);
   padding: 1.5rem;
   transition: transform 0.16s ease, box-shadow 0.16s ease;
+  
+  /* Force hardware acceleration to prevent flickering */
+  transform: translateZ(0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  
+  /* Performance optimization */
+  contain: layout style;
 }
 
 .home-lab-card__status {
