@@ -1903,12 +1903,26 @@ html {
   font-size: clamp(0.72rem, 0.4vw + 0.68rem, 0.85rem);
   overflow-y: auto;
   height: 22rem;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: #2a2730 #0d0c0f;
 }
 
 .home-lab__console-body::-webkit-scrollbar {
-  display: none;
+  display: block;
+  width: 6px;
+}
+
+.home-lab__console-body::-webkit-scrollbar-track {
+  background: #0d0c0f;
+}
+
+.home-lab__console-body::-webkit-scrollbar-thumb {
+  background: #2a2730;
+  border-radius: 4px;
+}
+
+.home-lab__console-body::-webkit-scrollbar-thumb:hover {
+  background: #3b3842;
 }
 
 .home-lab__console-footer {
@@ -1990,7 +2004,8 @@ html {
   margin: 0.6rem 0;
   color: #cbd5e1;
   font-family: monospace;
-  line-height: 1.45;
+  font-size: 0.7rem;
+  line-height: 1.4;
 }
 
 .console-card {
