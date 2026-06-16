@@ -1,5 +1,11 @@
 <script>
   async function trackVisitor() {
+    // Prevent tracking if the exclude flag is set in localStorage
+    if (localStorage.getItem("exclude_visitor") === "true") {
+      console.log("Visitor tracking disabled via localStorage flag.");
+      return;
+    }
+
     // Prevent duplicate tracking per session
     if (sessionStorage.getItem("visitor_tracked")) {
       return;
@@ -56,6 +62,13 @@
 
   // Execute after page load
   if (typeof window !== "undefined") {
+    // Check for exclude parameter in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('exclude') === 'true') {
+      localStorage.setItem("exclude_visitor", "true");
+      alert("This device is now excluded from visitor tracking.");
+    }
+
     const hostname = window.location.hostname;
     const isLocal =
       hostname === "localhost" ||
