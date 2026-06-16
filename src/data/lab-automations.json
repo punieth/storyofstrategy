@@ -13,28 +13,42 @@
       },
       "content": [
         {
-          "title": "The Shift to Agentic Orchestration",
+          "title": "LATEST: The Shift to Agentic Orchestration",
           "source": "AI Horizons",
           "summary": "We are witnessing a fundamental shift in how we interact with LLMs. For the past two years, the industry was obsessed with the 'Chat' interface—a simple request-response cycle. However, the data suggests that the real value lies in 'Agentic Orchestration' where the LLM is the controller of a multi-step workflow.\n\nThis transition requires a complete rethink of our technical stack. Traditional vector databases are being augmented with 'Knowledge Graphs' to provide agents with relational context."
         },
         {
-          "title": "The Death of Horizontal Generative AI",
+          "title": "LATEST: The Death of Horizontal Generative AI",
           "source": "Ben's Bites",
           "summary": "The first wave of GenAI was dominated by horizontal tools—writing assistants and image generators. While these were impressive, they are rapidly becoming features of the OS or the browser. The next massive opportunity lies in 'Vertical SaaS' where AI is deeply integrated into a specific industry's reality."
         },
         {
-          "title": "State of Product-Led Growth",
+          "title": "LATEST: State of Product-Led Growth",
           "source": "Lenny's Newsletter",
           "summary": "Product-led growth is entering a new phase where 'Sales-Assisted PLG' is no longer an edge case but a requirement for moving upmarket. Companies like Notion and Airtable are redefining how high-touch sales and self-serve work together."
         },
         {
-          "title": "Engineering Systems at Scale",
+          "title": "LATEST: Engineering Systems at Scale",
           "source": "Software Engineering Daily",
           "summary": "Building distributed systems in 2026 is less about infrastructure management and more about 'Logic Observability'. As we offload more logic to autonomous agents, the bottleneck moves to how we verify their decision-making in real-time."
         }
       ]
     },
-    "previous": null,
+    "previous": {
+      "lastRun": "Yesterday",
+      "stats": {
+        "processed": 10,
+        "tokens": "9.5k",
+        "model": "Llama 3.1 70B"
+      },
+      "content": [
+        {
+          "title": "PREVIOUS: Why Vector DBs are Not Enough",
+          "source": "Pinecone Blog",
+          "summary": "While vector databases solved the first-mile problem for RAG, the second mile requires structured reasoning. The industry is moving towards 'GraphRAG' which combines the semantic power of vectors with the relational precision of knowledge graphs."
+        }
+      ]
+    },
     "pipeline": [
       { "name": "Gmail", "icon": "https://api.iconify.design/logos:google-gmail.svg" },
       { "name": "Make.com", "icon": "https://api.iconify.design/simple-icons:make.svg?color=%238a2be2" },
@@ -57,13 +71,27 @@
       },
       "content": [
         {
-          "title": "The 'Product Engineer' is the new 10x developer",
+          "title": "LATEST: The 'Product Engineer' is the new 10x developer",
           "source": "r/ProductManagement",
           "summary": "Draft focusing on the convergence of engineering and product roles in startups. Engineering muscle + Product intuition = Speed."
         }
       ]
     },
-    "previous": null,
+    "previous": {
+      "lastRun": "Yesterday",
+      "stats": {
+        "processed": 8,
+        "tokens": "15k",
+        "model": "GPT-4o"
+      },
+      "content": [
+        {
+          "title": "PREVIOUS: Why SaaS is moving back to 'Small & Vertical'",
+          "source": "r/SaaS",
+          "summary": "Analysis of the shift from horizontal platforms to hyper-niche solutions. High LTV, low churn, easier acquisition."
+        }
+      ]
+    },
     "pipeline": ["Reddit API", "Hermes Agent", "GPT-4o", "Discord"]
   },
   "intelligence-os": {
@@ -80,13 +108,27 @@
       },
       "content": [
         {
-          "title": "How Vercel builds their Design System",
+          "title": "LATEST: How Vercel builds their Design System",
           "source": "Front-end Horse",
           "summary": "Key takeaway: Components are built for 'flexibility at the edges' rather than rigid consistency. Shared state management is the bottleneck."
         }
       ]
     },
-    "previous": null,
+    "previous": {
+      "lastRun": "2 days ago",
+      "stats": {
+        "processed": 5,
+        "tokens": "32k",
+        "model": "Claude 3.5 Sonnet"
+      },
+      "content": [
+        {
+          "title": "PREVIOUS: The Future of React Server Components",
+          "source": "Next.js Conf",
+          "summary": "RSC is not just a performance optimization; it's a paradigm shift in how we think about the 'Network Boundary'. The focus is shifting from fetching data to 'Streaming Capability' where the server and client work as a single unit."
+        }
+      ]
+    },
     "pipeline": ["RSS Feeds", "Hermes Agent", "Claude 3.5 Sonnet", "Discord"]
   }
 }

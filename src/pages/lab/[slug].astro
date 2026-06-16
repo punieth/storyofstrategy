@@ -198,7 +198,7 @@ const previousRun = labData.previous;
             )}
           </div>
 
-          <div id="content-previous" class="hidden flex flex-col gap-12">
+          <div id="content-previous" class="flex flex-col gap-12" style="display: none;">
             {previousRun ? (previousRun.content as ContentItem[]).map((item, index) => (
               <article class="relative group p-6 rounded-2xl bg-[#f9f8f3] border-2 border-black/5 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.02)] transition-all duration-300">
                 <div class="flex items-center gap-3 mb-4">
@@ -267,45 +267,59 @@ const previousRun = labData.previous;
 </Layout>
 
 <script is:inline define:vars={{ latestRun, previousRun }}>
-  const tabLatest = document.getElementById('tab-latest');
-  const tabPrevious = document.getElementById('tab-previous');
-  const contentLatest = document.getElementById('content-latest');
-  const contentPrevious = document.getElementById('content-previous');
-  
-  const metaProcessed = document.getElementById('meta-processed');
-  const metaTokens = document.getElementById('meta-tokens');
-  const metaModel = document.getElementById('meta-model');
+  function initTabs() {
+    const tabLatest = document.getElementById('tab-latest');
+    const tabPrevious = document.getElementById('tab-previous');
+    const contentLatest = document.getElementById('content-latest');
+    const contentPrevious = document.getElementById('content-previous');
+    
+    const metaProcessed = document.getElementById('meta-processed');
+    const metaTokens = document.getElementById('meta-tokens');
+    const metaModel = document.getElementById('meta-model');
 
-  function switchTab(type) {
-    if (type === 'latest') {
-      tabLatest.classList.add('bg-black', 'text-white', 'shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]');
-      tabPrevious.classList.remove('bg-black', 'text-white', 'shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]');
-      contentLatest.classList.remove('hidden');
-      contentPrevious.classList.add('hidden');
-      
-      // Update meta
-      if (latestRun) {
-        metaProcessed.textContent = latestRun.stats.processed;
-        metaTokens.innerHTML = `${latestRun.stats.tokens} <small class="text-sm opacity-40">tokens</small>`;
-        metaModel.textContent = latestRun.stats.model;
-      }
-    } else {
-      tabPrevious.classList.add('bg-black', 'text-white', 'shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]');
-      tabLatest.classList.remove('bg-black', 'text-white', 'shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]');
-      contentLatest.classList.add('hidden');
-      contentPrevious.classList.remove('hidden');
-      
-      // Update meta
-      if (previousRun) {
-        metaProcessed.textContent = previousRun.stats.processed;
-        metaTokens.innerHTML = `${previousRun.stats.tokens} <small class="text-sm opacity-40">tokens</small>`;
-        metaModel.textContent = previousRun.stats.model;
-      }
+    if (!tabLatest || !tabPrevious || !contentLatest || !contentPrevious) return;
+
+    function updateSidebar(run) {
+      if (!run || !metaProcessed || !metaTokens || !metaModel) return;
+      metaProcessed.textContent = run.stats.processed;
+      metaTokens.innerHTML = `${run.stats.tokens} <small class="text-sm opacity-40">tokens</small>`;
+      metaModel.textContent = run.stats.model;
     }
+
+    function switchTab(type) {
+      const isLatest = type === 'latest';
+      
+      // Update Tab Styles
+      tabLatest.classList.toggle('bg-black', isLatest);
+      tabLatest.classList.toggle('text-white', isLatest);
+      tabLatest.classList.toggle('shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]', isLatest);
+      
+      tabPrevious.classList.toggle('bg-black', !isLatest);
+      tabPrevious.classList.toggle('text-white', !isLatest);
+      tabPrevious.classList.toggle('shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]', !isLatest);
+      
+      // Update Content Visibility
+      contentLatest.style.display = isLatest ? 'flex' : 'none';
+      contentPrevious.style.display = isLatest ? 'none' : 'flex';
+      
+      // Update Meta
+      updateSidebar(isLatest ? latestRun : previousRun);
+    }
+
+    tabLatest.addEventListener('click', () => switchTab('latest'));
+    tabPrevious.addEventListener('click', () => {
+      if (!tabPrevious.disabled) switchTab('previous');
+    });
+
+    // Force initial state
+    switchTab('latest');
   }
 
-  tabLatest?.addEventListener('click', () => switchTab('latest'));
-  tabPrevious?.addEventListener('click', () => switchTab('previous'));
+  // Initialize on first load
+  initTabs();
+
+  // Re-initialize after Astro View Transitions swap the page content
+  document.addEventListener('astro:after-swap', initTabs);
 </script>
 
 <style>
