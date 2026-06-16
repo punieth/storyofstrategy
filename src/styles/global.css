@@ -109,6 +109,11 @@ body {
   font-weight: 500;
   letter-spacing: -0.01em;
   color: var(--ink-strong);
+  overflow-x: clip;
+}
+
+html {
+  overflow-x: clip;
 }
 
 .brutal-headline {
@@ -2048,7 +2053,7 @@ body {
   font-family: "Outfit", sans-serif !important;
   font-weight: 950 !important;
   letter-spacing: -0.060em !important;
-  line-height: 0.85 !important;
+  line-height: 1.0 !important;
 }
 
 /* Neo-Brutal Retro Small Buttons */
