@@ -1,8 +1,106 @@
 ---
 import Layout from "@layouts/Default.astro";
-import labData from "../data/lab-automations.json";
+import localLabData from "../data/lab-automations.json";
 import { Image } from "astro:assets";
 import myImage from "../assets/myimage-jpeg.jpg";
+
+// Fetch live data from Cloudflare KV (similar to [slug].astro)
+let labData = { ...localLabData } as any;
+const runtime = (Astro.locals as any).runtime;
+
+if (runtime && runtime.env && runtime.env.LAB_STORE) {
+  for (const slug of ['newsletter-digest', 'reddit-radar', 'intelligence-os']) {
+    try {
+      const kvData = await runtime.env.LAB_STORE.get(`lab:${slug}`);
+      if (kvData) {
+        const live = JSON.parse(kvData);
+        labData[slug] = { ...labData[slug], ...live };
+      }
+    } catch (e) {
+      console.error(`Failed to load KV data for lab:${slug}`, e);
+    }
+  }
+}
+
+// Truncation utility
+function truncateSignal(title: string, maxLength = 45) {
+  if (!title) return "";
+  const cleanTitle = title.replace(/^(LATEST:|PREVIOUS:)\s*/i, "").trim();
+  if (cleanTitle.length > maxLength) {
+    return cleanTitle.slice(0, maxLength) + "...";
+  }
+  return cleanTitle;
+}
+
+// Generate report HTML for client terminal console command execution logs
+function generateReportHTML(slug: string, data: any) {
+  const latest = data?.latest;
+  if (!latest) {
+    return `<div class="terminal-log-box my-2 text-slate-400 italic">No execution logs found.</div>`;
+  }
+  
+  const titleMap: Record<string, string> = {
+    'newsletter-digest': 'Newsletter Digest — Signal Brief',
+    'reddit-radar': 'Reddit Radar — Signal Report',
+    'intelligence-os': 'Intelligence OS — Daily Brief'
+  };
+  
+  const headerTitle = titleMap[slug] || `${data.title || slug} — Signal Brief`;
+  let html = `<div class="terminal-log-box my-2">`;
+  html += `<div class="text-[#00ff88] font-bold mb-2">${headerTitle}</div>`;
+  
+  const items = latest.content || [];
+  if (items.length === 0) {
+    html += `<div class="text-slate-400 italic">No signals recorded in this run.</div>`;
+  } else {
+    items.forEach((item: any) => {
+      const cleanTitle = item.title ? item.title.replace(/^(LATEST:|PREVIOUS:)\s*/i, "").trim() : "";
+      
+      if (slug === 'reddit-radar') {
+        html += `<div class="font-bold text-white mt-3 mb-1">### ${cleanTitle}</div>`;
+      } else {
+        const sourceText = item.source ? `${item.source}: ` : "";
+        html += `<div class="font-bold text-white mt-3 mb-1">● ${sourceText}${cleanTitle}</div>`;
+      }
+      
+      if (item.summary) {
+        const paragraphs = item.summary.split('\n\n');
+        paragraphs.forEach((p: string) => {
+          const cleanP = p.trim();
+          if (!cleanP) return;
+          
+          if (cleanP.toLowerCase().startsWith('why this matters:') || cleanP.toLowerCase().startsWith('**why this matters:**')) {
+            const textContent = cleanP.replace(/^(\*\*why this matters:\*\*|why this matters:)\s*/i, "").trim();
+            html += `<p class="text-slate-300 mb-3 font-semibold"><span class="text-yellow-400">Why this matters:</span> ${textContent}</p>`;
+          } else if (cleanP.toLowerCase().startsWith('watch next:') || cleanP.toLowerCase().startsWith('watch for:')) {
+            const label = cleanP.toLowerCase().startsWith('watch next:') ? 'Watch next:' : 'Watch for:';
+            const textContent = cleanP.replace(/^(watch next:|watch for:)\s*/i, "").trim();
+            html += `<p class="text-slate-300 mb-3 font-semibold"><span class="text-yellow-400">${label}</span> ${textContent}</p>`;
+          } else {
+            html += `<p class="text-slate-300 mb-2">${cleanP}</p>`;
+          }
+        });
+      }
+      
+      if (item.key_insights && Array.isArray(item.key_insights)) {
+        html += `<ul class="list-disc pl-5 text-slate-300 mb-2 space-y-1">`;
+        item.key_insights.forEach((insight: string) => {
+          html += `<li>${insight}</li>`;
+        });
+        html += `</ul>`;
+      }
+    });
+  }
+  
+  html += `</div>`;
+  return html;
+}
+
+const reports = {
+  'newsletter-digest': generateReportHTML('newsletter-digest', labData['newsletter-digest']),
+  'reddit-radar': generateReportHTML('reddit-radar', labData['reddit-radar']),
+  'intelligence-os': generateReportHTML('intelligence-os', labData['intelligence-os'])
+};
 ---
 
 <Layout
@@ -73,43 +171,187 @@ import myImage from "../assets/myimage-jpeg.jpg";
     <section class="home-section home-lab" id="lab">
       <div class="home-lab__main">
         <p class="home-section-label">What I’m up to</p>
-        <h2>Small automations, useful prototypes, and ideas that refuse to stay in Notes.app.</h2>
+        <h2>AI-driven automations and knowledge synthesis tools built for my personal needs.</h2>
+        <a href="/lab/" class="home-lab__cta-link">
+          <span class="home-cta-btn">View Active Automations ↗</span>
+        </a>
       </div>
 
-      <div class="home-lab__grid">
-        <a href="/lab/reddit-radar/" class="home-lab-card home-lab-card--yellow block no-underline">
-          <div class="home-lab-card__status">
-            Active • {labData["reddit-radar"].latest.lastRun}
+      <div id="homepage-console" class="home-lab__console font-mono" data-pipeline-reports={JSON.stringify(reports)}>
+        <div class="home-lab__console-header">
+          <div class="console-dot-container">
+            <span class="console-dot console-dot--red"></span>
+            <span class="console-dot console-dot--yellow"></span>
+            <span class="console-dot console-dot--green"></span>
           </div>
-          <span>Automation</span>
-          <h3>Reddit Radar</h3>
-          <p>Signal detection from Reddit. We scan PM and SaaS subs, filter for posts with real substance.</p>
-          <span class="home-cta-btn">View automation ↗</span>
-        </a>
-        <a href="/lab/newsletter-digest/" class="home-lab-card home-lab-card--mint block no-underline">
-          <div class="home-lab-card__status">
-            Active • {labData["newsletter-digest"].latest.lastRun}
+          <span class="console-title">hermes-agent@punith.sh</span>
+          <span class="console-status">● LIVE</span>
+        </div>
+        
+        <div id="console-scroll-area" class="home-lab__console-body">
+          <div id="console-output-history" class="flex flex-col gap-2">
+            <div class="console-line console-line--meta"><span class="terminal-prompt">$</span> hermes-agent --status</div>
+            <div class="console-line console-line--meta-success">● SYSTEM: Active / Pipelines loaded: 3</div>
+            <div class="console-divider"></div>
+            
+            <div class="console-line">
+              <span class="console-tag console-tag--amber">[OK] reddit-radar</span> <span class="console-time">({labData["reddit-radar"]?.latest?.lastRun})</span>
+              <div class="console-sub-line">&gt; Scanned PM &amp; SaaS subreddits ({labData["reddit-radar"]?.latest?.stats?.model || "GPT-4o"})</div>
+              <div class="console-sub-line">&gt; Signal: "{truncateSignal(labData["reddit-radar"]?.latest?.content?.[0]?.title || "")}"</div>
+            </div>
+            
+            <div class="console-line mt-3">
+              <span class="console-tag console-tag--lime">[OK] newsletter-digest</span> <span class="console-time">({labData["newsletter-digest"]?.latest?.lastRun})</span>
+              <div class="console-sub-line">&gt; Scanned inbox: {labData["newsletter-digest"]?.latest?.stats?.processed || 0} newsletters parsed ({labData["newsletter-digest"]?.latest?.stats?.model || "Llama 3.1"})</div>
+              <div class="console-sub-line">&gt; Highlight: "{truncateSignal(labData["newsletter-digest"]?.latest?.content?.[0]?.title || "")}"</div>
+            </div>
+            
+            <div class="console-line mt-3">
+              <span class="console-tag console-tag--cyan">[OK] intelligence-os</span> <span class="console-time">({labData["intelligence-os"]?.latest?.lastRun})</span>
+              <div class="console-sub-line">&gt; Scanned 60 RSS sources ({labData["intelligence-os"]?.latest?.stats?.model || "Claude 3.5 Sonnet"})</div>
+              <div class="console-sub-line">&gt; Highlight: "{truncateSignal(labData["intelligence-os"]?.latest?.content?.[0]?.title || "")}"</div>
+            </div>
           </div>
-          <span>Automation</span>
-          <h3>Newsletters → AI digest → Discord</h3>
-          <p>A low-friction way to keep up without pretending inbox zero is real.</p>
-          <span class="home-cta-btn">View automation ↗</span>
-        </a>
-        <a href="/lab/intelligence-os/" class="home-lab-card home-lab-card--lavender block no-underline">
-          <div class="home-lab-card__status">
-            Active • {labData["intelligence-os"].latest.lastRun}
+        </div>
+
+        <div class="home-lab__console-footer">
+          <div class="console-line flex items-center">
+            <span class="terminal-prompt">$</span>
+            <input 
+              type="text" 
+              id="homepage-console-input" 
+              class="bg-transparent border-none outline-none text-[#00ff88] w-full text-xs font-mono focus:ring-0 p-0 m-0 caret-[#00ff88]"
+              autocomplete="off"
+              placeholder="type help..."
+            />
           </div>
-          <span>Automation</span>
-          <h3>Intelligence OS</h3>
-          <p>Daily intelligence brief from 60 RSS sources — enriched signals, cross-source pattern detection.</p>
-          <span class="home-cta-btn">View automation ↗</span>
-        </a>
-        <article id="this-website-card" class="home-lab-card home-lab-card--black cursor-pointer">
-          <span>This site</span>
-          <h3>Neobrutal shell, built to be interactive</h3>
-          <p>Featuring a working terminal, custom PRD layouts for deep reading, and live feeds from the automation lab. It’s a functional sandbox for my product and engineering ideas.</p>
-        </article>
+        </div>
       </div>
+
+      <script>
+        const consoleContainer = document.getElementById("homepage-console");
+        const scrollAreaEl = document.getElementById("console-scroll-area");
+        const consoleInput = document.getElementById("homepage-console-input") as HTMLInputElement;
+        const consoleOutputEl = document.getElementById("console-output-history");
+
+        if (consoleContainer && scrollAreaEl && consoleInput && consoleOutputEl) {
+          const scrollArea = scrollAreaEl;
+          const consoleOutput = consoleOutputEl;
+          const initialHTML = consoleOutput.innerHTML;
+
+          const cmdColors = {
+            "reddit-radar": "text-[#00ff88]",
+            "newsletter-digest": "text-[#a3e635]",
+            "intelligence-os": "text-[#22d3ee]",
+            email: "text-[#ff6641]",
+            linkedin: "text-[#60a5fa]",
+            twitter: "text-[#38bdf8]",
+            about: "text-[#fbbf24]",
+            exit: "text-[#f43f5e]",
+            help: "text-white",
+            clear: "text-white"
+          };
+
+          const commands = {
+            help: `<div class="console-card border-help pl-3 py-1 my-1 bg-[#09080b]/50">
+              <div class="text-white font-bold text-xs uppercase tracking-wider mb-1">Available Commands</div>
+              <div class="text-slate-300 text-[11px] space-y-1">
+                <div>● <span class="text-[#00ff88] font-bold">reddit-radar</span>, <span class="text-[#a3e635] font-bold">newsletter-digest</span>, <span class="text-[#22d3ee] font-bold">intelligence-os</span> <span class="text-slate-500">(reports)</span></div>
+                <div>● <span class="text-[#ff6641] font-bold">email</span>, <span class="text-[#60a5fa] font-bold">linkedin</span>, <span class="text-[#38bdf8] font-bold">twitter</span>, <span class="text-[#fbbf24] font-bold">about</span> <span class="text-slate-500">(contact & info)</span></div>
+                <div>● <span class="text-white font-bold">clear</span>, <span class="text-[#f43f5e] font-bold">exit</span> <span class="text-slate-500">(session)</span></div>
+              </div>
+            </div>`,
+            clear: "",
+          };
+
+          const reportsAttr = consoleContainer.getAttribute("data-pipeline-reports");
+          const jobLogs = reportsAttr ? JSON.parse(reportsAttr) : {};
+
+          function printLine(text: string, isCommand = false, cmdName = "") {
+            const p = document.createElement("div");
+            p.className = "console-line";
+            if (isCommand) {
+              const colorClass = cmdColors[cmdName as keyof typeof cmdColors] || "text-white";
+              p.innerHTML = `<span class="terminal-prompt">$</span> <span class="${colorClass} font-bold">${text}</span>`;
+            } else {
+              p.innerHTML = text;
+            }
+            consoleOutput.appendChild(p);
+            scrollArea.scrollTop = scrollArea.scrollHeight;
+          }
+
+          const links = {
+            linkedin: "https://www.linkedin.com/in/punith-rathnakar/",
+            twitter: "https://twitter.com/xPunith",
+          };
+
+          consoleInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+              const cmd = consoleInput.value.trim().toLowerCase();
+              if (cmd === "") return;
+
+              printLine(cmd, true, cmd);
+              consoleInput.value = "";
+
+              if (cmd === "clear") {
+                consoleOutput.innerHTML = "";
+              } else if (cmd === "help") {
+                printLine(commands.help);
+              } else if (cmd === "email") {
+                printLine(`<div class="console-card border-email pl-3 py-1 my-1 bg-[#09080b]/50">
+                  <div class="text-[#ff6641] font-bold text-xs uppercase tracking-wider">Contact Email</div>
+                  <div class="text-white mt-1 font-semibold">
+                    <a href="mailto:theproductpunith@gmail.com" class="hover:underline hover:text-[#ff6641] transition-colors">theproductpunith@gmail.com</a>
+                  </div>
+                  <div class="text-slate-500 text-[10px] mt-0.5">Click to compose mail.</div>
+                </div>`);
+              } else if (cmd === "about") {
+                printLine(`<div class="console-card border-about pl-3 py-1 my-1 bg-[#09080b]/50">
+                  <div class="text-[#fbbf24] font-bold text-xs uppercase tracking-wider">Operator Profile</div>
+                  <div class="text-white mt-1 font-semibold">Punith Rathnakar</div>
+                  <div class="text-slate-300 text-xs mt-1 leading-relaxed">
+                    Operator: Punith Rathnakar<br/>
+                    System: NeoBrutal Portfolio v1.0<br/>
+                    Bio: 8 years shipping software. Tinkering with AI workflows, product strategy, and indie prototypes for the Indian market.
+                  </div>
+                </div>`);
+              } else if (cmd === "linkedin" || cmd === "twitter") {
+                const color = cmd === 'linkedin' ? '#60a5fa' : '#38bdf8';
+                const label = cmd === 'linkedin' ? 'LinkedIn Profile' : 'Twitter / X';
+                const handle = cmd === 'linkedin' ? 'punith-rathnakar' : '@xPunith';
+                printLine(`<div class="console-card border-l-2 pl-3 py-1 my-1 bg-[#09080b]/50" style="border-color: ${color}">
+                  <div class="font-bold text-xs uppercase tracking-wider" style="color: ${color}">${label}</div>
+                  <div class="text-white mt-1">
+                    Opening <a href="${links[cmd]}" target="_blank" class="underline hover:text-white transition-colors" style="color: ${color}">${handle}</a> in a new tab...
+                  </div>
+                </div>`);
+                setTimeout(() => {
+                  window.open(links[cmd as keyof typeof links], "_blank");
+                }, 400);
+              } else if (cmd === "exit") {
+                printLine(`<div class="console-card border-exit pl-3 py-1 my-1 bg-[#09080b]/50 animate-pulse">
+                  <div class="text-[#f43f5e] font-bold text-xs uppercase tracking-wider">Session Termination</div>
+                  <div class="text-white mt-1">Disconnecting session and resetting console dashboard...</div>
+                </div>`);
+                setTimeout(() => {
+                  consoleOutput.innerHTML = initialHTML;
+                  scrollArea.scrollTop = 0;
+                }, 800);
+              } else if (cmd === "reddit-radar" || cmd === "newsletter-digest" || cmd === "intelligence-os") {
+                printLine(`Fetching execution logs for pipeline: ${cmd}...`);
+                setTimeout(() => {
+                  const div = document.createElement("div");
+                  div.innerHTML = jobLogs[cmd as keyof typeof jobLogs];
+                  consoleOutput.appendChild(div);
+                  scrollArea.scrollTop = div.offsetTop - 10;
+                }, 300);
+              } else {
+                printLine(`Command not found: ${cmd}. Type 'help' for options.`);
+              }
+            }
+          });
+        }
+      </script>
     </section>
 
     <section class="home-manifesto" aria-label="Personal statement">
@@ -125,11 +367,11 @@ import myImage from "../assets/myimage-jpeg.jpg";
         <h2>An engineer first, with a product brain.</h2>
       </div>
       <div class="home-backstory__body">
-        <p>
-          I’ve spent the last 8 years building software, from trading platforms to UI systems used across engineering teams.
+        <p class="text-xl md:text-2xl font-extrabold tracking-tight leading-snug text-[#1f1720]">
+          I spent close to a decade in the US building core software—from complex trading systems to UI frameworks scaled across engineering teams.
         </p>
-        <p>
-          After several years in the US, I moved back to India. I’m interested in AI, products, and the messy, high-leverage problems that affect millions of people here.
+        <p class="text-sm md:text-base font-normal leading-relaxed text-[#1f1720]/80 mt-3">
+          Now I’m back in India. I’m applying that engineering leverage to product strategy, AI-driven workflows, and the messy, high-leverage bottlenecks that affect millions here.
         </p>
       </div>
     </section>
