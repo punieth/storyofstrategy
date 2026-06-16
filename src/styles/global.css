@@ -1830,6 +1830,12 @@ html {
   cursor: text;
 }
 
+@media (max-width: 767px) {
+  #homepage-console-input {
+    font-size: 16px !important;
+  }
+}
+
 .home-lab__console:hover {
   background: #121115;
   transform: translate(-2px, -2px);
@@ -1981,23 +1987,10 @@ html {
 
 /* ── Interactive Console Cards and Log Boxes ── */
 .terminal-log-box {
-  border: 2px solid #222;
-  background: #050505;
-  padding: 0.85rem;
-  margin: 0.5rem 0;
-  max-height: 14rem;
-  overflow-y: auto;
-  font-size: 0.75rem;
-  color: #e2e8f0;
-  border-radius: 6px;
+  margin: 0.6rem 0;
+  color: #cbd5e1;
   font-family: monospace;
-  line-height: 1.4;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.terminal-log-box::-webkit-scrollbar {
-  display: none;
+  line-height: 1.45;
 }
 
 .console-card {
