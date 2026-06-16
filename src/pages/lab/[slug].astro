@@ -1,29 +1,32 @@
 ---
 import Layout from "@layouts/Default.astro";
 import localLabData from "../../data/lab-automations.json";
+import hermesLogo from "../../assets/hermes-logo.webp";
 
 export function getStaticPaths() {
   return [
     { params: { slug: 'newsletter-digest' } },
-    { params: { slug: 'linkedin-drafts' } },
-    { params: { slug: 'youtube-summaries' } },
+    { params: { slug: 'reddit-radar' } },
+    { params: { slug: 'intelligence-os' } },
   ];
 }
 
 const { slug } = Astro.params;
 
 // 1. Attempt to fetch live data from Cloudflare KV
-let data = (localLabData as any)[slug as string];
+let meta = (localLabData as any)[slug as string];
+let labData = meta; // Base metadata
 const runtime = (Astro.locals as any).runtime;
 
 if (runtime && runtime.env && runtime.env.LAB_STORE) {
   const kvData = await runtime.env.LAB_STORE.get(`lab:${slug}`);
   if (kvData) {
-    data = JSON.parse(kvData);
+    const live = JSON.parse(kvData);
+    labData = { ...meta, ...live };
   }
 }
 
-if (!data) {
+if (!labData) {
   return Astro.redirect('/404');
 }
 
@@ -33,9 +36,45 @@ interface ContentItem {
   summary: string;
   key_insights?: string[];
 }
+
+// Hardcoded Pipeline Configurations
+const PIPELINES: Record<string, any[]> = {
+  'newsletter-digest': [
+    { name: "Gmail", icon: "https://api.iconify.design/logos:google-gmail.svg" },
+    { name: "Make.com", icon: "https://api.iconify.design/simple-icons:make.svg?color=%238a2be2" },
+    { name: "Hermes Agent", icon: hermesLogo.src },
+    { name: "MiniMax AI", icon: "https://api.iconify.design/simple-icons:minimax.svg" },
+    { name: "Discord", icon: "https://api.iconify.design/logos:discord-icon.svg" }
+  ],
+  'reddit-radar': [
+    { name: "Reddit API", icon: "https://api.iconify.design/logos:reddit-icon.svg" },
+    { name: "Hermes Agent", icon: hermesLogo.src },
+    { name: "GPT-4o", icon: "https://api.iconify.design/simple-icons:openai.svg" },
+    { name: "Discord", icon: "https://api.iconify.design/logos:discord-icon.svg" }
+  ],
+  'intelligence-os': [
+    { name: "RSS Feeds", icon: "https://api.iconify.design/mdi:rss.svg" },
+    { name: "Hermes Agent", icon: hermesLogo.src },
+    { name: "Claude 3.5", icon: "https://api.iconify.design/logos:claude-icon.svg" },
+    { name: "Discord", icon: "https://api.iconify.design/logos:discord-icon.svg" }
+  ]
+};
+
+const activePipeline = PIPELINES[slug as string] || [];
+
+const FEED_HEADINGS: Record<string, string> = {
+  'newsletter-digest': 'Inbox Digest',
+  'reddit-radar': 'Signal Radar',
+  'intelligence-os': 'Intelligence Feed'
+};
+
+const feedHeading = FEED_HEADINGS[slug as string] || 'Intelligence Feed';
+
+const latestRun = labData.latest;
+const previousRun = labData.previous;
 ---
 
-<Layout title={`${data.title} | Lab`} description={data.description}>
+<Layout title={`${labData.title} | Lab`} description={labData.description}>
   <main class="lab-page page-surface min-h-screen">
     <div class="lab-container max-w-6xl mx-auto px-4 py-12">
       
@@ -45,99 +84,164 @@ interface ContentItem {
         <span class="opacity-30">/</span>
         <span class="text-foreground">The Lab</span>
         <span class="opacity-30">/</span>
-        <span class="text-foreground">{data.title}</span>
+        <span class="text-foreground">{labData.title}</span>
       </nav>
 
-      <header class="mb-10">
-        <div class="flex flex-wrap items-center gap-4 mb-4">
-           <div class="status-indicator-breathing px-3 py-1 border-2 border-black bg-white rounded-full flex items-center gap-2">
-             <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-             <span class="text-[11px] font-black uppercase tracking-widest">{data.status}</span>
+      <header class="mb-12">
+        <div class="flex flex-wrap items-center gap-3 mb-6">
+           <div class="flex items-center gap-2 px-3 py-1.5 border-2 border-black bg-white rounded-full shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+             <span class="relative flex h-2 w-2">
+               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+               <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+             </span>
+             <span class="text-[10px] font-black uppercase tracking-widest">{labData.status}</span>
            </div>
-           <span class="text-[11px] font-black text-muted-foreground uppercase tracking-widest border-l-2 border-black/10 pl-4">Engineered Workflow • Last Run: {data.lastRun}</span>
+           <div class="flex items-center gap-3 px-3 py-1.5 border-2 border-black/10 bg-black/5 rounded-full">
+             <span class="text-[10px] font-black uppercase tracking-widest opacity-60">Schedule: {labData.schedule}</span>
+             <span class="w-1 h-1 rounded-full bg-black/20"></span>
+             <span class="text-[10px] font-black uppercase tracking-widest opacity-60">Last: {latestRun?.lastRun || 'N/A'}</span>
+           </div>
         </div>
         
-        <h1 class="text-5xl md:text-7xl font-black tracking-tighter mb-4 leading-[0.85]">{data.title}</h1>
-        <p class="text-lg md:text-xl text-muted-foreground max-w-2xl leading-tight font-bold opacity-80">
-          {data.description}
+        <h1 class="text-5xl md:text-8xl font-black tracking-tighter mb-6 leading-[0.8]">{labData.title}</h1>
+        <p class="text-xl md:text-2xl text-muted-foreground max-w-3xl leading-tight font-bold opacity-80">
+          {labData.description}
         </p>
       </header>
 
-      <!-- Pipeline Visualization (Responsive Size) -->
-      <section class="mb-8">
-        <div class="p-4 md:p-6 border-2 md:border-4 border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] md:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] rounded-2xl md:rounded-3xl overflow-x-auto no-scrollbar">
-          <div class="flex items-center justify-center gap-2 md:gap-8 min-w-max mx-auto">
-            {data.pipeline.map((step, i) => (
-              <div class="flex items-center gap-2 md:gap-8">
-                {/* Node */}
-                <div class="flex flex-col items-center gap-1 md:gap-2">
-                  <div class="w-10 h-10 md:w-16 md:h-16 shrink-0 rounded-full border-2 md:border-4 border-black bg-cream flex items-center justify-center font-black text-xs md:text-xl shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
-                    {step[0]}
+      <!-- Pipeline Visualization (Subtle Horizontal) -->
+      <section class="mb-16">
+        <div class="py-8 border-y-2 border-black/5 overflow-x-auto no-scrollbar">
+          <div class="flex items-center justify-center gap-2 md:gap-12 min-w-max md:min-w-0 mx-auto px-2 md:px-4">
+            {activePipeline.map((step: any, i: number) => {
+              const name = step.name;
+              const icon = step.icon;
+              
+              return (
+                <div class="flex items-center gap-3 md:gap-12">
+                  {/* Node */}
+                  <div class="flex flex-col items-center gap-2 md:gap-3">
+                    <div class={`w-11 h-11 md:w-14 md:h-14 shrink-0 rounded-full border-2 border-black flex items-center justify-center font-black text-[11px] md:text-base shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] md:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-all hover:-translate-y-1 hover:shadow-[5px_5px_0px_0px_rgba(0,0,0,1)] overflow-hidden ${name === 'Hermes Agent' ? 'bg-[#000] p-1' : 'bg-white p-1.5 md:p-2'}`}>
+                      {icon ? (
+                        <img 
+                          src={icon} 
+                          alt={name} 
+                          class="w-full h-full object-contain"
+                          loading="eager"
+                        />
+                      ) : (
+                        <span>{name[0]}</span>
+                      )}
+                    </div>
+                    <span class="text-[8px] md:text-[9px] font-black uppercase tracking-tighter md:tracking-widest opacity-40 whitespace-nowrap">{name}</span>
                   </div>
-                  <span class="text-[8px] md:text-[9px] font-black uppercase tracking-tighter md:tracking-widest opacity-60 md:opacity-100 whitespace-nowrap">{step}</span>
-                </div>
 
-                {/* Arrow */}
-                {i < data.pipeline.length - 1 && (
-                  <span class="text-black/20 font-black text-sm md:text-2xl">→</span>
-                )}
-              </div>
-            ))}
+                  {/* Arrow */}
+                  {i < activePipeline.length - 1 && (
+                    <div class="flex flex-col items-center -mt-4 md:-mt-6">
+                      <span class="text-black/60 font-black text-xs md:text-3xl">→</span>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-16">
         <!-- Main Content (The Digest) -->
         <div class="lg:col-span-8">
-          <div class="mb-4 pb-2 border-b-2 border-black">
-             <h2 class="text-2xl md:text-3xl font-black tracking-tight uppercase">Intelligence Feed</h2>
+          <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b-4 border-black pb-4">
+             <h2 class="text-3xl md:text-4xl font-black tracking-tighter uppercase italic">{feedHeading}</h2>
+             
+             <!-- Run Tabs -->
+             <div class="flex p-1 bg-black/5 rounded-lg border-2 border-black self-start md:self-auto">
+               <button 
+                id="tab-latest"
+                class="px-4 py-1.5 text-[10px] font-black uppercase tracking-widest rounded-md transition-all bg-black text-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]"
+                data-tab="latest"
+               >
+                Latest
+               </button>
+               <button 
+                id="tab-previous"
+                class="px-4 py-1.5 text-[10px] font-black uppercase tracking-widest rounded-md transition-all hover:bg-black/10 disabled:opacity-30 disabled:cursor-not-allowed"
+                data-tab="previous"
+                disabled={!previousRun}
+               >
+                Previous
+               </button>
+             </div>
           </div>
 
-          <div class="flex flex-col">
-            {(data.content as ContentItem[]).map((item, index) => (
-              <article class={`relative ${index > 0 ? 'mt-4 pt-4 border-t border-black/10' : ''}`}>
-                <div class="flex items-center gap-3 mb-2">
-                  <span class="w-4 h-px bg-primary"></span>
-                  <span class="text-[8px] font-black uppercase tracking-[0.2em] text-primary">{item.source}</span>
+          <div id="content-latest" class="flex flex-col gap-12">
+            {latestRun ? (latestRun.content as ContentItem[]).map((item, index) => (
+              <article class="relative group">
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="w-8 h-1 bg-primary"></span>
+                  <span class="text-[10px] font-black uppercase tracking-[0.3em] text-primary bg-primary/5 px-2 py-0.5 rounded">{item.source}</span>
                 </div>
                 
-                <h3 class="text-xl md:text-2xl font-black tracking-tight mb-3 leading-tight">{item.title}</h3>
+                <h3 class="text-2xl md:text-4xl font-black tracking-tight mb-4 leading-tight group-hover:text-primary transition-colors cursor-default">{item.title}</h3>
                 
                 <div class="prose-digest max-w-3xl">
-                  <div class="text-base md:text-lg text-muted-foreground leading-relaxed font-medium">
+                  <div class="text-lg md:text-xl text-muted-foreground/80 leading-relaxed font-medium">
                     {item.summary.split('\n\n').map(p => (
-                      <p class="mb-4 last:mb-0">{p}</p>
+                      <p class="mb-6 last:mb-0">{p}</p>
                     ))}
                   </div>
                 </div>
               </article>
-            ))}
+            )) : (
+              <p class="text-muted-foreground font-bold italic">No data available yet.</p>
+            )}
+          </div>
+
+          <div id="content-previous" class="hidden flex flex-col gap-12">
+            {previousRun ? (previousRun.content as ContentItem[]).map((item, index) => (
+              <article class="relative group">
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="w-8 h-1 bg-black/20"></span>
+                  <span class="text-[10px] font-black uppercase tracking-[0.3em] text-muted-foreground bg-black/5 px-2 py-0.5 rounded">{item.source}</span>
+                </div>
+                
+                <h3 class="text-2xl md:text-4xl font-black tracking-tight mb-4 leading-tight opacity-60">{item.title}</h3>
+                
+                <div class="prose-digest max-w-3xl">
+                  <div class="text-lg md:text-xl text-muted-foreground/60 leading-relaxed font-medium">
+                    {item.summary.split('\n\n').map(p => (
+                      <p class="mb-6 last:mb-0">{p}</p>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            )) : null}
           </div>
         </div>
 
         <!-- Sidebar Meta -->
         <aside class="lg:col-span-4 space-y-10">
           <div class="sticky top-12">
-            <div class="p-8 border-2 border-black bg-white rounded-2xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-              <h3 class="text-xs font-black uppercase tracking-widest mb-8 border-b-2 border-black/5 pb-4">Execution Metadata</h3>
-              <div class="space-y-6">
+            <div id="meta-card" class="p-6 border-2 border-black bg-white rounded-2xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+              <h3 class="text-xs font-black uppercase tracking-widest mb-5 border-b-2 border-black/5 pb-4">Execution Metadata</h3>
+              <div class="space-y-4">
                 <div class="group">
                   <span class="text-[10px] font-black text-muted-foreground uppercase tracking-widest block mb-1">Items Processed</span>
-                  <span class="text-3xl font-black">{data.stats.processed}</span>
+                  <span id="meta-processed" class="text-3xl font-black tracking-tighter">{latestRun?.stats.processed || 0}</span>
                 </div>
                 <div class="group">
                   <span class="text-[10px] font-black text-muted-foreground uppercase tracking-widest block mb-1">Context Window</span>
-                  <span class="text-3xl font-black">{data.stats.tokens} <small class="text-sm opacity-40">tokens</small></span>
+                  <span id="meta-tokens" class="text-3xl font-black tracking-tighter">{latestRun?.stats.tokens || 0} <small class="text-sm opacity-40">tokens</small></span>
                 </div>
                 <div class="group">
                   <span class="text-[10px] font-black text-muted-foreground uppercase tracking-widest block mb-1">Model Architecture</span>
-                  <span class="text-xl font-black block mt-1 px-3 py-2 border-2 border-black bg-primary/5 rounded-lg">{data.stats.model}</span>
+                  <span id="meta-model" class="text-lg font-black block mt-2 px-3 py-2 border-2 border-black bg-primary/5 rounded-xl">{latestRun?.stats.model || 'N/A'}</span>
                 </div>
               </div>
 
-              <div class="mt-12 pt-8 border-t-2 border-black/5">
-                <p class="text-[10px] font-black uppercase tracking-widest mb-4 opacity-40">Current Pipeline Status</p>
+              <div class="mt-6 pt-4 border-t-2 border-black/5">
+                <p class="text-[10px] font-black uppercase tracking-widest mb-3 opacity-40">Current Pipeline Status</p>
                 <div class="flex items-center gap-2 text-xs font-bold text-green-600">
                   <span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></span>
                   Systems Operational
@@ -145,12 +249,12 @@ interface ContentItem {
               </div>
             </div>
 
-            <div class="mt-8 p-8 border-2 border-black bg-primary text-primary-foreground rounded-2xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-               <h3 class="text-lg font-black tracking-tight mb-4 leading-tight">This is an automated workflow.</h3>
-               <p class="text-sm font-bold opacity-80 leading-relaxed mb-8">
+            <div class="mt-8 p-8 border-2 border-black bg-primary text-primary-foreground rounded-2xl shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+               <h3 class="text-xl font-black tracking-tight mb-4 leading-tight">This is an automated workflow.</h3>
+               <p class="text-base font-bold opacity-80 leading-relaxed mb-10">
                  The summaries above are generated daily by the Hermes Agent. I use this to maintain high-signal awareness without the inbox fatigue.
                </p>
-               <button class="w-full py-4 bg-black text-white font-black uppercase tracking-[0.2em] text-[10px] border-2 border-black hover:translate-x-1 hover:-translate-y-1 transition-all shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]">
+               <button class="w-full py-4 bg-black text-white font-black uppercase tracking-[0.2em] text-[11px] border-2 border-black hover:translate-x-1 hover:-translate-y-1 transition-all shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]">
                  Build one for your team
                </button>
             </div>
@@ -161,6 +265,48 @@ interface ContentItem {
     </div>
   </main>
 </Layout>
+
+<script is:inline define:vars={{ latestRun, previousRun }}>
+  const tabLatest = document.getElementById('tab-latest');
+  const tabPrevious = document.getElementById('tab-previous');
+  const contentLatest = document.getElementById('content-latest');
+  const contentPrevious = document.getElementById('content-previous');
+  
+  const metaProcessed = document.getElementById('meta-processed');
+  const metaTokens = document.getElementById('meta-tokens');
+  const metaModel = document.getElementById('meta-model');
+
+  function switchTab(type) {
+    if (type === 'latest') {
+      tabLatest.classList.add('bg-black', 'text-white', 'shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]');
+      tabPrevious.classList.remove('bg-black', 'text-white', 'shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]');
+      contentLatest.classList.remove('hidden');
+      contentPrevious.classList.add('hidden');
+      
+      // Update meta
+      if (latestRun) {
+        metaProcessed.textContent = latestRun.stats.processed;
+        metaTokens.innerHTML = `${latestRun.stats.tokens} <small class="text-sm opacity-40">tokens</small>`;
+        metaModel.textContent = latestRun.stats.model;
+      }
+    } else {
+      tabPrevious.classList.add('bg-black', 'text-white', 'shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]');
+      tabLatest.classList.remove('bg-black', 'text-white', 'shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]');
+      contentLatest.classList.add('hidden');
+      contentPrevious.classList.remove('hidden');
+      
+      // Update meta
+      if (previousRun) {
+        metaProcessed.textContent = previousRun.stats.processed;
+        metaTokens.innerHTML = `${previousRun.stats.tokens} <small class="text-sm opacity-40">tokens</small>`;
+        metaModel.textContent = previousRun.stats.model;
+      }
+    }
+  }
+
+  tabLatest?.addEventListener('click', () => switchTab('latest'));
+  tabPrevious?.addEventListener('click', () => switchTab('previous'));
+</script>
 
 <style>
   .lab-page {

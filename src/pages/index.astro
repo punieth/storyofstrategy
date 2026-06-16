@@ -1,25 +1,30 @@
 ---
 import Layout from "@layouts/Default.astro";
 import labData from "../data/lab-automations.json";
+import { Image } from "astro:assets";
+import myImage from "../assets/Gemini_Generated_Image_kx0ogvkx0ogvkx0o.png";
 ---
 
 <Layout
-  title="Punith R"
+  title="Punith"
   description="Software engineer. 8 years shipping software. Now exploring product ideas, automations, and whatever I find interesting."
 >
   <main class="home-redesign page-surface flex-grow border-b-[12px] border-frame">
-    <h1 class="sr-only">Punith R — Software Engineer exploring Product</h1>
+    <h1 class="sr-only">Punith — Software Engineer exploring Product</h1>
 
     <section class="home-hero" id="hero">
       <div class="home-hero__copy">
-        <p class="home-kicker">Software engineer / product tinkerer / India</p>
-        <h2>
-          <span class="home-hero__name">This is Punith.</span>
-          I bridge engineering and product to make complex ideas simple.
-        </h2>
-        <p class="home-hero__lede">
-          I spent 8 years shipping software. Now I’m using that engineering muscle to explore AI workflows, product strategy, and practical ideas for Indian markets.
-        </p>
+        <Image src={myImage} alt="Punith" class="home-hero__avatar" />
+        <div class="home-hero__text">
+          <p class="home-kicker">Software engineer / product tinkerer / India</p>
+          <h2>
+            <span class="home-hero__name">This is Punith.</span>
+            I bridge engineering and product to make complex ideas simple.
+          </h2>
+          <p class="home-hero__lede">
+            I spent 8 years shipping software. Now I’m using that engineering muscle to explore AI workflows, product strategy, and practical ideas for Indian markets.
+          </p>
+        </div>
       </div>
     </section>
 
@@ -39,6 +44,7 @@ import labData from "../data/lab-automations.json";
           <p>
             SMS bridge, smart repair buffer, and fail-safe approval loops for NRIs and remote property owners.
           </p>
+          <span class="home-cta-btn">Read teardown ↗</span>
         </a>
 
         <a href="/blog/proofit-prd/" class="home-case home-case--proofit">
@@ -50,6 +56,7 @@ import labData from "../data/lab-automations.json";
           <p>
             A profile, vouch, and verification loop for micro businesses that close deals through WhatsApp.
           </p>
+          <span class="home-cta-btn">Read PRD ↗</span>
         </a>
       </div>
     </section>
@@ -61,30 +68,33 @@ import labData from "../data/lab-automations.json";
       </div>
 
       <div class="home-lab__grid">
-        <!-- <a href="/lab/linkedin-drafts/" class="home-lab-card home-lab-card--yellow block no-underline">
+        <a href="/lab/reddit-radar/" class="home-lab-card home-lab-card--yellow block no-underline">
           <div class="home-lab-card__status">
-            Active • {labData["linkedin-drafts"].lastRun}
+            Active • {labData["reddit-radar"].latest.lastRun}
           </div>
           <span>Automation</span>
-          <h3>Reddit → AI summary → LinkedIn</h3>
-          <p>Daily product-management signals turned into a draftable post.</p>
-        </a> -->
+          <h3>Reddit Radar</h3>
+          <p>Signal detection from Reddit. We scan PM and SaaS subs, filter for posts with real substance.</p>
+          <span class="home-cta-btn">View automation ↗</span>
+        </a>
         <a href="/lab/newsletter-digest/" class="home-lab-card home-lab-card--mint block no-underline">
           <div class="home-lab-card__status">
-            Active • {labData["newsletter-digest"].lastRun}
+            Active • {labData["newsletter-digest"].latest.lastRun}
           </div>
           <span>Automation</span>
           <h3>Newsletters → AI digest → Discord</h3>
           <p>A low-friction way to keep up without pretending inbox zero is real.</p>
+          <span class="home-cta-btn">View automation ↗</span>
         </a>
-        <!-- <a href="/lab/youtube-summaries/" class="home-lab-card home-lab-card--lavender block no-underline">
+        <a href="/lab/intelligence-os/" class="home-lab-card home-lab-card--lavender block no-underline">
           <div class="home-lab-card__status">
-            Active • {labData["youtube-summaries"].lastRun}
+            Active • {labData["intelligence-os"].latest.lastRun}
           </div>
           <span>Automation</span>
-          <h3>YouTube → Deep Summary → Notion</h3>
-          <p>Turning hour-long engineering podcasts into actionable intel.</p>
-        </a> -->
+          <h3>Intelligence OS</h3>
+          <p>Daily intelligence brief from 60 RSS sources — enriched signals, cross-source pattern detection.</p>
+          <span class="home-cta-btn">View automation ↗</span>
+        </a>
         <article id="this-website-card" class="home-lab-card home-lab-card--black cursor-pointer">
           <span>This site</span>
           <h3>Neobrutal shell, built to be interactive</h3>

@@ -24,11 +24,42 @@ export const POST: APIRoute = async ({ request, locals, url }) => {
   }
 
   try {
-    const data = await request.json();
+    const newData = await request.json();
     
-    // 3. Store in Cloudflare KV
-    // Key format: lab:[type] (e.g., lab:newsletter-digest)
-    await kv.put(`lab:${type}`, JSON.stringify(data));
+    // 3. Set "Last Run" timestamp if not provided in payload
+    if (!newData.lastRun) {
+      newData.lastRun = new Date().toLocaleString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+        timeZone: 'Asia/Kolkata'
+      });
+    }
+
+    // 4. Fetch existing data to handle history
+    const existingRaw = await kv.get(`lab:${type}`);
+    let finalData: any = {};
+
+    if (existingRaw) {
+      const existing = JSON.parse(existingRaw);
+      // Shift latest to previous
+      finalData = {
+        ...existing,
+        previous: existing.latest || null,
+        latest: newData
+      };
+    } else {
+      // First time run
+      finalData = {
+        latest: newData,
+        previous: null
+      };
+    }
+
+    // 5. Store in Cloudflare KV
+    await kv.put(`lab:${type}`, JSON.stringify(finalData));
 
     return new Response(JSON.stringify({ 
       success: true, 

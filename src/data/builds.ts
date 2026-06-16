@@ -17,11 +17,11 @@ export interface Build {
 
 export const builds: Build[] = [
   {
-    title: "Reddit → LinkedIn Pipeline",
+    title: "Reddit Radar",
     oneLiner:
-      "Scrapes top posts from r/productmanagement daily, AI-summarizes them, and auto-posts to LinkedIn.",
+      "Signal detection from Reddit. Scanning PM and SaaS subs for high-substance discussions.",
     status: "live",
-    tags: ["automation", "n8n", "ai"],
+    tags: ["automation", "python", "ai"],
     tone: "bridge",
   },
   {
@@ -29,16 +29,16 @@ export const builds: Build[] = [
     oneLiner:
       "Summarizes my Gmail newsletters and pipes the digests straight to my Discord channel.",
     status: "live",
-    tags: ["automation", "n8n", "ai"],
+    tags: ["automation", "make", "ai"],
     tone: "principles",
   },
   {
-    title: "Story of Strategy",
+    title: "Intelligence OS",
     oneLiner:
-      "This site. Neo-brutalist design system, visitor tracking, interactive terminal — built from scratch.",
+      "Daily intelligence brief from 60 RSS sources — enriched signals and cross-source pattern detection.",
     status: "live",
-    tags: ["website", "design", "astro"],
-    tone: "vision",
+    tags: ["automation", "rss", "ai"],
+    tone: "profile-engineer",
   },
   {
     title: "Urban Company Prototype",
