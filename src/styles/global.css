@@ -2206,7 +2206,7 @@ html {
 }
 
 .home-case--proofit:hover .home-cta-btn {
-  background: var(--home-amber);
+  background: var(--home-green);
   color: var(--home-ink);
 }
 
