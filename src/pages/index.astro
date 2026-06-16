@@ -22,10 +22,38 @@ if (runtime && runtime.env && runtime.env.LAB_STORE) {
   }
 }
 
+// Skip generic report/date headings to find the first real insight/topic title
+function getFirstRealSignal(content: any[]) {
+  if (!content || !Array.isArray(content)) return "";
+  
+  const genericKeywords = [
+    "signal report",
+    "daily brief",
+    "intelligence os",
+    "reddit radar",
+    "newsletter digest",
+    "worth watching",
+    "what you should know today",
+    "what you should know"
+  ];
+  
+  for (const item of content) {
+    if (!item || !item.title) continue;
+    const titleLower = item.title.toLowerCase().trim();
+    const isGeneric = genericKeywords.some(kw => titleLower.includes(kw));
+    if (!isGeneric) {
+      return item.title;
+    }
+  }
+  
+  return content[0]?.title || "";
+}
+
 // Truncation utility
 function truncateSignal(title: string, maxLength = 45) {
   if (!title) return "";
-  const cleanTitle = title.replace(/^(LATEST:|PREVIOUS:)\s*/i, "").trim();
+  let cleanTitle = title.replace(/^(LATEST:|PREVIOUS:)\s*/i, "").trim();
+  cleanTitle = cleanTitle.replace(/^###\s*/, "").trim();
   if (cleanTitle.length > maxLength) {
     return cleanTitle.slice(0, maxLength) + "...";
   }
@@ -197,19 +225,19 @@ const reports = {
             <div class="console-line">
               <span class="console-tag console-tag--amber">[OK] reddit-radar</span> <span class="console-time">({labData["reddit-radar"]?.latest?.lastRun})</span>
               <div class="console-sub-line">&gt; Scanned PM &amp; SaaS subreddits ({labData["reddit-radar"]?.latest?.stats?.model || "GPT-4o"})</div>
-              <div class="console-sub-line">&gt; Signal: "{truncateSignal(labData["reddit-radar"]?.latest?.content?.[0]?.title || "")}"</div>
+              <div class="console-sub-line">&gt; Signal: "{truncateSignal(getFirstRealSignal(labData["reddit-radar"]?.latest?.content))}"</div>
             </div>
             
             <div class="console-line mt-3">
               <span class="console-tag console-tag--lime">[OK] newsletter-digest</span> <span class="console-time">({labData["newsletter-digest"]?.latest?.lastRun})</span>
               <div class="console-sub-line">&gt; Scanned inbox: {labData["newsletter-digest"]?.latest?.stats?.processed || 0} newsletters parsed ({labData["newsletter-digest"]?.latest?.stats?.model || "Llama 3.1"})</div>
-              <div class="console-sub-line">&gt; Highlight: "{truncateSignal(labData["newsletter-digest"]?.latest?.content?.[0]?.title || "")}"</div>
+              <div class="console-sub-line">&gt; Highlight: "{truncateSignal(getFirstRealSignal(labData["newsletter-digest"]?.latest?.content))}"</div>
             </div>
             
             <div class="console-line mt-3">
               <span class="console-tag console-tag--cyan">[OK] intelligence-os</span> <span class="console-time">({labData["intelligence-os"]?.latest?.lastRun})</span>
               <div class="console-sub-line">&gt; Scanned 60 RSS sources ({labData["intelligence-os"]?.latest?.stats?.model || "Claude 3.5 Sonnet"})</div>
-              <div class="console-sub-line">&gt; Highlight: "{truncateSignal(labData["intelligence-os"]?.latest?.content?.[0]?.title || "")}"</div>
+              <div class="console-sub-line">&gt; Highlight: "{truncateSignal(getFirstRealSignal(labData["intelligence-os"]?.latest?.content))}"</div>
             </div>
           </div>
         </div>
