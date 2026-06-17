@@ -15,7 +15,7 @@ interface Props {
 const { title, description, classList, pageTitle, ogImage } = Astro.props;
 ---
 
-<html lang="en" class="h-full">
+<html lang="en" class:list={["h-full", classList]}>
   <BaseHead ogImage={ogImage} title={title} description={description} />
 
   <body class:list={["flex flex-col min-h-screen", classList]}>

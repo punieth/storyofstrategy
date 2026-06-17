@@ -50,7 +50,7 @@ const isUrbanCompanyPrd = slug === "urban-company-teardown";
 const isProofItPrd = slug === "proofit-prd";
 const isPortfolioPrd = isUrbanCompanyPrd || isProofItPrd;
 const layoutClassList = [
-  "bg-[#faf9f6] blog-post-layout",
+  "blog-post-layout",
   isUrbanCompanyPrd ? "urban-company-page-shell" : "",
   isProofItPrd ? "proofit-page-shell" : "",
 ].filter(Boolean).join(" ");
@@ -62,9 +62,62 @@ const layoutClassList = [
   ogImage={ogImage}
   classList={layoutClassList}
 >
+  <style is:inline>
+    /* Aggressive fix for background flickering */
+    html.urban-company-page-shell, 
+    body.urban-company-page-shell,
+    html.proofit-page-shell,
+    body.proofit-page-shell {
+      background-color: #fbfaf6 !important;
+    }
+
+    /* Refined reveal animation for portfolio PRDs - no flicker, just smooth flow */
+    @keyframes portfolio-reveal {
+      from { 
+        opacity: 0;
+        transform: translateY(20px);
+        filter: blur(8px);
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+      }
+    }
+
+    .urban-company-page-shell .fade-in-up,
+    .proofit-page-shell .fade-in-up {
+      animation: portfolio-reveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+      will-change: transform, opacity, filter;
+    }
+
+    /* Critical styles for Urban Company to prevent inner flicker */
+    .urban-company-page-shell main {
+      background: radial-gradient(circle at 18% 14rem, rgba(23, 107, 77, 0.08), transparent 22rem), linear-gradient(180deg, #fbfaf6 0%, #f6f2ea 100%) !important;
+    }
+    .urban-company-page-shell .uc-hero {
+      background: linear-gradient(135deg, rgba(255, 253, 248, 0.95), rgba(238, 244, 236, 0.92)), #fffdf8 !important;
+    }
+    .urban-company-page-shell .urban-company-prd::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background: radial-gradient(circle at 15% 8%, rgba(23, 107, 77, 0.13), transparent 30rem), radial-gradient(circle at 88% 12%, rgba(245, 223, 186, 0.72), transparent 26rem), linear-gradient(180deg, #f8f4ec 0%, #f5f1e8 42%, #f6f3ed 100%) !important;
+    }
+
+    /* Critical styles for ProofIt to prevent inner flicker */
+    .proofit-page-shell main {
+      background: radial-gradient(circle at 20% 14rem, rgba(36, 87, 255, 0.08), transparent 22rem), linear-gradient(180deg, #fbfaf6 0%, #eef4ff 100%) !important;
+    }
+    .proofit-page-shell .proof-hero {
+      background: radial-gradient(circle at 82% 20%, rgba(36, 87, 255, 0.12), transparent 18rem), linear-gradient(135deg, rgba(255, 253, 248, 0.98), rgba(238, 244, 255, 0.94)) !important;
+    }
+  </style>
   <main class:list={[
-    "mx-auto w-full px-4 sm:px-6 md:px-8 pt-20 pb-10 sm:pt-24 sm:pb-12 md:pt-28 md:pb-16",
-    isPortfolioPrd ? "max-w-[92rem]" : "max-w-7xl",
+    "mx-auto w-full px-4 sm:px-6 md:px-8 pb-10 sm:pb-12 md:pb-16",
+    isPortfolioPrd ? "pt-8 sm:pt-10 md:pt-12 max-w-[92rem]" : "pt-20 sm:pt-24 md:pt-28 max-w-7xl",
   ]}>
     <div class:list={[
       "items-start",
