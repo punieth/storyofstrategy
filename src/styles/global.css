@@ -1701,6 +1701,24 @@ html {
   line-height: 0.95;
 }
 
+.home-section__heading h2 {
+  font-size: clamp(1.95rem, 2.85vw, 3.2rem);
+  text-wrap: balance;
+}
+
+.home-heading-keep {
+  white-space: nowrap;
+}
+
+.home-heading-br--m1,
+.home-heading-br--m2 {
+  display: none;
+}
+
+.home-heading-br--desk {
+  display: inline;
+}
+
 .home-case-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2150,6 +2168,19 @@ html {
     font-size: clamp(1.6rem, 8vw, 2.2rem);
     letter-spacing: -0.015em;
     line-height: 1.05;
+  }
+
+  .home-heading-br--m1,
+  .home-heading-br--m2 {
+    display: inline;
+  }
+
+  .home-heading-br--desk {
+    display: none;
+  }
+
+  .home-section__heading h2 {
+    font-size: clamp(1.5rem, 7.5vw, 2rem);
   }
 
   .home-button {
