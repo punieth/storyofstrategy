@@ -14,6 +14,7 @@ export default function ProofItPrototypeShowcase() {
 
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [viewportHeight, setViewportHeight] = useState(800);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== "undefined" ? window.innerWidth : 400);
 
   useEffect(() => {
     setIsMounted(true);
@@ -21,8 +22,12 @@ export default function ProofItPrototypeShowcase() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
+      setWindowWidth(window.innerWidth);
       setViewportHeight(window.innerHeight);
-      const handleResize = () => setViewportHeight(window.innerHeight);
+      const handleResize = () => {
+        setWindowWidth(window.innerWidth);
+        setViewportHeight(window.innerHeight);
+      };
       window.addEventListener("resize", handleResize);
       return () => window.removeEventListener("resize", handleResize);
     }
@@ -143,14 +148,20 @@ export default function ProofItPrototypeShowcase() {
   const scale = isMobile ? Math.min(1, containerWidth / mobileNaturalWidth) : 1;
   const scaledHeight = mobileNaturalHeight * scale;
 
+  const isMobileFullscreen = windowWidth < 640;
+
   if (isFullscreen) {
     return createPortal(
-      <div className="fixed inset-0 z-[9999] bg-[#0b0f19] flex flex-col w-screen h-screen">
+      <div 
+        className={`fixed inset-0 z-[9999] bg-[#0b0f19] ${
+          isMobileFullscreen ? "overflow-y-auto flex flex-col items-center" : "flex flex-col w-screen h-screen"
+        }`}
+      >
         {/* Floating Close Button */}
         <button
           onClick={() => setIsFullscreen(false)}
           title="Exit Fullscreen (Esc)"
-          className="absolute top-4 right-4 z-50 bg-black/60 hover:bg-black border border-white/20 hover:border-white/40 text-white rounded-full p-2.5 flex items-center justify-center shadow-lg transition-all hover:scale-105 active:scale-95"
+          className="fixed top-4 right-4 z-50 bg-black/60 hover:bg-black border border-white/20 hover:border-white/40 text-white rounded-full p-2.5 flex items-center justify-center shadow-lg transition-all hover:scale-105 active:scale-95"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -174,7 +185,10 @@ export default function ProofItPrototypeShowcase() {
           key={iframeKey}
           src={url}
           title="ProofIt Interactive Flow (Fullscreen)"
-          className="w-full h-full border-none select-text bg-[#0b0f19]"
+          className="w-full border-none select-text bg-[#0b0f19]"
+          style={{
+            height: isMobileFullscreen ? `${windowWidth * 2.20}px` : "100%",
+          }}
           loading="eager"
           onLoad={handleFrameLoad}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
