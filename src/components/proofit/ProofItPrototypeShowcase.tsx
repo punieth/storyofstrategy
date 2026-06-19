@@ -143,8 +143,8 @@ export default function ProofItPrototypeShowcase() {
   const isMobile = containerWidth < 640;
   
   // Mobile scaling parameters
-  const mobileNaturalWidth = 390; // Standard modern mobile width
-  const mobileNaturalHeight = 760; // Standard modern mobile height
+  const mobileNaturalWidth = 400; // Adjusted to match mockup width (prevent side cropping)
+  const mobileNaturalHeight = 860; // Adjusted to match mockup height (prevent notch/bottom cutoff and excess space)
   const scale = isMobile ? Math.min(1, containerWidth / mobileNaturalWidth) : 1;
   const scaledHeight = mobileNaturalHeight * scale;
 
@@ -187,7 +187,8 @@ export default function ProofItPrototypeShowcase() {
           title="ProofIt Interactive Flow (Fullscreen)"
           className="w-full border-none select-text bg-[#0b0f19]"
           style={{
-            height: isMobileFullscreen ? `${windowWidth * 2.20}px` : "100%",
+            height: isMobileFullscreen ? "860px" : "100%",
+            width: "100%",
           }}
           loading="eager"
           onLoad={handleFrameLoad}
