@@ -142,9 +142,11 @@ export default function UrbanCompanyPrototypeShowcase() {
 
   const isMobile = containerWidth < 640;
   
-  // Mobile scaling parameters
-  const mobileNaturalWidth = 400; // Adjusted to match mockup width (prevent side cropping)
-  const mobileNaturalHeight = 860; // Adjusted to match mockup height (prevent notch/bottom cutoff and excess space)
+  // Mobile scaling parameters — 390×844 matches iPhone 14/15 Pro native viewport
+  const mobileNaturalWidth = 390;
+  const mobileNaturalHeight = 844;
+  const mobileAspectRatio = mobileNaturalHeight / mobileNaturalWidth; // ~2.164
+  // Scale factor: render at natural 390px width, then CSS-transform to fit the container
   const scale = isMobile ? Math.min(1, containerWidth / mobileNaturalWidth) : 1;
   const scaledHeight = mobileNaturalHeight * scale;
 
@@ -181,19 +183,29 @@ export default function UrbanCompanyPrototypeShowcase() {
           </div>
         )}
 
-        <iframe
-          key={iframeKey}
-          src={url}
-          title="Urban Company Interactive Flow (Fullscreen)"
-          className="w-full border-none select-text bg-[#0b0f19]"
+        <div 
+          className="w-full flex-shrink-0"
           style={{
-            height: isMobileFullscreen ? "860px" : "100%",
+            height: isMobileFullscreen ? `${windowWidth * mobileAspectRatio}px` : "100%",
             width: "100%",
+            overflow: "hidden",
           }}
-          loading="eager"
-          onLoad={handleFrameLoad}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        />
+        >
+          <iframe
+            key={iframeKey}
+            src={url}
+            title="Urban Company Interactive Flow (Fullscreen)"
+            className="border-none select-text bg-[#0b0f19]"
+            style={{
+              width: "1px",
+              minWidth: "100%",
+              height: "100%",
+            }}
+            loading="eager"
+            onLoad={handleFrameLoad}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          />
+        </div>
       </div>,
       document.body
     );
@@ -211,7 +223,7 @@ export default function UrbanCompanyPrototypeShowcase() {
         <div className="w-full flex flex-col items-center">
           
           {/* Simple Clean Neo-Brutalist Toolbar for Mobile */}
-          <div className="w-full bg-[#fafaf7] border-[3px] border-black rounded-t-2xl px-3 py-2 flex items-center justify-between gap-2 shadow-[4px_4px_0_0_#000]">
+          <div className="w-full bg-[#fafaf7] border border-black rounded-t-xl px-3 py-2 flex items-center justify-between gap-2">
             <div className="flex items-center gap-1.5 truncate">
               <span className="w-2.5 h-2.5 rounded-full bg-[#ef4444] border border-black flex-shrink-0" />
               <span className="text-[10px] font-black uppercase tracking-wider text-black truncate">Home Flow App</span>
@@ -263,16 +275,17 @@ export default function UrbanCompanyPrototypeShowcase() {
 
           {/* Scaled Frame Viewport */}
           <div 
-            className="w-full overflow-hidden border-[3px] border-t-0 border-black rounded-b-2xl shadow-[4px_4px_0_0_#000] relative bg-[#0f172a]"
+            className="w-full overflow-hidden border border-t-0 border-black rounded-b-xl relative bg-[#0f172a]"
             style={{ height: `${scaledHeight}px` }}
           >
             {isLoading && (
               <LoadingOverlay compact />
             )}
 
-            {/* Scaled Iframe Container */}
+            {/* Scale wrapper: renders iframe at natural 390px, CSS-transforms to fit container.
+                Safari hack (width:1px + min-width:100%) prevents iframe expanding to 410px on WebKit. */}
             <div 
-              className="absolute top-0 left-1/2 -translate-x-1/2"
+              className="absolute top-0 left-1/2"
               style={{
                 width: `${mobileNaturalWidth}px`,
                 height: `${mobileNaturalHeight}px`,
@@ -284,7 +297,12 @@ export default function UrbanCompanyPrototypeShowcase() {
                 key={iframeKey}
                 src={url}
                 title="Urban Company Interactive Flow (Mobile)"
-                className="w-full h-full border-none select-text"
+                className="border-none select-text"
+                style={{
+                  width: "1px",
+                  minWidth: "100%",
+                  height: "100%",
+                }}
                 loading="eager"
                 onLoad={handleFrameLoad}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
