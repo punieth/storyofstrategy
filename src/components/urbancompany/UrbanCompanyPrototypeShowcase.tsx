@@ -142,11 +142,11 @@ export default function UrbanCompanyPrototypeShowcase() {
 
   const isMobile = containerWidth < 640;
   
-  // Mobile scaling parameters — 390×844 matches iPhone 14/15 Pro native viewport
-  const mobileNaturalWidth = 390;
-  const mobileNaturalHeight = 844;
-  const mobileAspectRatio = mobileNaturalHeight / mobileNaturalWidth; // ~2.164
-  // Scale factor: render at natural 390px width, then CSS-transform to fit the container
+  // Mobile scaling: render iframe at 430px (wider than physical screen) so the Lovable
+  // app's internal phone mockup frame proportionally fills more of the visible width.
+  // CSS transform then scales the whole thing down to fit the actual container.
+  const mobileNaturalWidth = 430;
+  const mobileNaturalHeight = 932; // maintains ~2.167 aspect ratio (iPhone proportions)
   const scale = isMobile ? Math.min(1, containerWidth / mobileNaturalWidth) : 1;
   const scaledHeight = mobileNaturalHeight * scale;
 
@@ -155,9 +155,7 @@ export default function UrbanCompanyPrototypeShowcase() {
   if (isFullscreen) {
     return createPortal(
       <div 
-        className={`fixed inset-0 z-[9999] bg-[#0b0f19] ${
-          isMobileFullscreen ? "overflow-y-auto flex flex-col items-center" : "flex flex-col w-screen h-screen"
-        }`}
+        className="fixed inset-0 z-[9999] bg-[#0b0f19] flex flex-col w-screen h-screen"
       >
         {/* Floating Close Button */}
         <button
@@ -183,13 +181,10 @@ export default function UrbanCompanyPrototypeShowcase() {
           </div>
         )}
 
+        {/* Fullscreen iframe: fills entire viewport, no aspect ratio constraint */}
         <div 
-          className="w-full flex-shrink-0"
-          style={{
-            height: isMobileFullscreen ? `${windowWidth * mobileAspectRatio}px` : "100%",
-            width: "100%",
-            overflow: "hidden",
-          }}
+          className="w-full h-full flex-1"
+          style={{ overflow: "hidden" }}
         >
           <iframe
             key={iframeKey}
