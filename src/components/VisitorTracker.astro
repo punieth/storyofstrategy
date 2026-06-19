@@ -1,8 +1,9 @@
 <script>
   async function trackVisitor() {
     // Prevent tracking if the exclude flag is set in localStorage
-    if (localStorage.getItem("exclude_visitor") === "true") {
-      console.log("Visitor tracking disabled via localStorage flag.");
+    const isInternalUser = localStorage.getItem("exclude_me") === "true" || localStorage.getItem("exclude_visitor") === "true";
+    if (isInternalUser) {
+      console.log("Internal user detected. Tracking blocked.");
       return;
     }
 
@@ -64,8 +65,8 @@
   if (typeof window !== "undefined") {
     // Check for exclude parameter in URL
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('exclude') === 'true') {
-      localStorage.setItem("exclude_visitor", "true");
+    if (urlParams.get('me') === 'dont-track-my-devices' || urlParams.get('exclude') === 'true') {
+      localStorage.setItem("exclude_me", "true");
       alert("This device is now excluded from visitor tracking.");
     }
 

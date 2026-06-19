@@ -21,17 +21,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
     const body = await request.json();
     const { city, country, browser, device, ip } = body;
 
-    // Check for excluded IPs
-    const excludedIpsStr = env.EXCLUDED_IPS || "";
-    const excludedIps = excludedIpsStr.split(",").map((s: string) => s.trim());
-    
-    if (ip && excludedIps.includes(ip)) {
-      return new Response(JSON.stringify({ success: true, message: "IP excluded from tracking" }), {
-        status: 200,
-        headers: { "Content-Type": "application/json" },
-      });
-    }
-
     const fromEmail = env.EMAIL_FROM || "onboarding@resend.dev";
     const toEmail = env.EMAIL_TO || "delivered@resend.dev";
 
