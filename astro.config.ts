@@ -11,11 +11,11 @@ export default defineConfig({
   adapter: cloudflare(),
   // used to generate images
   site:
-    process.env.VERCEL_ENV === "production"
-      ? "https://brutal.elian.codes/"
+    process.env.CF_PAGES_URL
+      ? process.env.CF_PAGES_URL
       : process.env.VERCEL_URL
         ? `https://${process.env.VERCEL_URL}/`
-        : "https://localhost:3000/",
+        : "https://storyofstrategy.co/",
   trailingSlash: "ignore",
   integrations: [sitemap(), UnoCSS({ injectReset: true }), mdx(), react()],
   vite: {
