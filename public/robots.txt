@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
-Host: https://storyofstrategy.co/
-Sitemap: https://storyofstrategy.co/sitemap-index.xml
+Host: https://www.storyofstrategy.com/
+Sitemap: https://www.storyofstrategy.com/sitemap-index.xml

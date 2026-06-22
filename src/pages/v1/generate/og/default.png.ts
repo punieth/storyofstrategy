@@ -14,20 +14,19 @@ const fontData: ArrayBuffer = await fontFile.arrayBuffer();
 const height = 630;
 const width = 1200;
 
-export const GET: APIRoute = async ({ request }) => {
-  const url = new URL(request.url);
-  const link = url.hostname === 'localhost' || url.hostname === '127.0.0.1' ? 'storyofstrategy.co' : url.hostname;
+export const GET: APIRoute = async () => {
+  const link = 'storyofstrategy.com';
   
   const html = toReactElement(`
   <div style="background-color: #f5ff85; display: flex; flex-direction: column; height: 100%; padding: 3rem; width: 100%">
     <div style="display:flex; height: 100%; width: 100%; background-color: white; border: 6px solid black; border-radius: 0.5rem; padding: 2.5rem; filter: drop-shadow(8px 8px 0 rgb(0 0 0 / 1));">
       <div style="display: flex; flex-direction: column; justify-content: space-between; width: 100%;">
-        <div style="display: flex; flex-direction: column; gap: 0.75rem;">  
-          <span style="display: flex; align-self: flex-start; align-items: center; padding: 0.25rem 0.75rem; font-size: 20px; font-weight: 900; background-color: #00ff88; border: 3px solid black; filter: drop-shadow(3px 3px 0 rgb(0 0 0 / 1)); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 1rem;">
+        <div style="display: flex; flex-direction: column;">  
+          <span style="display: flex; align-self: flex-start; align-items: center; padding: 0.25rem 0.75rem; font-size: 20px; font-weight: 900; background-color: #00ff88; border: 3px solid black; filter: drop-shadow(3px 3px 0 rgb(0 0 0 / 1)); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 1.5rem;">
             Think → Build
           </span>
-          <p style="font-size: 64px; font-weight: bold; margin: 0; padding: 0; color: black; line-height: 1.1;">Story of Strategy</p>
-          <p style="font-size: 32px; color: #444; margin: 0; padding: 0; margin-top: 0.5rem;">Product teardowns, automations, and engineering insights.</p>
+          <p style="font-size: 64px; font-weight: bold; margin: 0 0 16px 0; padding: 0; color: black; line-height: 1.2;">Story of Strategy</p>
+          <p style="font-size: 32px; color: #444; margin: 0; padding: 0; line-height: 1.4;">Product teardowns, automations, and engineering insights.</p>
         </div>
         <div style="display: flex; justify-content: space-between; align-items: center;">
           <p style="font-size: 28px; font-weight: bold; color: black; margin: 0;">By Punith</p>

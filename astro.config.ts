@@ -15,7 +15,7 @@ export default defineConfig({
       ? process.env.CF_PAGES_URL
       : process.env.VERCEL_URL
         ? `https://${process.env.VERCEL_URL}/`
-        : "https://storyofstrategy.co/",
+        : "https://www.storyofstrategy.com/",
   trailingSlash: "ignore",
   integrations: [sitemap(), UnoCSS({ injectReset: true }), mdx(), react()],
   vite: {
