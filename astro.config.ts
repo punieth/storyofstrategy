@@ -9,7 +9,7 @@ import cloudflare from "@astrojs/cloudflare";
 export default defineConfig({
   output: "server",
   adapter: cloudflare(),
-  site: "https://www.storyofstrategy.com/",
+  site: "https://storyofstrategy.com/",
   trailingSlash: "ignore",
   integrations: [sitemap(), UnoCSS({ injectReset: true }), mdx(), react()],
   vite: {
