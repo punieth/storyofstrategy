@@ -9,13 +9,7 @@ import cloudflare from "@astrojs/cloudflare";
 export default defineConfig({
   output: "server",
   adapter: cloudflare(),
-  // used to generate images
-  site:
-    process.env.CF_PAGES_URL
-      ? process.env.CF_PAGES_URL
-      : process.env.VERCEL_URL
-        ? `https://${process.env.VERCEL_URL}/`
-        : "https://www.storyofstrategy.com/",
+  site: "https://www.storyofstrategy.com/",
   trailingSlash: "ignore",
   integrations: [sitemap(), UnoCSS({ injectReset: true }), mdx(), react()],
   vite: {
