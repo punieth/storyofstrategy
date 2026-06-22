@@ -29,29 +29,29 @@ export const GET: APIRoute = async ({ params, props }) => {
   const title = props.title.trim() ?? 'Blogpost';
   const description = props.description ?? null;
   const html = toReactElement(`
-  <div style="background-color: #f5ff85; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; width: 100%; padding: 40px;">
-    <div style="display: flex; flex-direction: column; justify-content: space-between; height: 100%; width: 100%; background-color: white; border: 6px solid black; box-shadow: 12px 12px 0px 0px #000000; padding: 50px;">
+  <div style="background-color: #fff3e6; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; width: 100%; padding: 45px;">
+    <div style="display: flex; flex-direction: column; justify-content: space-between; height: 100%; width: 100%; background-color: #fffaf4; border: 6px solid #1f1720; box-shadow: 14px 14px 0px 0px #1f1720; padding: 55px; border-radius: 4px;">
       
       <!-- Top section -->
-      <div style="display: flex; flex-direction: column; align-items: flex-start;">
+      <div style="display: flex; flex-direction: column; align-items: flex-start; width: 100%;">
         <!-- Tag / Badge -->
-        <div style="display: flex; background-color: #00ff88; border: 3px solid black; box-shadow: 4px 4px 0px 0px #000000; padding: 6px 16px; margin-bottom: 30px;">
-          <span style="font-size: 20px; font-weight: 900; color: black; text-transform: uppercase; letter-spacing: 2px;">
+        <div style="display: flex; background-color: #00ff88; border: 3px solid #1f1720; box-shadow: 4px 4px 0px 0px #1f1720; padding: 6px 18px; margin-bottom: 35px;">
+          <span style="font-size: 18px; font-weight: 900; color: #1f1720; text-transform: uppercase; letter-spacing: 2px;">
             Story of Strategy
           </span>
         </div>
         
         <!-- Title -->
-        <div style="display: flex; margin-bottom: 24px;">
-          <span style="font-size: 64px; font-weight: 800; color: black; line-height: 1.2;">
+        <div style="display: flex; margin-bottom: 24px; width: 100%;">
+          <span style="font-size: 64px; font-weight: 900; color: #20141a; letter-spacing: -1.5px; line-height: 1.2;">
             ${title}
           </span>
         </div>
         
         <!-- Description -->
         ${description ? `
-        <div style="display: flex;">
-          <span style="font-size: 28px; font-weight: 500; color: #4b5563; line-height: 1.4;">
+        <div style="display: flex; width: 100%;">
+          <span style="font-size: 28px; font-weight: 500; color: #5a494f; line-height: 1.45; max-width: 90%;">
             ${description}
           </span>
         </div>
@@ -59,14 +59,14 @@ export const GET: APIRoute = async ({ params, props }) => {
       </div>
       
       <!-- Bottom section / Footer -->
-      <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; border-top: 3px solid #e5e7eb; padding-top: 30px; margin-top: auto;">
+      <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; border-top: 3px solid rgba(31, 23, 32, 0.1); padding-top: 35px; margin-top: auto; width: 100%;">
         <div style="display: flex; align-items: center;">
-          <span style="font-size: 28px; font-weight: 700; color: black;">
+          <span style="font-size: 28px; font-weight: 800; color: #20141a;">
             By Punith
           </span>
         </div>
         <div style="display: flex; align-items: center;">
-          <span style="font-size: 24px; font-weight: 600; color: #9ca3af; letter-spacing: 0.5px;">
+          <span style="font-size: 26px; font-weight: 800; color: #ff6641; letter-spacing: 0.5px;">
             ${link}
           </span>
         </div>
