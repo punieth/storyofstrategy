@@ -18,21 +18,47 @@ export const GET: APIRoute = async () => {
   const link = 'storyofstrategy.com';
   
   const html = toReactElement(`
-  <div style="background-color: #f5ff85; display: flex; flex-direction: column; height: 100%; padding: 3rem; width: 100%">
-    <div style="display:flex; height: 100%; width: 100%; background-color: white; border: 6px solid black; border-radius: 0.5rem; padding: 2.5rem; filter: drop-shadow(8px 8px 0 rgb(0 0 0 / 1));">
-      <div style="display: flex; flex-direction: column; justify-content: space-between; width: 100%;">
-        <div style="display: flex; flex-direction: column;">  
-          <span style="display: flex; align-self: flex-start; align-items: center; padding: 0.25rem 0.75rem; font-size: 20px; font-weight: 900; background-color: #00ff88; border: 3px solid black; filter: drop-shadow(3px 3px 0 rgb(0 0 0 / 1)); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 1.5rem;">
+  <div style="background-color: #f5ff85; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; width: 100%; padding: 40px;">
+    <div style="display: flex; flex-direction: column; justify-content: space-between; height: 100%; width: 100%; background-color: white; border: 6px solid black; box-shadow: 12px 12px 0px 0px #000000; padding: 50px;">
+      
+      <!-- Top section -->
+      <div style="display: flex; flex-direction: column; align-items: flex-start;">
+        <!-- Tag / Badge -->
+        <div style="display: flex; background-color: #00ff88; border: 3px solid black; box-shadow: 4px 4px 0px 0px #000000; padding: 6px 16px; margin-bottom: 30px;">
+          <span style="font-size: 20px; font-weight: 900; color: black; text-transform: uppercase; letter-spacing: 2px;">
             Think → Build
           </span>
-          <p style="font-size: 64px; font-weight: bold; margin: 0 0 16px 0; padding: 0; color: black; line-height: 1.2;">Story of Strategy</p>
-          <p style="font-size: 32px; color: #444; margin: 0; padding: 0; line-height: 1.4;">Product teardowns, automations, and engineering insights.</p>
         </div>
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <p style="font-size: 28px; font-weight: bold; color: black; margin: 0;">By Punith</p>
-          <p style="font-size: 24px; color: #666; margin: 0;">${link}</p>
+        
+        <!-- Title -->
+        <div style="display: flex; margin-bottom: 24px;">
+          <span style="font-size: 72px; font-weight: 800; color: black; line-height: 1.1;">
+            Story of Strategy
+          </span>
+        </div>
+        
+        <!-- Description -->
+        <div style="display: flex;">
+          <span style="font-size: 32px; font-weight: 500; color: #4b5563; line-height: 1.4;">
+            Product teardowns, automations, and engineering insights.
+          </span>
         </div>
       </div>
+      
+      <!-- Bottom section / Footer -->
+      <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; border-top: 3px solid #e5e7eb; padding-top: 30px; margin-top: auto;">
+        <div style="display: flex; align-items: center;">
+          <span style="font-size: 28px; font-weight: 700; color: black;">
+            By Punith
+          </span>
+        </div>
+        <div style="display: flex; align-items: center;">
+          <span style="font-size: 24px; font-weight: 600; color: #9ca3af; letter-spacing: 0.5px;">
+            ${link}
+          </span>
+        </div>
+      </div>
+
     </div>
   </div>
   `);
