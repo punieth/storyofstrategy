@@ -2255,3 +2255,35 @@ html {
   }
 }
 
+/* ── Laptop Responsive Zoom Ladder ── */
+
+/* 1. Large Laptops / Full HD scaled (1537px - 1728px) */
+@media (min-width: 1537px) and (max-width: 1728px) {
+  .home-redesign {
+    zoom: 0.9;
+  }
+}
+
+/* 2. Standard Laptops (1366px - 1536px) e.g., 13" MacBooks, 1080p Windows at 125% zoom */
+@media (min-width: 1366px) and (max-width: 1536px) {
+  .home-redesign {
+    zoom: 0.82;
+  }
+}
+
+/* 3. Small Laptops / Low Resolution (1200px - 1365px) e.g., 1280x800 scaling, 1366x768 screens */
+@media (min-width: 1200px) and (max-width: 1365px) {
+  .home-redesign {
+    zoom: 0.75;
+  }
+}
+
+/* 4. Mini Laptops / Landscape Tablets (1024px - 1199px) e.g., 1280x720, iPads in landscape */
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .home-redesign {
+    zoom: 0.7;
+  }
+}
+
+
+
