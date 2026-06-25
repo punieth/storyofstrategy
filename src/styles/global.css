@@ -2231,15 +2231,49 @@ html {
   box-shadow: 2px 2px 0 var(--home-ink);
 }
 
-/* Tailored hover colors for specific cards */
-.home-case--urban:hover .home-cta-btn {
+/* Dual CTA container at the bottom of case cards */
+.home-case__ctas {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: auto;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+/* Base style adjustment for home-case cta buttons */
+.home-case .home-cta-btn {
+  margin-top: 0;
+}
+
+/* Default state for prototype buttons: pre-colored to pop */
+.home-case--urban .home-cta-btn--proto {
+  background: var(--home-lime);
+}
+.home-case--proofit .home-cta-btn--proto {
+  background: var(--home-green);
+}
+
+/* Specific button hover states: override parent hover */
+.home-case .home-cta-btn:hover {
+  transform: translate(3px, 3px) !important;
+  box-shadow: 0px 0px 0 var(--home-ink) !important;
+}
+
+/* Hover colors: Read Case Study button gets card theme color */
+.home-case--urban .home-cta-btn:not(.home-cta-btn--proto):hover {
   background: var(--home-lime);
   color: var(--home-ink);
 }
-
-.home-case--proofit:hover .home-cta-btn {
+.home-case--proofit .home-cta-btn:not(.home-cta-btn--proto):hover {
   background: var(--home-green);
   color: var(--home-ink);
+}
+
+/* Hover colors: Try Prototype button gets inverted high-contrast dark look */
+.home-case--urban .home-cta-btn--proto:hover,
+.home-case--proofit .home-cta-btn--proto:hover {
+  background: var(--home-ink);
+  color: var(--home-paper);
 }
 
 .home-lab__cta-link:hover .home-cta-btn {
@@ -2252,6 +2286,27 @@ html {
 @media (max-width: 640px) {
   .home-cta-btn {
     margin-top: 1.25rem; /* Ensure minimum separation on mobile vertical layouts */
+  }
+  .home-case__ctas {
+    flex-direction: row;
+    margin-top: 1.25rem;
+    gap: 0.5rem;
+    width: 100%;
+  }
+  .home-case .home-cta-btn {
+    flex: 1;
+    margin-top: 0 !important;
+    width: auto;
+    text-align: center;
+    padding: 0.45rem 0.4rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    border-width: 2.5px;
+    box-shadow: 2px 2px 0 var(--home-ink);
+  }
+  .home-case .home-cta-btn:hover {
+    transform: translate(2px, 2px) !important;
+    box-shadow: 0px 0px 0 var(--home-ink) !important;
   }
 }
 
@@ -2283,6 +2338,58 @@ html {
   .home-redesign {
     zoom: 0.7;
   }
+}
+
+/* ── Standalone Prototype Loader ── */
+.loader-container {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: #0b0f19;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+.loader-spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 3.5px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  animation: loader-spin 1s linear infinite;
+}
+
+.loader-spinner--urban {
+  border-top: 3.5px solid #f5ff85; /* UC Yellow/Lime */
+}
+
+.loader-spinner--proofit {
+  border-top: 3.5px solid #00ff88; /* ProofIt Green */
+}
+
+.loader-text {
+  font-family: "Outfit", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.85);
+  animation: loader-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes loader-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes loader-pulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
 }
 
 

@@ -1,33 +1,49 @@
 ---
 import Layout from "../../layouts/Prototype.astro";
-import ProofItPrototypeShowcase from "../../components/proofit/ProofItPrototypeShowcase.tsx";
-import "../../components/urbancompany/globals.css";
 ---
 
 <Layout
   title="ProofIt Prototype"
-  description="Interactive prototype for embedding"
-  classList="bg-transparent"
+  description="Interactive prototype of ProofIt nano-vendor credibility layer"
 >
-  <div class="prototype-host">
-    <ProofItPrototypeShowcase client:load />
+  <!-- Loader Overlay -->
+  <div id="loader" class="loader-container">
+    <div class="loader-spinner loader-spinner--proofit"></div>
+    <p class="loader-text">Launching ProofIt Trust Engine...</p>
   </div>
+
+  <iframe
+    src="https://proofit-connect-trust.lovable.app"
+    title="ProofIt Interactive Flow"
+    class="fullscreen-iframe"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  ></iframe>
 </Layout>
 
-<style>
-  .prototype-host {
-    min-height: 100vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-sizing: border-box;
-    background: transparent;
-  }
+<script>
+  // Wait for the iframe to load, then fade out the loader overlay
+  const iframe = document.querySelector('.fullscreen-iframe') as HTMLIFrameElement;
+  const loader = document.getElementById('loader');
 
-  @media (max-width: 640px) {
-    .prototype-host {
-      padding: 1rem 0;
-    }
+  if (iframe && loader) {
+    iframe.addEventListener('load', () => {
+      loader.style.opacity = '0';
+      loader.style.transition = 'opacity 0.4s ease';
+      setTimeout(() => {
+        loader.style.display = 'none';
+      }, 400);
+    });
+  }
+</script>
+
+<style>
+  .fullscreen-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+    overflow: hidden;
   }
 </style>

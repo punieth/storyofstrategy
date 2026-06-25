@@ -12,17 +12,19 @@ interface Props {
 const { title, description, classList, ogImage } = Astro.props;
 ---
 
-<html lang="en" class="h-full">
+<html lang="en" class="w-full h-full overflow-hidden">
   <BaseHead ogImage={ogImage} title={title} description={description} />
 
-  <body class:list={["flex flex-col min-h-screen", classList]}>
+  <body class:list={["w-full h-full overflow-hidden m-0 p-0", classList]}>
     <slot />
     <style>
       :global(html, body) {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        background-color: #020617;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        overflow: hidden !important;
+        background-color: #0b0f19 !important;
       }
     </style>
   </body>
