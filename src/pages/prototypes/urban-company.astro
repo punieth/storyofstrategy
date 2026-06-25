@@ -12,8 +12,10 @@ import Layout from "../../layouts/Prototype.astro";
     <p class="loader-text">Launching Home Flow App...</p>
   </div>
 
+  <!-- We use data-src instead of src and load it via location.replace() in the script -->
+  <!-- This prevents the iframe from polluting Chrome's browser history stack -->
   <iframe
-    src="https://orchestrate-home-flow.lovable.app/"
+    data-src="https://orchestrate-home-flow.lovable.app/"
     title="Urban Company Interactive Flow"
     class="fullscreen-iframe"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -26,6 +28,12 @@ import Layout from "../../layouts/Prototype.astro";
   const loader = document.getElementById('loader');
 
   if (iframe && loader) {
+    const src = iframe.getAttribute('data-src');
+    if (src && iframe.contentWindow) {
+      // Use location.replace to load the iframe without adding a new history entry
+      iframe.contentWindow.location.replace(src);
+    }
+
     iframe.addEventListener('load', () => {
       loader.style.opacity = '0';
       loader.style.transition = 'opacity 0.4s ease';
